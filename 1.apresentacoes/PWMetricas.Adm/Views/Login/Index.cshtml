@@ -1,0 +1,119 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login PW Métricas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: url('/images/BackgroundPink.png') no-repeat center center fixed;
+            background-size: cover; /* Faz a imagem cobrir toda a tela */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background-color: transparent;
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 300px; /* Ajuste o tamanho conforme necessário */
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            background-color: #C71585;
+            border-color: #C71585;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #FF69B4;
+            border-color: #FF69B4;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+            color:white;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .pw-midia-logo {
+            margin-top: 10px;
+        }
+
+        .pw-midia-logo img {
+            max-width: 80px; /* Ajuste o tamanho conforme necessário */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="images/pw_metricas_branca.svg" alt="Logo PW Métricas">
+           
+        </div>
+        <form>
+            <div class="form-group"> 
+                <input type="email" class="form-control" id="email" placeholder="E-mail">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="senha" placeholder="Senha">
+            </div>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">ENTRAR</button>
+            </div>
+        </form>
+        <div class="forgot-password">
+            <a href="#">Esqueceu sua senha?</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        © PW Métricas - Todos os direitos reservados | <a href="#">Ajuda</a> | <a href="#">Privacidade</a>
+        <div class="pw-midia-logo">
+            <img src="images/PW_branco.svg" alt="Logo PW Midia">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

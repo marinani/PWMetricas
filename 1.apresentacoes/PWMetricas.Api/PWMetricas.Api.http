@@ -1,0 +1,6 @@
+@PWMetricas.Api_HostAddress = http://localhost:5012
+
+GET {{PWMetricas.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
