@@ -10,31 +10,60 @@
     <link rel="stylesheet" href="~/PWMetricas.Adm.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">PWMetricas.Adm</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+    <div class="d-flex">
+        <!-- Menu Lateral -->
+       @*  <nav id="sidebar" class="sidebar">
+            <ul class="list-unstyled">
+                <li>
+                    <a href="#menu1" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        Menu 1
+                    </a>
+                    <ul class="collapse list-unstyled" id="menu1">
+                        <li><a href="#">Submenu 1.1</a></li>
+                        <li><a href="#">Submenu 1.2</a></li>
                     </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
+                </li>
+                <li>
+                    <a href="#">Menu 2</a>
+                </li>
+                <li>
+                    <a href="#menu3" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        Menu 3
+                    </a>
+                    <ul class="collapse list-unstyled" id="menu3">
+                        <li><a href="#">Submenu 3.1</a></li>
+                        <li><a href="#">Submenu 3.2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav> *@
+
+        <!-- Conteúdo Principal -->
+        <div class="content flex-grow-1">
+            <header>
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">PW Métricas</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a href="#" id="theme-toggle" class="nav-link" title="Alternar Tema">
+                                        🌙
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                </header>
+   
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
@@ -48,3 +77,21 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const themeToggle = document.getElementById("theme-toggle");
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        // Aplica o tema salvo
+        document.documentElement.setAttribute("data-theme", currentTheme);
+        themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙";
+
+        // Alterna o tema ao clicar no ícone
+        themeToggle.addEventListener("click", function () {
+            const newTheme = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+            themeToggle.textContent = newTheme === "dark" ? "☀️" : "🌙";
+        });
+    });
+</script>

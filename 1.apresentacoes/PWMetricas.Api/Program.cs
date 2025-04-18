@@ -37,8 +37,12 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Configuração de conexão com o banco
+//builder.Services.AddDbContext<PwMetricasDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("PwMetricasDbConnection")));
+
 builder.Services.AddDbContext<PwMetricasDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PwMetricasDbConnection")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("PwMetricasDbConnection")));
+
 
 // JWT Authentication
 var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
