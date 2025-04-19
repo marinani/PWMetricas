@@ -1,7 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using PWMetricas.Dados;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+
+
+
+// Configuração do DbContext
+builder.Services.AddDbContext<PwMetricasDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PwMetricasDbConnection"), sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure();
+    }));
 
 var app = builder.Build();
 

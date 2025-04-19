@@ -8,10 +8,10 @@ namespace PWMetricas.Dominio.Entidades
 {
     public class UsuarioLoja : EntidadeBase
     {
-        public int UsuarioId { get; set; }
+        public required int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
 
-        public int LojaId { get; set; }
+        public required int LojaId { get; set; }
         public Loja Loja { get; set; }
     }
 }

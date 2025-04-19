@@ -26,5 +26,6 @@ namespace PWMetricas.Dados
         public DbSet<AtendimentoObservacoes> AtendimentoObservacoes { get; set; }
         public DbSet<Canal> Canal { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Tamanho> Tamanho { get; set; }
     }
 }

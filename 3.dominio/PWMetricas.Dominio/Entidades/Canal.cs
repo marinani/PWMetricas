@@ -8,6 +8,6 @@ namespace PWMetricas.Dominio.Entidades
 {
     public class Canal : EntidadeBase
     {
-        public string Nome { get; set; }
+        public required string Nome { get; set; }
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PWMetricas.Dominio.Entidades
 {
-    public class Loja : EntidadeBase
+    public class Tamanho : EntidadeBase
     {
         public required string Nome { get; set; }
-        public required string Cidade { get; set; }
     }
+    
 }

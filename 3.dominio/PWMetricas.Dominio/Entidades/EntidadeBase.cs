@@ -8,8 +8,8 @@ namespace PWMetricas.Dominio.Entidades
 {
     public class EntidadeBase
     {
-        public int Id { get; set; }
-        public Guid Guid { get; set; } = Guid.NewGuid();
-        public bool Ativo { get; set; } = true;
+        public required int Id { get; set; }
+        public required Guid Guid { get; set; } = Guid.NewGuid();
+        public required bool Ativo { get; set; } = true;
     }
 }
