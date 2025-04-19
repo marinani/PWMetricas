@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PWMetricas.Dados;
-using PWMetricas.Dominio.Models;
+using PWMetricas.Dominio.Entidades;
 using PWMetricas.Dominio.Utils;
 
 namespace PWMetricas.Api.Controllers
@@ -20,14 +20,14 @@ namespace PWMetricas.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var users = await _context.Usuarios.Include(u => u.Perfil).ToListAsync();
+            var users = await _context.Usuario.Include(u => u.Perfil).ToListAsync();
             return Ok(users);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var user = await _context.Usuarios.Include(u => u.Perfil).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Usuario.Include(u => u.Perfil).FirstOrDefaultAsync(u => u.Id == id);
             if (user == null) return NotFound();
             return Ok(user);
         }
@@ -36,7 +36,7 @@ namespace PWMetricas.Api.Controllers
         public async Task<IActionResult> Post(Usuario user)
         {
             user.Senha = CriptoUtil.Encrypt(user.Senha!);
-            _context.Usuarios.Add(user);
+            _context.Usuario.Add(user);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
         }
@@ -44,7 +44,7 @@ namespace PWMetricas.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Usuario user)
         {
-            var existing = await _context.Usuarios.FindAsync(id);
+            var existing = await _context.Usuario.FindAsync(id);
             if (existing == null) return NotFound();
 
             existing.Nome = user.Nome;
@@ -60,10 +60,10 @@ namespace PWMetricas.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var user = await _context.Usuarios.FindAsync(id);
+            var user = await _context.Usuario.FindAsync(id);
             if (user == null) return NotFound();
 
-            _context.Usuarios.Remove(user);
+            _context.Usuario.Remove(user);
             await _context.SaveChangesAsync();
             return NoContent();
         }

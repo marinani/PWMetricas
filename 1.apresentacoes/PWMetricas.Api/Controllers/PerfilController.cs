@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PWMetricas.Dados;
-using PWMetricas.Dominio.Models;
+using PWMetricas.Dominio.Entidades;
 using PWMetricas.Dominio.Utils;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -22,14 +22,14 @@ namespace PWMetricas.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var profiles = await _context.Perfis.ToListAsync();
+            var profiles = await _context.Perfil.ToListAsync();
             return Ok(profiles);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var profile = await _context.Perfis.FindAsync(id);
+            var profile = await _context.Perfil.FindAsync(id);
             if (profile == null) return NotFound();
             return Ok(profile);
         }
@@ -37,7 +37,7 @@ namespace PWMetricas.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Perfil profile)
         {
-            _context.Perfis.Add(profile);
+            _context.Perfil.Add(profile);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(Get), new { id = profile.Id }, profile);
         }
@@ -45,7 +45,7 @@ namespace PWMetricas.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, Perfil profile)
         {
-            var existing = await _context.Perfis.FindAsync(id);
+            var existing = await _context.Perfil.FindAsync(id);
             if (existing == null) return NotFound();
 
             existing.Nome = profile.Nome;
@@ -58,10 +58,10 @@ namespace PWMetricas.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var profile = await _context.Perfis.FindAsync(id);
+            var profile = await _context.Perfil.FindAsync(id);
             if (profile == null) return NotFound();
 
-            _context.Perfis.Remove(profile);
+            _context.Perfil.Remove(profile);
             await _context.SaveChangesAsync();
             return NoContent();
         }
