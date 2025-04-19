@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PWMetricas.Dominio.Models
+namespace PWMetricas.Dominio.Entidades
 {
-    public class Perfil
+    public class Perfil : EntidadeBase
     {
-        public int Id { get; set; }
         public required string Nome { get; set; }
-        public bool Ativo { get; set; }
     }
 }

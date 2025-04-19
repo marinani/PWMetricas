@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\2.aplicacao\PWMetricas.Aplicacao\PWMetricas.Aplicacao.csproj" />
+    <ProjectReference Include="..\..\4.dados\PWMetricas.Dados\PWMetricas.Dados.csproj" />
+  </ItemGroup>
+
 </Project>
