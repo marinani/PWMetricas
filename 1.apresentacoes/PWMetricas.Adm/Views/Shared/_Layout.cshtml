@@ -1,79 +1,76 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PWMetricas.Adm</title>
+    <title>PW Métricos</title>
     <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PWMetricas.Adm.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css" />
+
+
 </head>
 <body>
-    <div class="d-flex">
-        <!-- Menu Lateral -->
-       @*  <nav id="sidebar" class="sidebar">
-            <ul class="list-unstyled">
-                <li>
-                    <a href="#menu1" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        Menu 1
-                    </a>
-                    <ul class="collapse list-unstyled" id="menu1">
-                        <li><a href="#">Submenu 1.1</a></li>
-                        <li><a href="#">Submenu 1.2</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Menu 2</a>
-                </li>
-                <li>
-                    <a href="#menu3" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        Menu 3
-                    </a>
-                    <ul class="collapse list-unstyled" id="menu3">
-                        <li><a href="#">Submenu 3.1</a></li>
-                        <li><a href="#">Submenu 3.2</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav> *@
-
-        <!-- Conteúdo Principal -->
-        <div class="content flex-grow-1">
-            <header>
-                <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">PW Métricas</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a href="#" id="theme-toggle" class="nav-link" title="Alternar Tema">
-                                        🌙
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <img src="/images/logo_pwmidia.svg" alt="Logo Mini" class="logo-mini">
+                    <div class="logo-expanded">
+                        <img src="/images/PW branco.svg" alt="Logo Completa" class="logo-completa">
+                        <span class="logo-nome"></span>
                     </div>
-                </nav>
-                </header>
-   
-        <main role="main" class="pb-3">
+                </div>
+            </div>
+            <nav class="menu">
+                <a href="/" class="tab-btn">
+                    <i class="fas fa-chart-bar"></i>
+                    <span class="tab-label">Dashboard</span>
+                </a>
+                <a href="/Perfil/Consulta" class="tab-btn">
+                    <i class="fas fa-file-alt"></i>
+                    <span class="tab-label">Perfil</span>
+                </a>
+                <a href="/" class="tab-btn">
+                    <i class="fas fa-users"></i>
+                    <span class="tab-label">Usuários</span>
+                </a>
+                <a href="/" class="tab-btn">
+                    <i class="fas fa-box-open"></i>
+                    <span class="tab-label">Produtos</span>
+                </a>
+            </nav>
+        </aside>
+        <button class="toggle-btn">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <main class="content">
+            <header class="topbar">
+                <div class="search-box">
+                    <button id="theme-toggle" class="nav-link" title="Alternar Tema">🌙</button>
+                </div>
+                <div class="user-info">
+                    <span class="user-name show-on-close"></span>
+                    <img src="" alt="Usuário" class="user-avatar avatar-header" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                    <div class="dropdown hidden">
+                        <img src="" alt="Usuário" class="avatar-dropdown" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                        <p class="user-name-dropdown">Mariane</p>
+                        <p><i class="fas fa-envelope"></i> Administrador</p>
+                        <button class="logout-btn">Sair</button>
+                    </div>
+                </div>
+            </header>
             @RenderBody()
-        </main>
-        </div>
+            </main>
     </div>
 
-    <footer class="border-top footer text-center">
-        <div class="container">
-            &copy; 2025 - PW Métricas - Todos os direitos reservados | <a asp-area="" asp-controller="Home" asp-action="Privacy">Ajuda</a> | <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidade</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
