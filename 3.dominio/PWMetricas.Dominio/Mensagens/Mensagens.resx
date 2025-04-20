@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema
+
+    Version 2.0
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
+    associated with the data types.
+
+    Example:
+
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+
+    There are any number of "resheader" rows that contain simple
+    name/value pairs.
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
+    mimetype set.
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
+    extensible. For a given mimetype the value must be set accordingly:
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
+    read any of the formats listed below.
+
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlteracaoSucesso" xml:space="preserve">
+    <value>Alteração realizada com sucesso.</value>
+    <comment>Mensagem de sucesso de alteração.</comment>
+  </data>
+  <data name="AprovacaoSucesso" xml:space="preserve">
+    <value>Aprovação realizada com sucesso.</value>
+  </data>
+  <data name="AtivoSucesso" xml:space="preserve">
+    <value>Ativação realizada com sucesso.</value>
+    <comment>Mensagem de sucesso de ativação.</comment>
+  </data>
+  <data name="AtualizarVinculoErro" xml:space="preserve">
+    <value>Erro ao atualizar vínculo de secretaria.</value>
+    <comment>Erro ao atualziar vinculo usuario</comment>
+  </data>
+  <data name="AtualizarVinculoSucesso" xml:space="preserve">
+    <value>Vínculo atualizado com sucesso.</value>
+    <comment>Sucesso ao atualizar vinculo usuario.</comment>
+  </data>
+  <data name="BuscaSucesso" xml:space="preserve">
+    <value>Busca realizada com sucesso.</value>
+  </data>
+  <data name="CadastroSucesso" xml:space="preserve">
+    <value>Cadastro realizado com sucesso.</value>
+    <comment>Mensagem de sucesso de cadastro.</comment>
+  </data>
+  <data name="DespublicacaoSucesso" xml:space="preserve">
+    <value>Despublicação realizada com sucesso.</value>
+    <comment>Mensagem de sucesso de despublicação.</comment>
+  </data>
+  <data name="ExclusaoPossuiVinculo" xml:space="preserve">
+    <value>{0} não pode ser excluído, pois possui vínculos com {1}</value>
+    <comment>Mensagem exclusão possui vínculo</comment>
+  </data>
+  <data name="ExclusãoSucesso" xml:space="preserve">
+    <value>Exclusão realizada com sucesso.</value>
+    <comment>Mensagem de sucesso de exclusão.</comment>
+  </data>
+  <data name="FalhaAtualizacaoSegurancaBanco" xml:space="preserve">
+    <value>Erro de sincronia com Segurança.</value>
+    <comment>Informa que houve uma exceção no processo de atualização.</comment>
+  </data>
+  <data name="FalhaBusca" xml:space="preserve">
+    <value>Falha ao buscar {0}.</value>
+    <comment>Mensagem falha na requisição.</comment>
+  </data>
+  <data name="FalhaExclusaoPossuiVinculo" xml:space="preserve">
+    <value>{0} não pode ser excluído, pois possui vínculos com {1}.</value>
+    <comment>Mensagem de impedimento ao excluir, pois objeto possui vinculo com outro.</comment>
+  </data>
+  <data name="FalhaPrecisaVinculo" xml:space="preserve">
+    <value>{0} precisa estar vinculado ao menos a {1}.</value>
+    <comment>Mensagem precisa estar vinculado.</comment>
+  </data>
+  <data name="InativoSucesso" xml:space="preserve">
+    <value>Inativação realizada com sucesso.</value>
+    <comment>Mensagem de sucesso de inativação.</comment>
+  </data>
+  <data name="JaExiste" xml:space="preserve">
+    <value>Já existe um {0} com o mesmo {1} cadastrado.</value>
+    <comment>Mensagem para objeto existente.</comment>
+  </data>
+  <data name="MaxLength" xml:space="preserve">
+    <value>Informe o campo {0} com até {1} caracter(es).</value>
+    <comment>Utilizado na Annotation [MaxLength]</comment>
+  </data>
+  <data name="MinLength" xml:space="preserve">
+    <value>Informe o campo {0} com no mínimo {1} caracter(es).</value>
+    <comment>Utilizado na Annotation [MinLength]</comment>
+  </data>
+  <data name="NaoEncontrada" xml:space="preserve">
+    <value>{0} não encontrada.</value>
+    <comment>Mensagem para objeto não encontrado.</comment>
+  </data>
+  <data name="NaoEncontrado" xml:space="preserve">
+    <value>{0} não encontrado.</value>
+    <comment>Mensagem para objeto não encontrado.</comment>
+  </data>
+  <data name="NumeroInteiroValido" xml:space="preserve">
+    <value>Insira um número inteiro válido.</value>
+    <comment>Mensagem inteiro válido.</comment>
+  </data>
+  <data name="PublicacaoSucesso" xml:space="preserve">
+    <value>Publicação realizada com sucesso.</value>
+    <comment>Mensagem de sucesso de publicação.</comment>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>O campo {0} deve estar entre {1} e {2}.</value>
+    <comment>Utilizado na Annotation [Range]</comment>
+  </data>
+  <data name="ReprovadoSucesso" xml:space="preserve">
+    <value>Reprovação realizada com sucesso.</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>O preenchimento do campo {0} é obrigatório.</value>
+    <comment>Utilizado na Annotation [Required]</comment>
+  </data>
+  <data name="TamanhoMaximo" xml:space="preserve">
+    <value>O {0} não pode ter mais de {1} caractéres.</value>
+    <comment>Mensagem tamanho máximo.</comment>
+  </data>
+  <data name="TamanhoMaximo(a)" xml:space="preserve">
+    <value>A {0} não pode ter mais de {1} caractéres.</value>
+    <comment>Mensagem tamanho máximo.</comment>
+  </data>
+  <data name="TamanhoMinimo" xml:space="preserve">
+    <value>O {0} não pode ter menos de {1} caractéres.</value>
+    <comment>Mensagem tamanho mínimo.</comment>
+  </data>
+  <data name="TamanhoMinimo(a)" xml:space="preserve">
+    <value>A {0} não pode ter menos de {1} caractéres.</value>
+    <comment>Mensagem tamanho mínimo.</comment>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>O campo {0} não é uma url http, https ou ftp válida.</value>
+    <comment>Utilizado na Annotarion [Url].</comment>
+  </data>
+  <data name="UrlIvalida" xml:space="preserve">
+    <value>Url inválida.</value>
+    <comment>Mensagem url inválida.</comment>
+  </data>
+  <data name="UsuarioNaoAutorizado" xml:space="preserve">
+    <value>Usuário não autorizado.</value>
+  </data>
+  <data name="Vazia" xml:space="preserve">
+    <value>A {0} não pode ser vazia.</value>
+    <comment>Mensagem atributo vazio.</comment>
+  </data>
+  <data name="Vazio" xml:space="preserve">
+    <value>O {0} não pode ser vazio.</value>
+    <comment>Mensagem atributo vazio.</comment>
+  </data>
+  <data name="VinculoErro" xml:space="preserve">
+    <value>Erro ao pesquisar vínculo.</value>
+    <comment>Mensagem de erro de vínculo.</comment>
+  </data>
+  <data name="VinculoSucesso" xml:space="preserve">
+    <value>Vínculo realizado com sucesso.</value>
+    <comment>Mensagem de sucesso de vínculo.</comment>
+  </data>
+  <data name="CadastroConjuntoDadoSucesso" xml:space="preserve">
+	  <value>O conjunto de dados foi cadastrado com sucesso, mas no momento não há arquivos associados devido à necessidade de configuração dos servidores de FTP e Multimídia para acomodar os arquivos de base e dicionário de dados.</value>
+		<comment>Mensagem de sucesso do cadastro de um novo cojunto de dado.</comment>
+  </data>
+</root>

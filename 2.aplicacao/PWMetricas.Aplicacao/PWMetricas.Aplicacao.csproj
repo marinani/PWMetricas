@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="Flunt" Version="2.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\3.dominio\PWMetricas.Dominio\PWMetricas.Dominio.csproj" />
     <ProjectReference Include="..\..\4.dados\PWMetricas.Dados\PWMetricas.Dados.csproj" />
   </ItemGroup>

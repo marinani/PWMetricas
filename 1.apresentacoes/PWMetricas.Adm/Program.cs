@@ -1,15 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using PWMetricas.Dados;
+using PWMetricas.Aplicacao.Servicos;
+using PWMetricas.Aplicacao.Servicos.Interfaces;
+using PWMetricas.Dados.Repositorios;
+using PWMetricas.Dados.Repositorios.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-
-
-
 
 // Configuração do DbContext
 builder.Services.AddDbContext<PwMetricasDbContext>(options =>
@@ -18,13 +17,26 @@ builder.Services.AddDbContext<PwMetricasDbContext>(options =>
         sqlOptions.EnableRetryOnFailure();
     }));
 
+// Registro do AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
+#region Serviços
+builder.Services.AddScoped<IPerfilServico, PerfilServico>();
+builder.Services.AddScoped<IProdutoServico, ProdutoServico>();
+#endregion
+
+#region Repositórios
+builder.Services.AddScoped<IPerfilRepositorio, PerfilRepositorio>();
+builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -39,6 +51,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();

@@ -18,4 +18,10 @@
     <ProjectReference Include="..\..\4.dados\PWMetricas.Dados\PWMetricas.Dados.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\login\" />
+    <Folder Include="wwwroot\js\usuario\" />
+    <Folder Include="wwwroot\js\perfil\" />
+  </ItemGroup>
+
 </Project>
