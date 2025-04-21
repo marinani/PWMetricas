@@ -61,5 +61,38 @@ namespace PWMetricas.Adm.Controllers
 
             return RedirectToAction("Consulta");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(int id)
+        {
+            var usuario = await _usuarioServico.ObterPorId(id);
+            if (usuario != null)
+            {
+                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
+                return View(usuario);
+            }
+
+            return RedirectToAction("Consulta");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(UsuarioViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
+                return View(model);
+            }
+
+            var resultado = await _usuarioServico.EditarUsuario(model);
+            if (!resultado.Sucesso)
+            {
+                ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
+                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
+                return View(model);
+            }
+
+            return RedirectToAction("Consulta");
+        }
     }
 }

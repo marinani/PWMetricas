@@ -6,7 +6,7 @@
 	<!--begin::Container-->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-6"><h3 class="mb-0">Cadastro de Usuário</h3></div>
+			<div class="col-sm-6"><h3 class="mb-0">Edição de Usuário</h3></div>
 
 		</div>
 	</div>
@@ -23,16 +23,20 @@
 
 
 
-		<form asp-action="Cadastro" method="post">
+		<form asp-action="Editar" method="post">
+			@Html.HiddenFor(m => m.Id)
+			@Html.HiddenFor(m => m.Guid)
+			@Html.HiddenFor(m => m.Senha)
+			@Html.HiddenFor(m => m.Ativo)
 			<div class="row g-4">
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<div class="form-group">
 						<label for="Nome">Nome</label>
 						<input asp-for="Nome" class="form-control" id="Nome" placeholder="Digite o nome" />
 						<span asp-validation-for="Nome" class="text-danger"></span>
 					</div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<div class="form-group">
 						<label for="Email">E-mail</label>
 						<input asp-for="Email" class="form-control" id="Email" placeholder="Digite o e-mail" />
@@ -41,13 +45,6 @@
 				</div>
 			</div>
 			<div class="row g-4">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="Senha">Senha</label>
-						<input asp-for="Senha" type="password" class="form-control" id="Senha" placeholder="Digite a senha" />
-						<span asp-validation-for="Senha" class="text-danger"></span>
-					</div>
-				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label for="PerfilId">Perfil</label>
@@ -61,7 +58,7 @@
 			<br />
 			<div class="row g-4">
 				<div class="col-sm-12">
-					<button type="submit" class="btn btn-primary btn-sm float-sm-end">Salvar</button>
+						<button type="submit" class="btn btn-primary btn-sm float-sm-end">Salvar</button>
 					
 				</div>
 			</div>

@@ -18,7 +18,7 @@ namespace PWMetricas.Dados.Repositorios
             _context = context;
         }
 
-        public async Task<Usuario?> ObterPorIdAsync(int id)
+        public async Task<Usuario> ObterPorIdAsync(int id)
         {
             return await _context.Usuario
                 .FirstOrDefaultAsync(u => u.Id == id);

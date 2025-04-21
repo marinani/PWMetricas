@@ -14,8 +14,7 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
         Task<IEnumerable<UsuarioViewModel>> ObterTodos();
         Task<List<UsuarioViewModel>> ListarAtivos();
         Task<Resultado> CadastrarUsuario(UsuarioViewModel modelo);
-        //Task<Resultado> AtualizarUsuario(UsuarioViewModel modelo);
-        //Task<Resultado> RemoverUsuario(int id);
+        Task<Resultado> EditarUsuario(UsuarioViewModel modelo);
         Task<PaginacaoResultado<UsuarioViewModel>> ObterTodosPaginados(int page, int pageSize);
 
         Task<UsuarioViewModel?> AutenticarUsuario(string email, string senha);

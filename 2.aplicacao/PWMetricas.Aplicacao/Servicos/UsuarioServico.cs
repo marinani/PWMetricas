@@ -73,6 +73,40 @@ namespace PWMetricas.Aplicacao.Servicos
             }
         }
 
+        public async Task<Resultado> EditarUsuario(UsuarioViewModel modelo)
+        {
+            var resultado = new Resultado();
+
+            if (!modelo.PerfilId.HasValue)
+            {
+                return new Resultado(new[] { "O campo perfil é obrigatório." });
+            }
+
+            var usuario = await _usuarioRepositorio.ObterPorIdAsync(modelo.Id);
+
+            if (usuario == null)
+            {
+                return new Resultado(new[] { "Usuário não encontrado." });
+            }   
+
+            try
+            {
+
+                usuario.Nome = modelo.Nome;
+                usuario.PerfilId = modelo.PerfilId.Value;
+                //usuario.Ativo = modelo.Ativo;
+
+                await _usuarioRepositorio.AtualizarAsync(usuario);
+
+               
+                return new Resultado("Sucesso ao atualizar usuário.", usuario);
+            }
+            catch (Exception ex)
+            {
+                return new Resultado(new[] { "Erro ao atualizar usuário: " + ex.Message });
+            }
+        }
+
         public async Task<PaginacaoResultado<UsuarioViewModel>> ObterTodosPaginados(int page, int pageSize)
         {
             var perfis = await _usuarioRepositorio.ObterTodosPaginadosAsync(page, pageSize);
