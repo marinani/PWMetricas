@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PWMetricas.Aplicacao.Modelos.Perfil;
+using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Dominio.Entidades;
 
 namespace PWMetricas.Aplicacao
@@ -10,6 +11,8 @@ namespace PWMetricas.Aplicacao
         {
             // Configuração de mapeamento entre Perfil e PerfilViewModel
             CreateMap<Perfil, PerfilViewModel>().ReverseMap();
+            CreateMap<Usuario, UsuarioViewModel>().ReverseMap();
+            CreateMap<Perfil, PerfilSelect>().ReverseMap();
         }
     }
 }

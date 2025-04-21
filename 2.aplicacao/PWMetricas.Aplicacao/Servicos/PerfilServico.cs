@@ -32,6 +32,12 @@ namespace PWMetricas.Aplicacao.Servicos
             return _mapper.Map<IEnumerable<PerfilViewModel>>(perfis);
         }
 
+        public async Task<List<PerfilViewModel>> ListarAtivos()
+        {
+            var perfis = await _perfilRepositorio.ObterTodosAtivos();
+            return _mapper.Map<List<PerfilViewModel>>(perfis);
+        }
+
         public async Task<Resultado> CadastrarPerfil(PerfilViewModel modelo)
         {
             var resultado = new Resultado();

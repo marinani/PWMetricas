@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PWMetricas.Aplicacao.Modelos.Usuario;
 
 namespace PWMetricas.Adm.Controllers
 {
@@ -15,6 +16,14 @@ namespace PWMetricas.Adm.Controllers
         [HttpGet]
         [Route("Login")]
         public IActionResult Index()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Autenticar(LoginViewModel login)
         {
             return View();
         }

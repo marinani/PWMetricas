@@ -16,4 +16,10 @@ namespace PWMetricas.Aplicacao.Modelos.Perfil
         public string Nome { get; set; }
         public bool Ativo { get; set; }
     }
+
+    public class  PerfilSelect 
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+    }
 }

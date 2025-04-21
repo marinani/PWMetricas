@@ -1,0 +1,86 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Usuario
+@model PaginacaoResultado<UsuarioViewModel>
+
+<div class="container mt-4">
+    <h2>Consulta de Perfis</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in Model.Dados)
+            {
+                <tr>
+                    <td>@usuario.Nome</td>
+                    <td>@usuario.Email</td>
+                    <td>@(usuario.Ativo ? "Sim" : "Não")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@usuario.Id" class="btn btn-primary btn-sm">Editar</a>
+                        <form asp-action="Delete" asp-route-id="@usuario.Id" method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.TotalPaginas; i++)
+            {
+                <li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+
+<script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const listagemContainer = document.getElementById("usuario-listagem");
+
+        // Adiciona evento de clique nos links de paginação
+        listagemContainer.addEventListener("click", function (event) {
+            const target = event.target;
+
+            if (target.classList.contains("page-link")) {
+                event.preventDefault();
+
+                const page = target.getAttribute("data-page");
+
+                // Faz a requisição AJAX para atualizar a listagem
+                fetch(`/Perfil/Index?page=${page}`, {
+                    method: "GET",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Erro ao carregar a página.");
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        // Atualiza o conteúdo da listagem
+                        listagemContainer.innerHTML = html;
+                    })
+                    .catch(error => {
+                        console.error("Erro:", error);
+                    });
+            }
+        });
+    });
+
+
+</script>

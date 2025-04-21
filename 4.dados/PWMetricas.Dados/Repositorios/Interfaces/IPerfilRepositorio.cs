@@ -11,6 +11,7 @@ namespace PWMetricas.Dados.Repositorios.Interfaces
     {
         Task<Perfil> ObterPorIdAsync(int id);
         Task<IEnumerable<Perfil>> ObterTodosAsync();
+        Task<List<Perfil>> ObterTodosAtivos();
         Task AdicionarAsync(Perfil perfil);
         Task AtualizarAsync(Perfil perfil);
         Task RemoverAsync(int id);

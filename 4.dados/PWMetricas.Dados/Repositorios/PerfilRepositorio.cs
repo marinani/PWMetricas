@@ -28,6 +28,11 @@ namespace PWMetricas.Dados.Repositorios
             return await _context.Perfil.ToListAsync();
         }
 
+        public async Task<List<Perfil>> ObterTodosAtivos()
+        {
+            return await _context.Perfil.Where(x => x.Ativo).OrderBy(X => X.Nome).ToListAsync();
+        }
+
         public async Task AdicionarAsync(Perfil perfil)
         {
             await _context.Perfil.AddAsync(perfil);

@@ -22,7 +22,7 @@ namespace PWMetricas.Adm.Controllers
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                return PartialView("_PerfilListagem", perfis);
+                return PartialView("_Listagem", perfis);
             }
 
             return View(perfis);

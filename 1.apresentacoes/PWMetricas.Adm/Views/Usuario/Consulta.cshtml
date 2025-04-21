@@ -1,0 +1,58 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Usuario
+@model PaginacaoResultado<UsuarioViewModel>
+
+<section id="visao-geral" class="tab-content">
+
+<div class="col-12">
+    <!-- Cabeçalho com botão para cadastro -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Consulta de Usuários</h2>
+            <a asp-action="Cadastro" class="btn-cadastrar">Novo Usuário</a>
+    </div>
+
+    <!-- Listagem de Perfis -->
+    <div id="usuario-listagem">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Ativo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in Model.Dados)
+                {
+                    <tr>
+                            <td>@usuario.Nome</td>
+                            <td>@usuario.Email</td>
+                            <td>@(usuario.Ativo ? "Sim" : "Não")</td>
+                        <td>
+                                <a asp-action="Edit" asp-route-id="@usuario.Id" class="btn btn-primary btn-sm">Editar</a>
+                                <form asp-action="Delete" asp-route-id="@usuario.Id" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Paginação -->
+        <nav>
+            <ul class="pagination">
+                @for (int i = 1; i <= Model.TotalPaginas; i++)
+                {
+                    <li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+                        <a href="#" class="page-link" data-page="@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+</section>
+<!-- Script para atualizar a paginação dinamicamente -->
+<script src="/js/perfil/consulta.js"></script>
