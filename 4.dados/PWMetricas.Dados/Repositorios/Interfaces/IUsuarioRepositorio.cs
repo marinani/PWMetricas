@@ -17,5 +17,6 @@ namespace PWMetricas.Dados.Repositorios.Interfaces
         Task RemoverAsync(int id);
         Task<IEnumerable<Usuario>> ObterTodosPaginadosAsync(int page, int pageSize);
         Task<int> ContarTotalAsync();
+        Task<Usuario?> ObterPorEmailAsync(string email);
     }
 }

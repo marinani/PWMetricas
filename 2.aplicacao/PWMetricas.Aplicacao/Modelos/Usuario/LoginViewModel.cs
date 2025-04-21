@@ -9,11 +9,15 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Required(ErrorMessage = "O campo E-mail é obrigatório.")]
+        [EmailAddress(ErrorMessage = "Por favor, insira um endereço de e-mail válido.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
-        [Display(Name = "Email")]
+
+        [Required(ErrorMessage = "O campo Senha é obrigatório.")]
+        [StringLength(100, ErrorMessage = "A senha deve ter no mínimo {2} e no máximo {1} caracteres.", MinimumLength = 6)]
+
+        [Display(Name = "Senha")]
         public string Senha { get; set; }
     }
 }

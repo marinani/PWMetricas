@@ -4,9 +4,11 @@ using PWMetricas.Aplicacao.Modelos.Perfil;
 using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Aplicacao.Servicos;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PWMetricas.Adm.Controllers
 {
+    [Authorize]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioServico _usuarioServico;

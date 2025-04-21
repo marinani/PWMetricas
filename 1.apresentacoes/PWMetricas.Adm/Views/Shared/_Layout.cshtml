@@ -57,7 +57,7 @@
                         <img src="" alt="Usuário" class="avatar-dropdown" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
                         <p class="user-name-dropdown">Mariane</p>
                         <p><i class="fas fa-envelope"></i> Administrador</p>
-                        <button class="logout-btn">Sair</button>
+                        <a href="/Logout" class="logout-btn">Sair</a>
                     </div>
                 </div>
             </header>
@@ -70,6 +70,8 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.0/jquery.validate.unobtrusive.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,9 +1,12 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PWMetricas.Adm.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PWMetricas.Adm.Controllers;
 
+
+[Authorize]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

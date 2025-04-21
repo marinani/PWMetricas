@@ -14,7 +14,18 @@ body {
     /* flex-direction: row-reverse; */ /* Remova se quiser a barra à esquerda */
 }
 
+.text-danger {
+    color: #ff4d4d;
+    font-weight: bold;
+}
 
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+}
 
 /* Sidebar (Menu Lateral) */
 .sidebar {

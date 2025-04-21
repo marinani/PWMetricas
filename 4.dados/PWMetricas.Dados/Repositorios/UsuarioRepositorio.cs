@@ -82,5 +82,10 @@ namespace PWMetricas.Dados.Repositorios
         {
             return await _context.Usuario.CountAsync();
         }
+
+        public async Task<Usuario?> ObterPorEmailAsync(string email)
+        {
+            return await _context.Usuario.FirstOrDefaultAsync(u => u.Email == email);
+        }
     }
 }

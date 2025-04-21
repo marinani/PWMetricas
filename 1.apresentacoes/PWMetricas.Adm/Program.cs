@@ -20,7 +20,6 @@ builder.Services.AddDbContext<PwMetricasDbContext>(options =>
 // Registro do AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-
 #region Serviços
 builder.Services.AddScoped<IPerfilServico, PerfilServico>();
 builder.Services.AddScoped<IUsuarioServico, UsuarioServico>();
@@ -33,7 +32,21 @@ builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 #endregion
 
+// Configuração de autenticação
+builder.Services.AddAuthentication("CookieAuth")
+    .AddCookie("CookieAuth", options =>
+    {
+        options.LoginPath = "/Login/Index"; // Caminho para a tela de login
+        options.AccessDeniedPath = "/Login/AcessoNegado"; // Caminho para acesso negado
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Tempo de expiração do cookie (30 minutos)
+        options.SlidingExpiration = true; // Renova o tempo de expiração se o usuário estiver ativo
+
+    });
+
 var app = builder.Build();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -61,7 +74,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Login}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 app.Run();

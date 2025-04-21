@@ -17,5 +17,7 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
         //Task<Resultado> AtualizarUsuario(UsuarioViewModel modelo);
         //Task<Resultado> RemoverUsuario(int id);
         Task<PaginacaoResultado<UsuarioViewModel>> ObterTodosPaginados(int page, int pageSize);
+
+        Task<UsuarioViewModel?> AutenticarUsuario(string email, string senha);
     }
 }

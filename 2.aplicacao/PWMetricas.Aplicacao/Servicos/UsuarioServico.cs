@@ -88,6 +88,25 @@ namespace PWMetricas.Aplicacao.Servicos
         }
 
 
+        public async Task<UsuarioViewModel?> AutenticarUsuario(string email, string senha)
+        {
+            var usuario = await _usuarioRepositorio.ObterPorEmailAsync(email);
+            if (usuario == null)
+            {
+                return null;
+            }
+
+            // Verifica a senha
+            var senhaValida = VerifyPassword(senha, usuario.Senha);
+            if (!senhaValida)
+            {
+                return null;
+            }
+
+            return _mapper.Map<UsuarioViewModel>(usuario);
+        }
+
+
         #region Métodos Privados
         // Método para criptografar a senha
         private string EncryptPassword(string password)
