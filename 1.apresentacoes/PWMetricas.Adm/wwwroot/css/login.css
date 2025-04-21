@@ -1,12 +1,125 @@
 ﻿/* styles.css */
 
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #1e1e2f;
-    color: #fff;
-    overflow-x: hidden;
+    background: url('/images/background.jpg') no-repeat center center fixed;
+    background-size: cover; /* Faz a imagem cobrir toda a tela */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.login-container {
+    background-color: transparent;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.logo {
+    text-align: center;
+}
+
+    .logo img {
+        max-width: 300px; /* Ajuste o tamanho conforme necessário */
+    }
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.btn-outline-success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+    .btn-outline-success:hover {
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-outline-success:focus, .btn-outline-success.focus {
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    }
+
+    .btn-outline-success.disabled, .btn-outline-success:disabled {
+        color: #28a745;
+        background-color: transparent;
+    }
+
+    .btn-outline-success:not(:disabled):not(.disabled):active, .btn-outline-success:not(:disabled):not(.disabled).active, .show > .btn-outline-success.dropdown-toggle {
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+        .btn-outline-success:not(:disabled):not(.disabled):active:focus, .btn-outline-success:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-success.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+        }
+
+.btn-login {
+    color: #fff !important;
+    background-color: #8C0368 !important;
+    border-color: #8C0368 !important;
+}
+
+    .btn-login:hover {
+        color: #333 !important;
+        background-color: #8C0368 !important;
+        border-color: #8C0368 !important;
+    }
+
+    .btn-sucess:focus, .btn-sucess.focus {
+        color: #fff;
+        background-color: #f71964;
+        border-color: #0062cc;
+        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    }
+
+    .btn-sucess.disabled, .btn-sucess:disabled {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-sucess:not(:disabled):not(.disabled):active, .btn-sucess:not(:disabled):not(.disabled).active, .show > .btn-sucess.dropdown-toggle {
+        color: #fff;
+        background-color: #0062cc;
+        border-color: #005cbf;
+    }
+
+        .btn-sucess:not(:disabled):not(.disabled):active:focus, .btn-sucess:not(:disabled):not(.disabled).active:focus, .show > .btn-sucess.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    font-size: 0.8rem;
+}
+
+    .footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+
+.pw-midia-logo {
+    margin-top: 10px;
+}
+
+    .pw-midia-logo img {
+        max-width: 80px; /* Ajuste o tamanho conforme necessário */
+    }
 
 .container {
     display: flex;
@@ -14,25 +127,20 @@ body {
     /* flex-direction: row-reverse; */ /* Remova se quiser a barra à esquerda */
 }
 
-.login-container {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+
+.login-container input {
+    margin-bottom: 15px;
 }
 
-    .login-container input {
-        margin-bottom: 15px;
-    }
+.login-container a {
+    color: #f9d423;
+    text-decoration: none;
+}
 
-    .login-container a {
-        color: #f9d423;
-        text-decoration: none;
+    .login-container a:hover {
+        text-decoration: underline;
     }
-
-        .login-container a:hover {
-            text-decoration: underline;
-        }
 
 .text-danger {
     color: #ff4d4d;
@@ -64,9 +172,9 @@ body {
     overflow-x: hidden;
 }
 
-.sidebar.expanded {
-    width: 250px !important;
-}
+    .sidebar.expanded {
+        width: 250px !important;
+    }
 
 .sidebar-header {
     display: flex;
@@ -211,10 +319,10 @@ body {
     align-items: stretch; /* Estende os filhos horizontalmente */
 }
 
-.content.sidebar-expanded {
-    margin-left: 250px; /* Largura da barra lateral expandida */
-    width: calc(100% - 250px); /* Recalcula a largura */
-}
+    .content.sidebar-expanded {
+        margin-left: 250px; /* Largura da barra lateral expandida */
+        width: calc(100% - 250px); /* Recalcula a largura */
+    }
 
 .topbar {
     display: flex;
@@ -230,28 +338,28 @@ body {
     padding-left: 60px; /* Mantém o deslocamento inicial */
 }
 
-.topbar.sidebar-expanded {
-    padding-left: 250px; /* Mantém o deslocamento quando expandido */
-}
+    .topbar.sidebar-expanded {
+        padding-left: 250px; /* Mantém o deslocamento quando expandido */
+    }
 
 .search-box {
     margin-left: 1.2rem;
 }
 
-.search-box input {
-    background: #2c2c3e;
-    border: none;
-    color: white;
-    padding: 0.4rem;
-}
+    .search-box input {
+        background: #2c2c3e;
+        border: none;
+        color: white;
+        padding: 0.4rem;
+    }
 
-.search-box button {
-    background-color: #ff0066;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.6rem;
-    margin-left: 0.3rem;
-}
+    .search-box button {
+        background-color: #ff0066;
+        color: white;
+        border: none;
+        padding: 0.4rem 0.6rem;
+        margin-left: 0.3rem;
+    }
 
 .user-info {
     display: flex;
@@ -292,45 +400,45 @@ body {
     align-items: center;
 }
 
-.dropdown img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 0.5rem;
-    object-fit: cover;
-    object-position: center; /* Adicione esta linha */
-}
+    .dropdown img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 0.5rem;
+        object-fit: cover;
+        object-position: center; /* Adicione esta linha */
+    }
 
-.dropdown .user-name-dropdown {
-    color: #fff;
-    font-weight: bold;
-    margin-bottom: 0.75rem;
-    text-align: center; /* Certifique-se de ter esta linha */
-    width: 100%;
-    letter-spacing: 1px;
-    margin-left: 60px;
-}
+    .dropdown .user-name-dropdown {
+        color: #fff;
+        font-weight: bold;
+        margin-bottom: 0.75rem;
+        text-align: center; /* Certifique-se de ter esta linha */
+        width: 100%;
+        letter-spacing: 1px;
+        margin-left: 60px;
+    }
 
-.dropdown p {
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    color: #fff;
-    width: 100%;
-    gap: 0.5rem;
-}
+    .dropdown p {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        color: #fff;
+        width: 100%;
+        gap: 0.5rem;
+    }
 
-.dropdown p i {
-    margin-right: 0.75rem;
-    font-size: 1.1em;
-    color: #aaa;
-    width: 1.5em;
-    text-align: center;
-}
+        .dropdown p i {
+            margin-right: 0.75rem;
+            font-size: 1.1em;
+            color: #aaa;
+            width: 1.5em;
+            text-align: center;
+        }
 
-.dropdown p strong {
-    display: none;
-}
+        .dropdown p strong {
+            display: none;
+        }
 
 .logout-btn {
     margin-top: 1rem;
@@ -345,9 +453,9 @@ body {
     transition: background-color 0.2s ease-in-out;
 }
 
-.logout-btn:hover {
-    background-color: #ff3385;
-}
+    .logout-btn:hover {
+        background-color: #ff3385;
+    }
 
 .btn-cadastrar {
     margin-top: 1rem;
@@ -423,16 +531,17 @@ td:nth-child(3) {
     border: 1px solid #ccc;
 }
 
-.country-flag.br {
-    background-image: url('css/flags/br.png');
-}
+    .country-flag.br {
+        background-image: url('css/flags/br.png');
+    }
 
-.country-flag.us {
-    background-image: url('css/flags/us.png');
-}
-.country-flag.ar {
-    background-image: url('css/flags/ar.png');
-}
+    .country-flag.us {
+        background-image: url('css/flags/us.png');
+    }
+
+    .country-flag.ar {
+        background-image: url('css/flags/ar.png');
+    }
 /* Adicione mais estilos de bandeira conforme necessário */
 
 /* Ajustes responsivos para telas menores */
