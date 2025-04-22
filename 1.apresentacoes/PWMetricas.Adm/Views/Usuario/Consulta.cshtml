@@ -1,6 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
 @using PWMetricas.Aplicacao.Modelos.Usuario
-@model PaginacaoResultado<UsuarioViewModel>
+@model PaginacaoResultado<UsuarioConsulta>
 
 
 <div class="app-content-header">
@@ -33,6 +33,7 @@
 							<tr>
 								<th>Nome</th>
 								<th>E-mail</th>
+								<th>Perfil</th>
 								<th>Ativo</th>
 								<th>Ações</th>
 							</tr>
@@ -43,6 +44,7 @@
 								<tr>
 									<td>@usuario.Nome</td>
 									<td>@usuario.Email</td>
+									<td>@usuario.Perfil.Nome</td>
 									<td>@(usuario.Ativo ? "Sim" : "Não")</td>
 									<td>
 										<a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-primary btn-sm">Editar</a>

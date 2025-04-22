@@ -22,7 +22,7 @@ namespace PWMetricas.Aplicacao.Servicos
 
         public async Task<UsuarioViewModel> ObterPorId(int id)
         {
-            var usuario = await _usuarioRepositorio.ObterPorIdAsync(id);
+            var usuario = await _usuarioRepositorio.BuscarPorId(id);
             return _mapper.Map<UsuarioViewModel>(usuario);
         }
         public async Task<IEnumerable<UsuarioViewModel>> ObterTodos()
@@ -60,9 +60,9 @@ namespace PWMetricas.Aplicacao.Servicos
                     Ativo = true
                 };
 
-                await _usuarioRepositorio.AdicionarAsync(usuario);
+                await _usuarioRepositorio.Atualizar(usuario);
 
-                var usuarioSalvo = await _usuarioRepositorio.ObterPorIdAsync(usuario.Id);
+                var usuarioSalvo = await _usuarioRepositorio.BuscarPorId(usuario.Id);
                 Console.WriteLine(usuarioSalvo != null ? "Usuário salvo com sucesso!" : "Erro ao salvar usuário.");
 
                 return new Resultado("Sucesso ao cadastrar usuário.", usuario);
@@ -82,7 +82,7 @@ namespace PWMetricas.Aplicacao.Servicos
                 return new Resultado(new[] { "O campo perfil é obrigatório." });
             }
 
-            var usuario = await _usuarioRepositorio.ObterPorIdAsync(modelo.Id);
+            var usuario = await _usuarioRepositorio.BuscarPorId(modelo.Id);
 
             if (usuario == null)
             {
@@ -96,7 +96,7 @@ namespace PWMetricas.Aplicacao.Servicos
                 usuario.PerfilId = modelo.PerfilId.Value;
                 //usuario.Ativo = modelo.Ativo;
 
-                await _usuarioRepositorio.AtualizarAsync(usuario);
+                await _usuarioRepositorio.Atualizar(usuario);
 
                
                 return new Resultado("Sucesso ao atualizar usuário.", usuario);
@@ -107,14 +107,14 @@ namespace PWMetricas.Aplicacao.Servicos
             }
         }
 
-        public async Task<PaginacaoResultado<UsuarioViewModel>> ObterTodosPaginados(int page, int pageSize)
+        public async Task<PaginacaoResultado<UsuarioConsulta>> ObterTodosPaginados(int page, int pageSize)
         {
             var perfis = await _usuarioRepositorio.ObterTodosPaginadosAsync(page, pageSize);
             var totalRegistros = await _usuarioRepositorio.ContarTotalAsync();
 
-            return new PaginacaoResultado<UsuarioViewModel>
+            return new PaginacaoResultado<UsuarioConsulta>
             {
-                Dados = _mapper.Map<IEnumerable<UsuarioViewModel>>(perfis),
+                Dados = _mapper.Map<IEnumerable<UsuarioConsulta>>(perfis),
                 PaginaAtual = page,
                 TotalPaginas = (int)Math.Ceiling(totalRegistros / (double)pageSize),
                 TotalRegistros = totalRegistros
