@@ -60,7 +60,7 @@ namespace PWMetricas.Aplicacao.Servicos
                     Ativo = true
                 };
 
-                await _usuarioRepositorio.Atualizar(usuario);
+                await _usuarioRepositorio.Inserir(usuario);
 
                 var usuarioSalvo = await _usuarioRepositorio.BuscarPorId(usuario.Id);
                 Console.WriteLine(usuarioSalvo != null ? "Usuário salvo com sucesso!" : "Erro ao salvar usuário.");

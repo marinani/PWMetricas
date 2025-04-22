@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Aplicacao.Modelos.Perfil;
+using PWMetricas.Aplicacao.Modelos.Tamanho;
+using PWMetricas.Aplicacao.Servicos;
 
 namespace PWMetricas.Adm.Controllers
 {
@@ -28,67 +30,58 @@ namespace PWMetricas.Adm.Controllers
             return View(perfis);
         }
 
-        // Tela de Cadastro
+       
         [HttpGet]
-        public IActionResult Novo()
+        public IActionResult Cadastro()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Novo(PerfilViewModel model)
+        public async Task<IActionResult> Cadastro(PerfilViewModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            var resultado = await _perfilServico.CadastrarPerfil(model);
+            var resultado = await _perfilServico.Cadastrar(model);
             if (!resultado.Sucesso)
             {
                 ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
                 return View(model);
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Consulta));
         }
 
-        // Tela de Edição
         [HttpGet]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Editar(int id)
         {
-            var perfil = await _perfilServico.ObterPorId(id);
-            if (perfil == null)
-                return NotFound();
+            var usuario = await _perfilServico.ObterPorId(id);
+            if (usuario != null)
+            {
+                return View(usuario);
+            }
 
-            return View(perfil);
+            return RedirectToAction("Consulta");
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Edit(PerfilViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return View(model);
+        [HttpPost]
+        public async Task<IActionResult> Editar(PerfilViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
 
-        //    var resultado = await _perfilServico.AtualizarPerfil(model);
-        //    if (!resultado.Sucesso)
-        //    {
-        //        ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
-        //        return View(model);
-        //    }
+                return View(model);
+            }
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+            var resultado = await _perfilServico.Atualizar(model);
+            if (!resultado.Sucesso)
+            {
+                ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
+                return View(model);
+            }
 
-        //// Exclusão
-        //[HttpPost]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var resultado = await _perfilServico.RemoverPerfil(id);
-        //    if (!resultado.Sucesso)
-        //    {
-        //        TempData["Erro"] = string.Join(", ", resultado.Erros);
-        //    }
-
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return RedirectToAction("Consulta");
+        }
     }
 }

@@ -7,12 +7,10 @@ using PWMetricas.Dominio.Entidades;
 
 namespace PWMetricas.Dados.Repositorios.Interfaces
 {
-    public interface IProdutoRepositorio
+    public interface IProdutoRepositorio : IRepositorio<Produto>
     {
         Task<Produto> ObterPorIdAsync(int id);
         Task<IEnumerable<Produto>> ObterTodosAsync();
-        Task AdicionarAsync(Produto produto);
-        Task AtualizarAsync(Produto produto);
-        Task RemoverAsync(int id);
+       
     }
 }

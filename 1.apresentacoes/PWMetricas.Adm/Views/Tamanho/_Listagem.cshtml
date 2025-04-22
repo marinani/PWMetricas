@@ -1,6 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Perfil
-@model PaginacaoResultado<PerfilViewModel>
+@using PWMetricas.Aplicacao.Modelos.Tamanho
+@model PaginacaoResultado<TamanhoViewModel>
 
 
 <div class="app-content">
@@ -65,7 +65,7 @@
                 const page = target.getAttribute("data-page");
 
                 // Faz a requisição AJAX para atualizar a listagem
-                fetch(`/Perfil/Index?page=${page}`, {
+                fetch(`/Tamanho/Consulta?page=${page}`, {
                     method: "GET",
                     headers: {
                         "X-Requested-With": "XMLHttpRequest"

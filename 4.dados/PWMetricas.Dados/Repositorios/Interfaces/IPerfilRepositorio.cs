@@ -7,15 +7,10 @@ using PWMetricas.Dominio.Entidades;
 
 namespace PWMetricas.Dados.Repositorios.Interfaces
 {
-    public interface IPerfilRepositorio
+    public interface IPerfilRepositorio : IRepositorio<Perfil>
     {
         Task<Perfil> ObterPorIdAsync(int id);
         Task<IEnumerable<Perfil>> ObterTodosAsync();
         Task<List<Perfil>> ObterTodosAtivos();
-        Task AdicionarAsync(Perfil perfil);
-        Task AtualizarAsync(Perfil perfil);
-        Task RemoverAsync(int id);
-        Task<IEnumerable<Perfil>> ObterTodosPaginadosAsync(int page, int pageSize);
-        Task<int> ContarTotalAsync();
     }
 }

@@ -9,13 +9,12 @@ using PWMetricas.Dominio.Entidades;
 
 namespace PWMetricas.Dados.Repositorios
 {
-    public class ProdutoRepositorio : IProdutoRepositorio
+    public class ProdutoRepositorio : Repositorio<Produto>, IProdutoRepositorio
     {
         private readonly PwMetricasDbContext _context;
 
-        public ProdutoRepositorio(PwMetricasDbContext context)
+        public ProdutoRepositorio(PwMetricasDbContext contexto) : base(contexto)
         {
-            _context = context;
         }
 
         public async Task<Produto> ObterPorIdAsync(int id)
@@ -28,26 +27,5 @@ namespace PWMetricas.Dados.Repositorios
             return await _context.Produto.ToListAsync();
         }
 
-        public async Task AdicionarAsync(Produto produto)
-        {
-            await _context.Produto.AddAsync(produto);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task AtualizarAsync(Produto produto)
-        {
-            _context.Produto.Update(produto);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task RemoverAsync(int id)
-        {
-            var produto = await ObterPorIdAsync(id);
-            if (produto != null)
-            {
-                _context.Produto.Remove(produto);
-                await _context.SaveChangesAsync();
-            }
-        }
     }
 }

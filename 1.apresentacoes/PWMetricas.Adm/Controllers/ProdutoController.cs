@@ -1,29 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using PWMetricas.Aplicacao.Modelos.Usuario;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PWMetricas.Aplicacao.Modelos.Produto;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 
 namespace PWMetricas.Adm.Controllers
 {
     [Authorize]
-    public class UsuarioController : Controller
+    public class ProdutoController : Controller
     {
-        private readonly IUsuarioServico _usuarioServico;
-        private readonly IPerfilServico _perfilServico;
 
-        public UsuarioController(IUsuarioServico usuarioServico, IPerfilServico perfilServico)
+        private readonly IProdutoServico _produtoServico;
+
+        public ProdutoController(IProdutoServico produtoServico)
         {
-            _usuarioServico = usuarioServico;
-            _perfilServico = perfilServico;
+            _produtoServico = produtoServico;
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Consulta(int page = 1)
         {
             const int pageSize = 10;
-            var perfis = await _usuarioServico.ObterTodosPaginados(page, pageSize);
+            var perfis = await _produtoServico.ObterTodosPaginados(page, pageSize);
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
@@ -36,24 +33,21 @@ namespace PWMetricas.Adm.Controllers
         [HttpGet]
         public async Task<IActionResult> Cadastro()
         {
-            ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastro(UsuarioViewModel model)
+        public async Task<IActionResult> Cadastro(ProdutoViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
                 return View(model);
             }
 
-            var resultado = await _usuarioServico.CadastrarUsuario(model);
+            var resultado = await _produtoServico.Cadastrar(model);
             if (!resultado.Sucesso)
             {
                 ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
-                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
                 return View(model);
             }
 
@@ -63,10 +57,9 @@ namespace PWMetricas.Adm.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
-            var usuario = await _usuarioServico.ObterPorId(id);
+            var usuario = await _produtoServico.ObterPorId(id);
             if (usuario != null)
             {
-                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
                 return View(usuario);
             }
 
@@ -74,19 +67,18 @@ namespace PWMetricas.Adm.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Editar(UsuarioViewModel model)
+        public async Task<IActionResult> Editar(ProdutoViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
+
                 return View(model);
             }
 
-            var resultado = await _usuarioServico.EditarUsuario(model);
+            var resultado = await _produtoServico.Atualizar(model);
             if (!resultado.Sucesso)
             {
                 ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
-                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
                 return View(model);
             }
 

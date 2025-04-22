@@ -1,6 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Perfil
-@model PaginacaoResultado<PerfilViewModel>
+@using PWMetricas.Aplicacao.Modelos.Tamanho
+@model PaginacaoResultado<TamanhoViewModel>
 
 
 <div class="app-content-header">
@@ -8,18 +8,18 @@
 	<div class="container-fluid">
 		<!--begin::Row-->
 		<div class="row">
-			<div class="col-sm-6"><h3 class="mb-0">Consulta de Perfis</h3></div>
+			<div class="col-sm-6"><h3 class="mb-0">Consulta de Tamanhos</h3></div>
 			<div class="col-sm-6">
-				<ol class="breadcrumb float-sm-end">
-					<li class="breadcrumb-item"><a href="/">Página Inicial</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Consulta de Perfil</li>
-				</ol>
+				<div class="float-sm-end">
+					<a asp-action="Cadastro" class="btn btn-primary w-100 mt-3">Novo Tamanho</a>
+				</div>
 			</div>
 		</div>
 		<!--end::Row-->
 	</div>
 	<!--end::Container-->
 </div>
+
 <div class="app-content">
 	<div class="container-fluid">
 

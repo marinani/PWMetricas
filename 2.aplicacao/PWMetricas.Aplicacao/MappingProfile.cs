@@ -2,6 +2,7 @@
 using PWMetricas.Aplicacao.Modelos.Canal;
 using PWMetricas.Aplicacao.Modelos.Cliente;
 using PWMetricas.Aplicacao.Modelos.Perfil;
+using PWMetricas.Aplicacao.Modelos.Produto;
 using PWMetricas.Aplicacao.Modelos.Tamanho;
 using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Dominio.Entidades;
@@ -17,6 +18,7 @@ namespace PWMetricas.Aplicacao
             CreateMap<Cliente, ClienteViewModel>().ReverseMap();
             CreateMap<Canal, CanalViewModel>().ReverseMap();
             CreateMap<Tamanho, TamanhoViewModel>().ReverseMap();
+            CreateMap<Produto, ProdutoViewModel>().ReverseMap();
             CreateMap<Perfil, PerfilViewModel>().ReverseMap();
             CreateMap<Usuario, UsuarioConsulta>().ReverseMap();
             CreateMap<Perfil, PerfilSelect>().ReverseMap();

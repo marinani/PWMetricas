@@ -70,7 +70,7 @@
                 const page = target.getAttribute("data-page");
 
                 // Faz a requisição AJAX para atualizar a listagem
-                fetch(`/Perfil/Index?page=${page}`, {
+                fetch(`/Usuario/Consulta?page=${page}`, {
                     method: "GET",
                     headers: {
                         "X-Requested-With": "XMLHttpRequest"
