@@ -32,6 +32,19 @@ namespace PWMetricas.Dados.Repositorios
         public virtual async Task<TEntidade> Buscar(Guid chave) =>
             await Consulta.Where(x => x.Guid == chave).FirstOrDefaultAsync();
 
+        public async Task<IEnumerable<TEntidade>> ObterTodosPaginados(int page, int pageSize)
+        {
+            return await Consulta
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        public async Task<int> ContarTotal()
+        {
+            return await Consulta.CountAsync();
+        }
+
         public async Task<TEntidade> Buscar(Expression<Func<TEntidade, bool>> expressao) =>
             await Consulta.Where(expressao).FirstOrDefaultAsync();
 

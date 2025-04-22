@@ -34,6 +34,12 @@ namespace PWMetricas.Dados.Repositorios.Interfaces
         /// <returns></returns>
         Task<TEntidade> Buscar(Expression<Func<TEntidade, bool>> expressao);
 
+
+
+        Task<IEnumerable<TEntidade>> ObterTodosPaginados(int page, int pageSize);
+
+        Task<int> ContarTotal();
+
         /// <summary>
         /// Realiza uma busca paginada, retornando um objeto contendo o total de registros encontrados e uma
         /// lista com o resultado de acordo com a página e as propriedades selecionadas no filtro

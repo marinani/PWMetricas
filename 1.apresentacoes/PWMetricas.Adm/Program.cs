@@ -23,12 +23,18 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 #region Serviços
 builder.Services.AddScoped<IPerfilServico, PerfilServico>();
 builder.Services.AddScoped<IUsuarioServico, UsuarioServico>();
+builder.Services.AddScoped<IClienteServico, ClienteServico>();
+builder.Services.AddScoped<ICanalServico, CanalServico>();
+builder.Services.AddScoped<ITamanhoServico, TamanhoServico>();
 builder.Services.AddScoped<IProdutoServico, ProdutoServico>();
 #endregion
 
 #region Repositórios
 builder.Services.AddScoped<IPerfilRepositorio, PerfilRepositorio>();
 builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+builder.Services.AddScoped<ICanalRepositorio, CanalRepositorio>();
+builder.Services.AddScoped<ITamanhoRepositorio, TamanhoRepositorio>();
 builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 #endregion
 

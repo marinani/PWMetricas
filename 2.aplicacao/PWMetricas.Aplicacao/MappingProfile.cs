@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using PWMetricas.Aplicacao.Modelos.Canal;
+using PWMetricas.Aplicacao.Modelos.Cliente;
 using PWMetricas.Aplicacao.Modelos.Perfil;
+using PWMetricas.Aplicacao.Modelos.Tamanho;
 using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Dominio.Entidades;
 
@@ -10,6 +13,10 @@ namespace PWMetricas.Aplicacao
         public MappingProfile()
         {
             // Configuração de mapeamento entre Perfil e PerfilViewModel
+            CreateMap<Perfil, PerfilViewModel>().ReverseMap();
+            CreateMap<Cliente, ClienteViewModel>().ReverseMap();
+            CreateMap<Canal, CanalViewModel>().ReverseMap();
+            CreateMap<Tamanho, TamanhoViewModel>().ReverseMap();
             CreateMap<Perfil, PerfilViewModel>().ReverseMap();
             CreateMap<Usuario, UsuarioConsulta>().ReverseMap();
             CreateMap<Perfil, PerfilSelect>().ReverseMap();

@@ -1,0 +1,70 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Perfil
+@model PaginacaoResultado<PerfilViewModel>
+
+
+<div class="app-content-header">
+	<!--begin::Container-->
+	<div class="container-fluid">
+		<!--begin::Row-->
+		<div class="row">
+			<div class="col-sm-6"><h3 class="mb-0">Consulta de Perfis</h3></div>
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-end">
+					<li class="breadcrumb-item"><a href="/">Página Inicial</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Consulta de Perfil</li>
+				</ol>
+			</div>
+		</div>
+		<!--end::Row-->
+	</div>
+	<!--end::Container-->
+</div>
+<div class="app-content">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<!-- Listagem de Perfis -->
+				<div id="perfil-listagem">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Ativo</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var perfil in Model.Dados)
+							{
+								<tr>
+									<td>@perfil.Nome</td>
+									<td>@(perfil.Ativo ? "Sim" : "Não")</td>
+									<td>
+										<a asp-action="Editar" asp-route-id="@perfil.Id" class="btn btn-primary btn-sm">Editar</a>
+
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+
+					<!-- Paginação -->
+					<nav>
+						<ul class="pagination">
+							@for (int i = 1; i <= Model.TotalPaginas; i++)
+							{
+								<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+									<a href="#" class="page-link" data-page="@i">@i</a>
+								</li>
+							}
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/js/perfil/consulta.js"></script>

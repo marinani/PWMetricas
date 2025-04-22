@@ -1,0 +1,92 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Perfil
+@model PaginacaoResultado<PerfilViewModel>
+
+
+<div class="app-content">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<!-- Listagem de Perfis -->
+				<div id="perfil-listagem">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Ativo</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var perfil in Model.Dados)
+							{
+								<tr>
+									<td>@perfil.Nome</td>
+									<td>@(perfil.Ativo ? "Sim" : "Não")</td>
+									<td>
+										<a asp-action="Editar" asp-route-id="@perfil.Id" class="btn btn-primary btn-sm">Editar</a>
+
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+
+					<!-- Paginação -->
+					<nav>
+						<ul class="pagination">
+							@for (int i = 1; i <= Model.TotalPaginas; i++)
+							{
+								<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+									<a href="#" class="page-link" data-page="@i">@i</a>
+								</li>
+							}
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+        const listagemContainer = document.getElementById("perfil-listagem");
+
+        // Adiciona evento de clique nos links de paginação
+        listagemContainer.addEventListener("click", function (event) {
+            const target = event.target;
+
+            if (target.classList.contains("page-link")) {
+                event.preventDefault();
+
+                const page = target.getAttribute("data-page");
+
+                // Faz a requisição AJAX para atualizar a listagem
+                fetch(`/Perfil/Index?page=${page}`, {
+                    method: "GET",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Erro ao carregar a página.");
+                        }
+                        return response.text();
+                    })
+                    .then(html => {
+                        // Atualiza o conteúdo da listagem
+                        listagemContainer.innerHTML = html;
+                    })
+                    .catch(error => {
+                        console.error("Erro:", error);
+                    });
+            }
+        });
+    });
+
+
+</script>
