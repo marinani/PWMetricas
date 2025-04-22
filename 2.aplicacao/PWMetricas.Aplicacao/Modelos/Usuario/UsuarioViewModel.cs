@@ -27,6 +27,8 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         [Display(Name = "Perfil")]
         public int? PerfilId { get; set; }
 
+        public string PerfilNome{ get; set; }
+
         public bool Ativo { get; set; }
     }
 

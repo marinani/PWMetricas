@@ -45,7 +45,8 @@ namespace PWMetricas.Dados.Repositorios
 
         public async Task<Usuario?> ObterPorEmailAsync(string email)
         {
-            return await Consulta.FirstOrDefaultAsync(u => u.Email == email);
+            return await Consulta
+                .Include(x => x.Perfil).FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

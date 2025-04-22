@@ -1,11 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims;
+
+@{
+    var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
+    var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
+}
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PW Métricos</title>
+    <title>PW Métricas</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/css/adminlte.css" />
+    <link rel="icon" href="/images/icon_pwmetricas.svg" type="image/x-icon">
 
   
     <link rel="stylesheet"
@@ -71,8 +79,8 @@
                                      class="rounded-circle shadow"
                                      alt="User Image" />
                                 <p>
-                                    Mariane Ribeiro
-                                    <small>Administrador</small>
+                                    @userName
+                                    <small>@userPerfil</small>
                                 </p>
                             </li>
                             <!--end::User Image-->
@@ -98,12 +106,12 @@
                 <!--begin::Brand Link-->
                 <a href="/Home/Index" class="brand-link">
                     <!--begin::Brand Image-->
-                    <img src="/images/pw_metricas_branca.svg"
+                    <img src="/images/icon_pwmetricas.svg"
                          alt="Logo PW Métricas"
                          class="brand-image opacity-75 shadow" />
                     <!--end::Brand Image-->
                     <!--begin::Brand Text-->
-                    @* <span class="brand-text fw-light">Mw Métricas</span> *@
+                    <span class="brand-text fw-light">Mw Métricas</span>
                     <!--end::Brand Text-->
                 </a>
                 <!--end::Brand Link-->

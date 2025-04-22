@@ -46,6 +46,7 @@ namespace PWMetricas.Adm.Controllers
             {
                 new Claim(ClaimTypes.Name, usuario.Nome),
                 new Claim(ClaimTypes.Email, usuario.Email),
+                new Claim("Perfil", usuario.PerfilNome),      // Perfil do usuário
                 new Claim("PerfilId", usuario.PerfilId.ToString())
             };
 
