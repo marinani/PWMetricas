@@ -1,6 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Usuario
-@model PaginacaoResultado<UsuarioConsulta>
+@using PWMetricas.Aplicacao.Modelos.Origem
+@model PaginacaoResultado<OrigemViewModel>
 
 
 <div class="app-content-header">
@@ -8,10 +8,10 @@
 	<div class="container-fluid">
 		<!--begin::Row-->
 		<div class="row">
-			<div class="col-sm-6"><h3 class="mb-0">Consulta de Usuários</h3></div>
+			<div class="col-sm-6"><h3 class="mb-0">Consulta de Origens</h3></div>
 			<div class="col-sm-6">
 				<div class="float-sm-end">
-					<a asp-action="Cadastro" class="btn btn-primary w-100 mt-3">Novo Usuario</a>
+					<a asp-action="Cadastro" class="btn btn-primary w-100 mt-3">Nova Origem</a>
 				</div>
 			</div>
 		</div>
@@ -25,15 +25,14 @@
 
 		<div class="row">
 			<div class="col-sm-12">
-
 				<!-- Listagem de Perfis -->
-				<div id="usuario-listagem">
+				<div id="perfil-listagem">
 					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th>Nome</th>
-								<th>E-mail</th>
-								<th>Perfil</th>
+								<th>Cor</th>
+								<th>Ativo</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
@@ -42,11 +41,13 @@
 							{
 								<tr>
 									<td>@item.Nome</td>
-									<td>@item.Email</td>
-									<td>@item.Perfil.Nome</td>
+									<td>
+										<span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: @item.CorHex; border: 1px solid #ccc;" title="@item.CorHex"></span>
+									</td>
+									<td>@(item.Ativo ? "Sim" : "Não")</td>
 									<td>
 										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
-											<i class="nav-icon bi bi-pencil"></i>
+											<i class="nav-icon bi bi-pencil"></i> 
 										</a>
 									</td>
 								</tr>
@@ -71,5 +72,4 @@
 	</div>
 </div>
 
-<!-- Script para atualizar a paginação dinamicamente -->
-<script src="/js/usuario/consulta.js"></script>
+<script src="/js/origem/consulta.js"></script>

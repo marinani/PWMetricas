@@ -38,6 +38,22 @@ namespace PWMetricas.Dados.Repositorios
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Usuario>> ObterVendedoresPaginadosAsync(int page, int pageSize)
+        {
+            return await Consulta
+                .Include(x => x.Perfil)
+                .Where(x => x.Perfil.Nome.ToUpper().Contains("VENDEDOR"))
+                .OrderBy(p => p.Nome)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        public async Task<int> ContarTotalVendedoresAsync()
+        {
+            return await Consulta.Where(x=> x.PerfilId == 3).CountAsync();
+        }
+
         public async Task<int> ContarTotalAsync()
         {
             return await Consulta.CountAsync();

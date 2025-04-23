@@ -18,5 +18,10 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
         Task<PaginacaoResultado<UsuarioConsulta>> ObterTodosPaginados(int page, int pageSize);
 
         Task<UsuarioViewModel?> AutenticarUsuario(string email, string senha);
+
+        Task<PaginacaoResultado<UsuarioConsulta>> ObterVendedoresPaginados(int page, int pageSize);
+        Task<Resultado> CadastrarVendedor(VendedorViewModel modelo);
+        Task<Resultado> EditarVendedor(VendedorViewModel modelo);
+        Task<VendedorViewModel> ObterVendedorPorId(int id);
     }
 }

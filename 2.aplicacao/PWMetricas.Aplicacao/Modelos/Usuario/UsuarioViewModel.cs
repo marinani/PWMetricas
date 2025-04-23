@@ -32,6 +32,27 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         public bool Ativo { get; set; }
     }
 
+    public class VendedorViewModel
+    {
+        public int Id { get; set; }
+        public Guid Guid { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Nome Completo")]
+        public required string Nome { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "E-mail (acesso)")]
+        public required string Email { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Senha")]
+        public required string Senha { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Confirmação E-mail")]
+        public required string ConfirmaEmail { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Confirmação Senha")]
+        public required string ConfirmaSenha { get; set; }
+    }
+
 
     public class UsuarioConsulta
     {

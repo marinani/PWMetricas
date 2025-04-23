@@ -24,6 +24,7 @@ namespace PWMetricas.Aplicacao
             CreateMap<Perfil, PerfilViewModel>().ReverseMap();
             CreateMap<Perfil, PerfilSelect>().ReverseMap();
             CreateMap<Usuario, UsuarioConsulta>().ReverseMap();
+            CreateMap<Usuario, VendedorViewModel>().ReverseMap();
 
             // Configuração de mapeamento entre Usuario e UsuarioViewModel  
             CreateMap<Usuario, UsuarioViewModel>()

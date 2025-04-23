@@ -1,0 +1,30 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Origem
+@model OrigemViewModel
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label for="Nome">Nome</label>
+			<input asp-for="Nome" class="form-control" id="Nome" placeholder="Digite o nome" />
+			<span asp-validation-for="Nome" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="container mt-5">
+		<h1>Seletor de Cores</h1>
+		<div class="form-group">
+			<label for="seletorCor">Selecione uma cor:</label>
+			<input type="text" class="form-control" id="seletorCor" value="#000000">
+		</div>
+		<div>
+			<div id="corSelecionada" style="background-color: #000000;"></div>
+			<p id="valorHex">Cor selecionada: <span id="hexValue">#000000</span></p>
+		</div>
+	</div>
+</div>
+<br />
+<div class="row g-4">
+	<div class="col-sm-12">
+		<button type="submit" class="btn btn-primary float-sm-end">Salvar</button>
+
+	</div>
+</div>

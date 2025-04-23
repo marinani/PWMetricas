@@ -94,7 +94,8 @@ namespace PWMetricas.Aplicacao.Servicos
 
                 usuario.Nome = modelo.Nome;
                 usuario.PerfilId = modelo.PerfilId.Value;
-                //usuario.Ativo = modelo.Ativo;
+                usuario.Email = modelo.Email;
+                usuario.Senha = EncryptPassword(modelo.Senha);
 
                 await _usuarioRepositorio.Atualizar(usuario);
 
@@ -140,6 +141,96 @@ namespace PWMetricas.Aplicacao.Servicos
             return _mapper.Map<UsuarioViewModel>(usuario);
         }
 
+
+        #region Métodos para o Vendedor
+        public async Task<PaginacaoResultado<UsuarioConsulta>> ObterVendedoresPaginados(int page, int pageSize)
+        {
+            var perfis = await _usuarioRepositorio.ObterVendedoresPaginadosAsync(page, pageSize);
+            var totalRegistros = await _usuarioRepositorio.ContarTotalVendedoresAsync();
+
+            return new PaginacaoResultado<UsuarioConsulta>
+            {
+                Dados = _mapper.Map<IEnumerable<UsuarioConsulta>>(perfis),
+                PaginaAtual = page,
+                TotalPaginas = (int)Math.Ceiling(totalRegistros / (double)pageSize),
+                TotalRegistros = totalRegistros
+            };
+        }
+
+        public async Task<VendedorViewModel> ObterVendedorPorId(int id)
+        {
+            var usuario = await _usuarioRepositorio.BuscarPorId(id);
+            return _mapper.Map<VendedorViewModel>(usuario);
+        }
+
+
+        public async Task<Resultado> CadastrarVendedor(VendedorViewModel modelo)
+        {
+            var resultado = new Resultado();
+
+
+            try
+            {
+                // Fix: Initialize all required properties of the 'Perfil' class
+                var usuario = new Usuario()
+                {
+                    Id = 0, // Assuming 0 for new entities; adjust as needed
+                    Guid = Guid.NewGuid(), // Generate a new GUID
+                    Nome = modelo.Nome,
+                    Email = modelo.Email,
+                    Senha = EncryptPassword(modelo.Senha), // Criptografa a senha
+                    DataCadastro = DateTime.Now,
+                    PerfilId = 3, // Vendedor
+                    Ativo = true
+                };
+
+                await _usuarioRepositorio.Inserir(usuario);
+
+                var usuarioSalvo = await _usuarioRepositorio.BuscarPorId(usuario.Id);
+                Console.WriteLine(usuarioSalvo != null ? "Usuário salvo com sucesso!" : "Erro ao salvar usuário.");
+
+                return new Resultado("Sucesso ao cadastrar usuário.", usuario);
+            }
+            catch (Exception ex)
+            {
+                return new Resultado(new[] { "Erro ao cadastrar usuário: " + ex.Message });
+            }
+        }
+
+        public async Task<Resultado> EditarVendedor(VendedorViewModel modelo)
+        {
+            var resultado = new Resultado();
+
+           
+
+            var usuario = await _usuarioRepositorio.BuscarPorId(modelo.Id);
+
+            if (usuario == null)
+            {
+                return new Resultado(new[] { "Usuário não encontrado." });
+            }
+
+            try
+            {
+
+                usuario.Nome = modelo.Nome;
+                usuario.Email = modelo.Email;
+                usuario.Senha = EncryptPassword(modelo.Senha);
+                usuario.PerfilId = 3;
+
+                await _usuarioRepositorio.Atualizar(usuario);
+
+
+                return new Resultado("Sucesso ao atualizar usuário.", usuario);
+            }
+            catch (Exception ex)
+            {
+                return new Resultado(new[] { "Erro ao atualizar usuário: " + ex.Message });
+            }
+        }
+
+
+        #endregion
 
         #region Métodos Privados
         // Método para criptografar a senha
