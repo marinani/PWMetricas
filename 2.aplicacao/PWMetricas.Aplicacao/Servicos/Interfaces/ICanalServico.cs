@@ -9,5 +9,6 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
         Task<PaginacaoResultado<CanalViewModel>> ObterTodosPaginados(int page, int pageSize);
         Task<Resultado> Cadastrar(CanalViewModel modelo);
         Task<Resultado> Atualizar(CanalViewModel modelo);
+        Task<IEnumerable<CanalViewModel>> ObterTodos();
     }
 }

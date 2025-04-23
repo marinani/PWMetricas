@@ -9,6 +9,7 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
         Task<PaginacaoResultado<OrigemViewModel>> ObterTodosPaginados(int page, int pageSize);
         Task<Resultado> Cadastrar(OrigemViewModel modelo);
         Task<Resultado> Atualizar(OrigemViewModel modelo);
+        Task<IEnumerable<OrigemViewModel>> ObterTodos();
 
     }
 }

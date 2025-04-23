@@ -5,6 +5,8 @@ using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Aplicacao.Modelos.Produto;
 using PWMetricas.Aplicacao.Modelos;
 using AutoMapper;
+using PWMetricas.Aplicacao.Modelos.Origem;
+using PWMetricas.Dados.Repositorios;
 
 namespace PWMetricas.Aplicacao.Servicos
 {
@@ -25,9 +27,10 @@ namespace PWMetricas.Aplicacao.Servicos
             return _mapper.Map<ProdutoViewModel>(origem);
         }
 
-        public async Task<IEnumerable<Produto>> ObterTodosAsync()
+        public async Task<IEnumerable<ProdutoViewModel>> ObterTodos()
         {
-            return await _produtoRepositorio.ObterTodosAsync();
+            var perfis = await _produtoRepositorio.ListarAsync();
+            return _mapper.Map<IEnumerable<ProdutoViewModel>>(perfis);
         }
 
         public async Task<PaginacaoResultado<ProdutoViewModel>> ObterTodosPaginados(int page, int pageSize)

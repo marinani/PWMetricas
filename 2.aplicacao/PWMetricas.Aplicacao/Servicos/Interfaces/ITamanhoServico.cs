@@ -15,5 +15,6 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
         Task<PaginacaoResultado<TamanhoViewModel>> ObterTodosPaginados(int page, int pageSize);
         Task<Resultado> Cadastrar(TamanhoViewModel modelo);
         Task<Resultado> Atualizar(TamanhoViewModel modelo);
+        Task<IEnumerable<TamanhoViewModel>> ObterTodos();
     }
 }

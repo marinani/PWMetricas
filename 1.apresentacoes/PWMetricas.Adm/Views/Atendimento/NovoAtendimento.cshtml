@@ -80,17 +80,31 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label asp-for="CanalId"></label>
-						<select asp-for="CanalId" asp-items="ViewBag.Canais" class="form-control">
+
+						<select class="form-select" name="CanalId">
 							<option value="">Selecione um canal</option>
+							@foreach (var canal in ViewBag.Canais)
+							{
+								<option value="@canal.Id" style="background-color: @canal.CorHex; ">
+									@canal.Nome
+								</option>
+							}
 						</select>
+
 						<span asp-validation-for="CanalId" class="text-danger"></span>
 					</div>
 				</div>
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label asp-for="OrigemId"></label>
-						<select asp-for="OrigemId" asp-items="ViewBag.Origens" class="form-control">
+						<select class="form-select" name="OrigemId">
 							<option value="">Selecione uma origem</option>
+							@foreach (var canal in ViewBag.Origens)
+							{
+								<option value="@canal.Id" style="background-color: @canal.CorHex;">
+									@canal.Nome
+								</option>
+							}
 						</select>
 						<span asp-validation-for="OrigemId" class="text-danger"></span>
 					</div>
@@ -100,8 +114,14 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label asp-for="ProdutoId"></label>
-						<select asp-for="ProdutoId" asp-items="ViewBag.Produtos" class="form-control">
+						<select class="form-select" name="ProdutoId">
 							<option value="">Selecione um produto</option>
+							@foreach (var canal in ViewBag.Produtos)
+							{
+								<option value="@canal.Id" style="background-color: @canal.CorHex;">
+									@canal.Nome
+								</option>
+							}
 						</select>
 						<span asp-validation-for="ProdutoId" class="text-danger"></span>
 					</div>
@@ -109,8 +129,14 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label asp-for="TamanhoId"></label>
-						<select asp-for="TamanhoId" asp-items="ViewBag.Tamanhos" class="form-control">
+						<select class="form-select" name="TamanhoId">
 							<option value="">Selecione um tamanho</option>
+							@foreach (var canal in ViewBag.Tamanhos)
+							{
+								<option value="@canal.Id" style="background-color: @canal.CorHex; ">
+									@canal.Nome
+								</option>
+							}
 						</select>
 						<span asp-validation-for="TamanhoId" class="text-danger"></span>
 					</div>

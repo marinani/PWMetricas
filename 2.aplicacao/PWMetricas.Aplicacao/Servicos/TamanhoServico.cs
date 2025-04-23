@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using PWMetricas.Aplicacao.Modelos;
+using PWMetricas.Aplicacao.Modelos.Origem;
 using PWMetricas.Aplicacao.Modelos.Produto;
 using PWMetricas.Aplicacao.Modelos.Tamanho;
 using PWMetricas.Aplicacao.Modelos.Usuario;
@@ -29,6 +30,12 @@ namespace PWMetricas.Aplicacao.Servicos
         {
             var tamanho = await _tamanhoRepositorio.BuscarPorId(id);
             return _mapper.Map<TamanhoViewModel>(tamanho);
+        }
+
+        public async Task<IEnumerable<TamanhoViewModel>> ObterTodos()
+        {
+            var perfis = await _tamanhoRepositorio.ListarAsync();
+            return _mapper.Map<IEnumerable<TamanhoViewModel>>(perfis);
         }
 
         public async Task<PaginacaoResultado<TamanhoViewModel>> ObterTodosPaginados(int page, int pageSize)

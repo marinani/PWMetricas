@@ -25,6 +25,11 @@ namespace PWMetricas.Aplicacao.Servicos
             var origem = await _repositorio.BuscarPorId(id);
             return _mapper.Map<OrigemViewModel>(origem);
         }
+        public async Task<IEnumerable<OrigemViewModel>> ObterTodos()
+        {
+            var perfis = await _repositorio.ListarAsync();
+            return _mapper.Map<IEnumerable<OrigemViewModel>>(perfis);
+        }
 
         public async Task<PaginacaoResultado<OrigemViewModel>> ObterTodosPaginados(int page, int pageSize)
         {

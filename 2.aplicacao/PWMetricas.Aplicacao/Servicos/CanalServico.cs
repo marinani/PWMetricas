@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PWMetricas.Aplicacao.Modelos;
 using PWMetricas.Aplicacao.Modelos.Canal;
+using PWMetricas.Aplicacao.Modelos.Origem;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Dominio.Entidades;
@@ -21,6 +22,12 @@ namespace PWMetricas.Aplicacao.Servicos
         {
             var canal = await _repositorio.BuscarPorId(id);
             return _mapper.Map<CanalViewModel>(canal);
+        }
+
+        public async Task<IEnumerable<CanalViewModel>> ObterTodos()
+        {
+            var canais = await _repositorio.ListarAsync();
+            return _mapper.Map<IEnumerable<CanalViewModel>>(canais);
         }
 
         public async Task<PaginacaoResultado<CanalViewModel>> ObterTodosPaginados(int page, int pageSize)
