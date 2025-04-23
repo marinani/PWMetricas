@@ -1,0 +1,34 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Canal
+@model CanalViewModel
+
+<div class="row g-4">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label for="Nome">Nome</label>
+			<input asp-for="Nome" class="form-control" id="Nome" placeholder="Digite o nome" />
+			<span asp-validation-for="Nome" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="mb-3">
+		<label class="form-label">Escolha a cor</label>
+		<div>
+			@foreach (var cor in new List<string> { "#38BDF2", "#04BF55", "#F2884B", "#F23030" })
+			{
+				<label style="cursor:pointer;">
+					<input type="radio" name="CorHex" value="@cor" style="display:none;">
+					<span style="display:inline-block; width:30px; height:30px; background-color:@cor; border-radius:50%; border:2px solid #ccc; margin:5px;"></span>
+				</label>
+			}
+		</div>
+	</div>
+</div>
+
+<br />
+<div class="row g-4">
+	<div class="col-sm-12">
+		<button type="submit" class="btn btn-primary btn-sm float-sm-end">Salvar</button>
+
+	</div>
+</div>
+</div>

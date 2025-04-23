@@ -57,6 +57,7 @@ namespace PWMetricas.Aplicacao.Servicos
                     Id = 0, // Assuming 0 for new entities; adjust as needed
                     Guid = Guid.NewGuid(), // Generate a new GUID
                     Nome = modelo.Nome,
+                    CorHex = modelo.CorHex,
                     Ativo = true
                 };
 
@@ -89,6 +90,7 @@ namespace PWMetricas.Aplicacao.Servicos
             {
 
                 usuario.Nome = modelo.Nome;
+                usuario.CorHex = modelo.CorHex;
                 //usuario.Ativo = modelo.Ativo;
 
                 await _repositorio.Atualizar(usuario);

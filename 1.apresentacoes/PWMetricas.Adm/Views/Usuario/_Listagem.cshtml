@@ -22,16 +22,17 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach (var usuario in Model.Dados)
+							@foreach (var item in Model.Dados)
 							{
 								<tr>
-									<td>@usuario.Nome</td>
-									<td>@usuario.Email</td>
-									<td>@usuario.Perfil.Nome</td>
-									<td>@(usuario.Ativo ? "Sim" : "Não")</td>
+									<td>@item.Nome</td>
+									<td>@item.Email</td>
+									<td>@item.Perfil.Nome</td>
+									<td>@(item.Ativo ? "Sim" : "Não")</td>
 									<td>
-										<a asp-action="Editar" asp-route-id="@usuario.Id" class="btn btn-primary btn-sm">Editar</a>
-
+										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+											<i class="nav-icon bi bi-pencil"></i>
+										</a>
 									</td>
 								</tr>
 							}

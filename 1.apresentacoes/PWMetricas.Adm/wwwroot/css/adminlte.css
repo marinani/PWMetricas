@@ -184,6 +184,19 @@
     --bs-form-invalid-border-color: #ea868f;
 }
 
+
+#corSelecionada {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    margin-top: 20px;
+}
+
+#valorHex {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
 *,
 *::before,
 *::after {

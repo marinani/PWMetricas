@@ -28,8 +28,9 @@
 									</td>
 									<td>@(item.Ativo ? "Sim" : "Não")</td>
 									<td>
-										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Editar</a>
-
+										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+											<i class="nav-icon bi bi-pencil"></i>
+										</a>
 									</td>
 								</tr>
 							}

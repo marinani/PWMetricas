@@ -43,7 +43,6 @@
 						</a>
 					</li>
 				</ul>
-
 				<!-- Logo centralizada -->
 				<div class="navbar-brand logo-container">
 					<a href="/Home/Index">
@@ -65,7 +64,6 @@
 
 						</a>
 						<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-							<!--begin::User Image-->
 							<li class="user-header text-bg-primary">
 								<img src="/images/user2-160x160.jpg"
 								class="rounded-circle shadow"
@@ -87,26 +85,8 @@
 			</div>
 		</nav>
 		<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-			<!--begin::Sidebar Brand-->
-			<div class="sidebar-brand">
-				<!--begin::Brand Link-->
-				<a href="/Home/Index" class="brand-link">
-					<!--begin::Brand Image-->
-					<img src="/images/icon_pwmetricas.svg"
-						 alt="Logo PW Métricas"
-						 class="brand-image opacity-75 shadow" />
-					<!--end::Brand Image-->
-					<!--begin::Brand Text-->
-					@* 	<span class="brand-text fw-light">PW Métricas</span> *@
-					<!--end::Brand Text-->
-				</a>
-				<!--end::Brand Link-->
-			</div>
-			<!--end::Sidebar Brand-->
-			<!--begin::Sidebar Wrapper-->
 			<div class="sidebar-wrapper">
 				<nav class="mt-2">
-					<!--begin::Sidebar Menu-->
 					<ul class="nav sidebar-menu flex-column"
 					data-lte-toggle="treeview"
 					role="menu"
@@ -114,18 +94,106 @@
 
 						<li class="nav-item">
 							<a href="/Home/Index" class="nav-link">
-								<i class="nav-icon bi bi-clipboard-data"></i>
-								<p>Dashboard</p>
+								<i class="nav-icon bi bi-house"></i>
+								<p>Home</p>
 							</a>
 						</li>
 						@if (userPerfil == "Administrador" || userPerfil == "Gerente")
 						{
+
 							<li class="nav-item">
-								<a href="/Vendas/Consulta" class="nav-link">
-									<i class="nav-icon bi bi-headset"></i>
-									<p>Vendas Geral</p>
+								<a href="#" class="nav-link">
+									<i class="nav-icon bi bi-person-fill"></i>
+									<p>
+										Clientes
+										<i class="nav-arrow bi bi-chevron-right"></i>
+										
+									</p>
 								</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a href="/Cliente/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Cadastro</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Cliente/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Pesquisa</p>
+										</a>
+									</li>
+								</ul>
 							</li>
+
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+									<i class="nav-icon bi bi-list-check"></i>
+									<p>
+										Cadastros
+										<i class="nav-arrow bi bi-chevron-right"></i>
+									</p>
+								</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a href="/Usuario/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Vendedor</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Canal/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Canal</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Origem/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Origem</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Produto/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Produto</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Tamanho/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Tamanho</p>
+										</a>
+									</li>
+									
+								</ul>
+							</li>
+
+
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+									<i class="nav-icon bi bi-shop"></i>
+									<p>
+										Filiais
+										<i class="nav-arrow bi bi-chevron-right"></i>
+									</p>
+								</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a href="/Loja/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Pesquisa</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Loja/Nova" class="nav-link">
+											<i class="nav-icon bi bi-arrow-right"></i>
+											<p>Nova Filial</p>
+										</a>
+									</li>
+								</ul>
+							</li>
+							
 						}
 
 
@@ -140,84 +208,15 @@
 
 							
 						}
-						<!-- Menu Cadastros (somente para Administrador e Gerente) -->
-						@if (userPerfil == "Administrador" || userPerfil == "Gerente")
-						{
-							<li class="nav-item">
-								<a href="#" class="nav-link">
-									<i class="nav-icon bi bi-list-check"></i>
-									<p>
-										 Cadastros
-										<i class="nav-arrow bi bi-chevron-right"></i>
-									</p>
-								</a>
-								<ul class="nav nav-treeview">
-									<li class="nav-item">
-										<a href="/Perfil/Consulta" class="nav-link">
-											<i class="nav-icon bi bi-person-circle"></i>
-											<p>Perfil</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="/Usuario/Consulta" class="nav-link">
-											<i class="nav-icon bi bi-person-fill"></i>
-											<p>Usuário</p>
-										</a>
-									</li>
-									@*   <li class="nav-item">
-                                    <a href="/Cliente/Consulta" class="nav-link" disabled>
-                                        <i class="nav-icon bi bi-people-fill"></i>
-                                        <p>Cliente</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/Loja/Consulta" class="nav-link" disabled>
-                                        <i class="nav-icon bi bi-house"></i>
-                                        <p>Loja</p>
-                                    </a>
-                                </li>*@
-									<li class="nav-item">
-										<a href="/Canal/Consulta" class="nav-link">
-											<i class="nav-icon bi bi-chat-dots-fill"></i>
-											<p>Canal</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="/Origem/Consulta" class="nav-link">
-											<i class="nav-icon bi bi-globe"></i>
-											<p>Origem</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="/Produto/Consulta" class="nav-link">
-											<i class="nav-icon bi bi-bag-fill"></i>
-											<p>Produto</p>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a href="/Tamanho/Consulta" class="nav-link">
-											<i class="nav-icon bi bi-arrows-collapse"></i>
-											<p>Tamanho</p>
-										</a>
-									</li>
-								</ul>
-							</li>
-						}
+						
 
 					</ul>
-					<!--end::Sidebar Menu-->
 				</nav>
 			</div>
-			<!--end::Sidebar Wrapper-->
 		</aside>
-		<!--end::Sidebar-->
-		<!--begin::App Main-->
 		<main class="app-main">
-
-
 			@RenderBody()
 		</main>
-		<!--end::Footer-->
 	</div>
 
 
@@ -232,6 +231,7 @@
 			crossorigin="anonymous"></script>
 	<script src="~/js/adminlte.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 	@await RenderSectionAsync("Scripts", required: false)
 	<script>
 		document.addEventListener("DOMContentLoaded", function () {

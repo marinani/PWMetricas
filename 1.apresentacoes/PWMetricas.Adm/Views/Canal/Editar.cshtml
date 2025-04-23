@@ -16,24 +16,37 @@
 
 <div class="app-content">
 	<div class="container-fluid">
-		<form asp-action="Cadastro" method="post">
-			<div class="row g-4">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="Nome">Nome</label>
-						<input asp-for="Nome" class="form-control" id="Nome" placeholder="Digite o nome" />
-						<span asp-validation-for="Nome" class="text-danger"></span>
-					</div>
-				</div>
-			</div>
-
-			<br />
-			<div class="row g-4">
-				<div class="col-sm-12">
-					<button type="submit" class="btn btn-primary btn-sm float-sm-end">Salvar</button>
-
-				</div>
-			</div>
+		<form asp-action="Editar" method="post">
+			@Html.HiddenFor(m => m.Id)
+			@Html.HiddenFor(m => m.Guid)
+			@Html.HiddenFor(m => m.Ativo)
+			<partial name="_Visualizar" />
 		</form>
 	</div>
 </div>
+
+@section Scripts {
+	<!-- Scripts para validação do lado do cliente -->
+	<partial name="_ValidationScriptsPartial" />
+
+	<script>
+
+			document.querySelectorAll('#color-picker .color-option').forEach(function (el) {
+			el.addEventListener('click', function () {
+				// Remove seleção anterior
+				document.querySelectorAll('#color-picker .color-option').forEach(function (item) {
+					item.classList.remove('selected');
+				});
+
+				// Adiciona seleção atual
+				el.classList.add('selected');
+
+				// Marca o radio interno
+				el.querySelector('input[type="radio"]').checked = true;
+			});
+		});
+
+
+	</script>
+
+	}

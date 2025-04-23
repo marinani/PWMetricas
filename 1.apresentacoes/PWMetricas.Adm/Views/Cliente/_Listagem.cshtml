@@ -19,14 +19,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach (var perfil in Model.Dados)
+							@foreach (var item in Model.Dados)
 							{
 								<tr>
-									<td>@perfil.Nome</td>
-									<td>@(perfil.Ativo ? "Sim" : "Não")</td>
+									<td>@item.Nome</td>
+									<td>@(item.Ativo ? "Sim" : "Não")</td>
 									<td>
-										<a asp-action="Editar" asp-route-id="@perfil.Id" class="btn btn-primary btn-sm">Editar</a>
-
+										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+											<i class="nav-icon bi bi-pencil"></i>
+										</a>
 									</td>
 								</tr>
 							}
