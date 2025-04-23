@@ -27,6 +27,7 @@ builder.Services.AddScoped<IClienteServico, ClienteServico>();
 builder.Services.AddScoped<ICanalServico, CanalServico>();
 builder.Services.AddScoped<ITamanhoServico, TamanhoServico>();
 builder.Services.AddScoped<IProdutoServico, ProdutoServico>();
+builder.Services.AddScoped<IOrigemServico, OrigemServico>();
 #endregion
 
 #region Repositórios
@@ -36,6 +37,7 @@ builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
 builder.Services.AddScoped<ICanalRepositorio, CanalRepositorio>();
 builder.Services.AddScoped<ITamanhoRepositorio, TamanhoRepositorio>();
 builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+builder.Services.AddScoped<IOrigemRepositorio, OrigemRepositorio>();
 #endregion
 
 // Configuração de autenticação
@@ -48,6 +50,16 @@ builder.Services.AddAuthentication("CookieAuth")
         options.SlidingExpiration = true; // Renova o tempo de expiração se o usuário estiver ativo
 
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AcessoAdministrador", policy =>
+        policy.RequireRole("Administrador"));
+    options.AddPolicy("AcessoGerente", policy =>
+        policy.RequireRole("Gerente"));
+    options.AddPolicy("AcessoVendedor", policy =>
+        policy.RequireRole("Vendedor"));
+});
 
 var app = builder.Build();
 

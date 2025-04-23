@@ -1,0 +1,79 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Origem
+@model OrigemViewModel
+
+<div class="app-content-header">
+	<!--begin::Container-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6"><h3 class="mb-0">Edição da Origem</h3></div>
+
+		</div>
+	</div>
+	<!--end::Container-->
+</div>
+
+<div class="app-content">
+	<div class="container-fluid">
+
+		<form asp-action="Editar" method="post">
+			@Html.HiddenFor(m => m.Id)
+			@Html.HiddenFor(m => m.Guid)
+			@Html.HiddenFor(m => m.Ativo)
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="Nome">Nome</label>
+						<input asp-for="Nome" class="form-control" id="Nome" placeholder="Digite o nome" />
+						<span asp-validation-for="Nome" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Escolha a cor</label>
+					<div>
+						@foreach (var cor in new List<string> { "#38BDF2", "#04BF55", "#F2884B", "#F23030" })
+						{
+							<label style="cursor:pointer;">
+								<input type="radio" name="CorHex" value="@cor" style="display:none;">
+								<span style="display:inline-block; width:30px; height:30px; background-color:@cor; border-radius:50%; border:2px solid #ccc; margin:5px;"></span>
+							</label>
+						}
+					</div>
+				</div>
+			</div>
+			<br />
+			<div class="row g-4">
+				<div class="col-sm-12">
+					<button type="submit" class="btn btn-primary float-sm-end">Salvar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@section Scripts {
+	<!-- Scripts para validação do lado do cliente -->
+	<partial name="_ValidationScriptsPartial" />
+
+	<script>
+
+			document.querySelectorAll('#color-picker .color-option').forEach(function (el) {
+			el.addEventListener('click', function () {
+				// Remove seleção anterior
+				document.querySelectorAll('#color-picker .color-option').forEach(function (item) {
+					item.classList.remove('selected');
+				});
+
+				// Adiciona seleção atual
+				el.classList.add('selected');
+
+				// Marca o radio interno
+				el.querySelector('input[type="radio"]').checked = true;
+			});
+		});
+
+
+	</script>
+
+	}

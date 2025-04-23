@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Dominio.Entidades;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
-using PWMetricas.Aplicacao.Modelos.Tamanho;
 using PWMetricas.Aplicacao.Modelos.Produto;
 using PWMetricas.Aplicacao.Modelos;
-using PWMetricas.Dados.Repositorios;
-using PWMetricas.Aplicacao.Modelos.Usuario;
 using AutoMapper;
 
 namespace PWMetricas.Aplicacao.Servicos
@@ -26,9 +19,10 @@ namespace PWMetricas.Aplicacao.Servicos
             _mapper = mapper;
         }
 
-        public async Task<Produto> ObterPorId(int id)
+        public async Task<ProdutoViewModel> ObterPorId(int id)
         {
-            return await _produtoRepositorio.ObterPorIdAsync(id);
+            var origem = await _produtoRepositorio.BuscarPorId(id);
+            return _mapper.Map<ProdutoViewModel>(origem);
         }
 
         public async Task<IEnumerable<Produto>> ObterTodosAsync()

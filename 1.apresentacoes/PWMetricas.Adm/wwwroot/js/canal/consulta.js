@@ -1,5 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    const listagemContainer = document.getElementById("perfil-listagem");
+    const listagemContainer = document.getElementById("canal-listagem");
 
     // Adiciona evento de clique nos links de paginação
     listagemContainer.addEventListener("click", function (event) {
@@ -11,7 +11,7 @@
             const page = target.getAttribute("data-page");
 
             // Faz a requisição AJAX para atualizar a listagem
-            fetch(`/Perfil/Consulta?page=${page}`, {
+            fetch(`/Canal/Consulta?page=${page}`, {
                 method: "GET",
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"

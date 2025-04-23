@@ -9,5 +9,6 @@ namespace PWMetricas.Dominio.Entidades
     public class Canal : EntidadeBase
     {
         public required string Nome { get; set; }
+        public string? CorHex { get; set; } // Ex: "#25D366"
     }
 }

@@ -1,8 +1,205 @@
 ﻿@{
-    ViewData["Title"] = "Página Inicial";
+	ViewData["Title"] = "Página Inicial";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bem vindo</h1>
-  
+
+<div class="app-content-header">
+	<!--begin::Container-->
+	<div class="container-fluid">
+		
+	</div>
+	<!--end::Container-->
+</div>
+
+
+<div class="app-content">
+	<div class="container-fluid">
+
+
+		<div class="accordion" id="accordionExample">
+			<!-- Accordion 1 -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingOne">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+							style="background-color: #F2884B; color: white;">
+						EM ATENDIMENTO
+					</button>
+				</h2>
+				<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Cliente</th>
+									<th>Status</th>
+									<th>Data</th>
+									<th>Retornar</th>
+									<th>R$ Pedido</th>
+									<th>Visualizar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Fernando</td>
+									<td>Em Atendimento</td>
+									<td>20/04/2025</td>
+									<td>28/04/2025</td>
+									<td>R$ 6.000,00</td>
+									<td>Valor 3</td>
+								</tr>
+								<tr>
+									<td>João</td>
+									<td>Em Atendimento</td>
+									<td>20/04/2025</td>
+									<td>29/04/2025</td>
+									<td>R$ 10.000,00</td>
+									<td>Valor 3</td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- Accordion 2 -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingTwo">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+							style="background-color: #38BDF2; color: white;">
+						ORÇAMENTO
+					</button>
+				</h2>
+				<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Coluna 1</th>
+									<th>Coluna 2</th>
+									<th>Coluna 3</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Valor 1</td>
+									<td>Valor 2</td>
+									<td>Valor 3</td>
+								</tr>
+								<tr>
+									<td>Valor 4</td>
+									<td>Valor 5</td>
+									<td>Valor 6</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- Accordion 3 -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingThree">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+							style="background-color: #04BF55; color: white;">
+						VENDIDO
+					</button>
+				</h2>
+				<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Coluna 1</th>
+									<th>Coluna 2</th>
+									<th>Coluna 3</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Valor 1</td>
+									<td>Valor 2</td>
+									<td>Valor 3</td>
+								</tr>
+								<tr>
+									<td>Valor 4</td>
+									<td>Valor 5</td>
+									<td>Valor 6</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- Accordion 4 -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingFour">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+							style="background-color: #FF3131; color: white;">
+						PERDIDO NEGOCIADO
+					</button>
+				</h2>
+				<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Coluna 1</th>
+									<th>Coluna 2</th>
+									<th>Coluna 3</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Valor 1</td>
+									<td>Valor 2</td>
+									<td>Valor 3</td>
+								</tr>
+								<tr>
+									<td>Valor 4</td>
+									<td>Valor 5</td>
+									<td>Valor 6</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- Accordion 4 -->
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="headingFive">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"
+							style="background-color: #FF5757; color: white;">
+						PERDIDO Ñ RESPONDE
+					</button>
+				</h2>
+				<div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+					<div class="accordion-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Coluna 1</th>
+									<th>Coluna 2</th>
+									<th>Coluna 3</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Valor 1</td>
+									<td>Valor 2</td>
+									<td>Valor 3</td>
+								</tr>
+								<tr>
+									<td>Valor 4</td>
+									<td>Valor 5</td>
+									<td>Valor 6</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

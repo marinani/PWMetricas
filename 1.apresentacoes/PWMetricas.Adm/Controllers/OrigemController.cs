@@ -1,24 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PWMetricas.Aplicacao.Modelos.Canal;
+using PWMetricas.Aplicacao.Modelos.Origem;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 
 namespace PWMetricas.Adm.Controllers
 {
     [Authorize]
-    public class CanalController : Controller
+    public class OrigemController : Controller
     {
-        private readonly ICanalServico _canalServico;
-        public CanalController(ICanalServico canalServico)
+        private readonly IOrigemServico _origemServico;
+
+        public OrigemController(IOrigemServico origemServico)
         {
-            _canalServico = canalServico;
+            _origemServico = origemServico;
         }
 
         [HttpGet]
         public async Task<IActionResult> Consulta(int page = 1)
         {
             const int pageSize = 10;
-            var perfis = await _canalServico.ObterTodosPaginados(page, pageSize);
+            var perfis = await _origemServico.ObterTodosPaginados(page, pageSize);
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
@@ -35,14 +36,14 @@ namespace PWMetricas.Adm.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Cadastro(CanalViewModel model)
+        public async Task<IActionResult> Cadastro(OrigemViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var resultado = await _canalServico.Cadastrar(model);
+            var resultado = await _origemServico.Cadastrar(model);
             if (!resultado.Sucesso)
             {
                 ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
@@ -55,7 +56,7 @@ namespace PWMetricas.Adm.Controllers
         [HttpGet]
         public async Task<IActionResult> Editar(int id)
         {
-            var usuario = await _canalServico.ObterPorId(id);
+            var usuario = await _origemServico.ObterPorId(id);
             if (usuario != null)
             {
                 return View(usuario);
@@ -65,7 +66,7 @@ namespace PWMetricas.Adm.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Editar(CanalViewModel model)
+        public async Task<IActionResult> Editar(OrigemViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -73,7 +74,7 @@ namespace PWMetricas.Adm.Controllers
                 return View(model);
             }
 
-            var resultado = await _canalServico.Atualizar(model);
+            var resultado = await _origemServico.Atualizar(model);
             if (!resultado.Sucesso)
             {
                 ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));

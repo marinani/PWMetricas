@@ -12,7 +12,7 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
 {
     public interface IProdutoServico
     {
-        Task<Produto> ObterPorId(int id);
+        Task<ProdutoViewModel> ObterPorId(int id);
         Task<IEnumerable<Produto>> ObterTodosAsync();
         Task<PaginacaoResultado<ProdutoViewModel>> ObterTodosPaginados(int page, int pageSize);
         Task<Resultado> Cadastrar(ProdutoViewModel modelo);

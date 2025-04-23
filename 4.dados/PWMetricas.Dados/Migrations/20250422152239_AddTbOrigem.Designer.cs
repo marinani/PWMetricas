@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PWMetricas.Dados;
 
@@ -11,9 +12,11 @@ using PWMetricas.Dados;
 namespace PWMetricas.Dados.Migrations
 {
     [DbContext(typeof(PwMetricasDbContext))]
-    partial class PwMetricasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250422152239_AddTbOrigem")]
+    partial class AddTbOrigem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,6 +39,9 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<int>("CanalId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CidadeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
@@ -48,41 +54,31 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("OrigemId")
-                        .HasColumnType("int");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProdutoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StatusAtendimentoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TamanhoId")
                         .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("ValorPedido")
+                    b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Whatsapp")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("ValorPedido")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CanalId");
 
+                    b.HasIndex("CidadeId");
+
                     b.HasIndex("ClienteId");
 
-                    b.HasIndex("OrigemId");
-
                     b.HasIndex("ProdutoId");
-
-                    b.HasIndex("StatusAtendimentoId");
-
-                    b.HasIndex("TamanhoId");
 
                     b.HasIndex("UsuarioId");
 
@@ -130,10 +126,6 @@ namespace PWMetricas.Dados.Migrations
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
-
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
@@ -239,10 +231,6 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
@@ -289,10 +277,6 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
@@ -316,10 +300,6 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
@@ -342,10 +322,6 @@ namespace PWMetricas.Dados.Migrations
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
-
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
@@ -435,33 +411,21 @@ namespace PWMetricas.Dados.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PWMetricas.Dominio.Entidades.Cidade", "Cidade")
+                        .WithMany()
+                        .HasForeignKey("CidadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PWMetricas.Dominio.Entidades.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PWMetricas.Dominio.Entidades.Origem", "Origem")
-                        .WithMany()
-                        .HasForeignKey("OrigemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PWMetricas.Dominio.Entidades.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PWMetricas.Dominio.Entidades.StatusAtendimento", "StatusAtendimento")
-                        .WithMany()
-                        .HasForeignKey("StatusAtendimentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PWMetricas.Dominio.Entidades.Tamanho", "Tamanho")
-                        .WithMany()
-                        .HasForeignKey("TamanhoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -473,15 +437,11 @@ namespace PWMetricas.Dados.Migrations
 
                     b.Navigation("Canal");
 
+                    b.Navigation("Cidade");
+
                     b.Navigation("Cliente");
 
-                    b.Navigation("Origem");
-
                     b.Navigation("Produto");
-
-                    b.Navigation("StatusAtendimento");
-
-                    b.Navigation("Tamanho");
 
                     b.Navigation("Usuario");
                 });

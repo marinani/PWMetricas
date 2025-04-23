@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PWMetricas.Dados;
 
@@ -11,9 +12,11 @@ using PWMetricas.Dados;
 namespace PWMetricas.Dados.Migrations
 {
     [DbContext(typeof(PwMetricasDbContext))]
-    partial class PwMetricasDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250423003155_AlterAtendimento")]
+    partial class AlterAtendimento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,6 +37,9 @@ namespace PWMetricas.Dados.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("CanalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CidadeId")
                         .HasColumnType("int");
 
                     b.Property<int>("ClienteId")
@@ -66,13 +72,11 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<decimal>("ValorPedido")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Whatsapp")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CanalId");
+
+                    b.HasIndex("CidadeId");
 
                     b.HasIndex("ClienteId");
 
@@ -130,10 +134,6 @@ namespace PWMetricas.Dados.Migrations
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
-
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
@@ -239,10 +239,6 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
@@ -289,10 +285,6 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
@@ -316,10 +308,6 @@ namespace PWMetricas.Dados.Migrations
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
 
@@ -342,10 +330,6 @@ namespace PWMetricas.Dados.Migrations
 
                     b.Property<bool>("Ativo")
                         .HasColumnType("bit");
-
-                    b.Property<string>("CorHex")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("Guid")
                         .HasColumnType("uniqueidentifier");
@@ -435,6 +419,12 @@ namespace PWMetricas.Dados.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("PWMetricas.Dominio.Entidades.Cidade", "Cidade")
+                        .WithMany()
+                        .HasForeignKey("CidadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PWMetricas.Dominio.Entidades.Cliente", "Cliente")
                         .WithMany()
                         .HasForeignKey("ClienteId")
@@ -472,6 +462,8 @@ namespace PWMetricas.Dados.Migrations
                         .IsRequired();
 
                     b.Navigation("Canal");
+
+                    b.Navigation("Cidade");
 
                     b.Navigation("Cliente");
 

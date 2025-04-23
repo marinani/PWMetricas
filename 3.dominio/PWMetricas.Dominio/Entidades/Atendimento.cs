@@ -8,8 +8,8 @@ namespace PWMetricas.Dominio.Entidades
 {
     public class Atendimento : EntidadeBase
     {
-        public required string Nome { get; set; }
-        public required decimal Valor { get; set; }
+       // public required string Nome { get; set; }
+       // public required decimal Valor { get; set; }
         public required DateTime Data { get; set; }
         public required DateTime? DataRetorno { get; set; }
         public int CanalId { get; set; }
@@ -20,12 +20,24 @@ namespace PWMetricas.Dominio.Entidades
         public int ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
 
-        public int CidadeId { get; set; }
-        public virtual Cidade Cidade { get; set; }
+        //public int CidadeId { get; set; }
+        //public virtual Cidade Cidade { get; set; }
         public decimal ValorPedido { get; set; }
 
         //Vendedor
         public int UsuarioId { get; set; }
         public virtual Usuario Usuario { get; set; }
+
+        public int TamanhoId { get; set; }
+        public virtual Tamanho Tamanho { get; set; }
+
+        public int OrigemId { get; set; }
+        public virtual Origem Origem { get; set; }
+
+        public int StatusAtendimentoId { get; set; }
+
+        public virtual StatusAtendimento StatusAtendimento { get; set; }
+
+        public string Whatsapp { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PWMetricas.Dominio.Entidades
 {
-    public class Produto : EntidadeBase
+    public class Origem : EntidadeBase
     {
         public required string Nome { get; set; }
         public string? CorHex { get; set; } // Ex: "#25D366"

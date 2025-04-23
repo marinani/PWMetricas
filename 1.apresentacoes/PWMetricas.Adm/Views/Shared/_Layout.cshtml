@@ -1,165 +1,170 @@
 ﻿@using System.Security.Claims;
 
 @{
-    var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
-    var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
+	var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
+	var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
 }
 
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PW Métricas</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/css/adminlte.css" />
-    <link rel="icon" href="/images/icon_pwmetricas.svg" type="image/x-icon">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>PW Métricas</title>
+	<script type="importmap"></script>
+	<link rel="stylesheet" href="~/css/adminlte.css" />
+	<link rel="icon" href="/images/icon_pwmetricas.svg" type="image/x-icon">
 
-  
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
-          integrity="sha256-tZHrRjVqNSRyWg2wbppGnT833E/Ys0DHWGwT04GiqQg="
-          crossorigin="anonymous" />
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-          integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
-          crossorigin="anonymous" />
+
+	<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css"
+	integrity="sha256-tZHrRjVqNSRyWg2wbppGnT833E/Ys0DHWGwT04GiqQg="
+	crossorigin="anonymous" />
+	<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+	integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
+	crossorigin="anonymous" />
 
 
 
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 
-    <!--begin::App Wrapper-->
-    <div class="app-wrapper">
-        <!--begin::Header-->
-        <nav class="app-header navbar navbar-expand bg-body">
-            <div class="container-fluid">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
-                            <i class="bi bi-list"></i>
-                        </a>
-                    </li>
+	<!--begin::App Wrapper-->
+	<div class="app-wrapper">
+		<!--begin::Header-->
+		<nav class="app-header navbar navbar-expand bg-body">
+			<div class="container-fluid">
+				<!-- Botão de menu lateral -->
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+							<i class="bi bi-list iconMenuRosa"></i>
+						</a>
+					</li>
+				</ul>
 
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <button id="theme-toggle" class="btn btn-outline-secondary">
-                            <i id="theme-icon" class="bi bi-sun"></i>
-                        </button>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-bs-toggle="dropdown" href="#">
-                            <i class="bi bi-bell-fill"></i>
-                            <span class="navbar-badge badge text-bg-warning">5</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                            <span class="dropdown-item dropdown-header">5 Notifications</span>
-                            <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item">
-                                <i class="bi bi-envelope me-2"></i> 5 new messages
-                                <span class="float-end text-secondary fs-7">3 mins</span>
-                            </a>
-                        </div>
-                    </li>
-                    <!--end::Notifications Dropdown Menu-->
-                    <!--begin::User Menu Dropdown-->
-                    <li class="nav-item dropdown user-menu">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="/images/user2-160x160.jpg"
-                                 class="user-image rounded-circle shadow"
-                                 alt="User Image" />
+				<!-- Logo centralizada -->
+				<div class="navbar-brand logo-container">
+					<a href="/Home/Index">
+						<img src="/images/logopwmetricas.png" alt="Logo PW Métricas" class="logo-center img-fluid">
+					</a>
+				</div>
+				<!-- Botões à direita -->
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item">
+						<button id="theme-toggle" class="btn btn-outline-secondary">
+							<i id="theme-icon" class="bi bi-sun"></i>
+						</button>
+					</li>
+					<li class="nav-item dropdown user-menu">
+						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+							<img src="/images/user2-160x160.jpg"
+							class="user-image rounded-circle shadow"
+							alt="Imagem do usuário" />
 
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-                            <!--begin::User Image-->
-                            <li class="user-header text-bg-primary">
-                                <img src="/images/user2-160x160.jpg"
-                                     class="rounded-circle shadow"
-                                     alt="User Image" />
-                                <p>
-                                    @userName
-                                    <small>@userPerfil</small>
-                                </p>
-                            </li>
-                            <!--end::User Image-->
-                            <!--begin::Menu Footer-->
-                            <li class="user-footer">
-                                <a href="#" class="btn btn-default btn-flat">Meu Perfil</a>
-                                <a href="/Logout" class="btn btn-default btn-flat float-end">Sair</a>
-                            </li>
-                            <!--end::Menu Footer-->
-                        </ul>
-                    </li>
-                    <!--end::User Menu Dropdown-->
-                </ul>
-                <!--end::End Navbar Links-->
-            </div>
-            <!--end::Container-->
-        </nav>
-        <!--end::Header-->
-        <!--begin::Sidebar-->
-        <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-            <!--begin::Sidebar Brand-->
-            <div class="sidebar-brand">
-                <!--begin::Brand Link-->
-                <a href="/Home/Index" class="brand-link">
-                    <!--begin::Brand Image-->
-                    <img src="/images/icon_pwmetricas.svg"
-                         alt="Logo PW Métricas"
-                         class="brand-image opacity-75 shadow" />
-                    <!--end::Brand Image-->
-                    <!--begin::Brand Text-->
-                    <span class="brand-text fw-light">Mw Métricas</span>
-                    <!--end::Brand Text-->
-                </a>
-                <!--end::Brand Link-->
-            </div>
-            <!--end::Sidebar Brand-->
-            <!--begin::Sidebar Wrapper-->
-            <div class="sidebar-wrapper">
-                <nav class="mt-2">
-                    <!--begin::Sidebar Menu-->
-                    <ul class="nav sidebar-menu flex-column"
-                        data-lte-toggle="treeview"
-                        role="menu"
-                        data-accordion="false">
-                        
-                        <li class="nav-item">
-                            <a href="/Home/Index" class="nav-link">
-                                <i class="nav-icon bi bi-speedometer"></i>
-                                <p>Dashboard</p>
-                            </a>
-                        </li>
-                       @*  <li class="nav-item">
-                            <a href="/Vendas/Consulta" class="nav-link">
-                                <i class="nav-icon bi bi-handbag"></i>
-                                <p>Vendas</p>
-                            </a>
-                        </li> *@
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon bi bi-speedometer"></i>
-                                <p>
-                                    Cadastros
-                                    <i class="nav-arrow bi bi-chevron-right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="/Perfil/Consulta" class="nav-link">
-                                        <i class="nav-icon bi bi-people"></i>
-                                        <p>Perfil</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="/Usuario/Consulta" class="nav-link">
-                                        <i class="nav-icon bi bi-people"></i>
-                                        <p>Usuário</p>
-                                    </a>
-                                </li>
-                              @*   <li class="nav-item">
+						</a>
+						<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+							<!--begin::User Image-->
+							<li class="user-header text-bg-primary">
+								<img src="/images/user2-160x160.jpg"
+								class="rounded-circle shadow"
+								alt="Imagem do usuário" />
+								<p>
+									@userName
+									<small>@userPerfil</small>
+								</p>
+							</li>
+
+							<li class="user-footer">
+								<a href="#" class="btn btn-default btn-flat">Meu Perfil</a>
+								<a href="/Logout" class="btn btn-default btn-flat float-end">Sair</a>
+							</li>
+
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+			<!--begin::Sidebar Brand-->
+			<div class="sidebar-brand">
+				<!--begin::Brand Link-->
+				<a href="/Home/Index" class="brand-link">
+					<!--begin::Brand Image-->
+					<img src="/images/icon_pwmetricas.svg"
+						 alt="Logo PW Métricas"
+						 class="brand-image opacity-75 shadow" />
+					<!--end::Brand Image-->
+					<!--begin::Brand Text-->
+					@* 	<span class="brand-text fw-light">PW Métricas</span> *@
+					<!--end::Brand Text-->
+				</a>
+				<!--end::Brand Link-->
+			</div>
+			<!--end::Sidebar Brand-->
+			<!--begin::Sidebar Wrapper-->
+			<div class="sidebar-wrapper">
+				<nav class="mt-2">
+					<!--begin::Sidebar Menu-->
+					<ul class="nav sidebar-menu flex-column"
+					data-lte-toggle="treeview"
+					role="menu"
+					data-accordion="false">
+
+						<li class="nav-item">
+							<a href="/Home/Index" class="nav-link">
+								<i class="nav-icon bi bi-clipboard-data"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
+						@if (userPerfil == "Administrador" || userPerfil == "Gerente")
+						{
+							<li class="nav-item">
+								<a href="/Vendas/Consulta" class="nav-link">
+									<i class="nav-icon bi bi-headset"></i>
+									<p>Vendas Geral</p>
+								</a>
+							</li>
+						}
+
+
+						@if (userPerfil == "Vendedor")
+						{
+							<li class="nav-item">
+								<a href="/Atendimento/Consulta" class="nav-link">
+									<i class="nav-icon bi bi-headset"></i>
+									<p>Minhas Vendas</p>
+								</a>
+							</li>
+
+							
+						}
+						<!-- Menu Cadastros (somente para Administrador e Gerente) -->
+						@if (userPerfil == "Administrador" || userPerfil == "Gerente")
+						{
+							<li class="nav-item">
+								<a href="#" class="nav-link">
+									<i class="nav-icon bi bi-list-check"></i>
+									<p>
+										 Cadastros
+										<i class="nav-arrow bi bi-chevron-right"></i>
+									</p>
+								</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a href="/Perfil/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-person-circle"></i>
+											<p>Perfil</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Usuario/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-person-fill"></i>
+											<p>Usuário</p>
+										</a>
+									</li>
+									@*   <li class="nav-item">
                                     <a href="/Cliente/Consulta" class="nav-link" disabled>
                                         <i class="nav-icon bi bi-people-fill"></i>
                                         <p>Cliente</p>
@@ -171,68 +176,81 @@
                                         <p>Loja</p>
                                     </a>
                                 </li>*@
-                                <li class="nav-item">
-                                    <a href="/Produto/Consulta" class="nav-link" disabled>
-                                        <i class="nav-icon bi bi-inbox"></i>
-                                        <p>Produto</p>
-                                    </a>
-                                </li> 
-                                <li class="nav-item">
-                                    <a href="/Tamanho/Consulta" class="nav-link" disabled>
-                                        <i class="nav-icon bi bi-inbox"></i>
-                                        <p>Tamanho</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+									<li class="nav-item">
+										<a href="/Canal/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-chat-dots-fill"></i>
+											<p>Canal</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Origem/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-globe"></i>
+											<p>Origem</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Produto/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-bag-fill"></i>
+											<p>Produto</p>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="/Tamanho/Consulta" class="nav-link">
+											<i class="nav-icon bi bi-arrows-collapse"></i>
+											<p>Tamanho</p>
+										</a>
+									</li>
+								</ul>
+							</li>
+						}
+
+					</ul>
+					<!--end::Sidebar Menu-->
+				</nav>
+			</div>
+			<!--end::Sidebar Wrapper-->
+		</aside>
+		<!--end::Sidebar-->
+		<!--begin::App Main-->
+		<main class="app-main">
 
 
-                    </ul>
-                    <!--end::Sidebar Menu-->
-                </nav>
-            </div>
-            <!--end::Sidebar Wrapper-->
-        </aside>
-        <!--end::Sidebar-->
-        <!--begin::App Main-->
-        <main class="app-main">
-           
-           
-            @RenderBody()
-    </main>
-    <!--end::Footer-->
-    </div>
+			@RenderBody()
+		</main>
+		<!--end::Footer-->
+	</div>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
-            integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="
-            crossorigin="anonymous"></script>
-    <script src="/js/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-            crossorigin="anonymous"></script>
-    <script src="~/js/adminlte.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const themeToggle = document.getElementById("theme-toggle");
-            const themeIcon = document.getElementById("theme-icon");
-            const currentTheme = localStorage.getItem("theme") || "light";
+	<script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/browser/overlayscrollbars.browser.es6.min.js"
+			integrity="sha256-dghWARbRe2eLlIJ56wNB+b760ywulqK3DzZYEpsg2fQ="
+			crossorigin="anonymous"></script>
+	<script src="/js/popper.min.js"
+			integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+			crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+			integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+			crossorigin="anonymous"></script>
+	<script src="~/js/adminlte.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const themeToggle = document.getElementById("theme-toggle");
+			const themeIcon = document.getElementById("theme-icon");
+			const currentTheme = localStorage.getItem("theme") || "light";
 
-            // Aplica o tema salvo no localStorage
-            document.documentElement.setAttribute("data-bs-theme", currentTheme);
-            themeIcon.className = currentTheme === "dark" ? "bi bi-moon" : "bi bi-sun";
+			// Aplica o tema salvo no localStorage
+			document.documentElement.setAttribute("data-bs-theme", currentTheme);
+			themeIcon.className = currentTheme === "dark" ? "bi bi-sun" : "bi bi-moon";
 
-            // Alterna o tema ao clicar no botão
-            themeToggle.addEventListener("click", function () {
-                const newTheme = document.documentElement.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
-                document.documentElement.setAttribute("data-bs-theme", newTheme);
-                localStorage.setItem("theme", newTheme);
-                themeIcon.className = newTheme === "dark" ? "bi bi-moon" : "bi bi-sun";
-            });
-        });
-    </script>
+			// Alterna o tema ao clicar no botão
+			themeToggle.addEventListener("click", function () {
+				const newTheme = document.documentElement.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
+				document.documentElement.setAttribute("data-bs-theme", newTheme);
+				localStorage.setItem("theme", newTheme);
+				themeIcon.className = newTheme === "dark" ? "bi bi-sun" : "bi bi-moon";
+			});
+		});
+	</script>
 </body>
 </html>

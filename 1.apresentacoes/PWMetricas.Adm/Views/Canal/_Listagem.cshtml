@@ -1,6 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Perfil
-@model PaginacaoResultado<PerfilViewModel>
+@using PWMetricas.Aplicacao.Modelos.Canal
+@model PaginacaoResultado<CanalViewModel>
 
 
 <div class="app-content">
@@ -8,8 +8,7 @@
 
 		<div class="row">
 			<div class="col-sm-12">
-				<!-- Listagem de Perfis -->
-				<div id="perfil-listagem">
+				<div id="canal-listagem">
 					<table class="table table-striped">
 						<thead>
 							<tr>
@@ -53,7 +52,7 @@
 <script>
 
         document.addEventListener("DOMContentLoaded", function () {
-        const listagemContainer = document.getElementById("perfil-listagem");
+        const listagemContainer = document.getElementById("canal-listagem");
 
         // Adiciona evento de clique nos links de paginação
         listagemContainer.addEventListener("click", function (event) {
@@ -65,7 +64,7 @@
                 const page = target.getAttribute("data-page");
 
                 // Faz a requisição AJAX para atualizar a listagem
-                fetch(`/Perfil/Index?page=${page}`, {
+                fetch(`/Canal/Consulta?page=${page}`, {
                     method: "GET",
                     headers: {
                         "X-Requested-With": "XMLHttpRequest"

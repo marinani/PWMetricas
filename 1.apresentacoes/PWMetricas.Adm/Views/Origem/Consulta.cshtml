@@ -1,23 +1,29 @@
-﻿
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Origem
+@model PaginacaoResultado<OrigemViewModel>
 
 
 <div class="app-content-header">
+	<!--begin::Container-->
 	<div class="container-fluid">
+		<!--begin::Row-->
 		<div class="row">
-			<div class="col-sm-6"><h3 class="mb-0">Meus Atendimentos/Vendas</h3></div>
+			<div class="col-sm-6"><h3 class="mb-0">Consulta de Origens</h3></div>
 			<div class="col-sm-6">
 				<div class="float-sm-end">
-					<a asp-action="NovoAtendimento" class="btn btn-primary w-100 mt-3"><i class="bi bi-headset"></i>Novo Atendimento</a>
+					<a asp-action="Cadastro" class="btn btn-primary w-100 mt-3">Nova Origem</a>
 				</div>
 			</div>
 		</div>
+		<!--end::Row-->
 	</div>
-
+	<!--end::Container-->
 </div>
+
 <div class="app-content">
 	<div class="container-fluid">
 
-@* 		<div class="row">
+		<div class="row">
 			<div class="col-sm-12">
 				<!-- Listagem de Perfis -->
 				<div id="perfil-listagem">
@@ -25,18 +31,22 @@
 						<thead>
 							<tr>
 								<th>Nome</th>
+								<th>Cor</th>
 								<th>Ativo</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach (var perfil in Model.Dados)
+							@foreach (var item in Model.Dados)
 							{
 								<tr>
-									<td>@perfil.Nome</td>
-									<td>@(perfil.Ativo ? "Sim" : "Não")</td>
+									<td>@item.Nome</td>
 									<td>
-										<a asp-action="Editar" asp-route-id="@perfil.Id" class="btn btn-primary btn-sm">Editar</a>
+										<span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: @item.CorHex; border: 1px solid #ccc;" title="@item.CorHex"></span>
+									</td>
+									<td>@(item.Ativo ? "Sim" : "Não")</td>
+									<td>
+										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">Editar</a>
 
 									</td>
 								</tr>
@@ -57,7 +67,8 @@
 					</nav>
 				</div>
 			</div>
-		</div> *@
+		</div>
 	</div>
 </div>
 
+<script src="/js/origem/consulta.js"></script>
