@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PWMetricas.Aplicacao.Modelos.Canal;
 using PWMetricas.Aplicacao.Modelos.Cliente;
+using PWMetricas.Aplicacao.Modelos.Loja;
 using PWMetricas.Aplicacao.Modelos.Origem;
 using PWMetricas.Aplicacao.Modelos.Perfil;
 using PWMetricas.Aplicacao.Modelos.Produto;
@@ -17,6 +18,7 @@ namespace PWMetricas.Aplicacao
             // Configuração de mapeamento entre Entidades e ViewModel
             CreateMap<Perfil, PerfilViewModel>().ReverseMap();
             CreateMap<Cliente, ClienteViewModel>().ReverseMap();
+            CreateMap<Loja, LojaViewModel>().ReverseMap();
             CreateMap<Canal, CanalViewModel>().ReverseMap();
             CreateMap<Tamanho, TamanhoViewModel>().ReverseMap();
             CreateMap<Origem, OrigemViewModel>().ReverseMap();

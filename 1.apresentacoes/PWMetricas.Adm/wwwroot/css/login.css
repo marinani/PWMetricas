@@ -29,7 +29,7 @@ body {
 }
 
 .form-control {
-    border-radius: 5px;
+    border-radius: 25px !important;
 }
 
 .btn-outline-success {
@@ -66,12 +66,14 @@ body {
     color: #fff !important;
     background-color: #8C0368 !important;
     border-color: #8C0368 !important;
+    border-radius: 25px !important;
 }
 
     .btn-login:hover {
         color: #333 !important;
         background-color: #8C0368 !important;
         border-color: #8C0368 !important;
+        border-radius: 25px !important;
     }
 
     .btn-sucess:focus, .btn-sucess.focus {
@@ -98,7 +100,7 @@ body {
         }
 
 .footer {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     left: 0;
     right: 0;

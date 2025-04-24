@@ -3,10 +3,10 @@ using PWMetricas.Dominio.Entidades;
 
 namespace PWMetricas.Dados.Repositorios
 {
-    public class ClienteRepositorio : Repositorio<Cliente>, IClienteRepositorio
+    public class LojaRepositorio : Repositorio<Loja>, ILojaRepositorio
     {
         private readonly PwMetricasDbContext _context;
-        public ClienteRepositorio(PwMetricasDbContext contexto) : base(contexto)
+        public LojaRepositorio(PwMetricasDbContext contexto) : base(contexto)
         {
             _context = contexto;
         }

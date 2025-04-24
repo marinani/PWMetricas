@@ -1,6 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Origem
-@model PaginacaoResultado<OrigemViewModel>
+@using PWMetricas.Aplicacao.Modelos.Loja
+@model PaginacaoResultado<LojaViewModel>
 
 
 <div class="app-content">
@@ -8,14 +8,13 @@
 
 		<div class="row">
 			<div class="col-sm-12">
-				<!-- Listagem de Perfis -->
-				<div id="origem-listagem">
+				<div id="loja-listagem">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>Nome</th>
-								<th>Cor</th>
-								<th>Ativo</th>
+								<th>Nome Fantasia</th>
+								<th>CNPJ</th>
+								<th>Telefone</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
@@ -23,13 +22,11 @@
 							@foreach (var item in Model.Dados)
 							{
 								<tr>
-									<td>@item.Nome</td>
+									<td>@item.NomeFantasia</td>
+									<td>@item.CNPJ</td>
+									<td>@item.Telefone</td>
 									<td>
-										<span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: @item.CorHex; border: 1px solid #ccc;" title="@item.CorHex"></span>
-									</td>
-									<td>@(item.Ativo ? "Sim" : "Não")</td>
-									<td>
-										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+										<a asp-action="Editar" asp-route-guid="@item.Guid" class="btn btn-primary btn-sm">
 											<i class="nav-icon bi bi-pencil"></i>
 										</a>
 									</td>
@@ -59,43 +56,3 @@
 	</div>
 </div>
 
-@* <script>
-
-		document.addEventListener("DOMContentLoaded", function () {
-		const listagemContainer = document.getElementById("origem-listagem");
-
-		// Adiciona evento de clique nos links de paginação
-		listagemContainer.addEventListener("click", function (event) {
-			const target = event.target;
-
-			if (target.classList.contains("page-link")) {
-				event.preventDefault();
-
-				const page = target.getAttribute("data-page");
-
-				// Faz a requisição AJAX para atualizar a listagem
-				fetch(`/Origem/Consulta?page=${page}`, {
-					method: "GET",
-					headers: {
-						"X-Requested-With": "XMLHttpRequest"
-					}
-				})
-					.then(response => {
-						if (!response.ok) {
-							throw new Error("Erro ao carregar a página.");
-						}
-						return response.text();
-					})
-					.then(html => {
-						// Atualiza o conteúdo da listagem
-						listagemContainer.innerHTML = html;
-					})
-					.catch(error => {
-						console.error("Erro:", error);
-					});
-			}
-		});
-	});
-
-
-</script> *@

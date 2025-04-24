@@ -1,5 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    const listagemContainer = document.getElementById("origem-listagem");
+    const listagemContainer = document.getElementById("loja-listagem");
 
     if (listagemContainer) {
         listagemContainer.addEventListener("click", function (event) {
@@ -11,7 +11,7 @@
                 const page = target.getAttribute("data-page");
 
                 // Faz a requisição AJAX para atualizar a listagem
-                fetch(`/Origem/Consulta?page=${page}`, {
+                fetch(`/Loja/Consulta?page=${page}`, {
                     method: "GET",
                     headers: {
                         "X-Requested-With": "XMLHttpRequest"

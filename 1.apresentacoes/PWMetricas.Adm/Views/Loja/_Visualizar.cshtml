@@ -1,44 +1,19 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Cliente
-@model ClienteViewModel
+@using PWMetricas.Aplicacao.Modelos.Loja
+@model LojaViewModel
 
-<div class="row g-4">
-	<div class="col-sm-3">
-		<div class="form-group">
-			<label asp-for="Nome"></label>
-			<input asp-for="Nome" class="form-control" id="Nome" />
-			<span asp-validation-for="Nome" class="text-danger"></span>
-		</div>
-	</div>
 
-	<div class="col-sm-3">
-		<div class="form-group">
-			<label asp-for="Telefone"></label>
-			<input asp-for="Telefone" class="form-control" id="Telefone" />
-			<span asp-validation-for="Telefone" class="text-danger"></span>
-		</div>
-	</div>
-</div>
-
-<div class="row g-4 align-items-center">
-	<div class="col-sm-2">
-		<div class="form-check">
-			<input type="checkbox" class="form-check-input" id="PessoaJuridica" />
-			<label class="form-check-label" for="PessoaJuridica">Pessoa Jurídica?</label>
-		</div>
-	</div>
-	</div>
 
 
 <div class="row g-4 align-items-end">
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<div class="form-group">
-			<label asp-for="Documento"><span id="documentoTxt"></span></label>
+			<label asp-for="CNPJ"></label>
 			<div class="input-group">
-				<input asp-for="Documento" class="form-control" id="Documento" placeholder="" />
-				<button type="button" id="btn-consultar-cnpj" class="btn btn-primary hidden">Pesquisar Cnpj</button>
+				<input asp-for="CNPJ" class="form-control" id="CNPJ" placeholder="" />
+				<button type="button" id="btn-consultar-cnpj" class="btn btn-primary">Pesquisar Cnpj</button>
 			</div>
-			<span asp-validation-for="Documento" class="text-danger"></span>
+			<span asp-validation-for="CNPJ" class="text-danger"></span>
 		</div>
 	</div>
 </div>
@@ -46,7 +21,7 @@
 
 
 	
-<div class="row g-4 hidden" id="tipoPessoaJuridica">
+<div class="row g-4">
 	<div class="col-sm-3">
 		<div class="form-group">
 			<label asp-for="NomeFantasia"></label>
@@ -57,7 +32,7 @@
 	<div class="col-sm-3">
 		<div class="form-group">
 			<label asp-for="ResponsavelEmpresa"></label> 
-			<input asp-for="ResponsavelEmpresa" class="form-control" id="ResponsavelEmpresa" maxlength="250" />
+			<input asp-for="ResponsavelEmpresa" class="form-control" id="ResponsavelEmpresa" maxlength="20" />
 			<span asp-validation-for="ResponsavelEmpresa" class="text-danger"></span>
 		</div>
 	</div>
@@ -78,16 +53,23 @@
 			<span asp-validation-for="EmailCobranca" class="text-danger"></span>
 		</div>
 	</div>
+	<div class="col-sm-3">
+		<div class="form-group">
+			<label asp-for="Telefone"></label>
+			<input asp-for="Telefone" class="form-control" id="Telefone" />
+			<span asp-validation-for="Telefone" class="text-danger"></span>
+		</div>
+	</div>
 </div>
 
 <hr />
 
 <div class="row g-4 align-items-end">
-	<div class="col-sm-4">
+	<div class="col-sm-3">
 		<div class="form-group">
 			<label asp-for="Cep"></label>
 			<div class="input-group">
-				<input asp-for="Cep" class="form-control" id="Cep" placeholder="" maxlength="8" />
+				<input asp-for="Cep" class="form-control" id="Cep" placeholder="" maxlength="20" />
 				<button type="button" id="btn-consultar" class="btn btn-primary">Pesquisar Cep</button>
 			</div>
 			<span asp-validation-for="Cep" class="text-danger"></span>
@@ -131,7 +113,7 @@
 		<input asp-for="NumeroEndereco" class="form-control" id="NumeroEndereco" />
 		<span asp-validation-for="NumeroEndereco" class="text-danger"></span>
 	</div>
-	<div class="col-sm-2">
+	<div class="col-sm-3">
 		<label asp-for="Complemento"></label>
 		<input asp-for="Complemento" class="form-control" id="Complemento"  />
 		<span asp-validation-for="Complemento" class="text-danger"></span>

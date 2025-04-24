@@ -22,6 +22,7 @@ namespace PWMetricas.Adm.Controllers
                 return BadRequest("CEP inválido.");
             }
 
+            cep = Dominio.Utils.Geral.ApenasNumeros(cep);
             var resultado = await _cepServico.ConsultarCepAsync(cep);
 
             if (resultado == null)
