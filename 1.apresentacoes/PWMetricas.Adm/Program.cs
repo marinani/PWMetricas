@@ -20,6 +20,8 @@ builder.Services.AddDbContext<PwMetricasDbContext>(options =>
 // Registro do AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+builder.Services.AddHttpClient<CepServico>();
+
 #region Serviços
 builder.Services.AddScoped<IPerfilServico, PerfilServico>();
 builder.Services.AddScoped<IUsuarioServico, UsuarioServico>();

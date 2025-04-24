@@ -1,1 +1,77 @@
-﻿
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Cliente
+@model PaginacaoResultado<ClienteViewModel>
+
+
+<div class="app-content-header">
+	<!--begin::Container-->
+	<div class="container-fluid">
+		<!--begin::Row-->
+		<div class="row">
+			<div class="col-sm-6"><h3 class="mb-0">Consulta de Clientes</h3></div>
+		</div>
+		<!--end::Row-->
+	</div>
+	<!--end::Container-->
+</div>
+
+<div class="app-content">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<!-- Listagem de Perfis -->
+				<div id="cliente-listagem">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Whatsapp</th>
+								<th>E-mail</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.Dados)
+							{
+								<tr>
+									<td>@item.Nome</td>
+									<td>@item.Telefone</td>
+									<td>@item.Email</td>
+									<td>
+										<a asp-action="Editar" asp-route-id="@item.Guid" class="btn btn-primary btn-sm">
+											<i class="nav-icon bi bi-pencil"></i>
+										</a>
+										<a asp-action="Visualizar" asp-route-id="@item.Guid" class="btn btn-primary btn-sm">
+											<i class="nav-icon bi bi-eye"></i>
+										</a>
+									</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+
+					<!-- Paginação -->
+					<nav>
+						<ul class="pagination">
+							@for (int i = 1; i <= Model.TotalPaginas; i++)
+							{
+								<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+									<a href="#" class="page-link" data-page="@i">@i</a>
+								</li>
+							}
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+@section Scripts {
+	<!-- Scripts para validação do lado do cliente -->
+	<partial name="_ValidationScriptsPartial" />
+	<script src="/js/cliente/consulta.js"></script>
+	}
+

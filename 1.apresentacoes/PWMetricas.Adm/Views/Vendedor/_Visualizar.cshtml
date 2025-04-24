@@ -15,14 +15,14 @@
 	<div class="col-sm-6">
 		<div class="form-group">
 			<label asp-for="Email"></label>
-			<input asp-for="Email" class="form-control" id="Email" placeholder="Digite o e-mail (acesso)" />
+			<input asp-for="Email" class="form-control" id="Email" type="email" placeholder="Digite o e-mail (acesso)" />
 			<span asp-validation-for="Email" class="text-danger"></span>
 		</div>
 	</div>
 	<div class="col-sm-6">
 		<div class="form-group">
 			<label asp-for="ConfirmaEmail"></label>
-			<input asp-for="ConfirmaEmail" class="form-control" id="ConfirmaEmail" placeholder="Confirme o e-mail" />
+			<input asp-for="ConfirmaEmail" class="form-control" id="ConfirmaEmail" type="email" placeholder="Confirme o e-mail" />
 			<span asp-validation-for="ConfirmaEmail" class="text-danger"></span>
 		</div>
 	</div>

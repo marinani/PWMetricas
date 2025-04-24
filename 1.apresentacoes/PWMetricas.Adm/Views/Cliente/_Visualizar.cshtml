@@ -1,0 +1,147 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Cliente
+@model ClienteViewModel
+
+<div class="row g-4">
+	<div class="col-sm-3">
+		<div class="form-group">
+			<label asp-for="Nome"></label>
+			<input asp-for="Nome" class="form-control" id="Nome" />
+			<span asp-validation-for="Nome" class="text-danger"></span>
+		</div>
+	</div>
+
+	<div class="col-sm-3">
+		<div class="form-group">
+			<label asp-for="Telefone"></label>
+			<input asp-for="Telefone" class="form-control" id="Telefone" />
+			<span asp-validation-for="Telefone" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+<div class="row g-4 align-items-center">
+	<div class="col-sm-2">
+		<div class="form-check">
+			<input type="checkbox" class="form-check-input" id="PessoaJuridica" />
+			<label class="form-check-label" for="PessoaJuridica">Pessoa Jurídica?</label>
+		</div>
+	</div>
+	</div>
+
+
+<div class="row g-4 align-items-end">
+	<div class="col-sm-4">
+		<div class="form-group">
+			<label asp-for="Documento"><span id="documentoTxt"></span></label>
+			<div class="input-group">
+				<input asp-for="Documento" class="form-control" id="Documento" placeholder="" />
+				<button type="button" id="btn-consultar-cnpj" class="btn btn-primary hidden">Pesquisar Cnpj</button>
+			</div>
+			<span asp-validation-for="Documento" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="hidden" id="tipoPessoaJuridica">
+		<div class="col-sm-3">
+			<div class="form-group">
+				<label asp-for="NomeFantasia"></label>
+				<input asp-for="NomeFantasia" class="form-control" id="NomeFantasia" maxlength="250" />
+				<span asp-validation-for="NomeFantasia" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="form-group">
+				<label asp-for="ResponsavelEmpresa"></label>
+				<input asp-for="ResponsavelEmpresa" class="form-control" id="ResponsavelEmpresa" maxlength="250" />
+				<span asp-validation-for="ResponsavelEmpresa" class="text-danger"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+<div class="row g-4">
+	<div class="col-sm-3">
+		<div class="form-group">
+			<label asp-for="Email"></label>
+			<input asp-for="Email" class="form-control" id="Email" maxlength="120" />
+			<span asp-validation-for="Email" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="form-group">
+			<label asp-for="EmailCobranca"></label>
+			<input asp-for="EmailCobranca" class="form-control" id="EmailCobranca" maxlength="120" />
+			<span asp-validation-for="EmailCobranca" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<div class="row g-4 align-items-end">
+	<div class="col-sm-4">
+		<div class="form-group">
+			<label asp-for="Cep"></label>
+			<div class="input-group">
+				<input asp-for="Cep" class="form-control" id="Cep" placeholder="" maxlength="8" />
+				<button type="button" id="btn-consultar" class="btn btn-primary">Pesquisar Cep</button>
+			</div>
+			<span asp-validation-for="Cep" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+
+<div class="row g-4">
+	<div class="col-sm-2">
+		<div class="form-group">
+			<label asp-for="Uf"></label>
+			<input asp-for="Uf" class="form-control" id="Uf" readonly />
+			<span asp-validation-for="Uf" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-2">
+		<div class="form-group">
+			<label asp-for="Cidade"></label>
+			<input asp-for="Cidade" class="form-control" id="Cidade" readonly />
+			<span asp-validation-for="Cidade" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-2">
+		<div class="form-group">
+			<label asp-for="Bairro"></label>
+			<input asp-for="Bairro" class="form-control" id="Bairro" readonly />
+			<span asp-validation-for="Bairro" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+<div class="row g-4">
+	<div class="col-sm-6">
+		<label asp-for="Endereco"></label>
+		<input asp-for="Endereco" class="form-control" id="Endereco" readonly />
+		<span asp-validation-for="Endereco" class="text-danger"></span>
+	</div>
+	<div class="col-sm-2">
+		<label asp-for="NumeroEndereco"></label>
+		<input asp-for="NumeroEndereco" class="form-control" id="NumeroEndereco" />
+		<span asp-validation-for="NumeroEndereco" class="text-danger"></span>
+	</div>
+	<div class="col-sm-2">
+		<label asp-for="Complemento"></label>
+		<input asp-for="Complemento" class="form-control" id="Complemento"  />
+		<span asp-validation-for="Complemento" class="text-danger"></span>
+	</div>
+</div>
+
+<br />
+<div class="row g-4">
+	<div class="col-sm-12">
+		<button type="submit" class="btn btn-primary float-sm-end">Salvar</button>
+
+	</div>
+</div>

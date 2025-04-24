@@ -81,12 +81,19 @@ namespace PWMetricas.Dados.Repositorios
         //caso haja a necessidade, o SaveChanges pode ser movido para outro método, permitindo que haja múltiplas alterações no contexto e salvando tudo em apenas um save.
         public async Task Inserir(TEntidade entidade)
         {
+
+            entidade.Guid = Guid.NewGuid();
             await Consulta.AddAsync(entidade);
             await Contexto.SaveChangesAsync(CancellationToken.None);
         }
 
         public async Task Inserir(TEntidade[] entidades)
         {
+            foreach (var item in entidades)
+            {
+                item.Guid = Guid.NewGuid();
+            }
+
             Consulta.AddRange(entidades);
             await Contexto.SaveChangesAsync(CancellationToken.None);
         }

@@ -1,0 +1,71 @@
+
+.hidden {
+    display: none;
+}
+
+.form-check-input:checked {
+    background-color: #f71964;
+    border-color: #f71964;
+}
+
+.status-atendimento {
+    color: #FF914D;
+}
+
+.status-atendimento-bg {
+    background-color: #FF914D;
+}
+
+.status-orcamento {
+    color: #38BDF2;
+}
+
+.status-orcamento-bg {
+    background-color: #38BDF2;
+}
+
+.status-vendido {
+    color: #04BF55;
+}
+
+.status-vendido-bg {
+    background-color: #04BF55;
+}
+
+
+.status-negociado {
+    color: #FF3131;
+}
+
+.status-negociado-bg {
+    background-color: #FF3131;
+}
+
+
+.status-naoresponde {
+    color: #FF5757;
+}
+
+.status-naoresponde-bg {
+    background-color: #FF5757;
+}
+
+
+.container {
+    margin-top: 20px;
+}
+
+.quadro {
+    background-color: #333; /* Cor de fundo dos quadros */
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.quadro-valor {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+

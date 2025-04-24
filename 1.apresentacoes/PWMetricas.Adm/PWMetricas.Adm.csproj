@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Loja\" />
     <Folder Include="wwwroot\js\login\" />
     <Folder Include="wwwroot\js\perfil\" />
   </ItemGroup>

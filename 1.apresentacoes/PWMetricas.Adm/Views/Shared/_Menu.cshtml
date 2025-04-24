@@ -1,0 +1,141 @@
+﻿@using System.Security.Claims;
+
+@{
+	var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
+	var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
+}
+
+
+<aside class="app-sidebar bg-body-primary shadow" data-bs-theme="dark">
+	<div class="sidebar-wrapper">
+		<nav class="mt-2">
+			<ul class="nav sidebar-menu flex-column"
+				data-lte-toggle="treeview"
+				role="menu"
+				data-accordion="false">
+
+				<li class="nav-item">
+					<a href="/Home/Index" class="nav-link">
+						<i class="nav-icon bi bi-house"></i>
+						<p>Home</p>
+					</a>
+				</li>
+
+
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon bi bi-person-fill"></i>
+						<p>
+							Clientes
+							<i class="nav-arrow bi bi-chevron-right"></i>
+
+						</p>
+					</a>
+
+
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="/Cliente/Cadastro" class="nav-link">
+								<i class="nav-icon bi bi-arrow-right"></i>
+								<p>Cadastro</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/Cliente/Consulta" class="nav-link">
+								<i class="nav-icon bi bi-arrow-right"></i>
+								<p>Pesquisa</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
+				@if (userPerfil == "Administrador" || userPerfil == "Gerente")
+				{
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon bi bi-list-check"></i>
+							<p>
+								Cadastros
+								<i class="nav-arrow bi bi-chevron-right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="/Vendedor/Consulta" class="nav-link">
+									<i class="nav-icon bi bi-arrow-right"></i>
+									<p>Vendedor</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/Canal/Consulta" class="nav-link">
+									<i class="nav-icon bi bi-arrow-right"></i>
+									<p>Canal</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/Origem/Consulta" class="nav-link">
+									<i class="nav-icon bi bi-arrow-right"></i>
+									<p>Origem</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/Produto/Consulta" class="nav-link">
+									<i class="nav-icon bi bi-arrow-right"></i>
+									<p>Produto</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/Tamanho/Consulta" class="nav-link">
+									<i class="nav-icon bi bi-arrow-right"></i>
+									<p>Tamanho</p>
+								</a>
+							</li>
+
+						</ul>
+					</li>
+
+
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon bi bi-shop"></i>
+							<p>
+								Filiais
+								<i class="nav-arrow bi bi-chevron-right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="/Loja/Consulta" class="nav-link">
+									<i class="nav-icon bi bi-arrow-right"></i>
+									<p>Pesquisa</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/Loja/Nova" class="nav-link">
+									<i class="nav-icon bi bi-arrow-right"></i>
+									<p>Nova Filial</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+
+				}
+
+
+				@if (userPerfil == "Vendedor")
+				{
+					<li class="nav-item">
+						<a href="/Atendimento/Consulta" class="nav-link">
+							<i class="nav-icon bi bi-headset"></i>
+							<p>Minhas Vendas</p>
+						</a>
+					</li>
+
+
+				}
+
+
+			</ul>
+		</nav>
+	</div>
+</aside>

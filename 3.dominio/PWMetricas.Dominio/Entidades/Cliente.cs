@@ -18,11 +18,11 @@ namespace PWMetricas.Dominio.Entidades
         public string? ResponsavelEmpresa { get; set; }
         public string? NomeFantasia { get; set; }
         public required string Email { get; set; }
-        public string EmailCobranca { get; set; }
+        public string? EmailCobranca { get; set; }
 
         public required string Cep { get; set; }
         public required string Endereco { get; set; }
-        public required string NumeroEndereço { get; set; }
+        public required string NumeroEndereco { get; set; }
         public required string Uf { get; set; }
         public required string Cidade { get; set; }
         public required string Bairro { get; set; }

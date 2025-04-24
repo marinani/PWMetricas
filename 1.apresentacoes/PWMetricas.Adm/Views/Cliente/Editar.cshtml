@@ -1,67 +1,24 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Usuario
-@model UsuarioViewModel
+@using PWMetricas.Aplicacao.Modelos.Cliente
+@model ClienteViewModel
 
 <div class="app-content-header">
 	<!--begin::Container-->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-6"><h3 class="mb-0">Edição de Usuário</h3></div>
+			<div class="col-sm-6"><h3 class="mb-0">Edição do Cliente</h3></div>
 
 		</div>
 	</div>
 	<!--end::Container-->
 </div>
 
-
-
-
-
-
 <div class="app-content">
 	<div class="container-fluid">
-
-
-
 		<form asp-action="Editar" method="post">
 			@Html.HiddenFor(m => m.Id)
 			@Html.HiddenFor(m => m.Guid)
-			@Html.HiddenFor(m => m.Senha)
-			@Html.HiddenFor(m => m.Ativo)
-			<div class="row g-4">
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="Nome">Nome</label>
-						<input asp-for="Nome" class="form-control" id="Nome" placeholder="Digite o nome" />
-						<span asp-validation-for="Nome" class="text-danger"></span>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="Email">E-mail</label>
-						<input asp-for="Email" class="form-control" id="Email" placeholder="Digite o e-mail" />
-						<span asp-validation-for="Email" class="text-danger"></span>
-					</div>
-				</div>
-			</div>
-			<div class="row g-4">
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="PerfilId">Perfil</label>
-						<select asp-for="PerfilId" asp-items="ViewBag.Perfis" class="form-control">
-							<option value="">Selecione um perfil</option>
-						</select>
-						<span asp-validation-for="PerfilId" class="text-danger"></span>
-					</div>
-				</div>
-			</div>
-			<br />
-			<div class="row g-4">
-				<div class="col-sm-12">
-						<button type="submit" class="btn btn-primary btn-sm float-sm-end">Salvar</button>
-					
-				</div>
-			</div>
+			<partial name="_Visualizar" />
 		</form>
 	</div>
 </div>

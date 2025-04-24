@@ -1,7 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Perfil
-@model PaginacaoResultado<PerfilViewModel>
-
+@using PWMetricas.Aplicacao.Modelos.Cliente
+@model PaginacaoResultado<ClienteViewModel>
 
 <div class="app-content">
 	<div class="container-fluid">
@@ -9,12 +8,13 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<!-- Listagem de Perfis -->
-				<div id="perfil-listagem">
+				<div id="cliente-listagem">
 					<table class="table table-striped">
 						<thead>
 							<tr>
 								<th>Nome</th>
-								<th>Ativo</th>
+								<th>Whatsapp</th>
+								<th>E-mail</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
@@ -23,10 +23,14 @@
 							{
 								<tr>
 									<td>@item.Nome</td>
-									<td>@(item.Ativo ? "Sim" : "Não")</td>
+									<td>@item.Telefone</td>
+									<td>@item.Email</td>
 									<td>
-										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+										<a asp-action="Editar" asp-route-id="@item.Guid" class="btn btn-primary btn-sm">
 											<i class="nav-icon bi bi-pencil"></i>
+										</a>
+										<a asp-action="Visualizar" asp-route-id="@item.Guid" class="btn btn-primary btn-sm">
+											<i class="nav-icon bi bi-eye"></i>
 										</a>
 									</td>
 								</tr>
@@ -51,7 +55,7 @@
 	</div>
 </div>
 
-<script>
+@* <script>
 
         document.addEventListener("DOMContentLoaded", function () {
         const listagemContainer = document.getElementById("perfil-listagem");
@@ -90,4 +94,4 @@
     });
 
 
-</script>
+</script> *@

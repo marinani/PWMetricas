@@ -1,0 +1,84 @@
+﻿@using System.Security.Claims;
+
+@{
+	var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
+	var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
+}
+
+
+
+
+<div class="app-content-header">
+	<!--begin::Container-->
+	<div class="container-fluid">
+	</div>
+	<!--end::Container-->
+</div>
+
+
+<div class="app-content">
+	<div class="container-fluid">
+
+
+
+
+		<div class="container-principal">
+			<div class="row">
+				<div class="col-sm-12">
+					<div style="display: flex; align-items: center; margin-bottom: 20px;">
+						<span style="font-size: 2em; margin-right: 10px;">✔️</span>
+						<div>
+							<h4>Veja como estão</h4>
+							<h2>SEUS RESULTADOS</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="quadro">
+						<div>EM ATENDIMENTO</div>
+						<div class="quadro-valor">R$ 14.250,90</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="quadro">
+						<div>ORÇAMENTO</div>
+						<div class="quadro-valor">R$ 11.950,90</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="quadro">
+						<div>VENDIDO</div>
+						<div class="quadro-valor">R$ 27.950,90</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="quadro">
+						<div>PERDIDO NEGOCIADO</div>
+						<div class="quadro-valor">R$ 9.420,90</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="quadro">
+						<div>PERDIDO Ñ RESPONDE</div>
+						<div class="quadro-valor">R$ 16.841,00</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<button type="button" class="btn btn-lg btn-default">VERIFICAR ATENDIMENTOS</button>
+				</div>
+				<div class="col-sm-6 text-right botao-novo">
+					<button type="button" class="btn btn-lg btn-custom">NOVO ATENDIMENTO</button>
+					<span class="icone-balao">💬</span>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</div>
