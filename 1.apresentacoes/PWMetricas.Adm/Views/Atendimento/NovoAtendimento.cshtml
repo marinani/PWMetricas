@@ -2,6 +2,8 @@
 @using PWMetricas.Aplicacao.Modelos.Atendimento
 @model AtendimentoViewModel
 
+
+
 <div class="app-content-header">
 	<!--begin::Container-->
 	<div class="container-fluid">
@@ -58,9 +60,36 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label asp-for="Uf"></label>
-						<select asp-for="Uf" asp-items="ViewBag.Estado" class="form-control">
+						<label asp-for="Uf">Estado</label>
+						<select asp-for="Uf" class="form-control" id="Uf">
 							<option value="">Selecione um estado</option>
+							<option value="AC">AC</option>
+							<option value="AL">AL</option>
+							<option value="AP">AP</option>
+							<option value="AM">AM</option>
+							<option value="BA">BA</option>
+							<option value="CE">CE</option>
+							<option value="DF">DF</option>
+							<option value="ES">ES</option>
+							<option value="GO">GO</option>
+							<option value="MA">MA</option>
+							<option value="MT">MT</option>
+							<option value="MS">MS</option>
+							<option value="MG">MG</option>
+							<option value="PA">PA</option>
+							<option value="PB">PB</option>
+							<option value="PR">PR</option>
+							<option value="PE">PE</option>
+							<option value="PI">PI</option>
+							<option value="RJ">RJ</option>
+							<option value="RN">RN</option>
+							<option value="RS">RS</option>
+							<option value="RO">RO</option>
+							<option value="RR">RR</option>
+							<option value="SC">SC</option>
+							<option value="SP">SP</option>
+							<option value="SE">SE</option>
+							<option value="TO">TO</option>
 						</select>
 						<span asp-validation-for="Uf" class="text-danger"></span>
 					</div>
@@ -81,14 +110,19 @@
 					<div class="form-group">
 						<label asp-for="CanalId"></label>
 
-						<select class="form-select" name="CanalId">
+						<select class="form-select" name="CanalId" id="CanalId">
 							<option value="">Selecione um canal</option>
-							@foreach (var canal in ViewBag.Canais)
+
+							@if (ViewBag.Canais != null)
 							{
-								<option value="@canal.Id" style="background-color: @canal.CorHex; ">
-									@canal.Nome
-								</option>
+								@foreach (var canal in ViewBag.Canais)
+								{
+									<option value="@canal.Id" style="background-color: @canal.CorHex;" data-color="@canal.CorHex">
+										@canal.Nome
+									</option>
+								}
 							}
+
 						</select>
 
 						<span asp-validation-for="CanalId" class="text-danger"></span>
@@ -97,14 +131,19 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label asp-for="OrigemId"></label>
-						<select class="form-select" name="OrigemId">
+						<select class="form-select" name="OrigemId" id="OrigemId">
 							<option value="">Selecione uma origem</option>
-							@foreach (var canal in ViewBag.Origens)
+
+							@if (ViewBag.Origens != null)
 							{
-								<option value="@canal.Id" style="background-color: @canal.CorHex;">
-									@canal.Nome
-								</option>
+								@foreach (var canal in ViewBag.Origens)
+								{
+									<option value="@canal.Id" style="background-color: @canal.CorHex;" data-color="@canal.CorHex">
+										@canal.Nome
+									</option>
+								}
 							}
+
 						</select>
 						<span asp-validation-for="OrigemId" class="text-danger"></span>
 					</div>
@@ -114,14 +153,18 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label asp-for="ProdutoId"></label>
-						<select class="form-select" name="ProdutoId">
+						<select class="form-select" name="ProdutoId" id="ProdutoId">
 							<option value="">Selecione um produto</option>
-							@foreach (var canal in ViewBag.Produtos)
+							@if (ViewBag.Produtos != null)
 							{
-								<option value="@canal.Id" style="background-color: @canal.CorHex;">
-									@canal.Nome
-								</option>
+								@foreach (var canal in ViewBag.Produtos)
+								{
+									<option value="@canal.Id" style="background-color: @canal.CorHex;" data-color="@canal.CorHex">
+										@canal.Nome
+									</option>
+								}
 							}
+
 						</select>
 						<span asp-validation-for="ProdutoId" class="text-danger"></span>
 					</div>
@@ -129,14 +172,20 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label asp-for="TamanhoId"></label>
-						<select class="form-select" name="TamanhoId">
+						<select class="form-select" name="TamanhoId" id="TamanhoId">
 							<option value="">Selecione um tamanho</option>
-							@foreach (var canal in ViewBag.Tamanhos)
+
+							@if (ViewBag.Tamanhos != null)
 							{
-								<option value="@canal.Id" style="background-color: @canal.CorHex; ">
-									@canal.Nome
-								</option>
+								@foreach (var canal in ViewBag.Tamanhos)
+								{
+									<option value="@canal.Id" style="background-color: @canal.CorHex;" data-color="@canal.CorHex">
+										@canal.Nome
+									</option>
+								}
 							}
+
+
 						</select>
 						<span asp-validation-for="TamanhoId" class="text-danger"></span>
 					</div>
@@ -188,3 +237,8 @@
 		</form>
 	</div>
 </div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script src="/js/atendimento/cadastro.js"></script>
+}

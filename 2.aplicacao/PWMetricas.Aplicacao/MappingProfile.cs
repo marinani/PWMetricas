@@ -18,7 +18,9 @@ namespace PWMetricas.Aplicacao
             // Configuração de mapeamento entre Entidades e ViewModel
             CreateMap<Perfil, PerfilViewModel>().ReverseMap();
             CreateMap<Cliente, ClienteViewModel>().ReverseMap();
+            CreateMap<Cliente, ClienteSimplesViewModel>().ReverseMap();
             CreateMap<Loja, LojaViewModel>().ReverseMap();
+            CreateMap<Loja, LojaSimplesViewModel>().ReverseMap();
             CreateMap<Canal, CanalViewModel>().ReverseMap();
             CreateMap<Tamanho, TamanhoViewModel>().ReverseMap();
             CreateMap<Origem, OrigemViewModel>().ReverseMap();

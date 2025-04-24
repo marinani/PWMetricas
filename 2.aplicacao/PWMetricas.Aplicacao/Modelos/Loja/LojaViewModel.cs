@@ -45,4 +45,12 @@ namespace PWMetricas.Aplicacao.Modelos.Loja
         [Display(Name = "Complemento")]
         public string? Complemento { get; set; }
     }
+
+    public class LojaSimplesViewModel
+    {
+        public int Id { get; set; }
+        public string NomeFantasia { get; set; }
+        public string Telefone { get; set; }
+        public string CNPJ { get; set; }
+    }
 }

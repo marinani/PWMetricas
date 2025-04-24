@@ -39,7 +39,7 @@ namespace PWMetricas.Aplicacao.Modelos.Cliente
         [Display(Name = "Logradouro")]
         public string? Endereco { get; set; }
         [Display(Name = "Nº")]
-        public  string? NumeroEndereco { get; set; }
+        public string? NumeroEndereco { get; set; }
         [Display(Name = "UF")]
         public string? Uf { get; set; }
         [Display(Name = "Cidade")]
@@ -59,5 +59,15 @@ namespace PWMetricas.Aplicacao.Modelos.Cliente
                 return Nome;
             }
         }
+    }
+
+    public class ClienteSimplesViewModel
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string? Telefone { get; set; }
+        public string? NomeFantasia { get; set; }
+
+
     }
 }

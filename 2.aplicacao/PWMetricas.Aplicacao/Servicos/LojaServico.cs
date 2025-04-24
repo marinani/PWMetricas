@@ -17,6 +17,12 @@ namespace PWMetricas.Aplicacao.Servicos
             _mapper = mapper;
         }
 
+        public async Task<IEnumerable<LojaSimplesViewModel>> ObterTodos()
+        {
+            var perfis = await _repositorio.ListarAsync();
+            return _mapper.Map<List<LojaSimplesViewModel>>(perfis);
+        }
+
         public async Task<LojaViewModel> ObterPorGuid(Guid guid)
         {
             var cliente = await _repositorio.Buscar(guid);
