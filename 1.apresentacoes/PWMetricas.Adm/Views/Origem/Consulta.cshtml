@@ -2,11 +2,8 @@
 @using PWMetricas.Aplicacao.Modelos.Origem
 @model PaginacaoResultado<OrigemViewModel>
 
-
 <div class="app-content-header">
-	<!--begin::Container-->
 	<div class="container-fluid">
-		<!--begin::Row-->
 		<div class="row">
 			<div class="col-sm-6"><h3 class="mb-0">Consulta de Origens</h3></div>
 			<div class="col-sm-6">
@@ -15,61 +12,23 @@
 				</div>
 			</div>
 		</div>
-		<!--end::Row-->
 	</div>
-	<!--end::Container-->
 </div>
 
 <div class="app-content">
 	<div class="container-fluid">
-
 		<div class="row">
 			<div class="col-sm-12">
-				<!-- Listagem de Perfis -->
-				<div id="perfil-listagem">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Nome</th>
-								<th>Cor</th>
-								<th>Ativo</th>
-								<th>Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (var item in Model.Dados)
-							{
-								<tr>
-									<td>@item.Nome</td>
-									<td>
-										<span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: @item.CorHex; border: 1px solid #ccc;" title="@item.CorHex"></span>
-									</td>
-									<td>@(item.Ativo ? "Sim" : "Não")</td>
-									<td>
-										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
-											<i class="nav-icon bi bi-pencil"></i> 
-										</a>
-									</td>
-								</tr>
-							}
-						</tbody>
-					</table>
-
-					<!-- Paginação -->
-					<nav>
-						<ul class="pagination">
-							@for (int i = 1; i <= Model.TotalPaginas; i++)
-							{
-								<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
-									<a href="#" class="page-link" data-page="@i">@i</a>
-								</li>
-							}
-						</ul>
-					</nav>
+				<!-- Renderiza a listagem como um partial -->
+				<div id="origem-listagem">
+					@await Html.PartialAsync("_Listagem", Model)
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script src="/js/origem/consulta.js"></script>
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script src="/js/origem/consulta.js"></script>
+}

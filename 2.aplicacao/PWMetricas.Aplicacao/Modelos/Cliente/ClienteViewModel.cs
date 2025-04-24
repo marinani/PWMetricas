@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,5 +48,16 @@ namespace PWMetricas.Aplicacao.Modelos.Cliente
         public string? Bairro { get; set; }
         [Display(Name = "Complemento")]
         public string? Complemento { get; set; }
+
+        [NotMapped]
+        public string? NomeCliente
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(NomeFantasia))
+                    return NomeFantasia;
+                return Nome;
+            }
+        }
     }
 }

@@ -51,11 +51,47 @@ namespace PWMetricas.Adm.Controllers
                 return View(cliente);
             }
 
+            TempData["MensagemSucesso"] = "Cliente cadastrado com sucesso!";
             return RedirectToAction("Consulta");
         }
 
         [HttpGet]
         public async Task<IActionResult> Editar(Guid guid)
+        {
+            var cliente = await _clienteServico.ObterPorGuid(guid);
+
+            if (cliente != null)
+            {
+                return View(cliente);
+            }
+
+            return RedirectToAction("Consulta");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(ClienteViewModel cliente)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(cliente);
+            }
+
+            var resultado = await _clienteServico.Atualizar(cliente);
+            if (!resultado.Sucesso)
+            {
+                ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
+                return View(cliente);
+            }
+
+            TempData["MensagemSucesso"] = "Cliente atualizado com sucesso!";
+
+            return RedirectToAction("Consulta");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Visualizar(Guid guid)
         {
             var cliente = await _clienteServico.ObterPorGuid(guid);
 

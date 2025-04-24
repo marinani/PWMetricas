@@ -40,23 +40,26 @@
 					</table>
 
 					<!-- Paginação -->
-					<nav>
-						<ul class="pagination">
-							@for (int i = 1; i <= Model.TotalPaginas; i++)
-							{
-								<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
-									<a href="#" class="page-link" data-page="@i">@i</a>
-								</li>
-							}
-						</ul>
-					</nav>
+					@if (Model.TotalPaginas > 1)
+					{
+						<nav>
+							<ul class="pagination">
+								@for (int i = 1; i <= Model.TotalPaginas; i++)
+								{
+									<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+										<a href="#" class="page-link" data-page="@i">@i</a>
+									</li>
+								}
+							</ul>
+						</nav>
+					}
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script>
+@* <script>
 
 		document.addEventListener("DOMContentLoaded", function () {
 		const listagemContainer = document.getElementById("origem-listagem");
@@ -95,4 +98,4 @@
 	});
 
 
-</script>
+</script> *@

@@ -7,6 +7,7 @@
 
     // Aplica a máscara inicial (CPF)
     $('#Documento').mask(cpfMask);
+    $('#ResponsavelEmpresa').mask(cpfMask);
     $("#documentoTxt").text("CPF");
 
     // Altera a máscara ao marcar/desmarcar o checkbox

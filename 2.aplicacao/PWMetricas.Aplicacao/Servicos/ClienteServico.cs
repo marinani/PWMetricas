@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using PWMetricas.Aplicacao.Modelos.Usuario;
+﻿using AutoMapper;
 using PWMetricas.Aplicacao.Modelos;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
-using PWMetricas.Dados.Repositorios;
 using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Aplicacao.Modelos.Cliente;
 using PWMetricas.Dominio.Entidades;
@@ -33,10 +26,6 @@ namespace PWMetricas.Aplicacao.Servicos
         public async Task<Resultado> Cadastrar(ClienteViewModel modelo)
         {
             var resultado = new Resultado();
-            if (string.IsNullOrEmpty(modelo.Nome))
-            {
-                return new Resultado(new[] { "O campo nome é obrigatório." });
-            }
             try
             {
                 var cliente = _mapper.Map<Cliente>(modelo);
@@ -48,6 +37,31 @@ namespace PWMetricas.Aplicacao.Servicos
                 return new Resultado(new[] { $"Erro ao cadastrar cliente: {ex.Message}" });
             }
         }
+
+
+        public async Task<Resultado> Atualizar(ClienteViewModel modelo)
+        {
+            var resultado = new Resultado();
+
+
+            var cliente = await _repositorio.Buscar(modelo.Guid);
+
+            if (cliente == null)
+            {
+                return new Resultado(new[] { "Erro ao encontrar cliente." });
+            }
+            try
+            {
+                _mapper.Map(modelo, cliente);
+                await _repositorio.Atualizar(cliente);
+                return new Resultado("Sucesso ao atualizar cliente.", cliente);
+            }
+            catch (Exception ex)
+            {
+                return new Resultado(new[] { $"Erro ao atualizar cliente: {ex.Message}" });
+            }
+        }
+
         public async Task<PaginacaoResultado<ClienteViewModel>> ObterTodosPaginados(int page, int pageSize)
         {
             var perfis = await _repositorio.ObterTodosPaginados(page, pageSize);

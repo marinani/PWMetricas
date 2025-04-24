@@ -25,18 +25,32 @@
 	</div>
 </div>
 
-
 @section Scripts {
-	<!-- Scripts para validação do lado do cliente -->
-	<partial name="_ValidationScriptsPartial" />
+    <!-- Scripts para validação do lado do cliente -->
+    <partial name="_ValidationScriptsPartial" />
 
-	<script>
-		$(function() {
-			$('#seletorCor').colorpicker().on('colorpickerChange', function(event) {
-				$('#corSelecionada').css('background-color', event.color.toString());
-				$('#CorHex').text(event.color.toString('hex'));
-			});
-		});
-	</script>
+    <script>
+        const pickr = Pickr.create({
+            el: '#color-picker',
+            theme: 'classic',
+            default: '#000000',
+            components: {
+                preview: true,
+                opacity: true,
+                hue: true,
+                interaction: {
+                    hex: true,
+                    rgba: true,
+                    input: true,
+                    save: true
+                }
+            }
+        });
+
+        pickr.on('save', (color) => {
+            const hexColor = color.toHEXA().toString();
+            document.getElementById('CorHex').value = hexColor;
+        });
+    </script>
 
 	}

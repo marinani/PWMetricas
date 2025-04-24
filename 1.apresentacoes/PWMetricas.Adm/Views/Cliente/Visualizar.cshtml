@@ -1,0 +1,42 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Cliente
+@model ClienteViewModel
+
+<div class="app-content-header">
+	<!--begin::Container-->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6"><h3 class="mb-0">Detalhes do Cliente</h3></div>
+
+		</div>
+	</div>
+	<!--end::Container-->
+</div>
+
+<div class="app-content">
+	<div class="container-fluid">
+		<form asp-action="Visualizar">
+			@Html.HiddenFor(m => m.Id)
+			@Html.HiddenFor(m => m.Guid)
+			<partial name="_Visualizar" />
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			// Seleciona o formulário
+			const form = document.querySelector("form[asp-action='Visualizar']");
+
+			// Desabilita todos os campos dentro do formulário
+			if (form) {
+				const fields = form.querySelectorAll("input, select, textarea, button");
+				fields.forEach(field => {
+					field.disabled = true;
+				});
+			}
+		});
+	</script>
+}

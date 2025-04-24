@@ -1,5 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
 @using PWMetricas.Aplicacao.Modelos.Cliente
+@using PWMetricas.Aplicacao.Utils
 @model PaginacaoResultado<ClienteViewModel>
 
 <div class="app-content">
@@ -15,6 +16,7 @@
 								<th>Nome</th>
 								<th>Whatsapp</th>
 								<th>E-mail</th>
+								<th>Cpf/Cnpj</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
@@ -22,16 +24,17 @@
 							@foreach (var item in Model.Dados)
 							{
 								<tr>
-									<td>@item.Nome</td>
+									<td>@item.NomeCliente</td>
 									<td>@item.Telefone</td>
 									<td>@item.Email</td>
+									<td>@DocumentoFormatter.Formatar(item.Documento)</td>
 									<td>
-										<a asp-action="Editar" asp-route-id="@item.Guid" class="btn btn-primary btn-sm">
+										<a asp-action="Editar" asp-route-guid="@item.Guid" class="btn btn-primary btn-sm">
 											<i class="nav-icon bi bi-pencil"></i>
 										</a>
-										<a asp-action="Visualizar" asp-route-id="@item.Guid" class="btn btn-primary btn-sm">
+										@* <a asp-action="Visualizar" asp-route-guid="@item.Guid" class="btn btn-primary btn-sm">
 											<i class="nav-icon bi bi-eye"></i>
-										</a>
+										</a> *@
 									</td>
 								</tr>
 							}

@@ -4,21 +4,16 @@
 <div class="row">
 	<div class="col-sm-6">
 		<div class="form-group">
-			<label for="Nome">Nome</label>
+			<label for="Nome"></label>
 			<input asp-for="Nome" class="form-control" id="Nome" placeholder="Digite o nome" />
 			<span asp-validation-for="Nome" class="text-danger"></span>
 		</div>
 	</div>
 	<div class="container mt-5">
-		<h1>Seletor de Cores</h1>
-		<div class="form-group">
-			<label for="seletorCor">Selecione uma cor:</label>
-			<input type="text" class="form-control" id="seletorCor" value="#000000">
-		</div>
-		<div>
-			<div id="corSelecionada" style="background-color: #000000;"></div>
-			<p id="valorHex">Cor selecionada: <span id="hexValue">#000000</span></p>
-		</div>
+		<label asp-for="CorHex"></label>
+		<div id="color-picker"></div>
+		<input type="hidden" id="CorHex" name="CorHex" />
+		<input asp-for="CorHex" type="hidden" id="CorHex" />
 	</div>
 </div>
 <br />

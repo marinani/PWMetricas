@@ -41,27 +41,27 @@
 			<span asp-validation-for="Documento" class="text-danger"></span>
 		</div>
 	</div>
-	<div class="hidden" id="tipoPessoaJuridica">
-		<div class="col-sm-3">
-			<div class="form-group">
-				<label asp-for="NomeFantasia"></label>
-				<input asp-for="NomeFantasia" class="form-control" id="NomeFantasia" maxlength="250" />
-				<span asp-validation-for="NomeFantasia" class="text-danger"></span>
-			</div>
-		</div>
-		<div class="col-sm-3">
-			<div class="form-group">
-				<label asp-for="ResponsavelEmpresa"></label>
-				<input asp-for="ResponsavelEmpresa" class="form-control" id="ResponsavelEmpresa" maxlength="250" />
-				<span asp-validation-for="ResponsavelEmpresa" class="text-danger"></span>
-			</div>
-		</div>
-	</div>
 </div>
 
 
 
-
+	
+<div class="row g-4 hidden" id="tipoPessoaJuridica">
+	<div class="col-sm-3">
+		<div class="form-group">
+			<label asp-for="NomeFantasia"></label>
+			<input asp-for="NomeFantasia" class="form-control" id="NomeFantasia" maxlength="250"/>
+			<span asp-validation-for="NomeFantasia" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-3">
+		<div class="form-group">
+			<label asp-for="ResponsavelEmpresa"></label> 
+			<input asp-for="ResponsavelEmpresa" class="form-control" id="ResponsavelEmpresa" maxlength="250" />
+			<span asp-validation-for="ResponsavelEmpresa" class="text-danger"></span>
+		</div>
+	</div>
+</div>
 
 <div class="row g-4">
 	<div class="col-sm-3">

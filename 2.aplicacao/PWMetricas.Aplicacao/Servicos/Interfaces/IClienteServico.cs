@@ -12,6 +12,7 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
     {
         Task<ClienteViewModel> ObterPorGuid(Guid guid);
         Task<Resultado> Cadastrar(ClienteViewModel modelo);
+        Task<Resultado> Atualizar(ClienteViewModel modelo);
         Task<PaginacaoResultado<ClienteViewModel>> ObterTodosPaginados(int page, int pageSize);
     }
 }
