@@ -3,9 +3,12 @@ using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Aplicacao.Modelos.Perfil;
 using PWMetricas.Aplicacao.Modelos.Tamanho;
 using PWMetricas.Aplicacao.Servicos;
+using PWMetricas.Dominio.Entidades;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PWMetricas.Adm.Controllers
 {
+    [Authorize]
     public class PerfilController : Controller
     {
         private readonly IPerfilServico _perfilServico;
@@ -83,5 +86,13 @@ namespace PWMetricas.Adm.Controllers
 
             return RedirectToAction("Consulta");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MeuPerfil()
+        {
+            return View();
+        }
+
+       
     }
 }

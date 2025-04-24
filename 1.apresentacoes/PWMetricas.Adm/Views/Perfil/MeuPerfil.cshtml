@@ -1,0 +1,63 @@
+﻿@using System.Security.Claims;
+
+@{
+	var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
+	var userEmail = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Email)?.Value : "";
+	var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
+}
+
+
+<div class="app-content-header">
+	<div class="container-fluid">
+	</div>
+</div>
+
+<div class="app-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6"><h3 class="mb-0">Meus dados</h3></div>
+		</div>
+
+
+		<div class="row g-4">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label>Nome:</label> @userName
+
+				</div>
+			</div>
+		</div>
+		<div class="row g-4">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label>Perfil:</label> @userPerfil
+				</div>
+			</div>
+		</div>
+		<div class="row g-4">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label>Email:</label> @userEmail
+				</div>
+			</div>
+		</div>
+		<div class="row g-4">
+			<div class="col-sm-3">
+				<a href="/Usuario/AlterarSenha" class="btn btn-primary">Alterar Senha</a>
+			</div>
+		</div>
+
+
+		@if (userPerfil == "Vendedor")
+		{
+			<br />
+			<div class="row">
+				<div class="col-sm-6"><h3 class="mb-0">Minhas Filiais</h3></div>
+			</div>
+
+
+		}
+
+		
+	</div>
+</div>

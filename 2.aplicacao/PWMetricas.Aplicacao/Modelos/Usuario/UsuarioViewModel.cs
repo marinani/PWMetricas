@@ -23,11 +23,19 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         [Display(Name = "Senha")]
         public required string Senha { get; set; }
 
+
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Confirmação E-mail")]
+        public string ConfirmaEmail { get; set; }
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Confirmação Senha")]
+        public string ConfirmaSenha { get; set; }
+
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Perfil")]
         public int? PerfilId { get; set; }
 
-        public string PerfilNome{ get; set; }
+        public string PerfilNome { get; set; }
 
         public bool Ativo { get; set; }
     }
@@ -75,6 +83,23 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         public PerfilSelect Perfil { get; set; } = new PerfilSelect();
 
         public bool Ativo { get; set; }
+    }
+
+    public class  UsuarioSenhaViewModel
+    {
+        public int Id { get; set; }
+
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Senha Atual")]
+        public string Senha { get; set; }
+
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Nova Senha")]
+        public string NovaSenha { get; set; }
+
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Confirmação Senha")]
+        public string ConfirmaSenha { get; set; }
     }
 
 

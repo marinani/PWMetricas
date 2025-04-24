@@ -36,6 +36,38 @@ namespace PWMetricas.Aplicacao.Servicos
             return _mapper.Map<List<UsuarioViewModel>>(usuarios);
         }
 
+        public async Task<Resultado> AlterarSenha(UsuarioSenhaViewModel modelo)
+        {
+            var resultado = new Resultado();
+            if (modelo.NovaSenha != modelo.ConfirmaSenha)
+            {
+                return new Resultado(new[] { "As senhas não coincidem." });
+            }
+            var usuario = await _usuarioRepositorio.BuscarPorId(modelo.Id);
+            if (usuario == null)
+            {
+                return new Resultado(new[] { "Usuário não encontrado." });
+            }
+
+
+            var senhaValida = VerifyPassword(modelo.Senha, usuario.Senha);
+            if (!senhaValida)
+            {
+                return new Resultado(new[] { "Senha atual incorreta." });
+            }
+
+            try
+            {
+                usuario.Senha = EncryptPassword(modelo.NovaSenha);
+                await _usuarioRepositorio.Atualizar(usuario);
+                return new Resultado("Sucesso ao alterar senha.", usuario);
+            }
+            catch (Exception ex)
+            {
+                return new Resultado(new[] { "Erro ao alterar senha: " + ex.Message });
+            }
+        }
+
         public async Task<Resultado> CadastrarUsuario(UsuarioViewModel modelo)
         {
             var resultado = new Resultado();
@@ -43,6 +75,16 @@ namespace PWMetricas.Aplicacao.Servicos
             if (!modelo.PerfilId.HasValue)
             {
                 return new Resultado(new[] { "O campo perfil é obrigatório." });
+            }
+
+            if (modelo.Senha != modelo.ConfirmaSenha)
+            {
+                return new Resultado(new[] { "As senhas não coincidem." });
+            }
+
+            if (modelo.Email != modelo.ConfirmaEmail)
+            {
+                return new Resultado(new[] { "Os e-mails não coincidem." });
             }
 
             try
@@ -167,6 +209,16 @@ namespace PWMetricas.Aplicacao.Servicos
         public async Task<Resultado> CadastrarVendedor(VendedorViewModel modelo)
         {
             var resultado = new Resultado();
+
+            if (modelo.Senha != modelo.ConfirmaSenha)
+            {
+                return new Resultado(new[] { "As senhas não coincidem." });
+            }
+
+            if (modelo.Email != modelo.ConfirmaEmail)
+            {
+                return new Resultado(new[] { "Os e-mails não coincidem." });
+            }
 
 
             try

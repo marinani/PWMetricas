@@ -17,6 +17,8 @@
 	<div class="container-fluid">
 
 		<form asp-action="Editar" method="post">
+			@Html.HiddenFor(m => m.Id)
+			@Html.HiddenFor(m => m.Guid)
 			<div class="row g-4">
 				<div class="col-sm-6">
 					<div class="form-group">

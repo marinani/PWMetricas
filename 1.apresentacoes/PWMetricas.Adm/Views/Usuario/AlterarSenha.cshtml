@@ -1,0 +1,65 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Usuario
+@using System.Security.Claims;
+@model UsuarioSenhaViewModel
+
+
+@{
+	var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
+	var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
+}
+
+
+<div class="app-content-header">
+	<!--begin::Container-->
+	<div class="container-fluid">
+		<!--begin::Row-->
+		<div class="row">
+			<div class="col-sm-6"><h3 class="mb-0">Atualização de senha</h3></div>
+		</div>
+		<!--end::Row-->
+	</div>
+	<!--end::Container-->
+</div>
+
+<div class="app-content">
+	<div class="container-fluid">
+		<form asp-action="AlterarSenha" method="post">
+			@Html.HiddenFor(m => m.Id)
+			<div class="row g-4">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label asp-for="Senha"></label>
+						<input asp-for="Senha" type="password" class="form-control" id="Senha" placeholder="Digite a senha atual" />
+						<span asp-validation-for="Senha" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row g-4">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label asp-for="NovaSenha"></label>
+						<input asp-for="NovaSenha" type="password" class="form-control" id="NovaSenha" placeholder="Digite a nova senha" />
+						<span asp-validation-for="NovaSenha" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row g-4">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label asp-for="ConfirmaSenha"></label>
+						<input asp-for="ConfirmaSenha" type="password" class="form-control" id="ConfirmaSenha" placeholder="Confirme a sua senha" />
+						<span asp-validation-for="ConfirmaSenha" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+			<br />
+			<div class="row g-4">
+				<div class="col-sm-6">
+					<button type="submit" class="btn btn-primary">Atualizar</button>
+
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

@@ -92,5 +92,39 @@ namespace PWMetricas.Adm.Controllers
 
             return RedirectToAction("Consulta");
         }
+
+        [HttpGet]
+        public IActionResult AlterarSenha()
+        {
+            //Obter o ID do usuário logado
+            var id = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+            if (id == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            // Criar o modelo de alteração de senha
+            var modelo = new UsuarioSenhaViewModel
+            {
+                Id = int.Parse(id)
+            };
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AlterarSenha(UsuarioSenhaViewModel modelo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(modelo);
+            }
+            var resultado = await _usuarioServico.AlterarSenha(modelo);
+            if (!resultado.Sucesso)
+            {
+                ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
+                return View(modelo);
+            }
+            return RedirectToAction("Index","Home");
+        }
     }
 }
