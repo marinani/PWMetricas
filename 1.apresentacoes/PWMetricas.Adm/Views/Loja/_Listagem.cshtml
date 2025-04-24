@@ -1,0 +1,101 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Origem
+@model PaginacaoResultado<OrigemViewModel>
+
+
+<div class="app-content">
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-12">
+				<!-- Listagem de Perfis -->
+				<div id="origem-listagem">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Cor</th>
+								<th>Ativo</th>
+								<th>Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model.Dados)
+							{
+								<tr>
+									<td>@item.Nome</td>
+									<td>
+										<span style="display: inline-block; width: 20px; height: 20px; border-radius: 50%; background-color: @item.CorHex; border: 1px solid #ccc;" title="@item.CorHex"></span>
+									</td>
+									<td>@(item.Ativo ? "Sim" : "Não")</td>
+									<td>
+										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
+											<i class="nav-icon bi bi-pencil"></i>
+										</a>
+									</td>
+									
+								</tr>
+							}
+						</tbody>
+					</table>
+
+					<!-- Paginação -->
+					@if (Model.TotalPaginas > 1)
+					{
+						<nav>
+							<ul class="pagination">
+								@for (int i = 1; i <= Model.TotalPaginas; i++)
+								{
+									<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+										<a href="#" class="page-link" data-page="@i">@i</a>
+									</li>
+								}
+							</ul>
+						</nav>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@* <script>
+
+		document.addEventListener("DOMContentLoaded", function () {
+		const listagemContainer = document.getElementById("origem-listagem");
+
+		// Adiciona evento de clique nos links de paginação
+		listagemContainer.addEventListener("click", function (event) {
+			const target = event.target;
+
+			if (target.classList.contains("page-link")) {
+				event.preventDefault();
+
+				const page = target.getAttribute("data-page");
+
+				// Faz a requisição AJAX para atualizar a listagem
+				fetch(`/Origem/Consulta?page=${page}`, {
+					method: "GET",
+					headers: {
+						"X-Requested-With": "XMLHttpRequest"
+					}
+				})
+					.then(response => {
+						if (!response.ok) {
+							throw new Error("Erro ao carregar a página.");
+						}
+						return response.text();
+					})
+					.then(html => {
+						// Atualiza o conteúdo da listagem
+						listagemContainer.innerHTML = html;
+					})
+					.catch(error => {
+						console.error("Erro:", error);
+					});
+			}
+		});
+	});
+
+
+</script> *@

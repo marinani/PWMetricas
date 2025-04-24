@@ -1,0 +1,27 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Cliente
+@model ClienteViewModel
+
+<div class="app-content-header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6"><h3 class="mb-0">Cadastro do Cliente</h3></div>
+
+		</div>
+	</div>
+</div>
+
+
+<div class="app-content">
+	<div class="container-fluid">
+		<form asp-action="Cadastro" method="post">
+            <partial name="_Visualizar" />
+		
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script src="/js/cliente/cadastro.js"></script>
+}
