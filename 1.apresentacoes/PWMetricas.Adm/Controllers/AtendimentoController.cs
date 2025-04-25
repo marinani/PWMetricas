@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PWMetricas.Aplicacao.Modelos.Atendimento;
 using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
+using PWMetricas.Dominio.Entidades;
 
 namespace PWMetricas.Adm.Controllers
 {
@@ -18,10 +19,11 @@ namespace PWMetricas.Adm.Controllers
         private readonly IClienteServico _clienteServico;
         private readonly ILojaServico _lojaServico;
         private readonly IStatusAtendimentoServico _statusServico;
-        //private readonly IAtendimentoServico _atendimentoServico;
+        private readonly IAtendimentoServico _atendimentoServico;
         private readonly IUsuarioServico _usuarioServico;
         public AtendimentoController(IOrigemServico origemServico, ITamanhoServico tamanhoServico,
-            ICanalServico canalServico, IProdutoServico produtoServico, IClienteServico clienteServico, ILojaServico lojaServico, IStatusAtendimentoServico statusServico, IUsuarioServico usuarioServico)
+            ICanalServico canalServico, IProdutoServico produtoServico, IClienteServico clienteServico, 
+            ILojaServico lojaServico, IStatusAtendimentoServico statusServico, IUsuarioServico usuarioServico, IAtendimentoServico atendimentoServico)
         {
             _origemServico = origemServico;
             _tamanhoServico = tamanhoServico;
@@ -31,6 +33,7 @@ namespace PWMetricas.Adm.Controllers
             _lojaServico = lojaServico;
             _statusServico = statusServico;
             _usuarioServico = usuarioServico;
+            _atendimentoServico = atendimentoServico;
         }
 
         [HttpGet]
@@ -62,13 +65,6 @@ namespace PWMetricas.Adm.Controllers
             {
                 return View();
             }
-
-
-
-              
-
-
-            
            
         }
 
@@ -78,8 +74,19 @@ namespace PWMetricas.Adm.Controllers
         [Route("Atendimento/NovoAtendimento")]
         public async Task<IActionResult> NovoAtendimento(AtendimentoViewModel atendimento)
         {
-            await CarregarCombos();
-            return View(atendimento);
+            if (!ModelState.IsValid)
+            {
+                return Json(new { sucesso = false, erros = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+
+            var resultado = await _atendimentoServico.Cadastrar(atendimento);
+            if (!resultado.Sucesso)
+            {
+                return Json(new { sucesso = false, erros = resultado.Erros });
+            }
+
+            return Json(new { sucesso = true, mensagem = "Atendimento cadastrado com sucesso!" });
+
         }
 
 

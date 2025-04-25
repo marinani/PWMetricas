@@ -47,11 +47,11 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
 
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Estado")]
-        public string Uf { get; set; }
+        public string? Uf { get; set; }
 
         //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Cidade")]
-        public string Cidade { get; set; }
+        public string? Cidade { get; set; }
 
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Valor Pedido")]
@@ -64,11 +64,11 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Status")]
         public int? StatusId { get; set; }
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Observação")]
         public string? Observacao { get; set; }
 
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Loja")]
         //Filial
         public int? LojaId { get; set; }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PWMetricas.Aplicacao.Modelos.Atendimento;
 using PWMetricas.Aplicacao.Modelos.Canal;
 using PWMetricas.Aplicacao.Modelos.Cliente;
 using PWMetricas.Aplicacao.Modelos.Loja;
@@ -32,6 +33,7 @@ namespace PWMetricas.Aplicacao
             CreateMap<Usuario, UsuarioSelect>().ReverseMap();
             CreateMap<Usuario, VendedorViewModel>().ReverseMap();
             CreateMap<StatusAtendimento, StatusAtendimentoViewModel>().ReverseMap();
+            CreateMap<Atendimento, AtendimentoViewModel>().ReverseMap();
 
             // Configuração de mapeamento entre Usuario e UsuarioViewModel  
             CreateMap<Usuario, UsuarioViewModel>()
