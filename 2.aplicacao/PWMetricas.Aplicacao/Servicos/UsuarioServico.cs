@@ -205,6 +205,11 @@ namespace PWMetricas.Aplicacao.Servicos
             return _mapper.Map<VendedorViewModel>(usuario);
         }
 
+        public async Task<IEnumerable<UsuarioSelect>> ListarVendedores()
+        {
+            var usuarios = await _usuarioRepositorio.ListarAsync(x=> x.PerfilId == 3);
+            return _mapper.Map<IEnumerable<UsuarioSelect>>(usuarios);
+        }
 
         public async Task<Resultado> CadastrarVendedor(VendedorViewModel modelo)
         {

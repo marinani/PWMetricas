@@ -19,17 +19,15 @@ namespace PWMetricas.Adm.Controllers
         public async Task<IActionResult> Consulta(int page = 1)
         {
             const int pageSize = 10;
-            // Obtenha os dados paginados
+            
             var resultado = await _origemServico.ObterTodosPaginados(page, pageSize);
 
-            // Verifica se é uma requisição AJAX
+            
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                // Retorna apenas o partial view com os dados atualizados
                 return PartialView("_Listagem", resultado);
             }
 
-            // Retorna a página completa
             return View("Consulta", resultado);
         }
 

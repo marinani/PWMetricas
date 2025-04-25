@@ -10,6 +10,9 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
 {
     public class AtendimentoViewModel
     {
+
+        public bool IsVendedor { get; set; }
+
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Data")]
         public DateTime Data { get; set; } = DateTime.Now;
@@ -52,7 +55,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
 
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Valor Pedido")]
-        public decimal? ValorPedido { get; set; }
+        public string? ValorPedido { get; set; }
 
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Vendedor")]
@@ -64,5 +67,10 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Observação")]
         public string? Observacao { get; set; }
+
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Loja")]
+        //Filial
+        public int? LojaId { get; set; }
     }
 }

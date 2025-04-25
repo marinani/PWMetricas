@@ -15,38 +15,43 @@
 
 
 <div class="app-content">
-	<div class="container-fluid">
-		<form asp-action="Editar" method="post">
-			@Html.HiddenFor(m => m.Id)
-			@Html.HiddenFor(m => m.Guid)
-			@Html.HiddenFor(m => m.Ativo)
-			<partial name="_Visualizar" />
-		</form>
-	</div>
+    <div class="container-fluid">
+
+        <form asp-action="Editar" method="post">
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Guid)
+            @Html.HiddenFor(m => m.Ativo)
+            <partial name="_Visualizar" />
+        </form>
+    </div>
 </div>
 
 @section Scripts {
-	<!-- Scripts para validação do lado do cliente -->
-	<partial name="_ValidationScriptsPartial" />
+    <!-- Scripts para validação do lado do cliente -->
+    <partial name="_ValidationScriptsPartial" />
 
-	<script>
+    <script>
+        const pickr = Pickr.create({
+            el: '#color-picker',
+            theme: 'classic',
+            default: '#000000',
+            components: {
+                preview: true,
+                opacity: true,
+                hue: true,
+                interaction: {
+                    hex: true,
+                    rgba: true,
+                    input: true,
+                    save: true
+                }
+            }
+        });
 
-			document.querySelectorAll('#color-picker .color-option').forEach(function (el) {
-			el.addEventListener('click', function () {
-				// Remove seleção anterior
-				document.querySelectorAll('#color-picker .color-option').forEach(function (item) {
-					item.classList.remove('selected');
-				});
-
-				// Adiciona seleção atual
-				el.classList.add('selected');
-
-				// Marca o radio interno
-				el.querySelector('input[type="radio"]').checked = true;
-			});
-		});
-
-
-	</script>
+        pickr.on('save', (color) => {
+            const hexColor = color.toHEXA().toString();
+            document.getElementById('CorHex').value = hexColor;
+        });
+    </script>
 
 	}

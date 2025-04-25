@@ -102,5 +102,11 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         public string ConfirmaSenha { get; set; }
     }
 
+    public class UsuarioSelect
+    {
+        public int Id { get; set; }
+        public string Nome { get; set; }
+    }
+
 
 }

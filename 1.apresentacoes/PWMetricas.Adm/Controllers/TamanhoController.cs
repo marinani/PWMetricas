@@ -21,18 +21,17 @@ namespace PWMetricas.Adm.Controllers
         public async Task<IActionResult> Consulta(int page = 1)
         {
             const int pageSize = 10;
-            var perfis = await _tamanhoServico.ObterTodosPaginados(page, pageSize);
+            var resultado = await _tamanhoServico.ObterTodosPaginados(page, pageSize);
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                return PartialView("_Listagem", perfis);
+                return PartialView("_Listagem", resultado);
             }
-
-            return View(perfis);
+            return View("Consulta", resultado);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Cadastro()
+        public IActionResult Cadastro()
         {
             return View();
         }

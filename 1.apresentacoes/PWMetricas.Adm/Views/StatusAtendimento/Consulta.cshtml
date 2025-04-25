@@ -1,15 +1,14 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Canal
-@model PaginacaoResultado<CanalViewModel>
-
+@using PWMetricas.Aplicacao.Modelos.Origem
+@model PaginacaoResultado<OrigemViewModel>
 
 <div class="app-content-header">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-6"><h3 class="mb-0">Consulta de Canais</h3></div>
+			<div class="col-sm-6"><h3 class="mb-0">Consulta de Origens</h3></div>
 			<div class="col-sm-6">
 				<div class="float-sm-end">
-					<a asp-action="Cadastro" class="btn btn-primary w-100 mt-3">Novo Canal</a>
+					<a asp-action="Cadastro" class="btn btn-primary w-100 mt-3">Nova Origem</a>
 				</div>
 			</div>
 		</div>
@@ -21,7 +20,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<!-- Renderiza a listagem como um partial -->
-				<div id="canal-listagem">
+				<div id="origem-listagem">
 					@await Html.PartialAsync("_Listagem", Model)
 				</div>
 			</div>
@@ -31,5 +30,5 @@
 
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
-<script src="/js/canal/consulta.js"></script>
+	<script src="/js/origem/consulta.js"></script>
 }

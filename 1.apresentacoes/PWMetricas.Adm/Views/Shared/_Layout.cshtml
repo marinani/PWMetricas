@@ -50,6 +50,7 @@
 	<div class="app-wrapper">
 		<!--begin::Header-->
 		<nav class="app-header navbar navbar-expand bg-body">
+
 			<div class="container-fluid">
 				<!-- Botão de menu lateral -->
 				<ul class="navbar-nav">
@@ -107,7 +108,13 @@
 		<partial name="_Menu" />
 		<main class="app-main">
 			<div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 1050;"></div>
-
+			<!-- Container específico para páginas -->
+			@if (IsSectionDefined("PageSpecificContainer"))
+			{
+				<nav class="app-header navbar navbar-expand bg-body">
+					@RenderSection("PageSpecificContainer", required: false)
+				</nav>
+			}
 			@RenderBody()
 		</main>
 		<footer class="app-footer">

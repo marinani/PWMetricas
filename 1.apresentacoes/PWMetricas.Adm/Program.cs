@@ -31,6 +31,7 @@ builder.Services.AddScoped<ITamanhoServico, TamanhoServico>();
 builder.Services.AddScoped<IProdutoServico, ProdutoServico>();
 builder.Services.AddScoped<IOrigemServico, OrigemServico>();
 builder.Services.AddScoped<ILojaServico, LojaServico>();
+builder.Services.AddScoped<IStatusAtendimentoServico, StatusAtendimentoServico>();
 #endregion
 
 #region Repositórios
@@ -42,6 +43,7 @@ builder.Services.AddScoped<ITamanhoRepositorio, TamanhoRepositorio>();
 builder.Services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
 builder.Services.AddScoped<IOrigemRepositorio, OrigemRepositorio>();
 builder.Services.AddScoped<ILojaRepositorio, LojaRepositorio>();
+builder.Services.AddScoped<IStatusAtendimentoRepositorio, StatusAtendimentoRepositorio>();
 #endregion
 
 // Configuração de autenticação

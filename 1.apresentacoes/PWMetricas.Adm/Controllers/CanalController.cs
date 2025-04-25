@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PWMetricas.Aplicacao.Modelos;
 using PWMetricas.Aplicacao.Modelos.Canal;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 
@@ -18,18 +19,18 @@ namespace PWMetricas.Adm.Controllers
         public async Task<IActionResult> Consulta(int page = 1)
         {
             const int pageSize = 10;
-            var perfis = await _canalServico.ObterTodosPaginados(page, pageSize);
+            var resultado = await _canalServico.ObterTodosPaginados(page, pageSize);
 
             if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
-                return PartialView("_Listagem", perfis);
+                return PartialView("_Listagem", resultado);
             }
 
-            return View(perfis);
+            return View("Consulta", resultado);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Cadastro()
+        public IActionResult Cadastro()
         {
             return View();
         }

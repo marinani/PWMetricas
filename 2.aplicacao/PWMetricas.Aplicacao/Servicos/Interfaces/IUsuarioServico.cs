@@ -24,5 +24,6 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
         Task<Resultado> CadastrarVendedor(VendedorViewModel modelo);
         Task<Resultado> EditarVendedor(VendedorViewModel modelo);
         Task<VendedorViewModel> ObterVendedorPorId(int id);
+        Task<IEnumerable<UsuarioSelect>> ListarVendedores();
     }
 }

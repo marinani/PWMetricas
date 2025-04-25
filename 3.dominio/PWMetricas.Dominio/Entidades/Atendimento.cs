@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,10 +9,8 @@ namespace PWMetricas.Dominio.Entidades
 {
     public class Atendimento : EntidadeBase
     {
-       // public required string Nome { get; set; }
-       // public required decimal Valor { get; set; }
         public required DateTime Data { get; set; }
-        public required DateTime? DataRetorno { get; set; }
+        public DateTime? DataRetorno { get; set; }
         public int CanalId { get; set; }
         public virtual Canal Canal { get; set; }
         public int ProdutoId { get; set; }
@@ -19,9 +18,6 @@ namespace PWMetricas.Dominio.Entidades
 
         public int ClienteId { get; set; }
         public virtual Cliente Cliente { get; set; }
-
-        //public int CidadeId { get; set; }
-        //public virtual Cidade Cidade { get; set; }
         public decimal ValorPedido { get; set; }
 
         //Vendedor
@@ -38,6 +34,13 @@ namespace PWMetricas.Dominio.Entidades
 
         public virtual StatusAtendimento StatusAtendimento { get; set; }
 
-        public string Whatsapp { get; set; }
+        public required string Whatsapp { get; set; }
+
+        public string? Uf { get; set; }
+        public string? Cidade { get; set; }
+
+        public int LojaId { get; set; }
+
+        public virtual Loja Loja { get; set; }
     }
 }

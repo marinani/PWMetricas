@@ -1,32 +1,31 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Canal
-@model CanalViewModel
+@using PWMetricas.Aplicacao.Modelos.Origem
+@model OrigemViewModel
 
 <div class="app-content-header">
 	<!--begin::Container-->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-6"><h3 class="mb-0">Cadastro de Canal</h3></div>
+			<div class="col-sm-6"><h3 class="mb-0">Cadastro de Origem</h3></div>
 
 		</div>
 	</div>
 	<!--end::Container-->
 </div>
 
-
 <div class="app-content">
-    <div class="container-fluid">
+	<div class="container-fluid">
 
-        <form asp-action="Cadastro" method="post">
-            <partial name="_Visualizar" />
-        </form>
-    </div>
+		<form asp-action="Cadastro" method="post">
+			<partial name="_Visualizar" />
+		</form>
+	</div>
 </div>
 
 
 @section Scripts {
-    <!-- Scripts para validação do lado do cliente -->
-    <partial name="_ValidationScriptsPartial" />
+	<!-- Scripts para validação do lado do cliente -->
+	<partial name="_ValidationScriptsPartial" />
 
     <script>
         const pickr = Pickr.create({

@@ -6,6 +6,7 @@
     const origemDropdown = document.getElementById("OrigemId");
     const produtoDropdown = document.getElementById("ProdutoId");
     const tamanhoDropdown = document.getElementById("TamanhoId");
+    const statusDropdown = document.getElementById("StatusId");
 
 
 
@@ -43,4 +44,25 @@
         });
     }
 
+    if (statusDropdown) { // Verifica se o elemento existe
+       
+        statusDropdown.addEventListener("change", function () {
+            const selectedOption = statusDropdown.options[statusDropdown.selectedIndex];
+            const color = selectedOption.getAttribute("data-color");
+            statusDropdown.style.backgroundColor = color || "#ffffff"; // Cor padrão caso não tenha
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        debugger
+        if ($("#IsVendedor").val()) {
+            debugger
+            $("#UsuarioId").prop("disabled", true);
+
+        }
+
+    });
+    
+
 });
+

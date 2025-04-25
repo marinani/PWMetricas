@@ -5,6 +5,7 @@ using PWMetricas.Aplicacao.Modelos.Loja;
 using PWMetricas.Aplicacao.Modelos.Origem;
 using PWMetricas.Aplicacao.Modelos.Perfil;
 using PWMetricas.Aplicacao.Modelos.Produto;
+using PWMetricas.Aplicacao.Modelos.StatusAtendimento;
 using PWMetricas.Aplicacao.Modelos.Tamanho;
 using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Dominio.Entidades;
@@ -28,7 +29,9 @@ namespace PWMetricas.Aplicacao
             CreateMap<Perfil, PerfilViewModel>().ReverseMap();
             CreateMap<Perfil, PerfilSelect>().ReverseMap();
             CreateMap<Usuario, UsuarioConsulta>().ReverseMap();
+            CreateMap<Usuario, UsuarioSelect>().ReverseMap();
             CreateMap<Usuario, VendedorViewModel>().ReverseMap();
+            CreateMap<StatusAtendimento, StatusAtendimentoViewModel>().ReverseMap();
 
             // Configuração de mapeamento entre Usuario e UsuarioViewModel  
             CreateMap<Usuario, UsuarioViewModel>()
