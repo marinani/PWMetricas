@@ -49,7 +49,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
         [Display(Name = "Estado")]
         public string Uf { get; set; }
 
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Cidade")]
         public string Cidade { get; set; }
 
