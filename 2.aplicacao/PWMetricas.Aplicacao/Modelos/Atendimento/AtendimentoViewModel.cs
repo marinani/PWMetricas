@@ -63,7 +63,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
         public int? UsuarioId { get; set; }
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Status")]
-        public int? StatusId { get; set; }
+        public int? StatusAtendimentoId { get; set; }
         //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Observação")]
         public string? Observacao { get; set; }

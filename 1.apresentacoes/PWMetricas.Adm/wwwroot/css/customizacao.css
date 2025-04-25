@@ -1,3 +1,105 @@
+:root,
+[data-bs-theme=light] {
+    --bs-accordion-atendimento-bg: #FF914D;
+    --bs-accordion-atendimento-color: #fff;
+    --bs-atendimento-bg-subtle: #FF914D;
+    --bs-accordion-orcamento-bg: #38BDF2;
+    --bs-accordion-orcamento-color: #fff;
+    --bs-orcamento-bg-subtle: #38BDF2;
+    --bs-accordion-vendido-bg: #04BF55;
+    --bs-accordion-vendido-color: #fff;
+    --bs-vendido-bg-subtle: #04BF55;
+    --bs-accordion-negociado-bg: #FF3131;
+    --bs-accordion-negociado-color: #fff;
+    --bs-negociado-bg-subtle: #FF3131;
+    --bs-accordion-naoresponde-bg: #FF5757;
+    --bs-accordion-naoresponde-color: #fff;
+    --bs-naoresponde-bg-subtle: #FF5757;
+}
+
+[data-bs-theme=dark] {
+    color-scheme: dark;
+    --bs-accordion-atendimento-bg: #FF914D;
+    --bs-accordion-atendimento-color: #fff;
+    --bs-atendimento-bg-subtle: #FF914D;
+    --bs-accordion-orcamento-bg: #38BDF2;
+    --bs-accordion-orcamento-color: #fff;
+    --bs-orcamento-bg-subtle: #38BDF2;
+    --bs-accordion-vendido-bg: #04BF55;
+    --bs-accordion-vendido-color: #fff;
+    --bs-vendido-bg-subtle: #04BF55;
+    --bs-accordion-negociado-bg: #FF3131;
+    --bs-accordion-negociado-color: #fff;
+    --bs-negociado-bg-subtle: #FF3131;
+    --bs-accordion-naoresponde-bg: #FF5757;
+    --bs-accordion-naoresponde-color: #fff;
+    --bs-naoresponde-bg-subtle: #FF5757;
+    --bs-atendimento-bg: #FF914D;
+    --bs-orcamento-bg: #38BDF2;
+    --bs-vendido-bg: #04BF55;
+    --bs-negociado-bg: #FF3131;
+    --bs-naoresponde-bg: #FF5757;
+}
+
+
+@media (max-width: 768px) {
+    .left-select, .right-search {
+        width: 100%; /* Ocupa toda a largura em telas pequenas */
+    }
+
+    .right-search {
+        margin-top: 10px; /* Adiciona espaçamento entre os elementos */
+    }
+}
+
+
+.status-atendimento {
+    background-color: var(--bs-atendimento-bg) !important;
+    color: #fff;
+}
+
+.status-atendimento-bg {
+    background-color: var(--bs-atendimento-bg) !important;
+}
+
+.status-orcamento {
+    background-color: var(--bs-orcamento-bg) !important;
+    color: #fff;
+}
+
+.status-orcamento-bg {
+    background-color: var(--bs-orcamento-bg);
+}
+
+.status-vendido {
+    background-color: var(--bs-vendido-bg) !important;
+    color: #fff;
+}
+
+.status-vendido-bg {
+    background-color: var(--bs-vendido-bg) !important;
+}
+
+.status-negociado {
+    background-color: var(--bs-negociado-bg) !important;
+    color: #fff;
+}
+
+.status-negociado-bg {
+    background-color: var(--bs-negociado-bg) !important;
+}
+
+
+.status-naoresponde {
+    background-color: var(--bs-naoresponde-bg) !important;
+    color: #fff;
+}
+
+.status-naoresponde-bg {
+    background-color: var(--bs-naoresponde-bg) !important;
+}
+
+
 
 .hidden {
     display: none;
@@ -7,49 +109,6 @@
     background-color: #f71964;
     border-color: #f71964;
 }
-
-.status-atendimento {
-    color: #FF914D;
-}
-
-.status-atendimento-bg {
-    background-color: #FF914D;
-}
-
-.status-orcamento {
-    color: #38BDF2;
-}
-
-.status-orcamento-bg {
-    background-color: #38BDF2;
-}
-
-.status-vendido {
-    color: #04BF55;
-}
-
-.status-vendido-bg {
-    background-color: #04BF55;
-}
-
-
-.status-negociado {
-    color: #FF3131;
-}
-
-.status-negociado-bg {
-    background-color: #FF3131;
-}
-
-
-.status-naoresponde {
-    color: #FF5757;
-}
-
-.status-naoresponde-bg {
-    background-color: #FF5757;
-}
-
 
 .container {
     margin-top: 20px;
@@ -107,4 +166,627 @@
     .page-specific-container .form-control {
         max-width: 300px;
         margin: 0 10px;
+    }
+
+
+
+.bg-atendimento {
+    --bs-bg-opacity: 1;
+    background-color: var(--bs-atendimento-bg) !important;
+}
+
+.bg-orcamento {
+    --bs-bg-opacity: 1;
+    background-color: var(--bs-orcamento-bg) !important;
+}
+
+.bg-vendido {
+    --bs-bg-opacity: 1;
+    background-color: var(--bs-vendido-bg) !important;
+}
+
+.bg-negociado {
+    --bs-bg-opacity: 1;
+    background-color: var(--bs-negociado-bg) !important;
+}
+
+
+.bg-naoresponde {
+    --bs-bg-opacity: 1;
+    background-color: var(--bs-naoresponde-bg) !important;
+}
+
+
+/* Inicio tabelas */
+
+/* Inicio tabela atendimento */
+
+.table-atendimento {
+    border-color: var(--bs-atendimento-bg);
+}
+
+    .table-atendimento thead {
+        color: var(--bs-atendimento-bg) !important;
+    }
+
+        .table-atendimento thead th {
+            color: var(--bs-atendimento-bg) !important;
+            padding: 0.75rem; /* Exemplo de espaçamento interno */
+            text-align: center;
+        }
+
+    .table-atendimento tbody > tr > td {
+        text-align: center;
+    }
+
+/* Inicio tabela orcamento */
+
+.table-orcamento {
+    border-color: var(--bs-orcamento-bg);
+}
+
+    .table-orcamento thead {
+        color: var(--bs-orcamento-bg) !important;
+    }
+
+        .table-orcamento thead th {
+            color: var(--bs-orcamento-bg) !important;
+            padding: 0.75rem; /* Exemplo de espaçamento interno */
+            text-align: center;
+        }
+
+    .table-orcamento tbody > tr > td {
+        text-align: center;
+    }
+
+/* Inicio tabela vendido */
+
+.table-vendido {
+    border-color: var(--bs-vendido-bg) !important;
+}
+
+    .table-vendido thead {
+        color: var(--bs-vendido-bg) !important;
+    }
+
+        .table-vendido thead th {
+            color: var(--bs-vendido-bg) !important;
+            padding: 0.75rem; /* Exemplo de espaçamento interno */
+            text-align: center;
+        }
+
+    .table-vendido tbody > tr > td {
+        text-align: center;
+    }
+
+
+/* Inicio tabela negociado */
+.table-negociado {
+    border-color: var(--bs-negociado-bg);
+}
+
+    .table-negociado thead {
+        color: var(--bs-negociado-bg) !important;
+    }
+
+        .table-negociado thead th {
+            color: var(--bs-negociado-bg) !important;
+            padding: 0.75rem; /* Exemplo de espaçamento interno */
+            text-align: center;
+        }
+
+    .table-negociado tbody > tr > td {
+        text-align: center;
+    }
+/* Inicio tabela nao responde */
+
+.table-naoresponde {
+    border-color: var(--bs-naoresponde-bg);
+}
+
+    .table-naoresponde thead {
+        color: var(--bs-naoresponde-bg) !important;
+    }
+
+        .table-naoresponde thead th {
+            color: var(--bs-naoresponde-bg) !important;
+            padding: 0.75rem; /* Exemplo de espaçamento interno */
+            text-align: center;
+        }
+
+    .table-naoresponde tbody > tr > td {
+        text-align: center;
+    }
+
+.table-responsive {
+    overflow-x: auto; /* Garante o scroll horizontal */
+    -webkit-overflow-scrolling: touch; /* Suaviza o scroll em dispositivos móveis */
+}
+
+/* Fim tabelas */
+
+
+
+.text-bg-primary {
+    color: #fff !important;
+    background-color: RGBA(var(--bs-atendimento-rgb), var(--bs-bg-opacity, 1)) !important;
+}
+
+
+.accordion {
+    --bs-accordion-color: var(--bs-body-color);
+    --bs-accordion-bg: var(--bs-body-bg);
+    --bs-accordion-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, border-radius 0.15s ease;
+    --bs-accordion-border-color: var(--bs-border-color);
+    --bs-accordion-border-width: var(--bs-border-width);
+    --bs-accordion-border-radius: var(--bs-border-radius);
+    --bs-accordion-inner-border-radius: calc(var(--bs-border-radius) - (var(--bs-border-width)));
+    --bs-accordion-btn-padding-x: 1.25rem;
+    --bs-accordion-btn-padding-y: 1rem;
+    --bs-accordion-btn-color: var(--bs-body-color);
+    --bs-accordion-btn-bg: var(--bs-accordion-bg);
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23212529' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    --bs-accordion-btn-icon-width: 1.25rem;
+    --bs-accordion-btn-icon-transform: rotate(-180deg);
+    --bs-accordion-btn-icon-transition: transform 0.2s ease-in-out;
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23052c65' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    --bs-accordion-body-padding-x: 1.25rem;
+    --bs-accordion-body-padding-y: 1rem;
+    --bs-accordion-active-color: var(--bs-primary-text-emphasis);
+    --bs-accordion-atendimento-bg: var(--bs-atendimento-bg-subtle);
+    --bs-accordion-orcamento-bg: var(--bs-orcamento-bg-subtle);
+    --bs-accordion-vendido-bg: var(--bs-vendido-bg-subtle);
+    --bs-accordion-negociado-bg: var(--bs-negociado-bg-subtle);
+    --bs-accordion-naoresponde-bg: var(--bs-naoresponde-bg-subtle);
+}
+
+.accordion-item.atendimento {
+    border-color: var(--bs-accordion-atendimento-bg);
+}
+
+    .accordion-item.atendimento > .accordion-header .accordion-button-atendimento {
+        color: var(--bs-accordion-atendimento-color);
+        background-color: var(--bs-accordion-atendimento-bg);
+    }
+
+        .accordion-item.atendimento > .accordion-header .accordion-button-atendimento:not(.collapsed) {
+            color: var(--bs-accordion-atendimento-color);
+            background-color: var(--bs-accordion-atendimento-bg);
+            box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-atendimento-bg);
+        }
+
+.accordion-button-atendimento {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+    font-size: 1rem;
+    color: var(--bs-accordion-btn-color);
+    text-align: left;
+    background-color: var(--bs-accordion-btn-bg);
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: var(--bs-accordion-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-atendimento {
+        transition: none;
+    }
+}
+
+.accordion-button-atendimento:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-active-icon);
+    transform: var(--bs-accordion-btn-icon-transform);
+}
+
+.accordion-button-atendimento::after {
+    flex-shrink: 0;
+    width: var(--bs-accordion-btn-icon-width);
+    height: var(--bs-accordion-btn-icon-width);
+    margin-left: auto;
+    content: "";
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: var(--bs-accordion-btn-icon-width);
+    transition: var(--bs-accordion-btn-icon-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-atendimento::after {
+        transition: none;
+    }
+}
+
+.accordion-button-atendimento:hover {
+    z-index: 2;
+}
+
+.accordion-button-atendimento:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: var(--bs-accordion-btn-focus-box-shadow);
+}
+
+/* Estilos para o accordion de Orçamento */
+.accordion-item.orcamento {
+    border-color: var(--bs-accordion-orcamento-bg);
+}
+
+    .accordion-item.orcamento > .accordion-header .accordion-button-orcamento {
+        color: var(--bs-accordion-orcamento-color);
+        background-color: var(--bs-accordion-orcamento-bg);
+    }
+
+        .accordion-item.orcamento > .accordion-header .accordion-button-orcamento:not(.collapsed) {
+            color: var(--bs-accordion-orcamento-color);
+            background-color: var(--bs-accordion-orcamento-bg);
+            box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-orcamento-bg);
+        }
+
+.accordion-button-orcamento {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+    font-size: 1rem;
+    color: var(--bs-accordion-btn-color);
+    text-align: left;
+    background-color: var(--bs-accordion-btn-bg);
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: var(--bs-accordion-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-orcamento {
+        transition: none;
+    }
+}
+
+.accordion-button-orcamento:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-active-icon);
+    transform: var(--bs-accordion-btn-icon-transform);
+}
+
+.accordion-button-orcamento::after {
+    flex-shrink: 0;
+    width: var(--bs-accordion-btn-icon-width);
+    height: var(--bs-accordion-btn-icon-width);
+    margin-left: auto;
+    content: "";
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: var(--bs-accordion-btn-icon-width);
+    transition: var(--bs-accordion-btn-icon-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-orcamento::after {
+        transition: none;
+    }
+}
+
+.accordion-button-orcamento:hover {
+    z-index: 2;
+}
+
+.accordion-button-orcamento:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: var(--bs-accordion-btn-focus-box-shadow);
+}
+
+/* Estilos para o accordion de Vendido */
+.accordion-item.vendido {
+    border-color: var(--bs-accordion-vendido-bg);
+}
+
+    .accordion-item.vendido > .accordion-header .accordion-button-vendido {
+        color: var(--bs-accordion-vendido-color);
+        background-color: var(--bs-accordion-vendido-bg);
+    }
+
+        .accordion-item.vendido > .accordion-header .accordion-button-vendido:not(.collapsed) {
+            color: var(--bs-accordion-vendido-color);
+            background-color: var(--bs-accordion-vendido-bg);
+            box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-vendido-bg);
+        }
+
+.accordion-button-vendido {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+    font-size: 1rem;
+    color: var(--bs-accordion-btn-color);
+    text-align: left;
+    background-color: var(--bs-accordion-btn-bg);
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: var(--bs-accordion-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-vendido {
+        transition: none;
+    }
+}
+
+.accordion-button-vendido:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-active-icon);
+    transform: var(--bs-accordion-btn-icon-transform);
+}
+
+.accordion-button-vendido::after {
+    flex-shrink: 0;
+    width: var(--bs-accordion-btn-icon-width);
+    height: var(--bs-accordion-btn-icon-width);
+    margin-left: auto;
+    content: "";
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: var(--bs-accordion-btn-icon-width);
+    transition: var(--bs-accordion-btn-icon-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-vendido::after {
+        transition: none;
+    }
+}
+
+.accordion-button-vendido:hover {
+    z-index: 2;
+}
+
+.accordion-button-vendido:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: var(--bs-accordion-btn-focus-box-shadow);
+}
+
+
+/* Estilos para o accordion de Perdido Negociado */
+.accordion-item.negociado {
+    border-color: var(--bs-accordion-negociado-bg);
+}
+
+    .accordion-item.negociado > .accordion-header .accordion-button-negociado {
+        color: var(--bs-accordion-negociado-color);
+        background-color: var(--bs-accordion-negociado-bg);
+    }
+
+        .accordion-item.negociado > .accordion-header .accordion-button-negociado:not(.collapsed) {
+            color: var(--bs-accordion-negociado-color);
+            background-color: var(--bs-accordion-negociado-bg);
+            box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-negociado-bg);
+        }
+
+.accordion-button-negociado {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+    font-size: 1rem;
+    color: var(--bs-accordion-btn-color);
+    text-align: left;
+    background-color: var(--bs-accordion-btn-bg);
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: var(--bs-accordion-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-negociado {
+        transition: none;
+    }
+}
+
+.accordion-button-negociado:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-active-icon);
+    transform: var(--bs-accordion-btn-icon-transform);
+}
+
+.accordion-button-negociado::after {
+    flex-shrink: 0;
+    width: var(--bs-accordion-btn-icon-width);
+    height: var(--bs-accordion-btn-icon-width);
+    margin-left: auto;
+    content: "";
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: var(--bs-accordion-btn-icon-width);
+    transition: var(--bs-accordion-btn-icon-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-negociado::after {
+        transition: none;
+    }
+}
+
+.accordion-button-negociado:hover {
+    z-index: 2;
+}
+
+.accordion-button-negociado:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: var(--bs-accordion-btn-focus-box-shadow);
+}
+
+
+
+/* Estilos para o accordion de Perdido Não Responde */
+.accordion-item.naoresponde {
+    border-color: var(--bs-accordion-naoresponde-bg);
+}
+
+    .accordion-item.naoresponde > .accordion-header .accordion-button-naoresponde {
+        color: var(--bs-accordion-naoresponde-color);
+        background-color: var(--bs-accordion-naoresponde-bg);
+    }
+
+        .accordion-item.naoresponde > .accordion-header .accordion-button-naoresponde:not(.collapsed) {
+            color: var(--bs-accordion-naoresponde-color);
+            background-color: var(--bs-accordion-naoresponde-bg);
+            box-shadow: inset 0 calc(-1 * var(--bs-accordion-border-width)) 0 var(--bs-accordion-naoresponde-bg);
+        }
+
+.accordion-button-naoresponde {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x);
+    font-size: 1rem;
+    color: var(--bs-accordion-btn-color);
+    text-align: left;
+    background-color: var(--bs-accordion-btn-bg);
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: var(--bs-accordion-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-naoresponde {
+        transition: none;
+    }
+}
+
+.accordion-button-naoresponde:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-active-icon);
+    transform: var(--bs-accordion-btn-icon-transform);
+}
+
+.accordion-button-naoresponde::after {
+    flex-shrink: 0;
+    width: var(--bs-accordion-btn-icon-width);
+    height: var(--bs-accordion-btn-icon-width);
+    margin-left: auto;
+    content: "";
+    background-image: var(--bs-accordion-btn-icon);
+    background-repeat: no-repeat;
+    background-size: var(--bs-accordion-btn-icon-width);
+    transition: var(--bs-accordion-btn-icon-transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .accordion-button-naoresponde::after {
+        transition: none;
+    }
+}
+
+.accordion-button-naoresponde:hover {
+    z-index: 2;
+}
+
+.accordion-button-naoresponde:focus {
+    z-index: 3;
+    outline: 0;
+    box-shadow: var(--bs-accordion-btn-focus-box-shadow);
+}
+
+.accordion-header {
+    margin-bottom: 0;
+}
+
+.accordion-item {
+    color: var(--bs-accordion-color);
+    background-color: var(--bs-accordion-bg);
+    border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+}
+
+    .accordion-item:first-of-type {
+        border-top-left-radius: var(--bs-accordion-border-radius);
+        border-top-right-radius: var(--bs-accordion-border-radius);
+    }
+
+        .accordion-item:first-of-type > .accordion-header .accordion-button {
+            border-top-left-radius: var(--bs-accordion-inner-border-radius);
+            border-top-right-radius: var(--bs-accordion-inner-border-radius);
+        }
+
+    .accordion-item:not(:first-of-type) {
+        border-top: 0;
+    }
+
+    .accordion-item:last-of-type {
+        border-bottom-right-radius: var(--bs-accordion-border-radius);
+        border-bottom-left-radius: var(--bs-accordion-border-radius);
+    }
+
+        .accordion-item:last-of-type > .accordion-header .accordion-button.collapsed {
+            border-bottom-right-radius: var(--bs-accordion-inner-border-radius);
+            border-bottom-left-radius: var(--bs-accordion-inner-border-radius);
+        }
+
+        .accordion-item:last-of-type > .accordion-collapse {
+            border-bottom-right-radius: var(--bs-accordion-border-radius);
+            border-bottom-left-radius: var(--bs-accordion-border-radius);
+        }
+
+.accordion-body {
+    padding: var(--bs-accordion-body-padding-y) var(--bs-accordion-body-padding-x);
+}
+
+.accordion-flush > .accordion-item {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}
+
+    .accordion-flush > .accordion-item:first-child {
+        border-top: 0;
+    }
+
+    .accordion-flush > .accordion-item:last-child {
+        border-bottom: 0;
+    }
+
+    .accordion-flush > .accordion-item:first-child > .accordion-header .accordion-button {
+        border-top-left-radius: var(--bs-accordion-border-radius);
+        border-top-right-radius: var(--bs-accordion-border-radius);
+    }
+
+
+.custom-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #FF4081; /* Cor rosa, estilo do botão */
+    color: #FFFFFF; /* Cor do texto */
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px; /* Cantos arredondados */
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none; /* Remove o sublinhado do link */
+}
+
+    .custom-button:hover {
+        background-color: #E63270; /* Cor ao passar o mouse */
+    }
+
+    .custom-button img {
+        width: 20px; /* Largura do ícone */
+        height: 20px; /* Altura do ícone */
+        margin-left: 10px; /* Espaço entre o texto e o ícone */
+    }
+
+    .custom-button:focus {
+        outline: none;
+        box-shadow: 0 0 5px #FF4081;
     }

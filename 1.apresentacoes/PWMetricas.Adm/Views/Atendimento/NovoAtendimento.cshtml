@@ -11,16 +11,16 @@
 }
 
 @section PageSpecificContainer {
-	<div class="container-fluid d-flex justify-content-between align-items-center">
-		<div class="left-select">
+	<div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
+		<div class="left-select mb-2 mb-lg-0">
 			<select asp-for="LojaId" asp-items="ViewBag.Lojas" id="LojaId" class="form-select">
 				<option value="">Selecione uma filial</option>
 			</select>
 			<span asp-validation-for="LojaId" class="text-danger"></span>
 		</div>
-	@* 	<div class="right-search">
+		<div class="right-search">
 			<input type="text" id="searchField" class="form-control" placeholder="Pesquisar..." />
-		</div> *@
+		</div>
 	</div>
 }
 
@@ -239,8 +239,8 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label asp-for="StatusId"></label>
-						<select class="form-select-atendimento" name="StatusId" id="StatusId">
+						<label asp-for="StatusAtendimentoId"></label>
+						<select class="form-select-atendimento" name="StatusAtendimentoId" id="StatusAtendimentoId">
 							@if (ViewBag.Status != null)
 							{
 								@foreach (var status in ViewBag.Status)
@@ -265,7 +265,7 @@
 
 						</select>
 
-						<span asp-validation-for="CanalId" class="text-danger"></span>
+						<span asp-validation-for="StatusAtendimentoId" class="text-danger"></span>
 					</div>
 				</div>
 				

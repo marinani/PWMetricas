@@ -69,8 +69,8 @@
         if (!atendimentoModel.ValorPedido) errors.push("O campo ValorPedido é obrigatório.");
         if (!atendimentoModel.Cidade) errors.push("O campo Cidade é obrigatório.");
         if (!atendimentoModel.DataRetorno) errors.push("O campo DataRetorno é obrigatório.");
-        if (!atendimentoModel.StatusId) errors.push("O campo StatusId é obrigatório.");
-        if (!atendimentoModel.Observacao) errors.push("O campo Observacao é obrigatório.");
+        if (!atendimentoModel.StatusAtendimentoId) errors.push("O campo StatusAtendimento é obrigatório.");
+        //if (!atendimentoModel.Observacao) errors.push("O campo Observacao é obrigatório.");
 
         return errors;
     }
@@ -97,7 +97,7 @@
                 ValorPedido: document.getElementById("ValorPedido").value,
                 Cidade: document.querySelector("[asp-for='Cidade']").value,
                 DataRetorno: document.getElementById("DataRetorno").value,
-                StatusId: document.getElementById("StatusId").value,
+                StatusAtendimentoId: document.getElementById("StatusAtendimentoId").value,
                 Observacao: document.getElementById("Observacao").value,
                 IsVendedor: document.querySelector("input[name='IsVendedor']").value // Campo hidden
             };
