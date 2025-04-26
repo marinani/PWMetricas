@@ -32,47 +32,21 @@
             </div>
         </form>
 
-        <!-- Resultados da Consulta -->
-        <table class="table table-striped mt-4">
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Cliente</th>
-                    <th>Vendedor</th>
-                    <th>Loja</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var atendimento in Model.Resultados)
-                {
-                    <tr>
-                        <td>@atendimento.Data.ToShortDateString()</td>
-                        <td>@atendimento.ClienteId</td>
-                        <td>@atendimento.UsuarioId</td>
-                        <td>@atendimento.LojaId</td>
-                        <td>@atendimento.StatusAtendimentoId</td>
-                        <td>
-                            <a asp-action="Editar" asp-route-id="@atendimento.Id" class="btn btn-sm btn-primary">Editar</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <!-- Tabela de Atendimentos com Status 1 -->
+        <h4 class="mt-4">Atendimentos (Status 1)</h4>
+        <div id="lista-atendimento">
+            @await Html.PartialAsync("_ListaAtendimento", Model)
+        </div>
 
-        <!-- Paginação -->
-        <nav>
-            <ul class="pagination">
-                @for (int i = 1; i <= Model.TotalPaginas; i++)
-                {
-                    <li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
-                        <a class="page-link" asp-action="Consulta" asp-route-pagina="@i" asp-route-UsuarioId="@Model.Filtro.UsuarioId" asp-route-LojaId="@Model.Filtro.LojaId" asp-route-StatusAtendimentoId="@Model.Filtro.StatusAtendimentoId">
-                            @i
-                        </a>
-                    </li>
-                }
-            </ul>
-        </nav>
+        <!-- Tabela de Atendimentos com Status 2 -->
+        <h4 class="mt-4">Orçamentos (Status 2)</h4>
+        <div id="lista-orcamento">
+            @await Html.PartialAsync("_ListaOrcamento", Model)
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="/js/atendimento/consulta.js"></script>
+}

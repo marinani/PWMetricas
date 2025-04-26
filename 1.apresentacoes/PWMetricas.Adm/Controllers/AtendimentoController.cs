@@ -39,22 +39,53 @@ namespace PWMetricas.Adm.Controllers
 
         [HttpGet]
         [Route("Atendimento/Consulta")]
-        public async Task<IActionResult> Consulta(AtendimentoFiltro filtro, int pagina = 1)
+        public IActionResult Consulta()
+        {
+            return View();
+        }
+
+
+
+        [HttpGet]
+        [Route("Atendimento/ListaAtendimento")]
+        public async Task<IActionResult> ListaAtendimento(AtendimentoFiltro filtro, int pagina = 1)
         {
             const int pageSize = 10; // Número de itens por página
+            filtro.StatusAtendimentoId = 1; // Status 1
             var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
 
             var viewModel = new AtendimentoConsultaViewModel
             {
                 Filtro = filtro,
-                Resultados = resultadoPaginado.Dados,
-                PaginaAtual = resultadoPaginado.PaginaAtual,
-                TotalPaginas = resultadoPaginado.TotalPaginas,
-                TotalRegistros = resultadoPaginado.TotalRegistros
+                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoViewModel>(), // Evita null
+                PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
+                TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
             };
 
-            return View(viewModel);
+            return PartialView("_ListaAtendimento", viewModel);
         }
+
+        [HttpGet]
+        [Route("Atendimento/ListaOrcamento")]
+        public async Task<IActionResult> ListaOrcamento(AtendimentoFiltro filtro, int pagina = 1)
+        {
+            const int pageSize = 10; // Número de itens por página
+            filtro.StatusAtendimentoId = 2; // Status 2
+            var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
+
+            var viewModel = new AtendimentoConsultaViewModel
+            {
+                Filtro = filtro,
+                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoViewModel>(), // Evita null
+                PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
+                TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+            };
+
+            return PartialView("_ListaOrcamento", viewModel);
+        }
+
 
         [HttpGet]
         [Route("Atendimento/NovoAtendimento")]
