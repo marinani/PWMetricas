@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using PWMetricas.Aplicacao.Servicos;
 
 namespace PWMetricas.Adm.Controllers
 {
@@ -11,11 +12,13 @@ namespace PWMetricas.Adm.Controllers
     {
         private readonly IUsuarioServico _usuarioServico;
         private readonly IPerfilServico _perfilServico;
+        private readonly ILojaServico _lojaServico;
 
-        public VendedorController(IUsuarioServico usuarioServico, IPerfilServico perfilServico)
+        public VendedorController(IUsuarioServico usuarioServico, IPerfilServico perfilServico, ILojaServico lojaServico)
         {
             _usuarioServico = usuarioServico;
             _perfilServico = perfilServico;
+            _lojaServico = lojaServico;
         }
 
 
@@ -36,7 +39,7 @@ namespace PWMetricas.Adm.Controllers
         [HttpGet]
         public async Task<IActionResult> Cadastro()
         {
-            ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
+            await CarregarCombos();
             return View();
         }
 
@@ -45,17 +48,19 @@ namespace PWMetricas.Adm.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
+                await CarregarCombos();
                 return View(model);
             }
 
             var resultado = await _usuarioServico.CadastrarVendedor(model);
             if (!resultado.Sucesso)
             {
-                ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
+                await CarregarCombos();
+                TempData["MensagemErro"] = string.Join(", ", resultado.Erros);
                 return View(model);
             }
 
+            TempData["MensagemSucesso"] = "Vendedor cadastrado com sucesso!";
             return RedirectToAction("Consulta");
         }
 
@@ -63,6 +68,7 @@ namespace PWMetricas.Adm.Controllers
         public async Task<IActionResult> Editar(int id)
         {
             var usuario = await _usuarioServico.ObterVendedorPorId(id);
+            await CarregarCombos();
             if (usuario != null)
             {
                 return View(usuario);
@@ -76,18 +82,34 @@ namespace PWMetricas.Adm.Controllers
         {
             if (!ModelState.IsValid)
             {
+                await CarregarCombos();
                 return View(model);
             }
 
             var resultado = await _usuarioServico.EditarVendedor(model);
             if (!resultado.Sucesso)
             {
-                ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
+                await CarregarCombos();
+                TempData["MensagemErro"] = string.Join(", ", resultado.Erros);
                 
                 return View(model);
             }
 
+            TempData["MensagemSucesso"] = "Vendedor atualizado com sucesso!";
             return RedirectToAction("Consulta");
+        }
+
+
+        private async Task CarregarCombos()
+        {
+            ViewBag.Perfis = new SelectList(await _perfilServico.ObterTodos(), "Id", "Nome");
+            ViewBag.Lojas = (await _lojaServico.ObterTodos())
+         .Select(c => new SelectListItem
+         {
+             Value = c.Id.ToString(),
+             Text = $"{c.NomeFantasia} - {c.CNPJ}"
+         })
+         .ToList();
         }
     }
 }

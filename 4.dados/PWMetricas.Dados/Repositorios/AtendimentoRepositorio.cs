@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Dominio.Entidades;
+using PWMetricas.Dominio.Filtros;
 
 namespace PWMetricas.Dados.Repositorios
 {
@@ -12,9 +13,11 @@ namespace PWMetricas.Dados.Repositorios
         {
         }
 
-        public async Task<IEnumerable<Atendimento>> ObterEmAtendimentoPaginados(int page, int pageSize)
+        public async Task<IEnumerable<Atendimento>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro)
         {
-            return await Consulta
+
+
+            var query = Consulta
                 .Include(x => x.StatusAtendimento)
                 .Include(x => x.Cliente)
                 .Include(x => x.Usuario)
@@ -23,45 +26,59 @@ namespace PWMetricas.Dados.Repositorios
                 .Include(x => x.Tamanho)
                 .Include(x => x.Canal)
                 .Include(x => x.Origem)
-                .Where(x => x.StatusAtendimento.Nome.Equals("EM ATENDIMENTO"))
+                .AsQueryable();
+
+            if (filtro.StatusAtendimentoId.HasValue)
+            {
+                query = query.Where(x => x.StatusAtendimentoId == filtro.StatusAtendimentoId.Value);
+            }
+
+            if (filtro.UsuarioId.HasValue)
+            {
+                query = query.Where(x => x.UsuarioId == filtro.UsuarioId.Value);
+            }
+
+            if (filtro.LojaId.HasValue)
+            {
+                query = query.Where(x => x.LojaId == filtro.LojaId.Value);
+            }
+
+            if (filtro.DataInicio.HasValue)
+            {
+                query = query.Where(x => x.Data >= filtro.DataInicio.Value);
+            }
+
+            if (filtro.DataFim.HasValue)
+            {
+                query = query.Where(x => x.Data <= filtro.DataFim.Value);
+            }
+
+            return await query
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Atendimento>> ObterEmOrcamentoPaginados(int page, int pageSize)
+        public async Task<int> ContarAtendimentos(AtendimentoFiltro filtro)
         {
-            return await Consulta
-                .Include(x => x.StatusAtendimento)
-                .Include(x => x.Cliente)
-                .Include(x => x.Usuario)
-                .Include(x => x.Loja)
-                .Include(x => x.Produto)
-                .Include(x => x.Tamanho)
-                .Include(x => x.Canal)
-                .Include(x => x.Origem)
-                .Where(x => x.StatusAtendimento.Nome.Equals("ORÇAMENTO"))
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
-        }
+            var query = Consulta.AsQueryable();
 
+            if (filtro.UsuarioId.HasValue)
+                query = query.Where(x => x.UsuarioId == filtro.UsuarioId.Value);
 
-        public async Task<IEnumerable<Atendimento>> ObterVendidoPaginados(int page, int pageSize)
-        {
-            return await Consulta
-                .Include(x => x.StatusAtendimento)
-                .Include(x => x.Cliente)
-                .Include(x => x.Usuario)
-                .Include(x => x.Loja)
-                .Include(x => x.Produto)
-                .Include(x => x.Tamanho)
-                .Include(x => x.Canal)
-                .Include(x => x.Origem)
-                .Where(x => x.StatusAtendimento.Nome.Equals("VENDIDO"))
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToListAsync();
+            if (filtro.LojaId.HasValue)
+                query = query.Where(x => x.LojaId == filtro.LojaId.Value);
+
+            if (filtro.StatusAtendimentoId.HasValue)
+                query = query.Where(x => x.StatusAtendimentoId == filtro.StatusAtendimentoId.Value);
+
+            if (filtro.DataInicio.HasValue)
+                query = query.Where(x => x.Data >= filtro.DataInicio.Value);
+
+            if (filtro.DataFim.HasValue)
+                query = query.Where(x => x.Data <= filtro.DataFim.Value);
+
+            return await query.CountAsync();
         }
     }
 }

@@ -4,6 +4,7 @@ using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Dominio.Entidades;
 using PWMetricas.Aplicacao.Modelos.Atendimento;
+using PWMetricas.Dominio.Filtros;
 
 namespace PWMetricas.Aplicacao.Servicos
 {
@@ -31,6 +32,27 @@ namespace PWMetricas.Aplicacao.Servicos
             {
                 return new Resultado(new[] { $"Erro ao cadastrar atendimento: {ex.Message}" });
             }
+        }
+
+        public async Task<PaginacaoResultado<AtendimentoViewModel>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro)
+        {
+            var atendimentos = await _atendimentoRepositorio.ObterAtendimentosPaginados(page, pageSize, filtro);
+            var totalRegistros = await _atendimentoRepositorio.ContarAtendimentos(filtro);
+
+            return new PaginacaoResultado<AtendimentoViewModel>
+            {
+                Dados = atendimentos.Select(a => new AtendimentoViewModel
+                {
+                    Data = a.Data,
+                    ClienteId = a.ClienteId,
+                    UsuarioId = a.UsuarioId,
+                    LojaId = a.LojaId,
+                    StatusAtendimentoId = a.StatusAtendimentoId
+                }),
+                PaginaAtual = page,
+                TotalPaginas = (int)Math.Ceiling((double)totalRegistros / pageSize),
+                TotalRegistros = totalRegistros
+            };
         }
     }
 }

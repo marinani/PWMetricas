@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PWMetricas.Aplicacao.Modelos.Loja;
 using PWMetricas.Aplicacao.Modelos.Perfil;
 
 namespace PWMetricas.Aplicacao.Modelos.Usuario
@@ -59,6 +60,10 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Confirmação Senha")]
         public required string ConfirmaSenha { get; set; }
+
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Filial")]
+        public int? LojaId { get; set; }
     }
 
 
@@ -66,21 +71,22 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
-        [Display(Name = "Nome")]
-        public required string Nome { get; set; }
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
-        [Display(Name = "E-mail (acesso)")]
-        public required string Email { get; set; }
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
-        [Display(Name = "Senha")]
-        public required string Senha { get; set; }
 
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Nome")]
+        public string Nome { get; set; }
+        [Display(Name = "E-mail (acesso)")]
+        public string Email { get; set; }
+       
+        [Display(Name = "Senha")]
+        public string Senha { get; set; }
+
         [Display(Name = "Perfil")]
         public int? PerfilId { get; set; }
+        public int? LojaId { get; set; }
 
         public PerfilSelect Perfil { get; set; } = new PerfilSelect();
+
+        public string LojaNome { get; set; }
 
         public bool Ativo { get; set; }
     }

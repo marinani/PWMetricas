@@ -19,7 +19,41 @@
 		<form asp-action="Editar" method="post">
 			@Html.HiddenFor(m => m.Id)
 			@Html.HiddenFor(m => m.Guid)
-			<partial name="_Visualizar" />
+			<div class="row g-4">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label asp-for="Nome"></label>
+						<input asp-for="Nome" class="form-control" id="Nome" placeholder="Digite o nome" />
+						<span asp-validation-for="Nome" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label asp-for="LojaId"></label>
+						<select asp-for="LojaId" asp-items="ViewBag.Lojas" class="form-control">
+							<option value="">Selecione uma filial</option>
+						</select>
+						<span asp-validation-for="LojaId" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row g-4">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label asp-for="Email"></label>
+						<input asp-for="Email" class="form-control" id="Email" type="email" placeholder="Digite o e-mail (acesso)" />
+						<span asp-validation-for="Email" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+
+			<br />
+			<div class="row g-4">
+				<div class="col-sm-12">
+					<button type="submit" class="btn btn-primary float-sm-end">Salvar</button>
+
+				</div>
+			</div>
 		</form>
 	</div>
 </div>

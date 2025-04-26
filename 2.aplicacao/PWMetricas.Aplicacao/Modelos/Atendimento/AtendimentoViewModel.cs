@@ -10,7 +10,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
 {
     public class AtendimentoViewModel
     {
-
+        public int Id { get; set; }
         public bool IsVendedor { get; set; }
 
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]

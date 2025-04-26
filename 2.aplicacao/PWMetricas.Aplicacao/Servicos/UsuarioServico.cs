@@ -238,19 +238,18 @@ namespace PWMetricas.Aplicacao.Servicos
                     Senha = EncryptPassword(modelo.Senha), // Criptografa a senha
                     DataCadastro = DateTime.Now,
                     PerfilId = 3, // Vendedor
+                    LojaId = modelo.LojaId,
                     Ativo = true
                 };
 
                 await _usuarioRepositorio.Inserir(usuario);
 
-                var usuarioSalvo = await _usuarioRepositorio.BuscarPorId(usuario.Id);
-                Console.WriteLine(usuarioSalvo != null ? "Usuário salvo com sucesso!" : "Erro ao salvar usuário.");
-
-                return new Resultado("Sucesso ao cadastrar usuário.", usuario);
+               
+                return new Resultado("Sucesso ao cadastrar vendedor.", usuario);
             }
             catch (Exception ex)
             {
-                return new Resultado(new[] { "Erro ao cadastrar usuário: " + ex.Message });
+                return new Resultado(new[] { "Erro ao cadastrar vendedor: " + ex.Message });
             }
         }
 
@@ -273,16 +272,17 @@ namespace PWMetricas.Aplicacao.Servicos
                 usuario.Nome = modelo.Nome;
                 usuario.Email = modelo.Email;
                 usuario.Senha = EncryptPassword(modelo.Senha);
+                usuario.LojaId = modelo.LojaId;
                 usuario.PerfilId = 3;
 
                 await _usuarioRepositorio.Atualizar(usuario);
 
 
-                return new Resultado("Sucesso ao atualizar usuário.", usuario);
+                return new Resultado("Sucesso ao atualizar vendedor.", usuario);
             }
             catch (Exception ex)
             {
-                return new Resultado(new[] { "Erro ao atualizar usuário: " + ex.Message });
+                return new Resultado(new[] { "Erro ao atualizar vendedor: " + ex.Message });
             }
         }
 

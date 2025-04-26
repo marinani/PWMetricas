@@ -6,6 +6,7 @@ using PWMetricas.Aplicacao.Modelos.Atendimento;
 using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Dominio.Entidades;
+using PWMetricas.Dominio.Filtros;
 
 namespace PWMetricas.Adm.Controllers
 {
@@ -38,9 +39,21 @@ namespace PWMetricas.Adm.Controllers
 
         [HttpGet]
         [Route("Atendimento/Consulta")]
-        public IActionResult Consulta()
+        public async Task<IActionResult> Consulta(AtendimentoFiltro filtro, int pagina = 1)
         {
-            return View();
+            const int pageSize = 10; // Número de itens por página
+            var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
+
+            var viewModel = new AtendimentoConsultaViewModel
+            {
+                Filtro = filtro,
+                Resultados = resultadoPaginado.Dados,
+                PaginaAtual = resultadoPaginado.PaginaAtual,
+                TotalPaginas = resultadoPaginado.TotalPaginas,
+                TotalRegistros = resultadoPaginado.TotalRegistros
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet]
@@ -88,6 +101,8 @@ namespace PWMetricas.Adm.Controllers
             return Json(new { sucesso = true, mensagem = "Atendimento cadastrado com sucesso!" });
 
         }
+
+     
 
 
         #region Private Methods

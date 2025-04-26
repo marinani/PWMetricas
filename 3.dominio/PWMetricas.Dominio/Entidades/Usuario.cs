@@ -17,5 +17,8 @@ namespace PWMetricas.Dominio.Entidades
         // Navegação
         public virtual Perfil Perfil { get; set; }
         public int PerfilId { get; set; }
+
+        public int? LojaId { get; set; }
+        public virtual Loja Loja { get; set; }
     }
 }

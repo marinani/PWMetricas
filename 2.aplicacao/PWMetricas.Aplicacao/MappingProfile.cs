@@ -29,7 +29,10 @@ namespace PWMetricas.Aplicacao
             CreateMap<Produto, ProdutoViewModel>().ReverseMap();
             CreateMap<Perfil, PerfilViewModel>().ReverseMap();
             CreateMap<Perfil, PerfilSelect>().ReverseMap();
-            CreateMap<Usuario, UsuarioConsulta>().ReverseMap();
+            CreateMap<Usuario, UsuarioConsulta>()
+                .ForMember(dest => dest.LojaNome, opt => opt.MapFrom(src => src.Loja.NomeFantasia))
+                .ReverseMap()
+                .ForMember(dest => dest.Loja, opt => opt.Ignore());
             CreateMap<Usuario, UsuarioSelect>().ReverseMap();
             CreateMap<Usuario, VendedorViewModel>().ReverseMap();
             CreateMap<StatusAtendimento, StatusAtendimentoViewModel>().ReverseMap();

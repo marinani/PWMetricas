@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PWMetricas.Aplicacao.Modelos.Loja;
 using PWMetricas.Aplicacao.Servicos;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
@@ -44,6 +45,38 @@ namespace PWMetricas.Adm.Controllers
             }
 
             var resultado = await _lojaServico.Cadastrar(modelo);
+            if (!resultado.Sucesso)
+            {
+                ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));
+                return View(modelo);
+            }
+
+            return RedirectToAction("Consulta");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(Guid guid)
+        {
+            var loja = await _lojaServico.ObterPorGuid(guid);
+            if (loja != null)
+            {
+                
+                return View(loja);
+            }
+
+            return RedirectToAction("Consulta");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Editar(LojaViewModel modelo)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(modelo);
+            }
+
+            var resultado = await _lojaServico.Atualizar(modelo);
             if (!resultado.Sucesso)
             {
                 ModelState.AddModelError(string.Empty, string.Join(", ", resultado.Erros));

@@ -1,67 +1,78 @@
-﻿
-
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Atendimento
+@model AtendimentoConsultaViewModel
 
 <div class="app-content-header">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-6"><h3 class="mb-0">Meus Atendimentos/Vendas</h3></div>
-			<div class="col-sm-6">
-				<div class="float-sm-end">
-					<a asp-action="NovoAtendimento" class="custom-button ms-auto" type="button" onclick="location.href='atendimento.html'">
-						NOVO ATENDIMENTO
-						<img src="/icones/atendimento.png" alt="Ícone">
-					</a>
-				
-				</div>
-			</div>
-		</div>
-	</div>
-
+    <div class="container-fluid">
+        <h3 class="mb-0">Atendimentos</h3>
+    </div>
 </div>
+
 <div class="app-content">
-	<div class="container-fluid">
+    <div class="container-fluid">
+        <!-- Formulário de Filtro -->
+        <form asp-action="Consulta" method="get">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="UsuarioId">Vendedor</label>
+                    <select asp-for="Filtro.UsuarioId" asp-items="ViewBag.Vendedores" class="form-control"></select>
+                </div>
+                <div class="col-md-3">
+                    <label for="LojaId">Loja</label>
+                    <select asp-for="Filtro.LojaId" asp-items="ViewBag.Lojas" class="form-control"></select>
+                </div>
+                <div class="col-md-3">
+                    <label for="StatusAtendimentoId">Status</label>
+                    <select asp-for="Filtro.StatusAtendimentoId" asp-items="ViewBag.Status" class="form-control"></select>
+                </div>
+                <div class="col-md-3">
+                    <label>&nbsp;</label>
+                    <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+                </div>
+            </div>
+        </form>
 
-@* 		<div class="row">
-			<div class="col-sm-12">
-				<!-- Listagem de Perfis -->
-				<div id="perfil-listagem">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Nome</th>
-								<th>Ativo</th>
-								<th>Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (var perfil in Model.Dados)
-							{
-								<tr>
-									<td>@perfil.Nome</td>
-									<td>@(perfil.Ativo ? "Sim" : "Não")</td>
-									<td>
-										<a asp-action="Editar" asp-route-id="@perfil.Id" class="btn btn-primary btn-sm">Editar</a>
+        <!-- Resultados da Consulta -->
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Cliente</th>
+                    <th>Vendedor</th>
+                    <th>Loja</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var atendimento in Model.Resultados)
+                {
+                    <tr>
+                        <td>@atendimento.Data.ToShortDateString()</td>
+                        <td>@atendimento.ClienteId</td>
+                        <td>@atendimento.UsuarioId</td>
+                        <td>@atendimento.LojaId</td>
+                        <td>@atendimento.StatusAtendimentoId</td>
+                        <td>
+                            <a asp-action="Editar" asp-route-id="@atendimento.Id" class="btn btn-sm btn-primary">Editar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-									</td>
-								</tr>
-							}
-						</tbody>
-					</table>
-
-					<!-- Paginação -->
-					<nav>
-						<ul class="pagination">
-							@for (int i = 1; i <= Model.TotalPaginas; i++)
-							{
-								<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
-									<a href="#" class="page-link" data-page="@i">@i</a>
-								</li>
-							}
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div> *@
-	</div>
+        <!-- Paginação -->
+        <nav>
+            <ul class="pagination">
+                @for (int i = 1; i <= Model.TotalPaginas; i++)
+                {
+                    <li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+                        <a class="page-link" asp-action="Consulta" asp-route-pagina="@i" asp-route-UsuarioId="@Model.Filtro.UsuarioId" asp-route-LojaId="@Model.Filtro.LojaId" asp-route-StatusAtendimentoId="@Model.Filtro.StatusAtendimentoId">
+                            @i
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
 </div>
-

@@ -10,6 +10,15 @@
 			<span asp-validation-for="Nome" class="text-danger"></span>
 		</div>
 	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="LojaId"></label>
+			<select asp-for="LojaId" asp-items="ViewBag.Lojas" class="form-control">
+				<option value="">Selecione uma filial</option>
+			</select>
+			<span asp-validation-for="LojaId" class="text-danger"></span>
+		</div>
+	</div>
 </div>
 <div class="row g-4">
 	<div class="col-sm-6">

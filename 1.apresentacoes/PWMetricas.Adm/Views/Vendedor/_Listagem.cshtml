@@ -1,6 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
 @using PWMetricas.Aplicacao.Modelos.Usuario
-@model PaginacaoResultado<VendedorViewModel>
+@model PaginacaoResultado<UsuarioConsulta>
 
 
 <div class="app-content">
@@ -14,6 +14,7 @@
 							<tr>
 								<th>Nome</th>
 								<th>E-mail</th>
+								<th>Loja</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
@@ -23,6 +24,7 @@
 								<tr>
 									<td>@item.Nome</td>
 									<td>@item.Email</td>
+									<td>@item.LojaNome</td>
 									<td>
 										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
 											<i class="nav-icon bi bi-pencil"></i>
