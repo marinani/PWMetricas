@@ -24,7 +24,8 @@ namespace PWMetricas.Adm.Controllers
         private readonly IUsuarioServico _usuarioServico;
         public AtendimentoController(IOrigemServico origemServico, ITamanhoServico tamanhoServico,
             ICanalServico canalServico, IProdutoServico produtoServico, IClienteServico clienteServico, 
-            ILojaServico lojaServico, IStatusAtendimentoServico statusServico, IUsuarioServico usuarioServico, IAtendimentoServico atendimentoServico)
+            ILojaServico lojaServico, IStatusAtendimentoServico statusServico,
+            IUsuarioServico usuarioServico, IAtendimentoServico atendimentoServico)
         {
             _origemServico = origemServico;
             _tamanhoServico = tamanhoServico;
@@ -58,7 +59,7 @@ namespace PWMetricas.Adm.Controllers
             var viewModel = new AtendimentoConsultaViewModel
             {
                 Filtro = filtro,
-                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoViewModel>(), // Evita null
+                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
                 PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
                 TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
                 TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
@@ -78,7 +79,7 @@ namespace PWMetricas.Adm.Controllers
             var viewModel = new AtendimentoConsultaViewModel
             {
                 Filtro = filtro,
-                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoViewModel>(), // Evita null
+                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
                 PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
                 TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
                 TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0

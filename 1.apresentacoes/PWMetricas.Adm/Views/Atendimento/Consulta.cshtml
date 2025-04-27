@@ -3,50 +3,81 @@
 @model AtendimentoConsultaViewModel
 
 <div class="app-content-header">
-    <div class="container-fluid">
-        <h3 class="mb-0">Atendimentos</h3>
-    </div>
+	<div class="container-fluid">
+		<h3 class="mb-0">Atendimentos</h3>
+	</div>
 </div>
 
 <div class="app-content">
-    <div class="container-fluid">
-        <!-- Formulário de Filtro -->
-        <form asp-action="Consulta" method="get">
-            <div class="row">
-                <div class="col-md-3">
-                    <label for="UsuarioId">Vendedor</label>
-                    <select asp-for="Filtro.UsuarioId" asp-items="ViewBag.Vendedores" class="form-control">
-                        <option value="">Selecione um vendedor</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label for="LojaId">Loja</label>
-                    <select asp-for="Filtro.LojaId" asp-items="ViewBag.Lojas" class="form-control">
-                        <option value="">Selecione uma filial</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label>&nbsp;</label>
-                    <button type="submit" class="btn btn-primary w-100">Filtrar</button>
-                </div>
-            </div>
-        </form>
+	<div class="container-fluid">
+		<!-- Formulário de Filtro -->
+		<form asp-action="Consulta" method="get">
+			<div class="row">
+				<div class="col-md-3">
+					<label for="UsuarioId">Vendedor</label>
+					<select asp-for="Filtro.UsuarioId" asp-items="ViewBag.Vendedores" class="form-control">
+						<option value="">Selecione um vendedor</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label for="LojaId">Loja</label>
+					<select asp-for="Filtro.LojaId" asp-items="ViewBag.Lojas" class="form-control">
+						<option value="">Selecione uma filial</option>
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label>&nbsp;</label>
+					<button type="submit" class="btn btn-primary w-100">Filtrar</button>
+				</div>
+			</div>
+		</form>
 
-        <!-- Tabela de Atendimentos com Status 1 -->
-        <h4 class="mt-4">Atendimentos (Status 1)</h4>
-        <div id="lista-atendimento">
-            @await Html.PartialAsync("_ListaAtendimento", Model)
-        </div>
+		<br />
 
-        <!-- Tabela de Atendimentos com Status 2 -->
-        <h4 class="mt-4">Orçamentos (Status 2)</h4>
-        <div id="lista-orcamento">
-            @await Html.PartialAsync("_ListaOrcamento", Model)
-        </div>
-    </div>
+		<div class="row">
+			<div class="col-sm-10 offset-sm-1">
+				<div class="accordion" id="accordionExample">
+					<div class="accordion-item atendimento">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingOne">
+							<button class="accordion-button-atendimento" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+									aria-controls="collapseOne">
+								EM ATENDIMENTO
+							</button>
+						</h2>
+						<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+							<div class="accordion-body">
+
+
+								<div id="lista-atendimento">
+									@await Html.PartialAsync("_ListaAtendimento", Model)
+								</div>
+							</div>
+						</div>
+					</div>
+					<span class="badge bg-atendimento text-white ms-3">Soma Total: R$ 10.680</span>
+
+					<div class="accordion-item orcamento">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingTwo">
+							<button class="accordion-button-orcamento collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								ORÇAMENTO
+							</button>
+						</h2>
+						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+							<div class="accordion-body">
+								<div id="lista-orcamento">
+									@await Html.PartialAsync("_ListaOrcamento", Model)
+								</div>
+							</div>
+						</div>
+					</div>
+					<span class="badge bg-orcamento text-white ms-3">Soma Total: R$ 10.680</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script src="/js/atendimento/consulta.js"></script>
-}
+	<partial name="_ValidationScriptsPartial" />
+	<script src="/js/atendimento/consulta.js"></script>
+	}

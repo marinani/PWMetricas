@@ -10,7 +10,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
     public class AtendimentoConsultaViewModel
     {
         public AtendimentoFiltro Filtro { get; set; } = new AtendimentoFiltro();
-        public IEnumerable<AtendimentoViewModel> Resultados { get; set; } = new List<AtendimentoViewModel>();
+        public IEnumerable<AtendimentoListaViewModel> Resultados { get; set; } = new List<AtendimentoListaViewModel>();
 
         public int PaginaAtual { get; set; }
         public int TotalPaginas { get; set; }

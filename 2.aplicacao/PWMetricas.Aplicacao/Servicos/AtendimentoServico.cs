@@ -34,20 +34,20 @@ namespace PWMetricas.Aplicacao.Servicos
             }
         }
 
-        public async Task<PaginacaoResultado<AtendimentoViewModel>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro)
+        public async Task<PaginacaoResultado<AtendimentoListaViewModel>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro)
         {
             var atendimentos = await _atendimentoRepositorio.ObterAtendimentosPaginados(page, pageSize, filtro);
             var totalRegistros = await _atendimentoRepositorio.ContarAtendimentos(filtro);
 
-            return new PaginacaoResultado<AtendimentoViewModel>
+            return new PaginacaoResultado<AtendimentoListaViewModel>
             {
-                Dados = atendimentos.Select(a => new AtendimentoViewModel
+                Dados = atendimentos.Select(a => new AtendimentoListaViewModel
                 {
-                    Data = a.Data,
-                    ClienteId = a.ClienteId,
-                    UsuarioId = a.UsuarioId,
-                    LojaId = a.LojaId,
-                    StatusAtendimentoId = a.StatusAtendimentoId
+                    Cliente = a.Cliente.Nome,
+                    Status = a.StatusAtendimento.Nome,
+                    Data = a.Data.ToShortDateString(),
+                    DataRetorno = a.DataRetorno.HasValue ? a.DataRetorno.Value.ToShortDateString() : "",
+                    ValorPedido = a.ValorPedido.ToString("C")
                 }),
                 PaginaAtual = page,
                 TotalPaginas = (int)Math.Ceiling((double)totalRegistros / pageSize),

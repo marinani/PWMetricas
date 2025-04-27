@@ -5,31 +5,33 @@
 
 @if (Model?.Resultados != null && Model.Resultados.Any())
 {
-	<table class="table table-striped mt-4">
+	<div class="table-responsive">
+	<table class="table table-striped table-atendimento">
 		<thead>
 			<tr>
-				<th>Data</th>
 				<th>Cliente</th>
-				<th>Vendedor</th>
-				<th>Loja</th>
 				<th>Status</th>
-				<th>Ações</th>
+				<th>Data</th>
+				<th>Retornar</th>
+				<th>R$ Pedido</th>
+				<th>Visualizar</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach (var atendimento in Model.Resultados)
 			{
 				<tr>
+					<td>@atendimento.Cliente</td>
+					<td class="status-atendimento">@atendimento.Status</td>
 					<td>@atendimento.Data</td>
-					<td>@atendimento.ClienteId</td>
-					<td>@atendimento.UsuarioId</td>
-					<td>@atendimento.LojaId</td>
-					<td>@atendimento.StatusAtendimentoId</td>
+					<td>@atendimento.DataRetorno</td>
+					<td>@atendimento.ValorPedido</td>
 					<td>Ações</td>
 				</tr>
 			}
 		</tbody>
 	</table>
+	</div>
 }
 else
 {
