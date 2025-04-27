@@ -39,8 +39,9 @@ namespace PWMetricas.Adm.Controllers
 
         [HttpGet]
         [Route("Atendimento/Consulta")]
-        public IActionResult Consulta()
+        public async Task<IActionResult> Consulta()
         {
+            await CarregarCombosConsulta();
             return View();
         }
 
@@ -168,6 +169,17 @@ namespace PWMetricas.Adm.Controllers
 
             ViewBag.Vendedores = (await _usuarioServico.ListarVendedores())
                           .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Nome }).ToList();
+        }
+
+        private async Task CarregarCombosConsulta()
+        {
+            ViewBag.Lojas = (await _lojaServico.ObterTodos())
+                          .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.NomeFantasia + " - " + c.CNPJ }).ToList();
+
+
+            ViewBag.Vendedores = (await _usuarioServico.ListarVendedores())
+                          .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Nome }).ToList();
+
         }
         #endregion
     }

@@ -15,15 +15,15 @@
             <div class="row">
                 <div class="col-md-3">
                     <label for="UsuarioId">Vendedor</label>
-                    <select asp-for="Filtro.UsuarioId" asp-items="ViewBag.Vendedores" class="form-control"></select>
+                    <select asp-for="Filtro.UsuarioId" asp-items="ViewBag.Vendedores" class="form-control">
+                        <option value="">Selecione um vendedor</option>
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <label for="LojaId">Loja</label>
-                    <select asp-for="Filtro.LojaId" asp-items="ViewBag.Lojas" class="form-control"></select>
-                </div>
-                <div class="col-md-3">
-                    <label for="StatusAtendimentoId">Status</label>
-                    <select asp-for="Filtro.StatusAtendimentoId" asp-items="ViewBag.Status" class="form-control"></select>
+                    <select asp-for="Filtro.LojaId" asp-items="ViewBag.Lojas" class="form-control">
+                        <option value="">Selecione uma filial</option>
+                    </select>
                 </div>
                 <div class="col-md-3">
                     <label>&nbsp;</label>

@@ -62,16 +62,16 @@
 	<partial name="_ValidationScriptsPartial" />
 
 	<script>
-		document.addEventListener("DOMContentLoaded", function () {
+				document.addEventListener("DOMContentLoaded", function () {
+			const form = document.querySelector("form");
 			const button = document.getElementById("btnEntrar");
 
-			document.addEventListener("keypress", function (e) {
-				if (e.key === 'Enter') {
+			form.addEventListener("keydown", function (e) {
+				if (e.key === "Enter") {
 					e.preventDefault();
 					button.click();
 				}
 			});
-
 		});
 
 	</script>
