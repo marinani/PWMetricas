@@ -32,5 +32,24 @@ namespace PWMetricas.Adm.Controllers
 
             return Json(resultado);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ConsultarCidadePorEstado(string siglaUF)
+        {
+            if (string.IsNullOrWhiteSpace(siglaUF))
+            {
+                return BadRequest("Estado inválido.");
+            }
+
+           
+            var resultado = await _cepServico.ConsultarCidadePorEstadoAsync(siglaUF);
+
+            if (resultado == null)
+            {
+                return NotFound("Municípios não encontrados.");
+            }
+
+            return Json(resultado);
+        }
     }
 }

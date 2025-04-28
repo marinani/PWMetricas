@@ -34,5 +34,23 @@ namespace PWMetricas.Aplicacao.Servicos
 
             return null; // Ou lance uma exceção personalizada
         }
+
+        public async Task<List<MunicipioResponse>> ConsultarCidadePorEstadoAsync(string siglaUF)
+        {
+            
+            var url = $"https://brasilapi.com.br/api/ibge/municipios/v1/{siglaUF}?providers=dados-abertos-br,gov,wikipedia";
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<List<MunicipioResponse>>(json, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+            }
+
+            return null; // Ou lance uma exceção personalizada
+        }
     }
 }
