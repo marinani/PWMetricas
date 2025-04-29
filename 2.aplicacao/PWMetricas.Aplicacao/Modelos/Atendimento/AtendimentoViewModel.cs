@@ -10,6 +10,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
 {
     public class AtendimentoViewModel
     {
+        public Guid Guid { get; set; }
         public int Id { get; set; }
         public bool IsVendedor { get; set; }
 

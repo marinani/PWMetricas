@@ -4,7 +4,14 @@
 
 <div class="app-content-header">
 	<div class="container-fluid">
-		<h3 class="mb-0">Atendimentos</h3>
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="mb-0 text-center text-sm-center">
+					<img src="/icones/atendimento.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
+					Atendimentos
+				</h3>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -13,7 +20,8 @@
 		<!-- Formulário de Filtro -->
 		<form asp-action="Consulta" method="get">
 			<div class="row">
-				<div class="col-md-3">
+
+				<div class="col-md-3 offset-sm-1">
 					<label for="UsuarioId">Vendedor</label>
 					<select asp-for="Filtro.UsuarioId" asp-items="ViewBag.Vendedores" class="form-control">
 						<option value="">Selecione um vendedor</option>
@@ -27,8 +35,9 @@
 				</div>
 				<div class="col-md-3">
 					<label>&nbsp;</label>
-					<button type="submit" class="btn btn-primary w-100">Filtrar</button>
+					<button type="submit" class="btn btn-primary w-100"><i class="nav-icon bi bi-search"></i></button>
 				</div>
+
 			</div>
 		</form>
 
@@ -71,9 +80,69 @@
 						</div>
 					</div>
 					<span class="badge bg-orcamento text-white ms-3">Soma Total: R$ 10.680</span>
+
+
+					<div class="accordion-item vendido">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingThree">
+							<button class="accordion-button-vendido collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								VENDIDO
+							</button>
+						</h2>
+						<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+							<div class="accordion-body">
+								<div id="lista-vendido">
+									@await Html.PartialAsync("_ListaVendido", Model)
+								</div>
+							</div>
+						</div>
+					</div>
+					<span class="badge bg-vendido text-white ms-3">Soma Total: R$ 10.680</span>
+
+					<div class="accordion-item negociado">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingFour">
+							<button class="accordion-button-negociado collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+								PERDIDO NEGOCIADO
+							</button>
+						</h2>
+						<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+							<div class="accordion-body">
+								<div id="lista-negociado">
+									@await Html.PartialAsync("_ListaNegociado", Model)
+								</div>
+							</div>
+						</div>
+					</div>
+					<span class="badge bg-negociado text-white ms-3">Soma Total: R$ 10.680</span>
+
+
+					<div class="accordion-item naoresponde">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingFive">
+							<button class="accordion-button-naoresponde collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+								PERDIDO NÃO RESPONDE
+							</button>
+						</h2>
+						<div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive">
+							<div class="accordion-body">
+								<div id="lista-naoresponde">
+									@await Html.PartialAsync("_ListaNaoResponde", Model)
+								</div>
+							</div>
+						</div>
+					</div>
+					<span class="badge bg-naoresponde text-white ms-3">Soma Total: R$ 10.680</span>
+
 				</div>
 			</div>
 		</div>
+
+
+		<div class="d-flex justify-content-between align-items-center mt-4">
+			<a href="/Atendimento/NovoAtendimento" class="custom-button ms-auto">
+				NOVO ATENDIMENTO
+				<img src="/icones/atendimento.png" alt="Ícone">
+			</a>
+		</div>
+
 	</div>
 </div>
 

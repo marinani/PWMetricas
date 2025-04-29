@@ -56,6 +56,7 @@ namespace PWMetricas.Dados.Repositorios
             return await query
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
+                .OrderBy(x => x.DataRetorno)
                 .ToListAsync();
         }
 

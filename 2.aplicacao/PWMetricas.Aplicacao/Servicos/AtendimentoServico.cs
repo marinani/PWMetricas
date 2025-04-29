@@ -19,18 +19,43 @@ namespace PWMetricas.Aplicacao.Servicos
 
         }
 
+        public async Task<AtendimentoViewModel> ObterPorGuid(Guid guid)
+        {
+            var atendimento = await _atendimentoRepositorio.Buscar(guid);
+            return _mapper.Map<AtendimentoViewModel>(atendimento);
+        }
+
         public async Task<Resultado> Cadastrar(AtendimentoViewModel modelo)
         {
             var resultado = new Resultado();
             try
             {
                 var entidade = _mapper.Map<Atendimento>(modelo);
-                await _atendimentoRepositorio.Inserir(entidade);
+                var atendimento = await _atendimentoRepositorio.InserirERecuperar(entidade);
+
+
+                //Todo: Criar objeto para inserir observação caso o campo tenha sido preenchido
+
                 return new Resultado("Sucesso ao cadastrar atendimento.", entidade);
             }
             catch (Exception ex)
             {
                 return new Resultado(new[] { $"Erro ao cadastrar atendimento: {ex.Message}" });
+            }
+        }
+
+        public async Task<Resultado> Atualizar(AtendimentoViewModel modelo)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                var entidade = _mapper.Map<Atendimento>(modelo);
+                await _atendimentoRepositorio.Atualizar(entidade);
+                return new Resultado("Sucesso ao atualizar atendimento.", entidade);
+            }
+            catch (Exception ex)
+            {
+                return new Resultado(new[] { $"Erro ao atualizar atendimento: {ex.Message}" });
             }
         }
 
@@ -43,6 +68,7 @@ namespace PWMetricas.Aplicacao.Servicos
             {
                 Dados = atendimentos.Select(a => new AtendimentoListaViewModel
                 {
+                    Guid = a.Guid,
                     Cliente = a.Cliente.Nome,
                     Status = a.StatusAtendimento.Nome,
                     Data = a.Data.ToShortDateString(),

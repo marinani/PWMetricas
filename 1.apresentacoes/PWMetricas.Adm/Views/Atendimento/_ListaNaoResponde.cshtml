@@ -1,0 +1,55 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Atendimento
+@model AtendimentoConsultaViewModel
+
+@if (Model?.Resultados != null && Model.Resultados.Any())
+{
+	<div class="table-responsive">
+		<table class="table table-striped table-naoresponde">
+		<thead>
+			<tr>
+					<th>Cliente</th>
+					<th>Status</th>
+					<th>Data</th>
+					<th>Retornar</th>
+					<th>R$ Pedido</th>
+					<th>Visualizar</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var atendimento in Model.Resultados)
+			{
+					<tr>
+						<td>@atendimento.Cliente</td>
+						<td class="status-naoresponde">@atendimento.Status</td>
+						<td>@atendimento.Data</td>
+						<td>@atendimento.DataRetorno</td>
+						<td>@atendimento.ValorPedido</td>
+						<td>Ações</td>
+					</tr>
+			}
+		</tbody>
+	</table>
+	</div>
+}
+else
+{
+	<p>Nenhum atendimento encontrado.</p>
+}
+
+@if (Model?.TotalPaginas > 1)
+{
+	<!-- Paginação -->
+	<nav>
+		<ul class="pagination">
+			@for (int i = 1; i <= Model.TotalPaginas; i++)
+			{
+				<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+					<a class="page-link" asp-action="ListaNegociado" asp-route-pagina="@i" asp-route-UsuarioId="@Model.Filtro.UsuarioId" asp-route-LojaId="@Model.Filtro.LojaId">
+						@i
+					</a>
+				</li>
+			}
+		</ul>
+	</nav>
+}

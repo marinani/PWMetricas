@@ -13,17 +13,8 @@
 @section PageSpecificContainer {
 	<div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
 		<div class="left-select mb-2 mb-lg-0">
-			<select asp-for="LojaId" name="LojaId" id="LojaId" class="form-select">
+			<select asp-for="LojaId" asp-items="ViewBag.Lojas" id="LojaId" class="form-select">
 				<option value="">Selecione uma filial</option>
-				@if (ViewBag.Lojas != null)
-				{
-					@foreach (var loja in ViewBag.Lojas)
-					{
-						<option value="@loja.Value">
-							@loja.Text
-						</option>
-					}
-				}
 			</select>
 			<span asp-validation-for="LojaId" class="text-danger"></span>
 		</div>
@@ -39,7 +30,7 @@
 			<div class="col-sm-12">
 				<h3 class="mb-0 text-center text-sm-center">
 					<img src="/icones/atendimento.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
-					Atendimento - Edição
+					Atendimento - Detalhes
 				</h3>
 			</div>
 		</div>
@@ -52,7 +43,6 @@
 		<form asp-action="Editar" method="post">
 			@Html.HiddenFor(m => m.Id)
 			@Html.HiddenFor(m => m.Guid)
-			@Html.HiddenFor(m => m.IsVendedor)
 			<partial name="_Visualizar" />
 		</form>
 	</div>

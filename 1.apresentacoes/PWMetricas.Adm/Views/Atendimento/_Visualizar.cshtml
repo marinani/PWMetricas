@@ -1,0 +1,292 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Atendimento
+@using System.Security.Claims
+@model AtendimentoViewModel
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="UsuarioId"></label>
+			<select asp-for="UsuarioId" asp-items="ViewBag.Vendedores" class="form-control" id="UsuarioId">
+				<option value="">Selecione um vendedor</option>
+			</select>
+			<span asp-validation-for="UsuarioId" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="CanalId"></label>
+
+			<select class="form-select" name="CanalId" id="CanalId">
+				<option value="" data-color="#ffffff">Selecione um Canal</option>
+				@if (ViewBag.Canais != null)
+				{
+					@foreach (var item in ViewBag.Canais)
+					{
+
+						@if (Convert.ToInt32(item.Id) == Model.CanalId)
+						{
+							<option value="@item.Id" style="background-color: @(item.CorHex)" data-color="@(item.CorHex)" selected="selected">
+								@item.Nome
+							</option>
+						}
+						else
+						{
+							<option value="@item.Id" style="background-color: @(item.CorHex)" data-color="@(item.CorHex)">
+								@item.Nome
+							</option>
+						}
+
+
+					}
+				}
+			</select>
+			<span asp-validation-for="CanalId" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+
+
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="Data"></label>
+			<input asp-for="Data" class="form-control" id="Data" type="date" />
+			<span asp-validation-for="Data" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="OrigemId"></label>
+			<select class="form-select" name="OrigemId" id="OrigemId">
+				<option value="">Selecione uma origem</option>
+
+				@if (ViewBag.Origens != null)
+				{
+					@foreach (var item in ViewBag.Origens)
+					{
+						@if (Convert.ToInt32(item.Id) == Model.OrigemId)
+						{
+							<option value="@item.Id" style="background-color: @item.CorHex;" data-color="@item.CorHex" selected="selected">
+								@item.Nome
+							</option>
+						}
+						else
+						{
+							<option value="@item.Id" style="background-color: @(item.CorHex)" data-color="@(item.CorHex)">
+								@item.Nome
+							</option>
+						}
+					}
+				}
+			</select>
+			<span asp-validation-for="OrigemId" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="ClienteId"></label>
+			<select asp-for="ClienteId" asp-items="ViewBag.Clientes" class="form-control">
+				<option value="">Selecione um cliente</option>
+			</select>
+			<span asp-validation-for="ClienteId" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="ProdutoId"></label>
+			<select class="form-select" name="ProdutoId" id="ProdutoId">
+				<option value="">Selecione um produto</option>
+				@if (ViewBag.Produtos != null)
+				{
+					@foreach (var produto in ViewBag.Produtos)
+					{
+
+						@if (Convert.ToInt32(produto.Id) == Model.ProdutoId)
+						{
+							<option value="@produto.Id" style="background-color: @produto.CorHex;" data-color="@produto.CorHex" selected="selected">
+								@produto.Nome
+							</option>
+						}
+						else
+						{
+							<option value="@produto.Id" style="background-color: @(produto.CorHex)" data-color="@(produto.CorHex)">
+								@produto.Nome
+							</option>
+						}
+
+
+					}
+				}
+
+			</select>
+			<span asp-validation-for="ProdutoId" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="Whatsapp"></label>
+			<input asp-for="Whatsapp" class="form-control" id="Whatsapp" />
+			<span asp-validation-for="Whatsapp" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="TamanhoId"></label>
+			<select class="form-select" name="TamanhoId" id="TamanhoId">
+				<option value="">Selecione um tamanho</option>
+
+				@if (ViewBag.Tamanhos != null)
+				{
+					@foreach (var tamanho in ViewBag.Tamanhos)
+					{
+						@if (Convert.ToInt32(tamanho.Id) == Model.TamanhoId)
+						{
+							<option value="@tamanho.Id" style="background-color: @(tamanho.CorHex)" data-color="@(tamanho.CorHex)" selected="selected">
+								@tamanho.Nome
+							</option>
+						}
+						else
+						{
+							<option value="@tamanho.Id" style="background-color: @(tamanho.CorHex)" data-color="@(tamanho.CorHex)">
+								@tamanho.Nome
+							</option>
+						}
+
+
+					}
+				}
+			</select>
+			<span asp-validation-for="TamanhoId" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="Uf">Estado</label>
+			<select asp-for="Uf" class="form-control" id="Uf">
+				<option value="">Selecione um estado</option>
+				<option value="AC">AC</option>
+				<option value="AL">AL</option>
+				<option value="AP">AP</option>
+				<option value="AM">AM</option>
+				<option value="BA">BA</option>
+				<option value="CE">CE</option>
+				<option value="DF">DF</option>
+				<option value="ES">ES</option>
+				<option value="GO">GO</option>
+				<option value="MA">MA</option>
+				<option value="MT">MT</option>
+				<option value="MS">MS</option>
+				<option value="MG">MG</option>
+				<option value="PA">PA</option>
+				<option value="PB">PB</option>
+				<option value="PR">PR</option>
+				<option value="PE">PE</option>
+				<option value="PI">PI</option>
+				<option value="RJ">RJ</option>
+				<option value="RN">RN</option>
+				<option value="RS">RS</option>
+				<option value="RO">RO</option>
+				<option value="RR">RR</option>
+				<option value="SC">SC</option>
+				<option value="SP">SP</option>
+				<option value="SE">SE</option>
+				<option value="TO">TO</option>
+			</select>
+			<span asp-validation-for="Uf" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="ValorPedido"></label>
+			<input asp-for="ValorPedido" class="form-control" id="ValorPedido" />
+			<span asp-validation-for="ValorPedido" class="text-danger"></span>
+		</div>
+	</div>
+
+</div>
+
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="Cidade"></label>
+			<select asp-for="Cidade" class="form-control" id="Cidade" data-cidade-selecionada="@Model.Cidade">
+				<option value="">Selecione uma cidade</option>
+			</select>
+			<span asp-validation-for="Cidade" class="text-danger"></span>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="DataRetorno"></label>
+			<input asp-for="DataRetorno" class="form-control" id="DataRetorno" type="date" />
+			<span asp-validation-for="DataRetorno" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-6">
+		<div class="form-group">
+			<label asp-for="StatusAtendimentoId"></label>
+			<select class="form-select-atendimento" name="StatusAtendimentoId" id="StatusAtendimentoId">
+				@if (ViewBag.Status != null)
+				{
+					@foreach (var status in ViewBag.Status)
+					{
+
+						@if (Convert.ToInt32(status.Id) == Model.StatusAtendimentoId)
+						{
+							<option value="@status.Id" style="background-color: @status.CorHex;" data-color="@status.CorHex" selected="selected">
+								@status.Nome
+							</option>
+						}
+						else
+						{
+							<option value="@status.Id" style="background-color: @status.CorHex;" data-color="@status.CorHex">
+								@status.Nome
+							</option>
+						}
+
+
+					}
+				}
+
+			</select>
+
+			<span asp-validation-for="StatusAtendimentoId" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="form-group">
+			<label asp-for="Observacao"></label>
+			<textarea asp-for="Observacao" class="form-control" id="Observacao" rows="3" maxlength="500"></textarea>
+			<span asp-validation-for="Observacao" class="text-danger"></span>
+		</div>
+	</div>
+</div>
+
+<br />
+<div class="row g-4">
+	<div class="col-sm-12">
+		<button type="submit" class="btn btn-primary float-sm-end">GRAVAR ATENDIMENTO</button>
+	</div>
+</div>

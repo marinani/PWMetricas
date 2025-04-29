@@ -23,7 +23,7 @@ namespace PWMetricas.Adm.Controllers
         private readonly IAtendimentoServico _atendimentoServico;
         private readonly IUsuarioServico _usuarioServico;
         public AtendimentoController(IOrigemServico origemServico, ITamanhoServico tamanhoServico,
-            ICanalServico canalServico, IProdutoServico produtoServico, IClienteServico clienteServico, 
+            ICanalServico canalServico, IProdutoServico produtoServico, IClienteServico clienteServico,
             ILojaServico lojaServico, IStatusAtendimentoServico statusServico,
             IUsuarioServico usuarioServico, IAtendimentoServico atendimentoServico)
         {
@@ -88,6 +88,66 @@ namespace PWMetricas.Adm.Controllers
             return PartialView("_ListaOrcamento", viewModel);
         }
 
+        [HttpGet]
+        [Route("Atendimento/ListaVendido")]
+        public async Task<IActionResult> ListaVendido(AtendimentoFiltro filtro, int pagina = 1)
+        {
+            const int pageSize = 10; // Número de itens por página
+            filtro.StatusAtendimentoId = 3;
+            var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
+
+            var viewModel = new AtendimentoConsultaViewModel
+            {
+                Filtro = filtro,
+                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
+                PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
+                TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+            };
+
+            return PartialView("_ListaVendido", viewModel);
+        }
+
+        [HttpGet]
+        [Route("Atendimento/ListaNegociado")]
+        public async Task<IActionResult> ListaNegociado(AtendimentoFiltro filtro, int pagina = 1)
+        {
+            const int pageSize = 10; // Número de itens por página
+            filtro.StatusAtendimentoId = 4;
+            var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
+
+            var viewModel = new AtendimentoConsultaViewModel
+            {
+                Filtro = filtro,
+                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
+                PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
+                TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+            };
+
+            return PartialView("_ListaNegociado", viewModel);
+        }
+
+        [HttpGet]
+        [Route("Atendimento/ListaNaoResponde")]
+        public async Task<IActionResult> ListaNaoResponde(AtendimentoFiltro filtro, int pagina = 1)
+        {
+            const int pageSize = 10; // Número de itens por página
+            filtro.StatusAtendimentoId = 5;
+            var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
+
+            var viewModel = new AtendimentoConsultaViewModel
+            {
+                Filtro = filtro,
+                Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
+                PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
+                TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+            };
+
+            return PartialView("_ListaNaoResponde", viewModel);
+        }
+
 
         [HttpGet]
         [Route("Atendimento/NovoAtendimento")]
@@ -99,11 +159,17 @@ namespace PWMetricas.Adm.Controllers
             var usuarioLogadoId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
             if (perfil != null && perfil.Equals("Vendedor"))
             {
+                var usuario = await _usuarioServico.ObterPorId(int.Parse(usuarioLogadoId));
+
+
                 var modelo = new AtendimentoViewModel
                 {
                     UsuarioId = usuarioLogadoId.Equals("0") ? 0 : int.Parse(usuarioLogadoId),
+                    LojaId = usuario.LojaId,
                     IsVendedor = true
+
                 };
+
 
                 return View(modelo);
             }
@@ -111,7 +177,7 @@ namespace PWMetricas.Adm.Controllers
             {
                 return View();
             }
-           
+
         }
 
 
@@ -122,28 +188,81 @@ namespace PWMetricas.Adm.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Json(new { sucesso = false, erros = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+                return Ok(new { sucesso = false, erros = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
             }
 
             var resultado = await _atendimentoServico.Cadastrar(atendimento);
             if (!resultado.Sucesso)
             {
-                return Json(new { sucesso = false, erros = resultado.Erros });
+                return Ok(new { sucesso = false, erros = resultado.Erros });
             }
 
-            return Json(new { sucesso = true, mensagem = "Atendimento cadastrado com sucesso!" });
+            return Ok(new { sucesso = true, mensagem = "Sucesso ao cadastrar atendimento." });
 
         }
 
-     
+        [HttpGet]
+        [Route("Atendimento/Editar")]
+        public async Task<IActionResult> Editar(Guid guid)
+        {
+            var perfil = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
+            var atendimento = await _atendimentoServico.ObterPorGuid(guid);
+
+            if (atendimento != null)
+            {
+                await CarregarCombosEdicao(atendimento);
+
+                if (perfil != null && perfil.Equals("Vendedor"))
+                {
+                    atendimento.IsVendedor = true;
+                }
+                return View(atendimento);
+            }
+
+            return RedirectToAction("Consulta");
+
+        }
+
+        [HttpPost]
+        [Route("Atendimento/Editar")]
+        public async Task<IActionResult> Editar(AtendimentoViewModel atendimento)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Ok(new { sucesso = false, erros = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
+            }
+
+            var resultado = await _atendimentoServico.Atualizar(atendimento);
+            if (!resultado.Sucesso)
+            {
+                return Ok(new { sucesso = false, erros = resultado.Erros });
+            }
+
+            return Ok(new { sucesso = true, mensagem = "Sucesso ao atualizar atendimento." });
+
+        }
+
+        [HttpGet]
+        [Route("Atendimento/Visualizar")]
+        public async Task<IActionResult> Visualizar(Guid guid)
+        {
+            var atendimento = await _atendimentoServico.ObterPorGuid(guid);
+
+            if (atendimento != null)
+            {
+                await CarregarCombosEdicao(atendimento);
+
+                return View(atendimento);
+            }
+
+            return RedirectToAction("Consulta");
+
+        }
 
 
         #region Private Methods
         private async Task CarregarCombos()
         {
-            ViewBag.Lojas = (await _lojaServico.ObterTodos())
-                         .Select(c => new { Id = c.Id.ToString(), Nome = c.NomeFantasia, CNPJ = c.CNPJ }).ToList();
-
             ViewBag.Canais = (await _canalServico.ObterTodos())
                         .Select(c => new { Id = c.Id.ToString(), Nome = c.Nome, CorHex = c.CorHex }).ToList();
 
@@ -181,6 +300,37 @@ namespace PWMetricas.Adm.Controllers
             ViewBag.Vendedores = (await _usuarioServico.ListarVendedores())
                           .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Nome }).ToList();
 
+        }
+
+        private async Task CarregarCombosEdicao(AtendimentoViewModel atendimento)
+        {
+
+            ViewBag.Canais = (await _canalServico.ObterTodos())
+                        .Select(c => new { Id = c.Id.ToString(), Nome = c.Nome, CorHex = c.CorHex }).ToList();
+
+            ViewBag.Origens = (await _origemServico.ObterTodos())
+                         .Select(c => new { Id = c.Id.ToString(), Nome = c.Nome, CorHex = c.CorHex }).ToList();
+
+            ViewBag.Produtos = (await _produtoServico.ObterTodos())
+                         .Select(c => new { Id = c.Id.ToString(), Nome = c.Nome, CorHex = c.CorHex }).ToList();
+
+            ViewBag.Tamanhos = (await _tamanhoServico.ObterTodos())
+                          .Select(c => new { Id = c.Id.ToString(), Nome = c.Nome, CorHex = c.CorHex }).ToList();
+
+            ViewBag.Status = (await _statusServico.ObterTodos())
+                          .Select(c => new { Id = c.Id.ToString(), Nome = c.Nome, CorHex = c.CorHex }).ToList();
+
+
+            ViewBag.Clientes = (await _clienteServico.ObterTodos())
+                          .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Nome + " - " + c.Telefone }).ToList();
+
+
+            ViewBag.Lojas = (await _lojaServico.ObterTodos())
+                          .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.NomeFantasia + " - " + c.CNPJ }).ToList();
+
+
+            ViewBag.Vendedores = (await _usuarioServico.ListarVendedores())
+                          .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Nome }).ToList();
         }
         #endregion
     }

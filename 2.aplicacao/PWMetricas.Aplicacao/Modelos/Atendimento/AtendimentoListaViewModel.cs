@@ -10,6 +10,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
     public class AtendimentoListaViewModel
     {
          public int Id { get; set; }
+         public Guid Guid { get; set; }
       
         public string Data { get; set; } 
         public string? Whatsapp { get; set; }

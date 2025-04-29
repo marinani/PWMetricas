@@ -26,7 +26,14 @@
 					<td>@atendimento.Data</td>
 					<td>@atendimento.DataRetorno</td>
 					<td>@atendimento.ValorPedido</td>
-					<td>Ações</td>
+						<td>
+							<a asp-action="Editar" asp-route-guid="@atendimento.Guid" class="btn btn-primary btn-sm">
+								<i class="nav-icon bi bi-pencil"></i>
+							</a>
+							<a asp-action="Visualizar" asp-route-guid="@atendimento.Guid" class="btn btn-primary btn-sm">
+											<i class="nav-icon bi bi-eye"></i>
+										</a>
+						</td>
 				</tr>
 			}
 		</tbody>
