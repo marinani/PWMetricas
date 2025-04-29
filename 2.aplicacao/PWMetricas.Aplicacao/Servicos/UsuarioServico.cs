@@ -237,6 +237,8 @@ namespace PWMetricas.Aplicacao.Servicos
                     Email = modelo.Email,
                     Senha = EncryptPassword(modelo.Senha), // Criptografa a senha
                     DataCadastro = DateTime.Now,
+                    MetaMensal = Convert.ToDecimal(modelo.MetaMensal),
+                    SuperMetaMensal = Convert.ToDecimal(modelo.SuperMetaMensal),
                     PerfilId = 3, // Vendedor
                     LojaId = modelo.LojaId,
                     Ativo = true
@@ -271,7 +273,8 @@ namespace PWMetricas.Aplicacao.Servicos
 
                 usuario.Nome = modelo.Nome;
                 usuario.Email = modelo.Email;
-                usuario.Senha = EncryptPassword(modelo.Senha);
+                usuario.MetaMensal = Convert.ToDecimal(modelo.MetaMensal);  
+                usuario.SuperMetaMensal = Convert.ToDecimal(modelo.SuperMetaMensal);
                 usuario.LojaId = modelo.LojaId;
                 usuario.PerfilId = 3;
 

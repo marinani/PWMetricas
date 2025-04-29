@@ -56,16 +56,24 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Senha")]
         public required string Senha { get; set; }
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Confirmação E-mail")]
-        public required string ConfirmaEmail { get; set; }
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        public string? ConfirmaEmail { get; set; }
+        //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Confirmação Senha")]
-        public required string ConfirmaSenha { get; set; }
+        public string? ConfirmaSenha { get; set; }
 
         [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Filial")]
         public int? LojaId { get; set; }
+
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Meta Mensal")]
+        public string? MetaMensal { get; set; }
+
+        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        [Display(Name = "Super-Meta Mensal")]
+        public string? SuperMetaMensal { get; set; }
     }
 
 
