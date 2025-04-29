@@ -81,5 +81,28 @@ namespace PWMetricas.Dados.Repositorios
 
             return await query.CountAsync();
         }
+
+
+        public async Task<decimal?> SomaTotal(AtendimentoFiltro filtro)
+        {
+            var query = Consulta.AsQueryable();
+
+            if (filtro.UsuarioId.HasValue)
+                query = query.Where(x => x.UsuarioId == filtro.UsuarioId.Value);
+
+            if (filtro.LojaId.HasValue)
+                query = query.Where(x => x.LojaId == filtro.LojaId.Value);
+
+            if (filtro.StatusAtendimentoId.HasValue)
+                query = query.Where(x => x.StatusAtendimentoId == filtro.StatusAtendimentoId.Value);
+
+            if (filtro.DataInicio.HasValue)
+                query = query.Where(x => x.Data >= filtro.DataInicio.Value);
+
+            if (filtro.DataFim.HasValue)
+                query = query.Where(x => x.Data <= filtro.DataFim.Value);
+
+            return await query.Select(x => x.ValorPedido).SumAsync();
+        }
     }
 }

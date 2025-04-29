@@ -12,6 +12,7 @@ namespace PWMetricas.Dados.Repositorios.Interfaces
     {
         Task<IEnumerable<Atendimento>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro);
         Task<int> ContarAtendimentos(AtendimentoFiltro filtro);
+        Task<decimal?> SomaTotal(AtendimentoFiltro filtro);
 
 
     }

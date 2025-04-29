@@ -11,6 +11,29 @@
 }
 
 
+@section PageSpecificContainer {
+	<div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
+		<div class="left-select mb-2 mb-lg-0">
+			<select for="LojaId" name="LojaId" id="LojaId" class="form-select">
+				<option value="">Selecione uma filial</option>
+				@* @if (ViewBag.Lojas != null)
+				{
+					@foreach (var loja in ViewBag.Lojas)
+					{
+						<option value="@loja.Value">
+							@loja.Text
+						</option>
+					}
+				} *@
+			</select>
+		</div>
+		<div class="right-search">
+			<input type="text" id="searchField" class="form-control" placeholder="Pesquisar..." />
+		</div>
+	</div>
+}
+
+
 @if (userPerfil == "Administrador" || userPerfil == "Gerente")
 {
 	<partial name="_Administrador" />

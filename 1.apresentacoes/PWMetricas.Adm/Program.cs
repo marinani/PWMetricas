@@ -46,6 +46,7 @@ builder.Services.AddScoped<IOrigemRepositorio, OrigemRepositorio>();
 builder.Services.AddScoped<ILojaRepositorio, LojaRepositorio>();
 builder.Services.AddScoped<IStatusAtendimentoRepositorio, StatusAtendimentoRepositorio>();
 builder.Services.AddScoped<IAtendimentoRepositorio, AtendimentoRepositorio>();
+builder.Services.AddScoped<IAtendimentoObservacoesRepositorio, AtendimentoObservacoesRepositorio>();
 #endregion
 
 // Configuração de autenticação

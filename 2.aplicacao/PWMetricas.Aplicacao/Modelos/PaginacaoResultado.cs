@@ -12,5 +12,6 @@ namespace PWMetricas.Aplicacao.Modelos
         public int PaginaAtual { get; set; }
         public int TotalPaginas { get; set; }
         public int TotalRegistros { get; set; }
+        public string? SomaTotal { get; set; }
     }
 }

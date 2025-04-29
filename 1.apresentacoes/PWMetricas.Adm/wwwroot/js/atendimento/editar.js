@@ -97,17 +97,6 @@
         });
     }
 
-    //$(document).on('change', '#StatusAtendimentoId', function () {
-    //    const selectedOption = $(this).find('option:selected'); // Obtém a opção selecionada
-    //    const color = selectedOption.data('color'); // Obtém o atributo data-color da opção selecionada
-
-    //    if (color) {
-    //        $(this).css('background-color', color + ' !important');
-    //    } else {
-    //        $(this).css('background-color', "transparent"); // Cor padrão caso não tenha
-    //    }
-    //});
-
     // Evento para carregar cidades ao selecionar UF
     $('#Uf').on('change', function () {
         const uf = $(this).val(); // Obtém o valor selecionado no campo UF
@@ -137,7 +126,8 @@
     $("#btnSalvarAtendimento").click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        if ($("#formCadastrarAtendimento").valid()) {
+       
+        if ($("#formEditarAtendimento").valid()) {
             inserirAtendimento();
         }
 
@@ -145,6 +135,8 @@
 
 
     function inserirAtendimento() {
+        $("#LojaId").prop("disabled", false);
+        $("#UsuarioId").prop("disabled", false);
         var formData = new FormData();
 
         formData.append('Guid', document.getElementById("Guid").value);
@@ -166,7 +158,7 @@
         formData.append('StatusAtendimentoId', document.getElementById("StatusAtendimentoId").value);
         formData.append('Observacao', document.getElementById("Observacao").value);
 
-
+        debugger
 
         $.ajax({
             method: 'POST',
@@ -175,11 +167,14 @@
             processData: false,
             contentType: false,
             success: function (data) {
+                debugger
                 if (data.sucesso) {
                     showAlert("Atendimento atualizado com sucesso!", "success");
                     setTimeout(Reload, 2000);
 
                 } else {
+                    $("#LojaId").prop("disabled", true);
+                    $("#UsuarioId").prop("disabled", true);
                     showAlert("Erro ao atualizar atendimento.", "error");
 
                 }

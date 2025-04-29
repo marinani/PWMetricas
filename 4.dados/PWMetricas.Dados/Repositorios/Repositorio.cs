@@ -124,6 +124,7 @@ namespace PWMetricas.Dados.Repositorios
 
         public async Task<TEntidade> InserirERecuperar(TEntidade entidade)
         {
+            entidade.Guid = Guid.NewGuid();
             await Consulta.AddAsync(entidade);
             await Contexto.SaveChangesAsync(CancellationToken.None);
 

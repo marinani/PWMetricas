@@ -11,12 +11,13 @@ namespace PWMetricas.Aplicacao.Servicos
     public class AtendimentoServico : IAtendimentoServico
     {
         private readonly IAtendimentoRepositorio _atendimentoRepositorio;
+        private readonly IAtendimentoObservacoesRepositorio _atendimentoObservacoesRepositorio;
         private readonly IMapper _mapper;
-        public AtendimentoServico(IAtendimentoRepositorio atendimentoRepositorio, IMapper mapper)
+        public AtendimentoServico(IAtendimentoRepositorio atendimentoRepositorio, IMapper mapper, IAtendimentoObservacoesRepositorio atendimentoObservacoesRepositorio)
         {
             _atendimentoRepositorio = atendimentoRepositorio;
             _mapper = mapper;
-
+            _atendimentoObservacoesRepositorio = atendimentoObservacoesRepositorio;
         }
 
         public async Task<AtendimentoViewModel> ObterPorGuid(Guid guid)
@@ -31,10 +32,12 @@ namespace PWMetricas.Aplicacao.Servicos
             try
             {
                 var entidade = _mapper.Map<Atendimento>(modelo);
-                var atendimento = await _atendimentoRepositorio.InserirERecuperar(entidade);
+                entidade = await _atendimentoRepositorio.InserirERecuperar(entidade);
 
-
-                //Todo: Criar objeto para inserir observação caso o campo tenha sido preenchido
+                if (!string.IsNullOrEmpty(modelo.Observacao))
+                {
+                    await CriarObservacao(entidade, modelo.Observacao);
+                }
 
                 return new Resultado("Sucesso ao cadastrar atendimento.", entidade);
             }
@@ -49,8 +52,16 @@ namespace PWMetricas.Aplicacao.Servicos
             var resultado = new Resultado();
             try
             {
-                var entidade = _mapper.Map<Atendimento>(modelo);
+                var entidade = await _atendimentoRepositorio.Buscar(modelo.Guid);
+
+                entidade = _mapper.Map<Atendimento>(modelo);
                 await _atendimentoRepositorio.Atualizar(entidade);
+
+                if(!string.IsNullOrEmpty(modelo.Observacao))
+                {
+                    await CriarObservacao(entidade, modelo.Observacao);
+                }
+
                 return new Resultado("Sucesso ao atualizar atendimento.", entidade);
             }
             catch (Exception ex)
@@ -59,10 +70,37 @@ namespace PWMetricas.Aplicacao.Servicos
             }
         }
 
+        public async Task<Resultado> CriarObservacao(Atendimento atendimento, string observacao)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                var entidade = new AtendimentoObservacoes()
+                {
+                    Id = 0,
+                    Guid = Guid.NewGuid(),
+                    Data = DateTime.Now,
+                    AtendimentoId = atendimento.Id,
+                    Descricao = observacao,
+                    Ativo = true
+                };
+                // Verifica se o atendimento existe
+                entidade = await _atendimentoObservacoesRepositorio.InserirERecuperar(entidade);
+
+                return new Resultado("Sucesso ao criar observação do atendimento.", entidade);
+
+            }
+            catch (Exception ex)
+            {
+                return new Resultado(new[] { $"Erro ao criar observação: {ex.Message}" });
+            }
+        }
+
         public async Task<PaginacaoResultado<AtendimentoListaViewModel>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro)
         {
             var atendimentos = await _atendimentoRepositorio.ObterAtendimentosPaginados(page, pageSize, filtro);
             var totalRegistros = await _atendimentoRepositorio.ContarAtendimentos(filtro);
+            var somaTotal = await _atendimentoRepositorio.SomaTotal(filtro);
 
             return new PaginacaoResultado<AtendimentoListaViewModel>
             {
@@ -77,7 +115,8 @@ namespace PWMetricas.Aplicacao.Servicos
                 }),
                 PaginaAtual = page,
                 TotalPaginas = (int)Math.Ceiling((double)totalRegistros / pageSize),
-                TotalRegistros = totalRegistros
+                TotalRegistros = totalRegistros,
+                SomaTotal = somaTotal.HasValue ? somaTotal.Value.ToString("C") : "",
             };
         }
     }
