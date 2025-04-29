@@ -62,7 +62,8 @@ namespace PWMetricas.Adm.Controllers
                 Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
                 PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
                 TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
-                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0,
+                ValorPedido = resultadoPaginado?.SomaTotal ?? "0,00"
             };
 
             return PartialView("_ListaAtendimento", viewModel);
@@ -82,7 +83,8 @@ namespace PWMetricas.Adm.Controllers
                 Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
                 PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
                 TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
-                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0,
+                ValorPedido = resultadoPaginado?.SomaTotal ?? "0,00"
             };
 
             return PartialView("_ListaOrcamento", viewModel);
@@ -102,7 +104,8 @@ namespace PWMetricas.Adm.Controllers
                 Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
                 PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
                 TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
-                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0,
+                ValorPedido = resultadoPaginado?.SomaTotal ?? "0,00"
             };
 
             return PartialView("_ListaVendido", viewModel);
@@ -122,7 +125,8 @@ namespace PWMetricas.Adm.Controllers
                 Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
                 PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
                 TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
-                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0,
+                ValorPedido = resultadoPaginado?.SomaTotal ?? "0,00"
             };
 
             return PartialView("_ListaNegociado", viewModel);
@@ -142,7 +146,8 @@ namespace PWMetricas.Adm.Controllers
                 Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
                 PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
                 TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
-                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0
+                TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0,
+                ValorPedido = resultadoPaginado?.SomaTotal ?? "0,00"
             };
 
             return PartialView("_ListaNaoResponde", viewModel);

@@ -6,38 +6,51 @@
 @if (Model?.Resultados != null && Model.Resultados.Any())
 {
 	<div class="table-responsive">
-	<table class="table table-striped table-atendimento">
-		<thead>
-			<tr>
-				<th>Cliente</th>
-				<th>Status</th>
-				<th>Data</th>
-				<th>Retornar</th>
-				<th>R$ Pedido</th>
-				<th>Visualizar</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var atendimento in Model.Resultados)
-			{
+		<table class="table table-striped table-atendimento table-hover table-bordered">
+			<thead>
 				<tr>
-					<td>@atendimento.Cliente</td>
-					<td class="status-atendimento-bg">@atendimento.Status</td>
-					<td>@atendimento.Data</td>
-					<td>@atendimento.DataRetorno</td>
-					<td>@atendimento.ValorPedido</td>
+					<th>Cliente</th>
+					<th>Status</th>
+					<th>Data</th>
+					<th>Retornar</th>
+					<th>R$ Pedido</th>
+					<th>Visualizar</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var atendimento in Model.Resultados)
+				{
+					<tr>
+						<td>@atendimento.Cliente</td>
+						<td class="status-atendimento-bg">@atendimento.Status</td>
+						<td>@atendimento.Data</td>
+						<td>@atendimento.DataRetorno</td>
+						<td>@atendimento.ValorPedido</td>
 						<td>
 							<a asp-action="Editar" asp-route-guid="@atendimento.Guid" class="btn btn-primary btn-sm">
 								<i class="nav-icon bi bi-pencil"></i>
 							</a>
 							<a asp-action="Visualizar" asp-route-guid="@atendimento.Guid" class="btn btn-primary btn-sm">
-											<i class="nav-icon bi bi-eye"></i>
-										</a>
+								<i class="nav-icon bi bi-eye"></i>
+							</a>
 						</td>
+					</tr>
+				}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3"></td>
+					<td colspan="1" class="text-center">
+						<strong>Soma Total:</strong>
+					</td>
+					<td colspan="1" class="text-center">
+						<strong>@Model.ValorPedido</strong>
+					</td>
+					<td colspan="1">
+					</td>
 				</tr>
-			}
-		</tbody>
-	</table>
+			</tfoot>
+		</table>
 	</div>
 }
 else

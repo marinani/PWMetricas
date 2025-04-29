@@ -116,7 +116,7 @@ namespace PWMetricas.Aplicacao.Servicos
                 PaginaAtual = page,
                 TotalPaginas = (int)Math.Ceiling((double)totalRegistros / pageSize),
                 TotalRegistros = totalRegistros,
-                SomaTotal = somaTotal.HasValue ? somaTotal.Value.ToString("C") : "",
+                SomaTotal = somaTotal.HasValue ? somaTotal.Value.ToString("C") : "0,00",
             };
         }
     }
