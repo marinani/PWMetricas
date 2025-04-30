@@ -96,6 +96,19 @@ namespace PWMetricas.Aplicacao.Servicos
             }
         }
 
+        public async Task<decimal> SomaTotalAtendimento(int? usuarioId, int? status, int? lojaId)
+        {
+            var filtro = new AtendimentoFiltro
+            {
+                LojaId = lojaId,
+                UsuarioId = usuarioId,
+                StatusAtendimentoId = status
+            };
+
+            var soma = await _atendimentoRepositorio.SomaTotal(filtro);
+            return soma ?? 0;
+        }
+
         public async Task<PaginacaoResultado<AtendimentoListaViewModel>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro)
         {
             var atendimentos = await _atendimentoRepositorio.ObterAtendimentosPaginados(page, pageSize, filtro);

@@ -877,7 +877,7 @@
 
 /* Estilo do contêiner principal */
 .progress-container {
-    background-color: #1c1c1e; /* Fundo escuro */
+    background-color: transparent; 
     border-radius: 10px;
     padding: 20px;
     color: #fff;

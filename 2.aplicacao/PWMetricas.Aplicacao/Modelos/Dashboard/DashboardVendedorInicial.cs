@@ -8,19 +8,20 @@ namespace PWMetricas.Aplicacao.Modelos.Dashboard
 {
     public class DashboardVendedorInicial
     {
-        public string NomeUsuario { get; set; }
+        public string? NomeUsuario { get; set; }
         public List<Tarefas> Tarefas { get; set; } = new List<Tarefas>();
-        public Resultado Resultado { get; set; } = new Resultado();
+        public ResultadoViewModel Resultado { get; set; } = new ResultadoViewModel();
+        public Metas MinhasMetas { get; set; } = new Metas();   
     }
 
     public class Metas
     {
-        public decimal? MetaMensalVendedor { get; set; }
-        public decimal? MetaMensal { get; set; }
-        public decimal? SuperMetaMensalVendedor { get; set; }
-        public decimal? SuperMetaMensal { get; set; }
-        public int? ValorMetaPorcentagemMetaMensal { get; set; }
-        public int? ValorMetaPorcentagemSuperMetaMensal { get; set; }
+        public decimal MetaMensalVendedor { get; set; } = 0;
+        public decimal MetaMensal { get; set; } = 0;
+        public decimal SuperMetaMensalVendedor { get; set; } = 0;
+        public decimal SuperMetaMensal { get; set; } = 0;
+        public decimal ValorMetaPorcentagemMetaMensal { get; set; } = 0;
+        public decimal ValorMetaPorcentagemSuperMetaMensal { get; set; } = 0;
     }
 
 
@@ -34,12 +35,12 @@ namespace PWMetricas.Aplicacao.Modelos.Dashboard
         public string SomaTotal { get; set; }
     }
 
-    public class  Resultados
+    public class  ResultadoViewModel
     {
-        public string SomaAtendimento { get; set; }
-        public string SomaOrcamento { get; set; }
-        public string SomaVendido { get; set; }
-        public string SomaNegociado { get; set; }
-        public string SomaNaoResponde { get; set; }
+        public decimal SomaAtendimento { get; set; }
+        public decimal SomaOrcamento { get; set; }
+        public decimal SomaVendido { get; set; }
+        public decimal SomaNegociado { get; set; }
+        public decimal SomaNaoResponde { get; set; }
     }
 }

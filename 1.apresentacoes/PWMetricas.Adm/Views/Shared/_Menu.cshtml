@@ -10,9 +10,9 @@
 	<div class="sidebar-wrapper">
 		<nav class="mt-2">
 			<ul class="nav sidebar-menu flex-column"
-				data-lte-toggle="treeview"
-				role="menu"
-				data-accordion="false">
+			data-lte-toggle="treeview"
+			role="menu"
+			data-accordion="false">
 
 				<li class="nav-item">
 					<a href="/Home/Index" class="nav-link">
@@ -20,13 +20,25 @@
 						<p>Home</p>
 					</a>
 				</li>
+				@if (userPerfil == "Administrador" || userPerfil == "Gerente")
+				{
+					<li class="nav-item">
+						<a href="/Atendimento/Consulta" class="nav-link">
+							<i class="nav-icon bi bi-headset"></i>
+							<p>Atendimentos</p>
+						</a>
+					</li>
+				}
+				@if (userPerfil == "Vendedor")
+				{
+					<li class="nav-item">
+						<a href="/Atendimento/Consulta" class="nav-link">
+							<i class="nav-icon bi bi-headset"></i>
+							<p>Meus Atendimentos</p>
+						</a>
+					</li>
+				}
 
-				<li class="nav-item">
-					<a href="/Atendimento/Consulta" class="nav-link">
-						<i class="nav-icon bi bi-headset"></i>
-						<p>Atendimentos</p>
-					</a>
-				</li>
 
 
 				<li class="nav-item">
@@ -129,17 +141,7 @@
 				}
 
 
-				@if (userPerfil == "Vendedor")
-				{
-					<li class="nav-item">
-						<a href="/Atendimento/Consulta" class="nav-link">
-							<i class="nav-icon bi bi-headset"></i>
-							<p>Minhas Vendas</p>
-						</a>
-					</li>
-
-
-				}
+				
 
 
 			</ul>

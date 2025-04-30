@@ -1,4 +1,8 @@
 ﻿@using System.Security.Claims;
+@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Dashboard
+@model DashboardViewModel
+
 
 @{
 	var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
@@ -103,35 +107,42 @@
 							<div class="header">
 								<img src="/icones/trofeu.png" style="width: 85px;height: auto;" alt="Troféu" class="icon-trophy">
 								<div>
-									<h4>Uhuuu, Parabéns Dyego!</h4>
-									<h5>Você alcançou 100% da meta mensal.</h5>
+									<h4>Uhuuu, Parabéns @Model.Vendedor.NomeUsuario!</h4>
+									<h5>Você alcançou @(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal + "%") da meta mensal.</h5>
 									<p>Você está demais, vamos para Super-Meta?</p>
 								</div>
 							</div>
 
+							
 							<!-- Barra de progresso da meta -->
 							<div class="progress mt-3">
-								<div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-									100%
+								<div class="progress-bar bg-success" role="progressbar"
+									 style="width: @(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal + "%")"
+									 aria-valuenow="@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal"
+									 aria-valuemin="0" aria-valuemax="100">
+									@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal %
 								</div>
 							</div>
 
 							<!-- Barra de progresso da super-meta -->
 							<div class="progress mt-3">
-								<div class="progress-bar bg-meta" role="progressbar" style="width: 38%;" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100">
-									38%
+								<div class="progress-bar bg-meta" role="progressbar"
+									 style="width: @(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal + "%")"
+									 aria-valuenow="@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal"
+									 aria-valuemin="0" aria-valuemax="100">
+									@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal %
 								</div>
 							</div>
 
 							<!-- Informações adicionais -->
 							<div class="meta-info mt-6 d-flex justify-content-between">
 								<div>
-									<p>Meta: <span class="text-success">R$ 100.000,00</span></p>
-									<p>Super Meta: <span class="text-meta">R$ 19.000,00</span></p>
+									<p>Meta: <span class="text-success">@Model.Vendedor.MinhasMetas?.MetaMensalVendedor.ToString("C")</span></p>
+									<p>Super Meta: <span class="text-meta">@Model.Vendedor.MinhasMetas?.SuperMetaMensalVendedor.ToString("C")</span></p>
 								</div>
 								<div class="text-end">
-									<p>Meta Mensal: <b>R$ 100.000,00</b></p>
-									<p>Super Meta Mensal: <b>R$ 19.000,00</b></p>
+									<p>Meta Mensal: <b>@Model.Vendedor.MinhasMetas?.MetaMensal.ToString("C")</b></p>
+									<p>Super Meta Mensal: <b>@Model.Vendedor.MinhasMetas?.SuperMetaMensal.ToString("C")</b></p>
 								</div>
 							</div>
 						</div>
@@ -162,19 +173,19 @@
 								<div class="col-sm-4">
 									<div class="quadro">
 										<div class="quadro-texto">EM ATENDIMENTO</div>
-										<div class="quadro-valor status-atendimento">R$ 14.250,90</div>
+										<div class="quadro-valor status-atendimento">@Model.Vendedor.Resultado?.SomaAtendimento.ToString("C")</div>
 									</div>
 								</div>
 								<div class="col-sm-4">
 									<div class="quadro">
 										<div class="quadro-texto">ORÇAMENTO</div>
-										<div class="quadro-valor status-orcamento">R$ 11.950,90</div>
+										<div class="quadro-valor status-orcamento">@Model.Vendedor.Resultado?.SomaOrcamento.ToString("C")</div>
 									</div>
 								</div>
 								<div class="col-sm-4">
 									<div class="quadro">
 										<div class="quadro-texto">VENDIDO</div>
-										<div class="quadro-valor status-vendido">R$ 27.950,90</div>
+										<div class="quadro-valor status-vendido">@Model.Vendedor.Resultado?.SomaVendido.ToString("C")</div>
 									</div>
 								</div>
 							</div>
@@ -182,13 +193,13 @@
 								<div class="col-sm-6">
 									<div class="quadro">
 										<div class="quadro-texto">PERDIDO NEGOCIADO</div>
-										<div class="quadro-valor status-negociado">R$ 9.420,90</div>
+										<div class="quadro-valor status-negociado">@Model.Vendedor.Resultado?.SomaNegociado.ToString("C")</div>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="quadro">
 										<div class="quadro-texto">PERDIDO Ñ RESPONDE</div>
-										<div class="quadro-valor status-naoresponde">R$ 16.841,00</div>
+										<div class="quadro-valor status-naoresponde">@Model.Vendedor.Resultado?.SomaNaoResponde.ToString("C")</div>
 									</div>
 								</div>
 							</div>

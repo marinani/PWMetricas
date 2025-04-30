@@ -244,7 +244,7 @@
 	<div class="col-sm-6">
 		<div class="form-group">
 			<label asp-for="StatusAtendimentoId"></label>
-			<select class="form-select-atendimento" name="StatusAtendimentoId" id="StatusAtendimentoId">
+			<select class="form-control"  name="StatusAtendimentoId" id="StatusAtendimentoId">
 				@if (ViewBag.Status != null)
 				{
 					@foreach (var status in ViewBag.Status)

@@ -41,6 +41,14 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         public string PerfilNome { get; set; }
 
         public bool Ativo { get; set; }
+
+       
+        [Display(Name = "Meta Mensal")]
+        public decimal? MetaMensal { get; set; }
+
+       
+        [Display(Name = "Super-Meta Mensal")]
+        public decimal? SuperMetaMensal { get; set; }
     }
 
     public class VendedorViewModel
