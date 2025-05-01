@@ -5,6 +5,7 @@ using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Dominio.Entidades;
 using PWMetricas.Aplicacao.Modelos.Atendimento;
 using PWMetricas.Dominio.Filtros;
+using PWMetricas.Aplicacao.Modelos.Dashboard;
 
 namespace PWMetricas.Aplicacao.Servicos
 {
@@ -52,9 +53,21 @@ namespace PWMetricas.Aplicacao.Servicos
             var resultado = new Resultado();
             try
             {
-                var entidade = await _atendimentoRepositorio.Buscar(modelo.Guid);
+                var entidade = await _atendimentoRepositorio.BuscarPorId(modelo.Id);
 
-                entidade = _mapper.Map<Atendimento>(modelo);
+                entidade.OrigemId = modelo.OrigemId.Value;
+                entidade.CanalId = modelo.CanalId.Value;
+                entidade.ProdutoId = modelo.ProdutoId.Value;
+                entidade.TamanhoId = modelo.TamanhoId.Value;
+                entidade.StatusAtendimentoId = modelo.StatusAtendimentoId.Value;
+                entidade.ClienteId = modelo.ClienteId.Value;
+                entidade.Data = modelo.Data;
+                entidade.DataRetorno = modelo.DataRetorno;
+                entidade.Whatsapp = modelo.Whatsapp;
+                entidade.Uf = modelo.Uf;
+                entidade.Cidade = modelo.Cidade;
+
+
                 await _atendimentoRepositorio.Atualizar(entidade);
 
                 if(!string.IsNullOrEmpty(modelo.Observacao))
@@ -130,6 +143,28 @@ namespace PWMetricas.Aplicacao.Servicos
                 TotalPaginas = (int)Math.Ceiling((double)totalRegistros / pageSize),
                 TotalRegistros = totalRegistros,
                 SomaTotal = somaTotal.HasValue ? somaTotal.Value.ToString("C") : "0,00",
+            };
+        }
+
+
+        public async Task<DashboardVendedorInicial> ObterAtendimentosPorFiltro( AtendimentoFiltro filtro)
+        {
+            var atendimentos = await _atendimentoRepositorio.ObterAtendimentos(filtro);
+            var somaTotal = await _atendimentoRepositorio.SomaTotal(filtro);
+
+            return new DashboardVendedorInicial
+            {
+                Tarefas = atendimentos.Select(a => new TarefasViewModel
+                {
+                    Guid = a.Guid,
+                    Cliente = a.Cliente.Nome,
+                    Status = a.StatusAtendimento.Nome,
+                    CorStatusAtendimento = a.StatusAtendimento.CorHex,
+                    Data = a.Data.ToShortDateString(),
+                    DataRetorno = a.DataRetorno.HasValue ? a.DataRetorno.Value.ToShortDateString() : "",
+                    ValorPedido = a.ValorPedido.ToString("C")
+                }).ToList(),
+                SomaAtendimento = somaTotal.HasValue ? somaTotal.Value : 0,
             };
         }
     }

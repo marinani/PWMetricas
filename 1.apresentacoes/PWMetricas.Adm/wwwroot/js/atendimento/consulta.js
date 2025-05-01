@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+
+ 
+
     // Carregar Lista de Atendimentos ao carregar a página
     $.get('/Atendimento/ListaAtendimento', { pagina: 1 }, function (data) {
         $('#lista-atendimento').html(data);
@@ -20,6 +23,18 @@
     $.get('/Atendimento/ListaNaoResponde', { pagina: 1 }, function (data) {
         $('#lista-naoresponde').html(data);
     });
+
+
+    
+
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    debugger
+    if ($("#IsVendedor")[0].value == "True") {
+        $("#LojaId").prop("disabled", true);
+    }
 });
 
 // Paginação dinâmica para Atendimentos e Orçamentos
@@ -33,15 +48,15 @@ $(document).on('click', '.pagination a', function (e) {
     });
 });
 
-// Submeter o formulário de filtro via AJAX
-$('form').on('submit', function (e) {
-    e.preventDefault();
-    const form = $(this);
-    const urlAtendimento = '/Atendimento/ListaAtendimento?' + form.serialize(); // Serializa os dados do formulário
-    const urlOrcamento = '/Atendimento/ListaOrcamento?' + form.serialize();
-    const urlVendido = '/Atendimento/ListaVendido?' + form.serialize();
-    const urlNegociado = '/Atendimento/ListaNegociado?' + form.serialize();
-    const urlNaoResponde = '/Atendimento/ListaNaoResponde?' + form.serialize();
+$(document).on('change', '#LojaId', function () {
+    const lojaId = $(this).val(); // Obtém o valor selecionado no campo LojaId
+
+    // URLs para atualizar as tabelas com base no filtro LojaId
+    const urlAtendimento = '/Atendimento/ListaAtendimento?LojaId=' + lojaId;
+    const urlOrcamento = '/Atendimento/ListaOrcamento?LojaId=' + lojaId;
+    const urlVendido = '/Atendimento/ListaVendido?LojaId=' + lojaId;
+    const urlNegociado = '/Atendimento/ListaNegociado?LojaId=' + lojaId;
+    const urlNaoResponde = '/Atendimento/ListaNaoResponde?LojaId=' + lojaId;
 
     // Atualiza a tabela de atendimentos
     $.get(urlAtendimento, function (data) {

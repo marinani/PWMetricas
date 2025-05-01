@@ -66,7 +66,17 @@ namespace PWMetricas.Adm.Controllers
         [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
+            // Limpar os dados da sessão
+            //HttpContext.Session.Clear();
             await HttpContext.SignOutAsync("CookieAuth");
+            return RedirectToAction("Index", "Login");
+        }
+
+
+        [HttpGet]
+        [Route("AcessoNegado")]
+        public IActionResult AcessoNegado()
+        {
             return RedirectToAction("Index", "Login");
         }
     }

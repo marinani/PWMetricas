@@ -107,6 +107,10 @@ namespace PWMetricas.Aplicacao.Modelos.Usuario
         public string LojaNome { get; set; }
 
         public bool Ativo { get; set; }
+
+        public decimal? MetaMensal { get; set; }
+
+        public decimal? SuperMetaMensal { get; set; }
     }
 
     public class  UsuarioSenhaViewModel

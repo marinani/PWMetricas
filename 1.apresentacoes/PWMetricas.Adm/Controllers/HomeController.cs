@@ -4,8 +4,8 @@ using PWMetricas.Adm.Models;
 using Microsoft.AspNetCore.Authorization;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using PWMetricas.Aplicacao.Modelos.Atendimento;
 using PWMetricas.Aplicacao.Modelos.Dashboard;
+using PWMetricas.Dominio.Filtros;
 
 namespace PWMetricas.Adm.Controllers;
 
@@ -71,8 +71,17 @@ public class HomeController : Controller
         }
 
         var vendedor = new DashboardVendedorInicial();
+
+        var filtro = new AtendimentoFiltro
+        {
+            LojaId = usuario.LojaId,
+            UsuarioId = usuarioId,
+            DataAtual = DateTime.Now
+        };
+
+        vendedor = await _atendimentoServico.ObterAtendimentosPorFiltro(filtro);
+
         vendedor.NomeUsuario = usuario.Nome;
-        vendedor.Tarefas = new List<Tarefas>();
         
         vendedor.Resultado = new ResultadoViewModel()
         {
@@ -110,23 +119,10 @@ public class HomeController : Controller
         }
 
 
-      
 
-        //var filtro = new AtendimentoFiltro
-        //{
-        //    LojaId = lojaId,
-        //    UsuarioId = usuarioId
-        //};
-        //var atendimentos = await _atendimentoServico.ObterAtendimentos(filtro);
-        //vendedor.Tarefas.AddRange(atendimentos.Select(a => new Tarefas
-        //{
-        //    Guid = a.Guid,
-        //    Cliente = a.Cliente.Nome,
-        //    Data = a.Data.ToShortDateString(),
-        //    DataRetorno = a.DataRetorno.HasValue ? a.DataRetorno.Value.ToShortDateString() : "",
-        //    ValorPedido = a.ValorPedido.ToString("C"),
-        //    SomaTotal = a.SomaTotal.ToString("C")
-        //}));
+
+   
+
         return vendedor;
 
     }

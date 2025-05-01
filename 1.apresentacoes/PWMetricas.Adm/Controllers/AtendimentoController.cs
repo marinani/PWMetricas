@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PWMetricas.Aplicacao.Modelos.Atendimento;
-using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Dominio.Entidades;
 using PWMetricas.Dominio.Filtros;
@@ -43,7 +42,23 @@ namespace PWMetricas.Adm.Controllers
         public async Task<IActionResult> Consulta()
         {
             await CarregarCombosConsulta();
-            return View();
+            var perfil = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
+            var usuarioLogadoId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+            if (perfil != null && perfil.Equals("Vendedor"))
+            {
+                var usuario = await _usuarioServico.ObterPorId(int.Parse(usuarioLogadoId));
+                var consulta = new AtendimentoConsultaViewModel
+                {
+                    IsVendedor = true,
+                    LojaId = usuario.LojaId
+                };
+
+                return View(consulta);
+            }
+            else
+            {
+                return View();
+            }
         }
 
 
@@ -54,6 +69,7 @@ namespace PWMetricas.Adm.Controllers
         {
             const int pageSize = 10; // Número de itens por página
             filtro.StatusAtendimentoId = 1; // Status 1
+            filtro = await AtendimentoFiltro(filtro);
             var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
 
             var viewModel = new AtendimentoConsultaViewModel
@@ -75,6 +91,7 @@ namespace PWMetricas.Adm.Controllers
         {
             const int pageSize = 10; // Número de itens por página
             filtro.StatusAtendimentoId = 2; // Status 2
+            filtro = await AtendimentoFiltro(filtro);
             var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
 
             var viewModel = new AtendimentoConsultaViewModel
@@ -96,6 +113,7 @@ namespace PWMetricas.Adm.Controllers
         {
             const int pageSize = 10; // Número de itens por página
             filtro.StatusAtendimentoId = 3;
+            filtro = await AtendimentoFiltro(filtro);
             var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
 
             var viewModel = new AtendimentoConsultaViewModel
@@ -117,6 +135,7 @@ namespace PWMetricas.Adm.Controllers
         {
             const int pageSize = 10; // Número de itens por página
             filtro.StatusAtendimentoId = 4;
+            filtro = await AtendimentoFiltro(filtro);
             var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
 
             var viewModel = new AtendimentoConsultaViewModel
@@ -138,6 +157,7 @@ namespace PWMetricas.Adm.Controllers
         {
             const int pageSize = 10; // Número de itens por página
             filtro.StatusAtendimentoId = 5;
+            filtro = await AtendimentoFiltro(filtro);
             var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
 
             var viewModel = new AtendimentoConsultaViewModel
@@ -305,6 +325,20 @@ namespace PWMetricas.Adm.Controllers
             ViewBag.Vendedores = (await _usuarioServico.ListarVendedores())
                           .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Nome }).ToList();
 
+        }
+
+        private async Task<AtendimentoFiltro> AtendimentoFiltro(AtendimentoFiltro filtro)
+        {
+            var perfil = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
+            var usuarioLogadoId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+            if (perfil != null && perfil.Equals("Vendedor"))
+            {
+                var usuario = await _usuarioServico.ObterPorId(int.Parse(usuarioLogadoId));
+                filtro.UsuarioId = usuario.Id;
+                filtro.LojaId = usuario.LojaId;
+                filtro.IsVendedor = true;
+            }
+            return filtro;
         }
 
         private async Task CarregarCombosEdicao(AtendimentoViewModel atendimento)

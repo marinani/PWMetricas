@@ -17,6 +17,9 @@ builder.Services.AddDbContext<PwMetricasDbContext>(options =>
         sqlOptions.EnableRetryOnFailure();
     }));
 
+
+
+
 // Registro do AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

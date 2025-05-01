@@ -3,10 +3,12 @@
 @model AtendimentoConsultaViewModel
 
 
-@* @section PageSpecificContainer {
+@section PageSpecificContainer {
 	<div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
 		<div class="left-select mb-2 mb-lg-0">
-			<select asp-for="Filtro.LojaId" name="LojaId" id="LojaId" class="form-select">
+			@Html.HiddenFor(m => m.IsVendedor)
+			@Html.HiddenFor(m => m.Filtro.IsVendedor)
+			<select asp-for="LojaId" name="LojaId" id="LojaId" class="form-select">
 				<option value="">Selecione uma filial</option>
 				@if (ViewBag.Lojas != null)
 				{
@@ -18,15 +20,15 @@
 					}
 				}
 			</select>
-			<span asp-validation-for="Filtro.LojaId" class="text-danger"></span>
+			<span asp-validation-for="LojaId" class="text-danger"></span>
 		</div>
 		<div class="right-search">
 			<input type="text" id="searchField" class="form-control" placeholder="Pesquisar..." />
 		</div>
 	</div>
-} *@
+}
 
-<div class="app-content-header">
+@* <div class="app-content-header">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12">
@@ -37,12 +39,12 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> *@
 
 <div class="app-content">
 	<div class="container-fluid">
 		<!-- Formulário de Filtro -->
-		<form asp-action="Consulta" method="get">
+@* 		<form asp-action="Consulta" method="get">
 			<div class="row">
 
 				<div class="col-md-3 offset-sm-1">
@@ -61,10 +63,8 @@
 					<label>&nbsp;</label>
 					<button type="submit" class="btn btn-primary w-100"><i class="nav-icon bi bi-search"></i></button>
 				</div>
-				
-
 			</div>
-		</form>
+		</form> *@
 
 		<br />
 

@@ -22,46 +22,11 @@
 
 <div class="app-content">
 	<div class="container-fluid">
-
 		<div class="row">
 			<div class="col-sm-12">
 				<!-- Listagem de Perfis -->
 				<div id="vendedor-listagem">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Nome</th>
-								<th>E-mail</th>
-								<th>Ações</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach (var item in Model.Dados)
-							{
-								<tr>
-									<td>@item.Nome</td>
-									<td>@item.Email</td>
-									<td>
-										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
-											<i class="nav-icon bi bi-pencil"></i> 
-										</a>
-									</td>
-								</tr>
-							}
-						</tbody>
-					</table>
-
-					<!-- Paginação -->
-					<nav>
-						<ul class="pagination">
-							@for (int i = 1; i <= Model.TotalPaginas; i++)
-							{
-								<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
-									<a href="#" class="page-link" data-page="@i">@i</a>
-								</li>
-							}
-						</ul>
-					</nav>
+					@await Html.PartialAsync("_Listagem", Model)
 				</div>
 			</div>
 		</div>

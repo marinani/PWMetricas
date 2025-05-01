@@ -9,9 +9,11 @@ namespace PWMetricas.Aplicacao.Modelos.Dashboard
     public class DashboardVendedorInicial
     {
         public string? NomeUsuario { get; set; }
-        public List<Tarefas> Tarefas { get; set; } = new List<Tarefas>();
+        public List<TarefasViewModel> Tarefas { get; set; } = new List<TarefasViewModel>();
         public ResultadoViewModel Resultado { get; set; } = new ResultadoViewModel();
-        public Metas MinhasMetas { get; set; } = new Metas();   
+        public Metas MinhasMetas { get; set; } = new Metas();
+
+        public decimal SomaAtendimento { get; set; } = 0;
     }
 
     public class Metas
@@ -25,14 +27,15 @@ namespace PWMetricas.Aplicacao.Modelos.Dashboard
     }
 
 
-    public class Tarefas
+    public class TarefasViewModel
     {
         public Guid Guid { get; set; }
         public string Cliente { get; set; }
         public string Data { get; set; }
         public string DataRetorno { get; set; }
         public string ValorPedido { get; set; }
-        public string SomaTotal { get; set; }
+        public string Status { get; set; }
+        public string CorStatusAtendimento { get; set; }
     }
 
     public class  ResultadoViewModel

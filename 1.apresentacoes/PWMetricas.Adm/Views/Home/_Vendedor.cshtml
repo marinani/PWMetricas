@@ -49,30 +49,37 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>Fernanda</td>
-												<td class="status-atendimento-bg">Em Atendimento</td>
-												<td>09/04/2025</td>
-												<td>29/04/2025</td>
-												<td>R$ 2.000</td>
-												<td><i class="bi bi-eye"></i></td>
-											</tr>
-											<tr>
-												<td>Jão</td>
-												<td class="status-naoresponde-bg">Perdido Não Responde</td>
-												<td>09/04/2025</td>
-												<td>29/04/2025</td>
-												<td>R$ 3.000</td>
-												<td><i class="bi bi-eye"></i></td>
-											</tr>
-											<tr>
-												<td>Maria</td>
-												<td class="status-orcamento-bg">Orçamento</td>
-												<td>09/04/2025</td>
-												<td>29/04/2025</td>
-												<td>R$ 5.000</td>
-												<td><i class="bi bi-eye"></i></td>
-											</tr>
+
+											@if (Model.Vendedor.Tarefas.Any())
+											{
+												@foreach (var tarefa in Model.Vendedor.Tarefas)
+												{
+													<tr>
+														<td>@tarefa.Cliente</td>
+														<td style="background-color:@tarefa.CorStatusAtendimento;">@tarefa.Status</td>
+														<td>@tarefa.Data</td>
+														<td>@tarefa.DataRetorno</td>
+														<td>@tarefa.ValorPedido</td>
+														<td>
+															<a asp-action="Editar" asp-controller="Atendimento" asp-route-guid="@tarefa.Guid" class="btn btn-primary btn-sm">
+																<i class="nav-icon bi bi-pencil"></i>
+															</a>
+															<a asp-action="Visualizar" asp-controller="Atendimento" asp-route-guid="@tarefa.Guid" class="btn btn-primary btn-sm">
+																<i class="nav-icon bi bi-eye"></i>
+															</a>
+														</td>
+													</tr>
+												}
+											}
+											else
+											{
+												<tr>
+													<td colspan="7" class="text-center">
+														<strong>Nenhuma tarefa encontrada para hoje.</strong>
+													</td>
+												</tr>
+											}
+
 										</tbody>
 										<tfoot>
 											<tr>
@@ -81,7 +88,7 @@
 													<strong>Soma Total:</strong>
 												</td>
 												<td colspan="1" class="text-center">
-													<strong>R$ 10.680</strong>
+													<strong>@Model.Vendedor.SomaAtendimento.ToString("C")</strong>
 												</td>
 												<td colspan="1">
 												</td>
@@ -113,11 +120,11 @@
 								</div>
 							</div>
 
-							
+
 							<!-- Barra de progresso da meta -->
 							<div class="progress mt-3">
 								<div class="progress-bar bg-success" role="progressbar"
-									 style="width: @(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal + "%")"
+									 style="width: @(Convert.ToInt32(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal) + "%")"
 									 aria-valuenow="@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal"
 									 aria-valuemin="0" aria-valuemax="100">
 									@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal %
@@ -127,7 +134,7 @@
 							<!-- Barra de progresso da super-meta -->
 							<div class="progress mt-3">
 								<div class="progress-bar bg-meta" role="progressbar"
-									 style="width: @(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal + "%")"
+									 style="width: @(Convert.ToInt32(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal) + "%")"
 									 aria-valuenow="@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal"
 									 aria-valuemin="0" aria-valuemax="100">
 									@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal %
@@ -163,8 +170,8 @@
 									<div style="display: flex; align-items: center; margin-bottom: 20px;">
 										<span style="font-size: 2em; margin-right: 10px;"> <img src="/icones/check-circle.png" style="width: 90px;height: auto;" alt="Ícone"></span>
 										<div>
-											<h4>Veja como estão</h4>
-											<h2>SEUS RESULTADOS</h2>
+											<h4 style="color:#fff;">Veja como estão</h4>
+											<h2 style="color:#fff;">SEUS RESULTADOS</h2>
 										</div>
 									</div>
 								</div>

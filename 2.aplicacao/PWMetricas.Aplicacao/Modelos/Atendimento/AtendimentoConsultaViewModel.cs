@@ -15,6 +15,8 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
         public int PaginaAtual { get; set; }
         public int TotalPaginas { get; set; }
         public int TotalRegistros { get; set; }
+        public bool IsVendedor { get; set; } = false;
+        public int? LojaId { get; set; }
         public string ValorPedido { get; set; } = "0,00";
     }
 }

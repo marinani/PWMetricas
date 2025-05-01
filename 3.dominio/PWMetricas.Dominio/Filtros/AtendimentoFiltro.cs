@@ -13,5 +13,8 @@ namespace PWMetricas.Dominio.Filtros
         public int? StatusAtendimentoId { get; set; }
         public DateTime? DataInicio { get; set; }
         public DateTime? DataFim { get; set; }
+        public DateTime? DataAtual { get; set; }
+
+        public bool IsVendedor { get; set; } = false;
     }
 }

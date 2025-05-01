@@ -22,7 +22,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
         [Display(Name = "Whatsapp")]
         public string? Whatsapp { get; set; }
 
-        [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
+        //[Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(Dominio.Mensagens.Mensagens))]
         [Display(Name = "Retorno")]
         public DateTime? DataRetorno { get; set; }
 

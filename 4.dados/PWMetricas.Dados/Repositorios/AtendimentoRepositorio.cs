@@ -13,6 +13,58 @@ namespace PWMetricas.Dados.Repositorios
         {
         }
 
+
+        public async Task<IEnumerable<Atendimento>> ObterAtendimentos(AtendimentoFiltro filtro)
+        {
+
+
+            var query = Consulta
+                .Include(x => x.StatusAtendimento)
+                .Include(x => x.Cliente)
+                .Include(x => x.Usuario)
+                .Include(x => x.Loja)
+                .Include(x => x.Produto)
+                .Include(x => x.Tamanho)
+                .Include(x => x.Canal)
+                .Include(x => x.Origem)
+                .AsQueryable();
+
+            if (filtro.StatusAtendimentoId.HasValue)
+            {
+                query = query.Where(x => x.StatusAtendimentoId == filtro.StatusAtendimentoId.Value);
+            }
+
+            if (filtro.UsuarioId.HasValue)
+            {
+                query = query.Where(x => x.UsuarioId == filtro.UsuarioId.Value);
+            }
+
+            if (filtro.LojaId.HasValue)
+            {
+                query = query.Where(x => x.LojaId == filtro.LojaId.Value);
+            }
+
+            if (filtro.DataInicio.HasValue)
+            {
+                query = query.Where(x => x.Data >= filtro.DataInicio.Value);
+            }
+
+            if (filtro.DataFim.HasValue)
+            {
+                query = query.Where(x => x.Data <= filtro.DataFim.Value);
+            }
+
+
+            if (filtro.DataAtual.HasValue)
+            {
+                query = query.Where(x => x.DataRetorno.HasValue && x.DataRetorno.Value.Date == filtro.DataAtual.Value.Date);
+            }
+
+            return await query
+                .OrderBy(x => x.DataRetorno)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Atendimento>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro)
         {
 

@@ -15,6 +15,8 @@
 								<th>Nome</th>
 								<th>E-mail</th>
 								<th>Loja</th>
+								<th>Meta Mensal</th>
+								<th>Super-Meta Mensal</th>
 								<th>Ações</th>
 							</tr>
 						</thead>
@@ -25,6 +27,8 @@
 									<td>@item.Nome</td>
 									<td>@item.Email</td>
 									<td>@item.LojaNome</td>
+									<td>@item.MetaMensal</td>
+									<td>@item.SuperMetaMensal</td>
 									<td>
 										<a asp-action="Editar" asp-route-id="@item.Id" class="btn btn-primary btn-sm">
 											<i class="nav-icon bi bi-pencil"></i>
