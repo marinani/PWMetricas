@@ -37,6 +37,7 @@ namespace PWMetricas.Aplicacao
             CreateMap<Usuario, VendedorViewModel>().ReverseMap();
             CreateMap<StatusAtendimento, StatusAtendimentoViewModel>().ReverseMap();
             CreateMap<Atendimento, AtendimentoViewModel>().ReverseMap();
+            CreateMap<AtendimentoObservacoes, ObservacoesAtendimentoViewModel>().ReverseMap();
 
             // Configuração de mapeamento entre Usuario e UsuarioViewModel  
             CreateMap<Usuario, UsuarioViewModel>()

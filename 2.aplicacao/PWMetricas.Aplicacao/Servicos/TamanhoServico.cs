@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using PWMetricas.Aplicacao.Modelos;
-using PWMetricas.Aplicacao.Modelos.Origem;
-using PWMetricas.Aplicacao.Modelos.Produto;
 using PWMetricas.Aplicacao.Modelos.Tamanho;
-using PWMetricas.Aplicacao.Modelos.Usuario;
 using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Dados.Repositorios;
 using PWMetricas.Dados.Repositorios.Interfaces;
@@ -59,11 +51,13 @@ namespace PWMetricas.Aplicacao.Servicos
            
             try
             {
-                
+                //if (await _tamanhoRepositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome))
+                //    new Resultado(new[] { "Já existe um tamanho com o mesmo Nome cadastrado " });
+
                 var entidade = new Tamanho()
                 {
-                    Id = 0, // Assuming 0 for new entities; adjust as needed
-                    Guid = Guid.NewGuid(), // Generate a new GUID
+                    Id = 0, 
+                    Guid = Guid.NewGuid(), 
                     Nome = modelo.Nome,
                     CorHex = modelo.CorHex,
                     Ativo = true
@@ -87,24 +81,27 @@ namespace PWMetricas.Aplicacao.Servicos
 
 
 
-            var usuario = await _tamanhoRepositorio.BuscarPorId(modelo.Id);
+            var entidade = await _tamanhoRepositorio.BuscarPorId(modelo.Id);
 
-            if (usuario == null)
+            if (entidade == null)
             {
                 return new Resultado(new[] { "Tamanho não encontrado." });
             }
 
+            //if (await _tamanhoRepositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome, entidade.Id))
+            //    new Resultado(new[] { "Já existe um tamanho com o mesmo Nome cadastrado " });
+
             try
             {
 
-                usuario.Nome = modelo.Nome;
-                usuario.CorHex = modelo.CorHex;
+                entidade.Nome = modelo.Nome;
+                entidade.CorHex = modelo.CorHex;
                 //usuario.Ativo = modelo.Ativo;
 
-                await _tamanhoRepositorio.Atualizar(usuario);
+                await _tamanhoRepositorio.Atualizar(entidade);
 
 
-                return new Resultado("Sucesso ao atualizar tamanho.", usuario);
+                return new Resultado("Sucesso ao atualizar tamanho.", entidade);
             }
             catch (Exception ex)
             {

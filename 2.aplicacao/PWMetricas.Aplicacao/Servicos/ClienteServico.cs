@@ -4,6 +4,7 @@ using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Aplicacao.Modelos.Cliente;
 using PWMetricas.Dominio.Entidades;
+using PWMetricas.Dados.Repositorios;
 
 namespace PWMetricas.Aplicacao.Servicos
 {
@@ -34,6 +35,10 @@ namespace PWMetricas.Aplicacao.Servicos
             var resultado = new Resultado();
             try
             {
+
+                //if (await _repositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome))
+                //    new Resultado(new[] { "Já existe um cliente com o mesmo Nome cadastrado " });
+
                 var cliente = _mapper.Map<Cliente>(modelo);
                 await _repositorio.Inserir(cliente);
                 return new Resultado("Sucesso ao cadastrar cliente.", cliente);
@@ -56,6 +61,11 @@ namespace PWMetricas.Aplicacao.Servicos
             {
                 return new Resultado(new[] { "Erro ao encontrar cliente." });
             }
+
+
+            //if (await _repositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome, cliente.Id))
+            //    new Resultado(new[] { "Já existe um cliente com o mesmo Nome cadastrado " });
+
             try
             {
                 _mapper.Map(modelo, cliente);

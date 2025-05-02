@@ -73,5 +73,7 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
         [Display(Name = "Loja")]
         //Filial
         public int? LojaId { get; set; }
+
+        public List<ObservacoesAtendimentoViewModel> AtendimentoObservacoes { get; set; } = new List<ObservacoesAtendimentoViewModel>();
     }
 }

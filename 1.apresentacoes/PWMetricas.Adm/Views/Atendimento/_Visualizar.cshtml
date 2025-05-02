@@ -285,3 +285,25 @@
 </div>
 
 <br />
+
+
+@if (Model.AtendimentoObservacoes != null && Model.AtendimentoObservacoes.Any())
+{
+	<div class="row mt-4">
+		<div class="col-sm-12">
+			<h5>Histórico de Observações</h5>
+			<hr />
+			@foreach (var obs in Model.AtendimentoObservacoes)
+			{
+				<div class="mb-4">
+					<div class="text-light-emphasis" style="font-size: 1.1rem;">
+						@obs.Data.ToString("dd/MM/yyyy") | @obs.Data.ToString("HH:mm")h
+					</div>
+					<div class="fst-italic text-muted" style="white-space: pre-wrap;">
+						@obs.Descricao
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+}

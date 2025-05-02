@@ -24,6 +24,37 @@ namespace PWMetricas.Aplicacao.Servicos
         public async Task<AtendimentoViewModel> ObterPorGuid(Guid guid)
         {
             var atendimento = await _atendimentoRepositorio.Buscar(guid);
+            var model = _mapper.Map<AtendimentoViewModel>(atendimento);
+
+            var lista = await MontarListaObservacoesAtendimento(atendimento.Id);
+
+            model.AtendimentoObservacoes = lista;
+
+            return model;
+        }
+
+        public async Task<List<ObservacoesAtendimentoViewModel>> MontarListaObservacoesAtendimento(int atendimentoId)
+        {
+            var observacoes = await _atendimentoObservacoesRepositorio.ListarObservacoesPorAtendimento(atendimentoId);
+
+            var lista = new List<ObservacoesAtendimentoViewModel>();
+
+            foreach (var item in observacoes)
+            {
+                lista.Add(new ObservacoesAtendimentoViewModel()
+                {
+                    Descricao = item.Descricao,
+                    Data = item.Data
+                }
+                );
+            }
+
+            return lista;
+        }
+
+        public async Task<AtendimentoViewModel> ObterPorGuidComObservacoes(Guid guid)
+        {
+            var atendimento = await _atendimentoRepositorio.BuscarComObservacoes(guid);
             return _mapper.Map<AtendimentoViewModel>(atendimento);
         }
 
@@ -70,7 +101,7 @@ namespace PWMetricas.Aplicacao.Servicos
 
                 await _atendimentoRepositorio.Atualizar(entidade);
 
-                if(!string.IsNullOrEmpty(modelo.Observacao))
+                if (!string.IsNullOrEmpty(modelo.Observacao))
                 {
                     await CriarObservacao(entidade, modelo.Observacao);
                 }
@@ -147,7 +178,7 @@ namespace PWMetricas.Aplicacao.Servicos
         }
 
 
-        public async Task<DashboardVendedorInicial> ObterAtendimentosPorFiltro( AtendimentoFiltro filtro)
+        public async Task<DashboardVendedorInicial> ObterAtendimentosPorFiltro(AtendimentoFiltro filtro)
         {
             var atendimentos = await _atendimentoRepositorio.ObterAtendimentos(filtro);
             var somaTotal = await _atendimentoRepositorio.SomaTotal(filtro);

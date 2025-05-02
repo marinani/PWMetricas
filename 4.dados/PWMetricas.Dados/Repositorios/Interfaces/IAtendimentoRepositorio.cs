@@ -10,6 +10,7 @@ namespace PWMetricas.Dados.Repositorios.Interfaces
 {
     public interface IAtendimentoRepositorio : IRepositorio<Atendimento>
     {
+        Task<Atendimento> BuscarComObservacoes(Guid chave);
         Task<IEnumerable<Atendimento>> ObterAtendimentos(AtendimentoFiltro filtro);
         Task<IEnumerable<Atendimento>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro);
         Task<int> ContarAtendimentos(AtendimentoFiltro filtro);

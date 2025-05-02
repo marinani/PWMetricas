@@ -34,6 +34,10 @@ namespace PWMetricas.Aplicacao.Servicos
             var resultado = new Resultado();
             try
             {
+
+                if (await _repositorio.ExisteComTexto(nameof(modelo.NomeFantasia), modelo.NomeFantasia))
+                    new Resultado(new[] { "Já existe uma loja com o mesmo Nome Fantasia cadastrado " });
+
                 var loja = _mapper.Map<Loja>(modelo);
                 await _repositorio.Inserir(loja);
                 return new Resultado("Sucesso ao cadastrar loja.", loja);
@@ -49,17 +53,21 @@ namespace PWMetricas.Aplicacao.Servicos
             var resultado = new Resultado();
 
 
-            var cliente = await _repositorio.Buscar(modelo.Guid);
+            var loja = await _repositorio.Buscar(modelo.Guid);
 
-            if (cliente == null)
+            if (loja == null)
             {
                 return new Resultado(new[] { "Erro ao encontrar loja." });
             }
+
+            if (await _repositorio.ExisteComTexto(nameof(modelo.NomeFantasia), modelo.NomeFantasia, loja.Id))
+                new Resultado(new[] { "Já existe uma loja com o mesmo Nome Fantasia cadastrado " });
+
             try
             {
-                _mapper.Map(modelo, cliente);
-                await _repositorio.Atualizar(cliente);
-                return new Resultado("Sucesso ao atualizar loja.", cliente);
+                _mapper.Map(modelo, loja);
+                await _repositorio.Atualizar(loja);
+                return new Resultado("Sucesso ao atualizar loja.", loja);
             }
             catch (Exception ex)
             {

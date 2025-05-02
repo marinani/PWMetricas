@@ -4,6 +4,8 @@ using PWMetricas.Aplicacao.Servicos.Interfaces;
 using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Dominio.Entidades;
 using PWMetricas.Aplicacao.Modelos.Origem;
+using Azure;
+using Flunt.Notifications;
 
 namespace PWMetricas.Aplicacao.Servicos
 {
@@ -52,6 +54,8 @@ namespace PWMetricas.Aplicacao.Servicos
 
             try
             {
+                //if (await _repositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome))
+                //    new Resultado(new[] { "Já existe uma origem com o mesmo nome cadastrado " });
 
                 var entidade = new Origem() 
                 {   Ativo = true, 
@@ -78,24 +82,27 @@ namespace PWMetricas.Aplicacao.Servicos
 
 
 
-            var usuario = await _repositorio.BuscarPorId(modelo.Id);
+            var origem = await _repositorio.BuscarPorId(modelo.Id);
 
-            if (usuario == null)
+            if (origem == null)
             {
                 return new Resultado(new[] { "Origem não encontrado." });
             }
 
+            //if (await _repositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome, origem.Id))
+            //    new Resultado(new[] { "Já existe uma origem com o mesmo nome cadastrado " });
+
             try
             {
 
-                usuario.Nome = modelo.Nome;
-                usuario.CorHex = modelo.CorHex;
+                origem.Nome = modelo.Nome;
+                origem.CorHex = modelo.CorHex;
                 //usuario.Ativo = modelo.Ativo;
 
-                await _repositorio.Atualizar(usuario);
+                await _repositorio.Atualizar(origem);
 
 
-                return new Resultado("Sucesso ao atualizar origem.", usuario);
+                return new Resultado("Sucesso ao atualizar origem.", origem);
             }
             catch (Exception ex)
             {

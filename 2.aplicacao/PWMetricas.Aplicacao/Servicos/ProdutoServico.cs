@@ -54,6 +54,8 @@ namespace PWMetricas.Aplicacao.Servicos
 
             try
             {
+                //if (await _produtoRepositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome))
+                //    new Resultado(new[] { "Já existe um produto com o mesmo Nome cadastrado " });
 
                 var entidade = new Produto()
                 {
@@ -81,24 +83,27 @@ namespace PWMetricas.Aplicacao.Servicos
 
             
 
-            var usuario = await _produtoRepositorio.BuscarPorId(modelo.Id);
+            var entidade = await _produtoRepositorio.BuscarPorId(modelo.Id);
 
-            if (usuario == null)
+            if (entidade == null)
             {
                 return new Resultado(new[] { "Usuário não encontrado." });
             }
 
+            //if (await _produtoRepositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome, entidade.Id))
+            //    new Resultado(new[] { "Já existe um produto com o mesmo Nome cadastrado " });
+
             try
             {
 
-                usuario.Nome = modelo.Nome;
-                usuario.CorHex = modelo.CorHex;
-                //usuario.Ativo = modelo.Ativo;
+                entidade.Nome = modelo.Nome;
+                entidade.CorHex = modelo.CorHex;
+                //entidade.Ativo = modelo.Ativo;
 
-                await _produtoRepositorio.Atualizar(usuario);
+                await _produtoRepositorio.Atualizar(entidade);
 
 
-                return new Resultado("Sucesso ao atualizar usuário.", usuario);
+                return new Resultado("Sucesso ao atualizar usuário.", entidade);
             }
             catch (Exception ex)
             {

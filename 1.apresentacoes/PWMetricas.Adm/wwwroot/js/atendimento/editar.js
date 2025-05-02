@@ -8,7 +8,7 @@
     const tamanhoDropdown = document.getElementById("TamanhoId");
     const statusDropdown = document.getElementById("StatusAtendimentoId");
     const cidadeDropdown = $('#Cidade'); // Dropdown de cidades
-    const dropdowns = ['#CanalId', '#OrigemId', '#ProdutoId', '#TamanhoId'];
+    const dropdowns = ['#CanalId', '#OrigemId', '#ProdutoId', '#TamanhoId', '#StatusAtendimentoId'];
 
     // Carregar cidades ao carregar a página
     const ufSelecionada = $('#Uf').val(); // Obtém a UF selecionada
@@ -158,8 +158,7 @@
         formData.append('StatusAtendimentoId', document.getElementById("StatusAtendimentoId").value);
         formData.append('Observacao', document.getElementById("Observacao").value);
 
-        debugger
-
+       
         $.ajax({
             method: 'POST',
             url: '/Atendimento/Editar/',
@@ -167,7 +166,6 @@
             processData: false,
             contentType: false,
             success: function (data) {
-                debugger
                 if (data.sucesso) {
                     showAlert("Atendimento atualizado com sucesso!", "success");
                     setTimeout(Reload, 2000);

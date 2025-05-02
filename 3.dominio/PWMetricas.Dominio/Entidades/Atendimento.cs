@@ -42,5 +42,7 @@ namespace PWMetricas.Dominio.Entidades
         public int LojaId { get; set; }
 
         public virtual Loja Loja { get; set; }
+
+        public virtual List<AtendimentoObservacoes> AtendimentoObservacoes { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace PWMetricas.Dados.Repositorios.Interfaces
 {
     public interface IAtendimentoObservacoesRepositorio : IRepositorio<AtendimentoObservacoes>
     {
+        Task<List<AtendimentoObservacoes>> ListarObservacoesPorAtendimento(int atendimentoId);
     }
 }

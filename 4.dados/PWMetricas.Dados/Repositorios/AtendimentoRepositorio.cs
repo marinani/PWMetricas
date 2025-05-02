@@ -13,6 +13,11 @@ namespace PWMetricas.Dados.Repositorios
         {
         }
 
+        public virtual async Task<Atendimento> BuscarComObservacoes(Guid chave) =>
+           await Consulta.Where(x => x.Guid == chave)
+            .Include(x => x.AtendimentoObservacoes)
+            .FirstOrDefaultAsync();
+
 
         public async Task<IEnumerable<Atendimento>> ObterAtendimentos(AtendimentoFiltro filtro)
         {

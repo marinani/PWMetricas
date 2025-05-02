@@ -51,6 +51,8 @@ namespace PWMetricas.Aplicacao.Servicos
 
             try
             {
+                //if (await _repositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome))
+                //    new Resultado(new[] { "Já existe uma canal com o mesmo Nome cadastrado " });
 
                 var entidade = new Canal()
                 {
@@ -79,24 +81,27 @@ namespace PWMetricas.Aplicacao.Servicos
 
 
 
-            var usuario = await _repositorio.BuscarPorId(modelo.Id);
+            var entidade = await _repositorio.BuscarPorId(modelo.Id);
 
-            if (usuario == null)
+            if (entidade == null)
             {
                 return new Resultado(new[] { "Canal não encontrado." });
             }
 
+            //if (await _repositorio.ExisteComTexto(nameof(modelo.Nome), modelo.Nome, entidade.Id))
+            //    new Resultado(new[] { "Já existe uma canal com o mesmo Nome cadastrado " });
+
             try
             {
 
-                usuario.Nome = modelo.Nome;
-                usuario.CorHex = modelo.CorHex;
+                entidade.Nome = modelo.Nome;
+                entidade.CorHex = modelo.CorHex;
                 //usuario.Ativo = modelo.Ativo;
 
-                await _repositorio.Atualizar(usuario);
+                await _repositorio.Atualizar(entidade);
 
 
-                return new Resultado("Sucesso ao atualizar canal.", usuario);
+                return new Resultado("Sucesso ao atualizar canal.", entidade);
             }
             catch (Exception ex)
             {
