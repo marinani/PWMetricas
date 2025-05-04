@@ -1,14 +1,14 @@
 {
   "profiles": {
     "DEV": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "https://localhost:8081",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "remoteDebugEnabled": false,
-      "applicationUrl": "https://localhost:8081"
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "https://localhost:8081",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "remoteDebugEnabled": true,
+        "applicationUrl": "http://localhost:5000;https://localhost:8081"
     }
   },
   "$schema": "https://json.schemastore.org/launchsettings.json"

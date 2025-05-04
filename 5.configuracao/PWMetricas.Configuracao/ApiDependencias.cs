@@ -20,6 +20,9 @@ using PWMetricas.Dados;
 using PWMetricas.Configuracao.Politicas;
 using PWMetricas.Dados.Repositorios.Interfaces;
 using PWMetricas.Dados.Repositorios;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace PWMetricas.Configuracao
 {
@@ -32,8 +35,11 @@ namespace PWMetricas.Configuracao
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pw Métricas - API - v1.0");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pw de Gerenciamento de Métricas - API - v1.0");
                 c.RoutePrefix = string.Empty;
+
+                c.SwaggerEndpoint("/api-docs/v1/swagger.json", "API de Gerenciamento de Métricas - v1.0");
+                c.RoutePrefix = "docs"; // Define o Swagger UI em "/docs"
             });
 
             app.UseRouting();
@@ -79,40 +85,39 @@ namespace PWMetricas.Configuracao
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Pw Métricas API",
-                    Description = "API para gerenciamento de métricas."
-                });
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Version = "v1",
+                        Title = "Pw Metricas API",
+                        Description = "API REST do sistema de gestão de métricas.",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Pw Midia",
+                            Email = "contato@pwmidia.com"
+                        }
+                    });
 
-                // Configuração para autenticação JWT no Swagger
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = @"Insira o token JWT no formato: Bearer {seu token}",
                     Name = "Authorization",
-                    In = ParameterLocation.Header,
                     Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer"
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = @"Token de acesso para autenticação na API, gerado através do método ""/api/autenticacao"". Exemplo (enviar no header das requisições): Bearer {token}.",
                 });
-
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                },
-                Scheme = "oauth2",
-                Name = "Bearer",
-                In = ParameterLocation.Header,
-            },
-            new List<string>()
-        }
-    });
+                 {
+                     new OpenApiSecurityScheme
+                     {
+                         Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
+                     },
+                     Array.Empty<string>()
+                 }
+            });
+            
             });
 
             services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
@@ -165,50 +170,55 @@ namespace PWMetricas.Configuracao
 
         private static void MontarAutenticacao(IServiceCollection services, IConfiguration configuration)
         {
-            var secretKey = configuration["Jwt:Key"];
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+            var secretKey = configuration.GetSection("Jwt")["Key"] ?? string.Empty;
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-     .AddJwtBearer(options =>
-     {
-         options.TokenValidationParameters = new TokenValidationParameters
-         {
-             ValidateIssuer = true,
-             ValidateAudience = true,
-             ValidateLifetime = true,
-             ValidateIssuerSigningKey = true,
-             ValidIssuer = configuration["Jwt:Issuer"],
-             ValidAudience = configuration["Jwt:Audience"],
-             IssuerSigningKey = signingKey,
-             ClockSkew = TimeSpan.Zero // Remove tolerância de tempo
-         };
+            var jwtAppSettingOptions = configuration.GetSection(nameof(JwtIssuerOptions));
 
-         // Adicionar eventos para depuração
-         options.Events = new JwtBearerEvents
-         {
-             OnAuthenticationFailed = context =>
-             {
-                 Console.WriteLine($"Token inválido: {context.Exception.Message}");
-                 return Task.CompletedTask;
-             },
-             OnTokenValidated = context =>
-             {
-                 Console.WriteLine("Token validado com sucesso.");
-                 return Task.CompletedTask;
-             }
-         };
-     });
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)],
+
+                ValidateAudience = true,
+                ValidAudience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)],
+
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+
+                RequireExpirationTime = true,
+                ValidateLifetime = true,
+
+                ClockSkew = TimeSpan.Zero,
+            };
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options => options.TokenValidationParameters = tokenValidationParameters);
+
+            services
+                .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, _ =>
+                {
+                    _.Cookie.HttpOnly = true;
+                });
+
 
             services.AddAuthorization(options =>
             {
-                var defaultPolicy = new AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme)
-                    .RequireAuthenticatedUser()
-                    .Build();
-
-                options.DefaultPolicy = defaultPolicy;
+                foreach (var pcv in Policy.Compilar(configuration))
+                {
+                    options.AddPolicy(pcv.Policy, policy => policy.RequireClaim(pcv.ClaimType, pcv.ClaimValue));
+                }
             });
 
-         
+            services.Configure<JwtIssuerOptions>(options =>
+            {
+                options.Issuer = jwtAppSettingOptions[nameof(JwtIssuerOptions.Issuer)];
+                options.Audience = jwtAppSettingOptions[nameof(JwtIssuerOptions.Audience)];
+                options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            });
         }
     }
 }

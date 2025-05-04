@@ -20,10 +20,10 @@ namespace PWMetricas.Api.Controllers
     /// </summary>
     [AllowAnonymous]
     [Route("Api/[controller]")]
-    public class AutenticacaoController : Controller
+    public sealed class AutenticacaoController : Controller
     {
         private readonly JwtIssuerOptions jwtOptions;
-        private readonly JsonSerializerOptions serializerSettings;
+        private readonly JsonSerializerOptions SerializerSettings;
         private readonly Tokens token;
 
         /// <summary>
@@ -31,32 +31,16 @@ namespace PWMetricas.Api.Controllers
         /// </summary>
         /// <param name="configuration"></param>
         /// <param name="tokensSnapshot"></param>
-        public AutenticacaoController(IConfiguration configuration, IOptionsSnapshot<Tokens> tokensSnapshot)
+       	public AutenticacaoController(IOptions<JwtIssuerOptions> jwtOptions, IOptionsSnapshot<Tokens> tokensSnapshot)
         {
-            // Configurar JwtIssuerOptions com base no appsettings
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
-
-            this.jwtOptions = new JwtIssuerOptions
-            {
-                Issuer = configuration["Jwt:Issuer"],
-                Audience = configuration["Jwt:Audience"],
-                SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
-               SecurityAlgorithms.HmacSha256
-               ),
-                JtiGenerator = () => Task.FromResult(Guid.NewGuid().ToString()),
-                IssuedAt = DateTime.UtcNow,
-                NotBefore = DateTime.UtcNow
-            };
-
-            serializerSettings = new JsonSerializerOptions
+            this.jwtOptions = jwtOptions.Value;
+            ThrowIfInvalidOptions(this.jwtOptions);
+            SerializerSettings = new JsonSerializerOptions
             {
                 WriteIndented = false
             };
 
             token = tokensSnapshot.Value;
-
-            Console.WriteLine($"Chave de assinatura: {configuration["Jwt:Key"]}");
         }
 
         /// <summary>
@@ -70,7 +54,7 @@ namespace PWMetricas.Api.Controllers
         {
             var resposta = new Resposta<Autorizacao>();
 
-            // Autenticação do cliente
+            //autenticação do cliente
             if (!token.Sistemas.ContainsValue(guid))
             {
                 HttpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
@@ -78,7 +62,7 @@ namespace PWMetricas.Api.Controllers
                 return resposta;
             }
 
-            // Permissões do cliente
+            //permissões do cliente
             var sistema = string.Empty;
             var identity = GetClaimsIdentity(guid, out sistema);
             if (identity == null)
@@ -90,34 +74,46 @@ namespace PWMetricas.Api.Controllers
 
             var claims = new[]
             {
-        new Claim(JwtRegisteredClaimNames.Sub, guid.ToString()),
-        new Claim(JwtRegisteredClaimNames.Jti, await this.jwtOptions.JtiGenerator()),
-        new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(jwtOptions.IssuedAt).ToString(CultureInfo.InvariantCulture), ClaimValueTypes.Integer64)
-    };
+                new Claim(JwtRegisteredClaimNames.Sub, guid.ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, await this.jwtOptions.JtiGenerator()),
+                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(jwtOptions.IssuedAt).ToString(CultureInfo.InvariantCulture), ClaimValueTypes.Integer64)
+        };
 
             var jwt = new JwtSecurityToken(
-                issuer: jwtOptions.Issuer,
-                audience: jwtOptions.Audience,
-                claims: claims,
-                notBefore: jwtOptions.NotBefore,
-                expires: DateTime.UtcNow.AddHours(24),
-                signingCredentials: jwtOptions.SigningCredentials
+                    issuer: jwtOptions.Issuer,
+                    audience: jwtOptions.Audience,
+                    claims: claims,
+                    notBefore: jwtOptions.NotBefore,
+                    expires: DateTime.Now.AddHours(24),
+                    signingCredentials: jwtOptions.SigningCredentials
             );
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            resposta.Dados = new Autorizacao
+            resposta.Dados = new Autorizacao()
             {
                 TokenAcesso = encodedJwt,
                 ValidoAte = jwt.ValidTo,
             };
 
-            Console.WriteLine($"Token gerado: {encodedJwt}");
-
             return resposta;
         }
 
         #region Privados
+
+        /// <summary>
+        /// Exibir exceções para a validação das opções JWT obrigatórias.
+        /// </summary>
+        /// <param name="options">Opções JWT.</param>
+        private static void ThrowIfInvalidOptions(JwtIssuerOptions options)
+        {
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+            if (options.SigningCredentials == null)
+                throw new ArgumentException(nameof(options.SigningCredentials));
+            if (options.JtiGenerator == null)
+                throw new ArgumentException(nameof(options.JtiGenerator));
+        }
 
         /// <summary>
         /// Converter uma data para Data em formato Unix, usado no jwt.
@@ -133,7 +129,7 @@ namespace PWMetricas.Api.Controllers
         /// <param name="guid">Código de acesso do sistema.</param>
         /// <param name="sistemaLicenca"></param>
         /// <returns></returns>
-        private Task<ClaimsIdentity> GetClaimsIdentity(Guid guid, out string sistemaLicenca)
+       	private Task<ClaimsIdentity> GetClaimsIdentity(Guid guid, out string sistemaLicenca)
         {
             var sistema = token.Sistemas.FirstOrDefault(x => x.Value == guid);
 
@@ -146,6 +142,7 @@ namespace PWMetricas.Api.Controllers
             sistemaLicenca = string.Empty;
             return Task.FromResult(new ClaimsIdentity());
         }
+
 
         #endregion Privados
     }
