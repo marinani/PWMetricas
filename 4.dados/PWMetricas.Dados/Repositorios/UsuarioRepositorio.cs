@@ -41,6 +41,7 @@ namespace PWMetricas.Dados.Repositorios
         public async Task<IEnumerable<Usuario>> ObterVendedoresPaginadosAsync(int page, int pageSize)
         {
             return await Consulta
+                .Include(x => x.Loja)
                 .Include(x => x.Perfil)
                 .Where(x => x.Perfil.Nome.ToUpper().Contains("VENDEDOR"))
                 .OrderBy(p => p.Nome)
@@ -48,6 +49,11 @@ namespace PWMetricas.Dados.Repositorios
                 .Take(pageSize)
                 .ToListAsync();
         }
+
+        public async Task<Usuario> BuscarVendedorPorId(int id) =>
+           await Consulta
+            .Include(x=> x.Loja)
+            .FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<int> ContarTotalVendedoresAsync()
         {
