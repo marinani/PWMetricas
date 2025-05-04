@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using Google.Authenticator;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using PWMetricas.Aplicacao.Modelos.Usuario;
@@ -10,11 +11,13 @@ namespace PWMetricas.Adm.Controllers
     {
         private readonly IUsuarioServico _usuarioServico;
         private readonly ILogger<HomeController> _logger;
+        private readonly TwoFactorAuthenticator _authenticator;
 
         public LoginController(IUsuarioServico usuarioServico, ILogger<HomeController> logger)
         {
             _usuarioServico = usuarioServico;
             _logger = logger;
+            _authenticator = new TwoFactorAuthenticator();
         }
 
         [HttpGet]
@@ -60,6 +63,9 @@ namespace PWMetricas.Adm.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+
+
 
 
         [HttpGet]

@@ -1,0 +1,518 @@
+﻿@{
+     
+    ViewData["Title"] = "Manual de Autenticação";
+
+}
+
+<style>
+    .nav-link.active.green {
+        color: green !important;
+    }
+
+    .nav-link:not(.active) {
+        color: #6c757d !important;
+        opacity: 0.6;
+    }
+</style>
+
+<div class="login-header d-flex flex-row justify-content-center align-items-center mb-4 col-12 col-md-6 ">
+    <img src="/images/logo_pw_metricas_horizontal.svg" alt="" height="80" width="80">
+    <h2 class="text-success">Manual de Configuração de Autenticação de Dois Fatores (2FA)</h2>
+</div>
+
+<!-- Abas -->
+<div class="card-body">
+    <div class="card card-outline card-success">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active green" id="android-tab" data-toggle="tab" href="#android" role="tab" aria-controls="android" aria-selected="true">Android</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link green" id="ios-tab" data-toggle="tab" href="#ios" role="tab" aria-controls="ios" aria-selected="false">iOS</a>
+            </li>
+        </ul>
+
+
+
+        <div class="tab-content" id="myTabContent">
+            <!-- Aba Android -->
+            <div class="tab-pane fade show active p-4" id="android" role="tabpanel" aria-labelledby="android-tab">
+                <ul class="nav nav-tabs" id="androidTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active green" id="google-auth-tab" data-toggle="tab" href="#googleAuth" role="tab" aria-controls="googleAuth" aria-selected="true">Google Authenticator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link green" id="microsoft-auth-tab" data-toggle="tab" href="#microsoftAuth" role="tab" aria-controls="microsoftAuth" aria-selected="false">Microsoft Authenticator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link green" id="authy-auth-tab" data-toggle="tab" href="#authyAuth" role="tab" aria-controls="authyAuth" aria-selected="false">Authy</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="androidTabContent">
+                    <!-- Aba Google Authenticator -->
+                    <div class="tab-pane fade show active col-lg-12  w-100" id="googleAuth" role="tabpanel" aria-labelledby="google-auth-tab">
+                        <h4 class="mb-3 mt-4 text-success">
+                            <b>1. Google Authenticator</b>
+                        </h4>
+                        <h5 class="ml-2"><b>⦁	Baixar e Instalar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Abra a	Google Play Store. <br />
+                            2.	Pesquise por "Google Authenticator". <br />
+                            3.	Toque em "Instalar". <br />
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Configurar:</b></h5>
+                        <p class="ml-3">
+                            1.	Abra o Google Authenticator. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Adicionar uma Conta:</b> </h5>
+                        <h6 class="ml-3">
+                            ⦁	<u>Digitalizando um Código QR:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" style="max-width: 58rem" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6.	No Google Authenticator, toque em "Escanear um código QR" e aponte a câmera para o código QR </br>
+                            7. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar. </br>
+                            8. No Google Authenticator, toque em "Inserir uma chave de configuração", digite a chave e o nome da conta. </br>
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Verificação:</b> </h5>
+                        <p class="ml-3">
+                            Digite o código de 6 dígitos gerado pelo Google Authenticator no campo <b>Digite o PIN de verificação do seu app</b> <br />
+                            “Pode apresentar o nome do aplicativo de forma dinâmica com o que conta nesta sessão”
+                            para confirmar. <br />
+                        </p>
+                    </div>
+
+                    <!-- Aba Microsoft Authenticator -->
+                    <div class="tab-pane fade col-lg-12  w-100" id="microsoftAuth" role="tabpanel" aria-labelledby="microsoft-auth-tab">
+                        <h4 class="mb-3 mt-4 text-success">
+                            <b>2. Microsoft Authenticator</b>
+                        </h4>
+                        <h5 class="ml-2"><b>⦁	Baixar e Instalar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Abra a	Google Play Store. <br />
+                            2.	Pesquise por "Microsoft Authenticator". <br />
+                            3.	Toque em "Instalar". <br />
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Configurar:</b></h5>
+                        <p class="ml-3">
+                            1.	Abra o Microsoft Authenticator. <br />
+                            2.	Toque em "Adicionar conta". <br />
+                            3.	Selecione "Outra conta" para contas não-Microsoft. <br />
+
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Adicionar uma Conta:</b> </h5>
+                        <h6 class="ml-3">
+                            ⦁	<u>Digitalizando um Código QR:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6.	No Microsoft Authenticator, toque em "Escanear código QR" e aponte a câmera para o código QR. </br>
+                        </p>
+                        <h6 class="ml-3">
+                            ⦁	<u>Inserindo Manualmente a Chave:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6.	No Microsoft Authenticator, toque em "Outra conta (Google, Facebook, etc.)", insira a chave e o nome da conta. </br>
+                        </p>
+
+                        <h5 class="ml-2"><b>⦁	Verificação:</b> </h5>
+                        <p class="ml-3">
+                            Digite o código de 6 dígitos gerado pelo Microsoft Authenticator no site/serviço para confirmar. <br />
+                        </p>
+                    </div>
+                    <!-- Aba Authy-->
+                    <div class="tab-pane fade col-lg-12 w-100" id="authyAuth" role="tabpanel" aria-labelledby="authy-auth-tab">
+                        <h4 class="mb-3 mt-4 text-success">
+                            <b>3. Authy</b>
+                        </h4>
+                        <h5 class="ml-2"><b>⦁	Baixar e Instalar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Abra a	Google Play Store. <br />
+                            2.	Pesquise por "Authy". <br />
+                            3.	Toque em "Instalar". <br />
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Configurar:</b></h5>
+                        <p class="ml-3">
+                            1.	Abra o Authy <br />
+                            2.	Toque no ícone de adicionar uma conta. <br />
+                            3.	Selecione "Outra conta" para contas não-Microsoft. <br />
+
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Adicionar uma Conta:</b> </h5>
+                        <h6 class="ml-3">
+                            ⦁	<u>Digitalizando um Código QR:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6.	No Authy, toque em "Escanear código QR" e aponte a câmera para o código QR. </br>
+                        </p>
+                        <h6 class="ml-3">
+                            ⦁	<u>Inserindo Manualmente a Chave:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6. No Authy, toque em "Inserir manualmente", insira a chave e o nome da conta. </br>
+                        </p>
+
+                        <h5 class="ml-2"><b>⦁	Verificação:</b> </h5>
+                        <p class="ml-3">
+                            Digite o código de 6 dígitos gerado pelo Authy no site/serviço para confirmar. <br />
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aba iOS -->
+            <div class="tab-pane fade p-4" id="ios" role="tabpanel" aria-labelledby="ios-tab">
+                <ul class="nav nav-tabs" id="iosTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active green" id="ios-google-auth-tab" data-toggle="tab" href="#iosGoogleAuth" role="tab" aria-controls="iosGoogleAuth" aria-selected="true">Google Authenticator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link green" id="ios-microsoft-auth-tab" data-toggle="tab" href="#iosMicrosoftAuth" role="tab" aria-controls="iosMicrosoftAuth" aria-selected="false">Microsoft Authenticator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link green" id="ios-apple-auth-tab" data-toggle="tab" href="#iosAppleAuth" role="tab" aria-controls="iosAppleAuth" aria-selected="false">Apple Authenticator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link green" id="ios-authy-auth-tab" data-toggle="tab" href="#iosAuthyAuth" role="tab" aria-controls="iosAuthyAuth" aria-selected="false">Authy</a>
+                    </li>
+                </ul>
+
+
+                <!-- Aba iOS -->
+                <div class="tab-content" id="iosTabContent">
+
+                    <!-- Aba Google Authenticator -->
+                    <div class="tab-pane fade show active" id="iosGoogleAuth" role="tabpanel" aria-labelledby="ios-google-auth-tab">
+                        <h4 class="mb-3 mt-4 text-success">
+                            <b>1. Google Authenticator</b>
+                        </h4>
+                        <h5 class="ml-2"><b>⦁	Baixar e Instalar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Abra a App Store. <br />
+                            2.	Pesquise por "Google Authenticator". <br />
+                            3.	Toque em "Obter" e depois em "Instalar". <br />
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Configurar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Abra o Google Authenticator. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Adicionar uma Conta:</b> </h5>
+                        <h6 class="ml-3">
+                            ⦁	<u>Digitalizando um Código QR:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" style="max-width: 58rem" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6.	No Google Authenticator, toque em "Escanear um código QR" e aponte a câmera para o código QR </br>
+
+                        </p>
+                        <h6 class="ml-3">
+                            ⦁	<u>Inserindo Manualmente a Chave:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> <br />
+                        <p class="ml-4 mt-2">
+                            6. No Google Authenticator, toque em "Inserir uma chave de configuração", digite a chave e o nome da conta. <br />
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Verificação:</b> </h5>
+                        <p class="ml-3">
+                            Digite o código de 6 dígitos gerado pelo Google Authenticator no site/serviço para confirmar. <br />
+                        </p>
+                    </div>
+
+                    <!-- Aba Microsoft Authenticator -->
+                    <div class="tab-pane fade" id="iosMicrosoftAuth" role="tabpanel" aria-labelledby="ios-microsoft-auth-tab">
+                        <h4 class="mb-3 mt-4 text-success">
+                            <b>2. Microsoft Authenticator</b>
+                        </h4>
+                        <h5 class="ml-2"><b>⦁	Baixar e Instalar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Abra a App Store. <br />
+                            2.	Pesquise por "Microsoft Authenticator". <br />
+                            3.	Toque em "Obter" e depois em "Instalar". <br />
+                        </p>
+                        <h5 class="ml-2">⦁	Configurar: </h5>
+                        <p class="ml-3">
+                            1.	Abra o Microsoft Authenticator. <br />
+                            2.	Toque em "Adicionar conta". <br />
+                            3.	Selecione "Outra conta" para contas não-Microsoft. <br />
+
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Adicionar uma Conta:</b> </h5>
+                        <h6 class="ml-3">
+                            ⦁	<u>Digitalizando um Código QR:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> <br/>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> <br/>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> <br/>
+                        <p class="ml-4 mt-2">
+                            6.	No Microsoft Authenticator, toque em "Escanear código QR" e aponte a câmera para o código QR. <br/>
+                        </p>
+                        <h6 class="ml-3">
+                            ⦁	<u>Inserindo Manualmente a Chave:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6.	No Microsoft Authenticator, toque em "Outra conta (Google, Facebook, etc.)", insira a chave e o nome da conta. </br>
+                        </p>
+
+                        <h5 class="ml-2"><b>⦁	Verificação:</b> </h5>
+                        <p class="ml-3">
+                            Digite o código de 6 dígitos gerado pelo Microsoft Authenticator no site/serviço para confirmar. <br />
+                        </p>
+                    </div>
+
+                    <!-- Aba Apple Authenticator -->
+                    <div class="tab-pane fade" id="iosAppleAuth" role="tabpanel" aria-labelledby="ios-apple-auth-tab">
+                        <h4 class="mb-3 mt-4 text-success">
+                            <b>3. Apple Authenticator</b>
+                        </h4>
+                        <h5 class="ml-2"><b>⦁	Configurar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Vá para Ajustes no seu iPhone/iPad. <br />
+                            2.	Selecione "Senhas". <br />
+                            3.	Toque em uma conta existente ou adicione uma nova. <br />
+                            3.	Selecione "Configurar Código de Verificação" e escolha "Inserir Configuração Manual". <br />
+
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Adicionar uma Conta:</b> </h5>
+                        <h6 class="ml-3">
+                            ⦁	<u>Inserindo Manualmente a Chave:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6.	Digite a chave e o nome da conta. </br>
+                        </p>
+
+                        <h5 class="ml-2"><b>⦁	Verificação:</b> </h5>
+                        <p class="ml-3">
+                            Digite o código de 6 dígitos gerado pelo Apple Authenticator no site/serviço para confirmar. <br />
+                        </p>
+                    </div>
+
+                    <!-- Aba Authy -->
+                    <div class="tab-pane fade" id="iosAuthyAuth" role="tabpanel" aria-labelledby="ios-authy-auth-tab">
+                        <h4 class="mb-3 mt-4 text-success">
+                            <b>4. Authy</b>
+                        </h4>
+                        <h5 class="ml-2"><b>⦁	Baixar e Instalar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Abra a App Store.. <br />
+                            2.	Pesquise por "Authy". <br />
+                            3.	Toque em "Obter" e depois em "Instalar". <br />
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Configurar:</b> </h5>
+                        <p class="ml-3">
+                            1.	Abra o Authy <br />
+                            2.	Toque no ícone de adicionar uma conta. <br />
+
+                        </p>
+                        <h5 class="ml-2"><b>⦁	Adicionar uma Conta:</b> </h5>
+                        <h6 class="ml-3">
+                            ⦁	<u>Digitalizando um Código QR:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> </br>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> </br>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> </br>
+                        <p class="ml-4 mt-2">
+                            6.	No Authy, toque em "Escanear código QR" e aponte a câmera para o código QR. </br>
+                        </p>
+                        <h6 class="ml-3">
+                            ⦁	<u>Inserindo Manualmente a Chave:</u>
+                        </h6>
+                        <p class="ml-4">
+                            1.	No Portal de Notícias, na área do perfil selecionar a opção <b>Configurar autenticação</b>. <br />
+                            2.	Toque em "Começar". <br />
+                            3.	Escolha "Escanear um código QR" ou "Inserir chave de configuração". <br />
+                            4.	Siga as instruções na tela. <br />
+                        </p>
+                        <div class="d-flex justify-center flex-column">
+                            <img src="~/dist/img/perfil.png" alt="Perfil" class="img-fluid border border-dark" /> <br/>
+                            <img src="~/dist/img/configurar_autenticacao.png" alt="Autenticação" class="img-fluid mt-2 border border-dark " style="max-width:23rem;" /> <br/>
+                        </div>
+                        <p class="ml-4 mt-1">
+                            5. Selecionar a opção <b>Aplicativo de Autenticação</b> e será apresentada a tela com o QRCode para configurar.
+                        </p>
+                        <img src="~/dist/img/qr_code.png" alt="QR Code" class="img-fluid border border-dark mb-4" /> <br/>
+                        <p class="ml-4 mt-2">
+                            6. No Authy, toque em "Inserir manualmente", insira a chave e o nome da conta. <br/>
+                        </p>
+
+                        <h5 class="ml-2"><b>⦁	Verificação:</b> </h5>
+                        <p class="ml-3">
+                            Digite o código de 6 dígitos gerado pelo Authy no site/serviço para confirmar. <br />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="card card-outline card-success p-3">
+            <h4 class="mb-3 mt-4 text-success">
+                <b>Dicas Adicionais:</b>
+            </h4>
+            <h5 class="ml-2"><b>⦁	Backup de Códigos</b> </h5>
+            <p class="ml-3">
+                Alguns serviços oferecem códigos de backup. Guarde esses códigos em um lugar seguro para o caso de você perder acesso ao autenticador.
+            </p>
+            <h5 class="ml-2"><b>⦁	Múltiplos Dispositivos: </b> </h5>
+            <p class="ml-3">
+                Considere configurar o autenticador em mais de um dispositivo para garantir acesso contínuo em caso de perda ou troca de aparelho.
+            </p>
+            <h5 class="ml-2"><b>⦁	Sincronização e Backup (para Authy): </b> </h5>
+            <p class="ml-3">
+                Authy permite sincronizar seus tokens em múltiplos dispositivos e fazer backup na nuvem, oferecendo uma camada extra de segurança e conveniência.
+            </p>
+
+            <p class="mt-3" style="font-size:1rem">⦁<u> Seguindo esses passos, você terá configurado a autenticação de dois fatores utilizando Google Authenticator, Microsoft Authenticator, Apple Authenticator, e Authy, aumentando significativamente a segurança de sua conta.</u></p>
+        </div>
+    </div>

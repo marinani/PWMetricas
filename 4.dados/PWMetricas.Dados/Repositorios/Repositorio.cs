@@ -48,23 +48,6 @@ namespace PWMetricas.Dados.Repositorios
         public async Task<TEntidade> Buscar(Expression<Func<TEntidade, bool>> expressao) =>
             await Consulta.Where(expressao).FirstOrDefaultAsync();
 
-        //public virtual async Task<dynamic> Buscar(Filtro<TEntidade> filtro)
-        //{
-        //    filtro.PrepararPaginacao();
-        //    var consulta = filtro.Consulta();
-        //    var total = await Consulta.AsExpandable().AsNoTracking().Where(consulta).CountAsync();
-        //    var lista = await Consulta
-        //        .AsExpandable()
-        //        .AsNoTracking()
-        //        .Where(consulta)
-        //        .OrderBy($@"{filtro.OrdemPor} {filtro.Ordem}")
-        //        .Skip(filtro.Pagina)
-        //        .Take(filtro.TamanhoPagina)
-        //        .Select(filtro.Propriedades())
-        //        .ToListAsync();
-        //    return new { Lista = lista, Total = total };
-        //}
-
         public Task<bool> Existe(Expression<Func<TEntidade, bool>> expressao) => Consulta.AnyAsync(expressao);
 
         public virtual async Task<bool> ExisteComTexto(string nomeColuna, string valor, int? idComparar)

@@ -31,7 +31,7 @@ namespace PWMetricas.Adm.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Cadastro()
+        public IActionResult Cadastro()
         {
             return View();
         }

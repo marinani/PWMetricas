@@ -57,6 +57,13 @@
 </body>
 </html>
 
+
+@RenderBody()
+
+
+@await Html.PartialAsync("_Scripts", "vendors")
+@await RenderSectionAsync("Scripts", false)
+
 @section Scripts {
 	<!-- Scripts para validação do lado do cliente -->
 	<partial name="_ValidationScriptsPartial" />
