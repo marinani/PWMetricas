@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PWMetricas.Dados;
 using PWMetricas.Dominio.Entidades;
@@ -6,8 +7,9 @@ using PWMetricas.Dominio.Utils;
 
 namespace PWMetricas.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
         private readonly PwMetricasDbContext _context;
@@ -15,6 +17,14 @@ namespace PWMetricas.Api.Controllers
         public UsuarioController(PwMetricasDbContext context)
         {
             _context = context;
+        }
+
+
+        [HttpGet]
+        [Route("/GetUsuarios")]
+        public IActionResult GetUsuarios()
+        {
+            return Ok("Usuário autenticado com sucesso!");
         }
 
         [HttpGet]

@@ -6,4 +6,21 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FastExpressionCompiler" Version="5.1.1" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="Microsoft.OpenApi" Version="1.6.24" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\2.aplicacao\PWMetricas.Aplicacao\PWMetricas.Aplicacao.csproj" />
+    <ProjectReference Include="..\..\3.dominio\PWMetricas.Dominio\PWMetricas.Dominio.csproj" />
+    <ProjectReference Include="..\..\4.dados\PWMetricas.Dados\PWMetricas.Dados.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,69 +1,97 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PWMetricas.Dados;
-using PWMetricas.Dominio.Entidades;
-using PWMetricas.Dominio.Utils;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using PWMetricas.Aplicacao.Modelos.Perfil;
+using PWMetricas.Aplicacao.Servicos.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PWMetricas.Api.Controllers
 {
-    [Route("api/[controller]")]
+    /// <summary>
+    /// Controller geral de Perfil
+    /// </summary>
+    /// <seealso cref="Controller" />
+    [Produces("application/json")]
     [ApiController]
     public class PerfilController : ControllerBase
     {
 
-        private readonly PwMetricasDbContext _context;
+        private readonly IPerfilServico _perfilServico;
 
-        public PerfilController(PwMetricasDbContext context)
+        public PerfilController(IPerfilServico perfilServico)
         {
-            _context = context;
+            _perfilServico = perfilServico;
         }
 
+
+        [Authorize] // Deve exigir claim Operacoes.Listar = Permitido
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [Route("api/Perfil/teste")]
+        public IActionResult Get() => Ok("Acesso autorizado!");
+
+        /// <summary>
+        /// Lista todos os perfils.
+        /// </summary>
+        /// <returns></returns>
+        [Route("Api/Perfil/ListarTodos")]
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ListarTodos()
         {
-            var profiles = await _context.Perfil.ToListAsync();
+            var profiles = await _perfilServico.ObterTodos();
             return Ok(profiles);
         }
 
+        /// <summary>
+        /// Lista o perfil por Id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("Api/Perfil/Listar/{id}")]
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [Authorize]
+        public async Task<IActionResult> Listar(int id)
         {
-            var profile = await _context.Perfil.FindAsync(id);
-            if (profile == null) return NotFound();
-            return Ok(profile);
+
+            var usuario = await _perfilServico.ObterPorId(id);
+            if (usuario == null) return NotFound();
+            return Ok(usuario);
+            
         }
 
+        /// <summary>
+        /// Adicionar um novo perfil.
+        /// </summary>
+        /// <returns></returns>
+        [Route("Api/Perfil/Adicionar")]
         [HttpPost]
-        public async Task<IActionResult> Post(Perfil profile)
+        [Authorize]
+        public async Task<IActionResult> Adicionar(PerfilViewModel model)
         {
-            _context.Perfil.Add(profile);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Get), new { id = profile.Id }, profile);
+            var resultado = await _perfilServico.Cadastrar(model);
+            if (!resultado.Sucesso)
+            {
+                return BadRequest(resultado.Erros);
+            }
+            return Ok(resultado);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Perfil profile)
+        /// <summary>
+        /// Atualiza o perfil.
+        /// </summary>
+        /// <returns></returns>
+        [Route("Api/Perfil/Atualizar")]
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Atualizar(PerfilViewModel model)
         {
-            var existing = await _context.Perfil.FindAsync(id);
-            if (existing == null) return NotFound();
-
-            existing.Nome = profile.Nome;
-            existing.Ativo = profile.Ativo;
-
-            await _context.SaveChangesAsync();
-            return NoContent();
+            var resultado = await _perfilServico.Atualizar(model);
+            if (!resultado.Sucesso)
+            {
+                return BadRequest(resultado.Erros);
+            }
+            return Ok(resultado);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var profile = await _context.Perfil.FindAsync(id);
-            if (profile == null) return NotFound();
-
-            _context.Perfil.Remove(profile);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
+      
     }
 }

@@ -16,7 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\4.dados\PWMetricas.Dados\PWMetricas.Dados.csproj" />
+    <ProjectReference Include="..\..\2.aplicacao\PWMetricas.Aplicacao\PWMetricas.Aplicacao.csproj" />
+    <ProjectReference Include="..\..\5.configuracao\PWMetricas.Configuracao\PWMetricas.Configuracao.csproj" />
   </ItemGroup>
 
 </Project>
