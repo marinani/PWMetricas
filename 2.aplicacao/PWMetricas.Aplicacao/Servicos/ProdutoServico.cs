@@ -29,7 +29,7 @@ namespace PWMetricas.Aplicacao.Servicos
 
         public async Task<IEnumerable<ProdutoViewModel>> ObterTodos()
         {
-            var perfis = await _produtoRepositorio.ListarAsync();
+            var perfis = await _produtoRepositorio.ListarAtivosAsync();
             return _mapper.Map<IEnumerable<ProdutoViewModel>>(perfis);
         }
 
@@ -63,7 +63,7 @@ namespace PWMetricas.Aplicacao.Servicos
                     Guid = Guid.NewGuid(), // Generate a new GUID
                     Nome = modelo.Nome,
                     CorHex = modelo.CorHex,
-                    Ativo = true
+                    Ativo = modelo.Ativo
                 };
                 await _produtoRepositorio.Inserir(entidade);
 
@@ -98,7 +98,7 @@ namespace PWMetricas.Aplicacao.Servicos
 
                 entidade.Nome = modelo.Nome;
                 entidade.CorHex = modelo.CorHex;
-                //entidade.Ativo = modelo.Ativo;
+                entidade.Ativo = modelo.Ativo;
 
                 await _produtoRepositorio.Atualizar(entidade);
 

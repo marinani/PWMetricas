@@ -29,7 +29,7 @@ namespace PWMetricas.Aplicacao.Servicos
         }
         public async Task<IEnumerable<OrigemViewModel>> ObterTodos()
         {
-            var perfis = await _repositorio.ListarAsync();
+            var perfis = await _repositorio.ListarAtivosAsync();
             return _mapper.Map<IEnumerable<OrigemViewModel>>(perfis);
         }
 
@@ -58,7 +58,8 @@ namespace PWMetricas.Aplicacao.Servicos
                 //    new Resultado(new[] { "Já existe uma origem com o mesmo nome cadastrado " });
 
                 var entidade = new Origem() 
-                {   Ativo = true, 
+                {
+                    Ativo = modelo.Ativo,
                     Guid = Guid.NewGuid(),
                     Id = 0, 
                     Nome = modelo.Nome,
@@ -97,7 +98,7 @@ namespace PWMetricas.Aplicacao.Servicos
 
                 origem.Nome = modelo.Nome;
                 origem.CorHex = modelo.CorHex;
-                //usuario.Ativo = modelo.Ativo;
+                origem.Ativo = modelo.Ativo;
 
                 await _repositorio.Atualizar(origem);
 

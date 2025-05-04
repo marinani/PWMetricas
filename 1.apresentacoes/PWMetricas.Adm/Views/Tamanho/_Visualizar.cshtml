@@ -9,6 +9,13 @@
 			<span asp-validation-for="Nome" class="text-danger"></span>
 		</div>
 	</div>
+	<div class="col-sm-3">
+		<div class="form-group form-check form-switch">
+			<input asp-for="Ativo" class="form-check-input" type="checkbox" id="Ativo" />
+			<label asp-for="Ativo" class="form-check-label">Ativo</label>
+		</div>
+		<span asp-validation-for="Ativo" class="text-danger"></span>
+	</div>
 </div>
 <div class="row g-4">
 	<div class="col-sm-3">

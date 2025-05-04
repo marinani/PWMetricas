@@ -26,7 +26,7 @@ namespace PWMetricas.Aplicacao.Servicos
 
         public async Task<IEnumerable<CanalViewModel>> ObterTodos()
         {
-            var canais = await _repositorio.ListarAsync();
+            var canais = await _repositorio.ListarAtivosAsync();
             return _mapper.Map<IEnumerable<CanalViewModel>>(canais);
         }
 
@@ -60,7 +60,7 @@ namespace PWMetricas.Aplicacao.Servicos
                     Guid = Guid.NewGuid(), // Generate a new GUID
                     Nome = modelo.Nome,
                     CorHex = modelo.CorHex,
-                    Ativo = true
+                    Ativo = modelo.Ativo
                 };
 
                 await _repositorio.Inserir(entidade);
@@ -96,7 +96,7 @@ namespace PWMetricas.Aplicacao.Servicos
 
                 entidade.Nome = modelo.Nome;
                 entidade.CorHex = modelo.CorHex;
-                //usuario.Ativo = modelo.Ativo;
+                entidade.Ativo = modelo.Ativo;
 
                 await _repositorio.Atualizar(entidade);
 

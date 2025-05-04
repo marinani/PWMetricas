@@ -119,6 +119,10 @@ namespace PWMetricas.Dados.Repositorios
         public async Task<IEnumerable<TEntidade>> ListarAsync() =>
             await Lista.ToListAsync();
 
+        public async Task<IEnumerable<TEntidade>> ListarAtivosAsync() =>
+           await Lista
+            .Where(x=> x.Ativo).ToListAsync();
+
         public async Task<IEnumerable<TEntidade>> ListarAsync(Expression<Func<TEntidade, bool>> expressao) =>
             await Lista.Where(expressao).ToListAsync();
 

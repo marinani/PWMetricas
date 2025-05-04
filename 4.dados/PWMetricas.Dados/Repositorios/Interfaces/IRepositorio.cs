@@ -69,6 +69,7 @@ namespace PWMetricas.Dados.Repositorios.Interfaces
         IQueryable<TEntidade> Listar(Expression<Func<TEntidade, bool>> expressao);
         Task<IEnumerable<TEntidade>> ListarAsync(Expression<Func<TEntidade, bool>> expressao);
         Task<IEnumerable<TEntidade>> ListarAsync();
+        Task<IEnumerable<TEntidade>> ListarAtivosAsync();
         Task Inserir(TEntidade entidade);
         Task Inserir(TEntidade[] entidades);
         Task Atualizar(TEntidade entidade);
