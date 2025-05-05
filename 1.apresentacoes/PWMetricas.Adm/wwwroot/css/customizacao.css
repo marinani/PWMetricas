@@ -948,3 +948,51 @@
     font-size: 1.2rem; /* Aumenta o tamanho do texto */
     padding: 10px 20px; /* Ajusta o espaçamento interno */
 }
+
+
+.em-atendimento .accordion-header {
+    background-color: var(--bs-atendimento-bg);
+}
+
+.orcamento .accordion-header {
+    background-color: var(--bs-orcamento-bg);
+}
+
+.vendido .accordion-header {
+    background-color: var(--bs-vendido-bg);
+}
+
+.negociado .accordion-header {
+    background-color: var(--bs-negociado-bg);
+}
+
+.naoresponde .accordion-header {
+    background-color: var(--bs-naoresponde-bg);
+}
+
+
+.total {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.graficos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.grafico-card {
+    background-color: #3a3a4a;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+canvas {
+    width: 100% !important;
+    max-width: 200px;
+    height: auto !important;
+    margin: 0 auto;
+}

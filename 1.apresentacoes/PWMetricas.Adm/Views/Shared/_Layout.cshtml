@@ -25,8 +25,8 @@
 		  integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI="
 		  crossorigin="anonymous" />
 	<link rel="stylesheet" href="~/css/classic.min.css" />
-
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+	
 
 
 </head>
@@ -67,7 +67,7 @@
 					</a>
 				</div>
 				<!-- Botões à direita -->
-				<ul class="navbar-nav ms-auto">
+				<ul class="navbar-nav ms-auto" style="z-index: 1050 !important; ">
 					<li class="nav-item">
 						<button id="theme-toggle" class="btn btn-outline-secondary">
 							<i id="theme-icon" class="bi bi-sun" style="color:goldenrod;"></i>
@@ -136,8 +136,9 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	@* <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script> *@
 	<script src="/js/pickr.min.js"></script>
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 	<script src="~/js/global.js"></script>
 	@await RenderSectionAsync("Scripts", required: false)
 	<script>

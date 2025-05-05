@@ -1,6 +1,8 @@
 ﻿@using System.Security.Claims;
 @using PWMetricas.Aplicacao.Modelos
 @using PWMetricas.Aplicacao.Modelos.Dashboard
+@using PWMetricas.Dominio.Enumerators
+
 @model DashboardViewModel
 
 
@@ -9,7 +11,9 @@
 	var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
 }
 
+@* <style>
 
+</style> *@
 
 
 <div class="app-content-header">
@@ -21,6 +25,31 @@
 
 <div class="app-content">
 	<div class="container-fluid">
+
+		<div class="row col-sm-10 offset-sm-1">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label for="mesVendedor">Mês</label>
+					<select for="mesVendedor" class="form-control" id="mesVendedor">
+						@foreach (var item in Enumerador.BuscarTodos<Mes>())
+						{
+							<option value="@item.Valor">@item.Descricao</option>
+						}
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-3" style="z-index: 1050 !important; ">
+				<div class="form-group">
+					<label for="anoVendedor">Ano</label>
+					<input for="anoVendedor" class="form-control" id="anoVendedor" type="text" maxlength="4" placeholder="Selecione o ano" />
+				</div>
+			</div>
+			<div class="col-sm-3 d-flex">
+				<button type="button" class="btn btn-primary mt-3" id="btnBuscarResultadoVendedor">Buscar</button>
+			</div>
+		</div>
+
+		<br />
 
 
 		<div class="row">

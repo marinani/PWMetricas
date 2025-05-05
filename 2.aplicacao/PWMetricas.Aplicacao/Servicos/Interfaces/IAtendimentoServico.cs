@@ -15,5 +15,9 @@ namespace PWMetricas.Aplicacao.Servicos.Interfaces
         Task<PaginacaoResultado<AtendimentoListaViewModel>> ObterAtendimentosPaginados(int page, int pageSize, AtendimentoFiltro filtro);
         Task<DashboardVendedorInicial> ObterAtendimentosPorFiltro(AtendimentoFiltro filtro);
         Task<List<ObservacoesAtendimentoViewModel>> MontarListaObservacoesAtendimento(int atendimentoId);
+        Task<List<GraficoCoresDto>> ObterTop4OrigemPorStatusAsync(int? mes, int? ano, int status);
+        Task<List<GraficoCoresDto>> ObterCanaisGraficoStatusAsync(int? mes, int? ano, int status);
+        Task<List<GraficoSimplesDto>> ObterVendedorGraficoStatusAsync(int? mes, int? ano, int status);
+        Task<List<GraficoSimplesDto>> ObterCidadesGraficoStatusAsync(int? mes, int? ano, int status);
     }
 }

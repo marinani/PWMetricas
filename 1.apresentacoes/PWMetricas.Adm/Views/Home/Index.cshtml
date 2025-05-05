@@ -18,9 +18,9 @@
 @section PageSpecificContainer {
 	<div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
 		<div class="left-select mb-2 mb-lg-0">
-			<select for="LojaId" name="LojaId" id="LojaId" class="form-select">
+			<select asp-for="LojaId" name="LojaId" id="LojaId" class="form-select">
 				<option value="">Selecione uma filial</option>
-				@* @if (ViewBag.Lojas != null)
+				@if (ViewBag.Lojas != null)
 				{
 					@foreach (var loja in ViewBag.Lojas)
 					{
@@ -28,7 +28,7 @@
 							@loja.Text
 						</option>
 					}
-				} *@
+				}
 			</select>
 		</div>
 		<div class="right-search">
@@ -45,4 +45,20 @@
 @if (userPerfil == "Vendedor")
 {
 	<partial name="_Vendedor" model="Model" />
+}
+
+
+@section Scripts {
+	<!-- Scripts para validação do lado do cliente -->
+	<partial name="_ValidationScriptsPartial" />
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	@if (userPerfil == "Administrador" || userPerfil == "Gerente")
+	{
+		<script src="/js/dashboard/graficos.js"></script>
+	}
+	else
+	{
+		<script src="/js/dashboard/vendedor.js"></script>
+	}
+
 }

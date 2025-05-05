@@ -17,5 +17,6 @@ namespace PWMetricas.Dados.Repositorios.Interfaces
         Task<decimal?> SomaTotal(AtendimentoFiltro filtro);
 
 
+
     }
 }

@@ -6,19 +6,27 @@ using PWMetricas.Dominio.Entidades;
 using PWMetricas.Aplicacao.Modelos.Atendimento;
 using PWMetricas.Dominio.Filtros;
 using PWMetricas.Aplicacao.Modelos.Dashboard;
+using Microsoft.EntityFrameworkCore;
 
 namespace PWMetricas.Aplicacao.Servicos
 {
     public class AtendimentoServico : IAtendimentoServico
     {
         private readonly IAtendimentoRepositorio _atendimentoRepositorio;
+        private readonly IOrigemRepositorio _origemRepositorio;
+        private readonly ICanalRepositorio _canalRepositorio;
+        private readonly IUsuarioRepositorio _usuarioRepositorio;
         private readonly IAtendimentoObservacoesRepositorio _atendimentoObservacoesRepositorio;
         private readonly IMapper _mapper;
-        public AtendimentoServico(IAtendimentoRepositorio atendimentoRepositorio, IMapper mapper, IAtendimentoObservacoesRepositorio atendimentoObservacoesRepositorio)
+        public AtendimentoServico(IAtendimentoRepositorio atendimentoRepositorio, IMapper mapper,
+            IAtendimentoObservacoesRepositorio atendimentoObservacoesRepositorio, IOrigemRepositorio origemRepositorio, ICanalRepositorio canalRepositorio, IUsuarioRepositorio usuarioRepositorio)
         {
             _atendimentoRepositorio = atendimentoRepositorio;
             _mapper = mapper;
             _atendimentoObservacoesRepositorio = atendimentoObservacoesRepositorio;
+            _origemRepositorio = origemRepositorio;
+            _canalRepositorio = canalRepositorio;
+            _usuarioRepositorio = usuarioRepositorio;
         }
 
         public async Task<AtendimentoViewModel> ObterPorGuid(Guid guid)
@@ -198,5 +206,218 @@ namespace PWMetricas.Aplicacao.Servicos
                 SomaAtendimento = somaTotal.HasValue ? somaTotal.Value : 0,
             };
         }
+
+
+
+
+        #region Graficos
+        public async Task<List<GraficoCoresDto>> ObterTop4OrigemPorStatusAsync(int? mes, int? ano, int status)
+        {
+
+            var hoje = DateTime.Today;
+            var mesVar = hoje.Month;
+            var anoVar = hoje.Year;
+
+            if(mes.HasValue && mes.Value > 0)
+                mesVar = mes.Value;
+
+            if(ano.HasValue)
+                anoVar = ano.Value;
+
+
+            var primeiroDiaMes = new DateTime(anoVar, mesVar, 1);
+            var proximoMes = primeiroDiaMes.AddMonths(1);
+
+
+            // Filtra os atendimentos válidos do mês atual
+            var atendimentosQuery = _atendimentoRepositorio.Listar()
+                .Where(a => a.Ativo &&
+                            a.Data >= primeiroDiaMes &&
+                            a.Data < proximoMes &&
+                            a.StatusAtendimentoId == status);
+
+            // Total de atendimentos no mês
+            var totalAtendimentos = await atendimentosQuery.CountAsync();
+
+            if (totalAtendimentos == 0)
+                return new List<GraficoCoresDto>();
+
+            // Top 4 origens com porcentagem
+            var resultado = await atendimentosQuery
+                .GroupBy(a => a.OrigemId)
+                .Select(grupo => new
+                {
+                    OrigemId = grupo.Key,
+                    Quantidade = grupo.Count()
+                })
+                .OrderByDescending(x => x.Quantidade)
+            //.Take(4)
+                .Join(_origemRepositorio.Listar(),
+                      atendimento => atendimento.OrigemId,
+                      origem => origem.Id,
+                      (atendimento, origem) => new GraficoCoresDto
+                      {
+                          Nome = origem.Nome,
+                          Porcentagem = Math.Round((decimal)atendimento.Quantidade * 100 / totalAtendimentos, 2),
+                          CorHex = origem.CorHex
+                      })
+                .ToListAsync();
+
+            return resultado;
+        }
+
+
+        public async Task<List<GraficoCoresDto>> ObterCanaisGraficoStatusAsync(int? mes, int? ano, int status)
+        {
+
+            var hoje = DateTime.Today;
+            var mesVar = hoje.Month;
+            var anoVar = hoje.Year;
+
+            if (mes.HasValue && mes.Value > 0)
+                mesVar = mes.Value;
+
+            if (ano.HasValue)
+                anoVar = ano.Value;
+
+
+            var primeiroDiaMes = new DateTime(anoVar, mesVar, 1);
+            var proximoMes = primeiroDiaMes.AddMonths(1);
+
+            // Filtra os atendimentos válidos do mês atual
+            var atendimentosQuery = _atendimentoRepositorio.Listar()
+                .Where(a => a.Ativo &&
+                            a.Data >= primeiroDiaMes &&
+                            a.Data < proximoMes &&
+                            a.StatusAtendimentoId == status);
+
+            // Total de atendimentos no mês
+            var totalAtendimentos = await atendimentosQuery.CountAsync();
+
+            if (totalAtendimentos == 0)
+                return new List<GraficoCoresDto>();
+
+            // Top canais com porcentagem
+            var resultado = await atendimentosQuery
+                .GroupBy(a => a.CanalId)
+                .Select(grupo => new
+                {
+                    CanalId = grupo.Key,
+                    Quantidade = grupo.Count()
+                })
+                .OrderByDescending(x => x.Quantidade)
+                .Join(_canalRepositorio.Listar(),
+                      atendimento => atendimento.CanalId,
+                      canal => canal.Id,
+                      (atendimento, canal) => new GraficoCoresDto
+                      {
+                          Nome = canal.Nome,
+                          Porcentagem = Math.Round((decimal)atendimento.Quantidade * 100 / totalAtendimentos, 2),
+                          CorHex = canal.CorHex
+                      })
+                .ToListAsync();
+
+            return resultado;
+        }
+
+
+        public async Task<List<GraficoSimplesDto>> ObterVendedorGraficoStatusAsync(int? mes, int? ano, int status)
+        {
+            var hoje = DateTime.Today;
+            var mesVar = hoje.Month;
+            var anoVar = hoje.Year;
+
+            if (mes.HasValue && mes.Value > 0)
+                mesVar = mes.Value;
+
+            if (ano.HasValue)
+                anoVar = ano.Value;
+
+
+            var primeiroDiaMes = new DateTime(anoVar, mesVar, 1);
+            var proximoMes = primeiroDiaMes.AddMonths(1);
+
+            // Filtra os atendimentos válidos do mês atual
+            var atendimentosQuery = _atendimentoRepositorio.Listar()
+                .Where(a => a.Ativo &&
+                            a.Data >= primeiroDiaMes &&
+                            a.Data < proximoMes &&
+                            a.StatusAtendimentoId == status);
+
+            // Total de atendimentos no mês
+            var totalAtendimentos = await atendimentosQuery.CountAsync();
+
+            if (totalAtendimentos == 0)
+                return new List<GraficoSimplesDto>();
+
+            // Top vendedores com porcentagem
+            var resultado = await atendimentosQuery
+                .GroupBy(a => a.UsuarioId)
+                .Select(grupo => new
+                {
+                    UsuarioId = grupo.Key,
+                    Quantidade = grupo.Count()
+                })
+                .OrderByDescending(x => x.Quantidade)
+                .Join(_usuarioRepositorio.Listar(x=> x.PerfilId == 3),
+                      atendimento => atendimento.UsuarioId,
+                      vendedor => vendedor.Id,
+                      (atendimento, vendedor) => new GraficoSimplesDto
+                      {
+                          Nome = vendedor.Nome,
+                          Porcentagem = Math.Round((decimal)atendimento.Quantidade * 100 / totalAtendimentos, 2)
+                      })
+                .Take(4)
+                .ToListAsync();
+
+            return resultado;
+        }
+
+
+        public async Task<List<GraficoSimplesDto>> ObterCidadesGraficoStatusAsync(int? mes, int? ano, int status)
+        {
+            var hoje = DateTime.Today;
+            var mesVar = hoje.Month;
+            var anoVar = hoje.Year;
+
+            if (mes.HasValue && mes.Value > 0)
+                mesVar = mes.Value;
+
+            if (ano.HasValue)
+                anoVar = ano.Value;
+
+
+            var primeiroDiaMes = new DateTime(anoVar, mesVar, 1);
+            var proximoMes = primeiroDiaMes.AddMonths(1);
+
+            // Filtra os atendimentos válidos do mês atual
+            var atendimentosQuery = _atendimentoRepositorio.Listar()
+                .Where(a => a.Ativo &&
+                            a.Data >= primeiroDiaMes &&
+                            a.Data < proximoMes &&
+                            a.StatusAtendimentoId == status);
+
+            // Total de atendimentos no mês
+            var totalAtendimentos = await atendimentosQuery.CountAsync();
+
+            if (totalAtendimentos == 0)
+                return new List<GraficoSimplesDto>();
+
+
+            var resultado = await atendimentosQuery
+            .GroupBy(a => a.Cidade)
+            .Select(grupo => new GraficoSimplesDto
+            {
+                Nome = grupo.Key,
+                Porcentagem = Math.Round((decimal)grupo.Count() * 100 / totalAtendimentos, 2)
+            })
+           .OrderByDescending(x => x.Porcentagem)
+           .Take(4)
+           .ToListAsync();
+
+            return resultado;
+        }
+        #endregion
+
     }
 }

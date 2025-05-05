@@ -30,6 +30,11 @@ public class HomeController : Controller
     {
         var perfil = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
         var usuarioLogadoId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+        ViewBag.Lojas = (await _lojaServico.ObterTodos())
+                         .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.NomeFantasia + " - " + c.CNPJ }).ToList();
+
+
         if (perfil != null && perfil.Equals("Vendedor"))
         {
             var usuario = await _usuarioServico.ObterPorId(int.Parse(usuarioLogadoId));
@@ -44,11 +49,46 @@ public class HomeController : Controller
         }
         else
         {
+            
+
             return View();
         }
     }
 
-   
+    #region Graficos
+    [HttpGet]
+    public async Task<IActionResult> ListarOrigensPorStatus(int mes, int ano, int status)
+    {
+        var lista = await _atendimentoServico.ObterTop4OrigemPorStatusAsync(mes, ano, status);
+        return Json(new { data = lista });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ListarCanaisPorStatus(int mes, int ano, int status)
+    {
+        var lista = await _atendimentoServico.ObterCanaisGraficoStatusAsync(mes, ano, status);
+        return Json(new { data = lista });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ListarVendedoresPorStatus(int mes, int ano, int status)
+    {
+        var lista = await _atendimentoServico.ObterVendedorGraficoStatusAsync(mes, ano, status);
+        return Json(new { data = lista });
+    }
+
+
+    [HttpGet]
+    public async Task<IActionResult> ListarCidadesPorStatus(int mes, int ano, int status)
+    {
+        var lista = await _atendimentoServico.ObterCidadesGraficoStatusAsync(mes, ano, status);
+        return Json(new { data = lista });
+    }
+
+    #endregion
+
+
+    #region Métodos Privados
     private async Task CarregarCombosConsulta()
     {
         ViewBag.Lojas = (await _lojaServico.ObterTodos())
@@ -134,6 +174,8 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    #endregion
 
 
 }
