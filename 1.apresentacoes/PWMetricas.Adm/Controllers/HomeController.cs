@@ -57,31 +57,31 @@ public class HomeController : Controller
 
     #region Graficos
     [HttpGet]
-    public async Task<IActionResult> ListarOrigensPorStatus(int mes, int ano, int status)
+    public async Task<IActionResult> ListarOrigensPorStatus(int? mes, int? ano, int? loja, int status)
     {
-        var lista = await _atendimentoServico.ObterTop4OrigemPorStatusAsync(mes, ano, status);
+        var lista = await _atendimentoServico.ObterOrigemGraficoStatusAsync(mes, ano, loja, status);
         return Json(new { data = lista });
     }
 
     [HttpGet]
-    public async Task<IActionResult> ListarCanaisPorStatus(int mes, int ano, int status)
+    public async Task<IActionResult> ListarCanaisPorStatus(int? mes, int? ano, int? loja, int status)
     {
-        var lista = await _atendimentoServico.ObterCanaisGraficoStatusAsync(mes, ano, status);
+        var lista = await _atendimentoServico.ObterCanaisGraficoStatusAsync(mes, ano, loja, status);
         return Json(new { data = lista });
     }
 
     [HttpGet]
-    public async Task<IActionResult> ListarVendedoresPorStatus(int mes, int ano, int status)
+    public async Task<IActionResult> ListarVendedoresPorStatus(int? mes, int? ano, int? loja, int status)
     {
-        var lista = await _atendimentoServico.ObterVendedorGraficoStatusAsync(mes, ano, status);
+        var lista = await _atendimentoServico.ObterVendedorGraficoStatusAsync(mes, ano, loja, status);
         return Json(new { data = lista });
     }
 
 
     [HttpGet]
-    public async Task<IActionResult> ListarCidadesPorStatus(int mes, int ano, int status)
+    public async Task<IActionResult> ListarCidadesPorStatus(int? mes, int? ano, int? loja, int status)
     {
-        var lista = await _atendimentoServico.ObterCidadesGraficoStatusAsync(mes, ano, status);
+        var lista = await _atendimentoServico.ObterCidadesGraficoStatusAsync(mes, ano, loja, status);
         return Json(new { data = lista });
     }
 

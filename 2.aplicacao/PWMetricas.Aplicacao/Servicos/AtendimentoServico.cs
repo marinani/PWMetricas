@@ -211,7 +211,7 @@ namespace PWMetricas.Aplicacao.Servicos
 
 
         #region Graficos
-        public async Task<List<GraficoCoresDto>> ObterTop4OrigemPorStatusAsync(int? mes, int? ano, int status)
+        public async Task<List<GraficoCoresDto>> ObterOrigemGraficoStatusAsync(int? mes, int? ano, int? loja, int status)
         {
 
             var hoje = DateTime.Today;
@@ -234,7 +234,8 @@ namespace PWMetricas.Aplicacao.Servicos
                 .Where(a => a.Ativo &&
                             a.Data >= primeiroDiaMes &&
                             a.Data < proximoMes &&
-                            a.StatusAtendimentoId == status);
+                            a.StatusAtendimentoId == status &&
+                            (!loja.HasValue || a.LojaId == loja.Value));
 
             // Total de atendimentos no mês
             var totalAtendimentos = await atendimentosQuery.CountAsync();
@@ -267,7 +268,7 @@ namespace PWMetricas.Aplicacao.Servicos
         }
 
 
-        public async Task<List<GraficoCoresDto>> ObterCanaisGraficoStatusAsync(int? mes, int? ano, int status)
+        public async Task<List<GraficoCoresDto>> ObterCanaisGraficoStatusAsync(int? mes, int? ano, int? loja, int status)
         {
 
             var hoje = DateTime.Today;
@@ -289,7 +290,8 @@ namespace PWMetricas.Aplicacao.Servicos
                 .Where(a => a.Ativo &&
                             a.Data >= primeiroDiaMes &&
                             a.Data < proximoMes &&
-                            a.StatusAtendimentoId == status);
+                            a.StatusAtendimentoId == status &&
+                            (!loja.HasValue || a.LojaId == loja.Value));
 
             // Total de atendimentos no mês
             var totalAtendimentos = await atendimentosQuery.CountAsync();
@@ -321,7 +323,7 @@ namespace PWMetricas.Aplicacao.Servicos
         }
 
 
-        public async Task<List<GraficoSimplesDto>> ObterVendedorGraficoStatusAsync(int? mes, int? ano, int status)
+        public async Task<List<GraficoSimplesDto>> ObterVendedorGraficoStatusAsync(int? mes, int? ano, int? loja, int status)
         {
             var hoje = DateTime.Today;
             var mesVar = hoje.Month;
@@ -342,7 +344,8 @@ namespace PWMetricas.Aplicacao.Servicos
                 .Where(a => a.Ativo &&
                             a.Data >= primeiroDiaMes &&
                             a.Data < proximoMes &&
-                            a.StatusAtendimentoId == status);
+                            a.StatusAtendimentoId == status &&
+                            (!loja.HasValue || a.LojaId == loja.Value));
 
             // Total de atendimentos no mês
             var totalAtendimentos = await atendimentosQuery.CountAsync();
@@ -374,7 +377,7 @@ namespace PWMetricas.Aplicacao.Servicos
         }
 
 
-        public async Task<List<GraficoSimplesDto>> ObterCidadesGraficoStatusAsync(int? mes, int? ano, int status)
+        public async Task<List<GraficoSimplesDto>> ObterCidadesGraficoStatusAsync(int? mes, int? ano, int? loja, int status)
         {
             var hoje = DateTime.Today;
             var mesVar = hoje.Month;
@@ -395,7 +398,8 @@ namespace PWMetricas.Aplicacao.Servicos
                 .Where(a => a.Ativo &&
                             a.Data >= primeiroDiaMes &&
                             a.Data < proximoMes &&
-                            a.StatusAtendimentoId == status);
+                            a.StatusAtendimentoId == status &&
+                            (!loja.HasValue || a.LojaId == loja.Value));
 
             // Total de atendimentos no mês
             var totalAtendimentos = await atendimentosQuery.CountAsync();

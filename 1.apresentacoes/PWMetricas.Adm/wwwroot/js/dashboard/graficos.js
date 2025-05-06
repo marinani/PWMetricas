@@ -46,7 +46,21 @@ $(document).ready(function () {
             const response = await fetch(url);
             const result = await response.json();
 
-            if (!result || !result.data || result.data.length === 0) return;
+            const canvas = document.getElementById(id);
+
+            // Se já existe gráfico neste canvas, destrua antes de criar outro
+            if (graficos[id]) {
+                graficos[id].destroy();
+                graficos[id] = null;
+            }
+
+            if (!result || !result.data || result.data.length === 0) {
+                // Limpa o canvas manualmente se quiser
+                const ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                //showAlert('Não existe resultado para o gráfico: ' + id, "warning");
+                return;
+            }
 
             const dados = result.data.map(x => x.porcentagem);
             const cores = result.data.map(x => x.corHex);
@@ -54,7 +68,7 @@ $(document).ready(function () {
 
             criarGrafico(id, dados, cores, labels);
         } catch (error) {
-            console.error(`Erro ao carregar gráfico ${id}:`, error);
+            showAlert('Erro ao carregar gráfico: ' + id, "danger");
         }
     }
 
@@ -68,7 +82,21 @@ $(document).ready(function () {
             const response = await fetch(url);
             const result = await response.json();
 
-            if (!result || !result.data || result.data.length === 0) return;
+            const canvas = document.getElementById(id);
+
+            // Se já existe gráfico neste canvas, destrua antes de criar outro
+            if (graficos[id]) {
+                graficos[id].destroy();
+                graficos[id] = null;
+            }
+
+            if (!result || !result.data || result.data.length === 0) {
+                // Limpa o canvas manualmente se quiser
+                const ctx = canvas.getContext("2d");
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                //showAlert('Não existe resultado para o gráfico: ' + id, "warning");
+                return;
+            }
 
             const dados = result.data.map(x => x.porcentagem);
             const cores = ['#FF4D79', '#D6B287', '#434343', '#EFEFEF'];
@@ -76,7 +104,7 @@ $(document).ready(function () {
 
             criarGrafico(id, dados, cores, labels);
         } catch (error) {
-            console.error(`Erro ao carregar gráfico ${id}:`, error);
+            showAlert('Erro ao carregar gráfico: ' + id, "danger");
         }
     }
 
@@ -117,32 +145,32 @@ $(document).ready(function () {
     carregarGraficoPizza({
         id: 'atendimentoOrigem',
         endpoint: '/Home/ListarOrigensPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 1 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 1 }
     });
 
     carregarGraficoPizza({
         id: 'orcamentoOrigem',
         endpoint: '/Home/ListarOrigensPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 2 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 2 }
     });
 
 
     carregarGraficoPizza({
         id: 'vendidoOrigem',
         endpoint: '/Home/ListarOrigensPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 3 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 3 }
     });
 
     carregarGraficoPizza({
         id: 'negociadoOrigem',
         endpoint: '/Home/ListarOrigensPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 4 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 4 }
     });
 
     carregarGraficoPizza({
         id: 'naorespondeOrigem',
         endpoint: '/Home/ListarOrigensPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 5 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 5 }
     });
 
 
@@ -151,32 +179,32 @@ $(document).ready(function () {
     carregarGraficoPizza({
         id: 'atendimentoCanal',
         endpoint: '/Home/ListarCanaisPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 1 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 1 }
     });
 
 
     carregarGraficoPizza({
         id: 'orcamentoCanal',
         endpoint: '/Home/ListarCanaisPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 2 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 2 }
     });
 
     carregarGraficoPizza({
         id: 'vendidoCanal',
         endpoint: '/Home/ListarCanaisPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 3 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 3 }
     });
 
     carregarGraficoPizza({
         id: 'negociadoCanal',
         endpoint: '/Home/ListarCanaisPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 4 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 4 }
     });
 
     carregarGraficoPizza({
         id: 'naorespondeCanal',
         endpoint: '/Home/ListarCanaisPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 5 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 5 }
     });
 
 
@@ -185,31 +213,31 @@ $(document).ready(function () {
     carregarGraficoPizzaTradicional({
         id: 'atendimentoVendedor',
         endpoint: '/Home/ListarVendedoresPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 1 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 1 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'orcamentoVendedor',
         endpoint: '/Home/ListarVendedoresPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 2 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 2 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'vendidoVendedor',
         endpoint: '/Home/ListarVendedoresPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 3 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 3 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'negociadoVendedor',
         endpoint: '/Home/ListarVendedoresPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 4 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 4 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'naorespondeVendedor',
         endpoint: '/Home/ListarVendedoresPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 5 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 5 }
     });
 
 
@@ -218,40 +246,41 @@ $(document).ready(function () {
     carregarGraficoPizzaTradicional({
         id: 'atendimentoCidade',
         endpoint: '/Home/ListarCidadesPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 1 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 1 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'orcamentoCidade',
         endpoint: '/Home/ListarCidadesPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 2 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 2 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'vendidoCidade',
         endpoint: '/Home/ListarCidadesPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 3 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 3 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'negociadoCidade',
         endpoint: '/Home/ListarCidadesPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 4 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 4 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'naorespondeCidade',
         endpoint: '/Home/ListarCidadesPorStatus',
-        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), status: 5 }
+        parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 5 }
     });
 
 
     $('#btnBuscar').on('click', function () {
         const mesSelecionado = $("#mes").val();
         const anoSelecionado = $("#ano").val();
+        const lojaSelecionada = $("#LojaId").val();
 
         // Atualiza os gráficos com os novos filtros
-        const parametros = (status) => ({ mes: mesSelecionado, ano: anoSelecionado, status });
+        const parametros = (status) => ({ mes: mesSelecionado, ano: anoSelecionado, loja: lojaSelecionada, status });
 
         // Origem
         carregarGraficoPizza({ id: 'atendimentoOrigem', endpoint: '/Home/ListarOrigensPorStatus', parametros: parametros(1) });
