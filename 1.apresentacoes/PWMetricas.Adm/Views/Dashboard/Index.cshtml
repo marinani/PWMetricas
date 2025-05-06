@@ -1,0 +1,258 @@
+﻿@using System.Security.Claims;
+@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Dashboard
+@using PWMetricas.Dominio.Enumerators
+@model DashboardViewModel
+
+
+@{
+	var userName = User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Name)?.Value : "Visitante";
+	var userPerfil = User.Identity.IsAuthenticated ? User.FindFirst("Perfil")?.Value : "Sem Perfil";
+}
+
+
+@{
+	ViewData["Title"] = "Página Inicial";
+}
+
+
+@section PageSpecificContainer {
+	<div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
+		<div class="left-select mb-2 mb-lg-0">
+			<select asp-for="LojaId" name="LojaId" id="LojaId" class="form-select">
+				<option value="">Selecione uma filial</option>
+				@if (ViewBag.Lojas != null)
+				{
+					@foreach (var loja in ViewBag.Lojas)
+					{
+						<option value="@loja.Value">
+							@loja.Text
+						</option>
+					}
+				}
+			</select>
+		</div>
+		<div class="right-search">
+			<input type="text" id="searchField" class="form-control" placeholder="Pesquisar..." />
+		</div>
+	</div>
+}
+
+
+
+
+<div class="app-content-header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="mb-0 text-center text-sm-center">
+					VISÃO GERAL
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="app-content">
+	<div class="container-fluid">
+		<div class="row col-sm-10 offset-sm-1">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label for="mes">Mês</label>
+					<select for="mes" class="form-control" id="mes">
+						@foreach (var item in Enumerador.BuscarTodos<Mes>())
+						{
+							<option value="@item.Valor">@item.Descricao</option>
+						}
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-3" style="z-index: 1050 !important; ">
+				<div class="form-group">
+					<label for="ano">Ano</label>
+					<input for="ano" class="form-control" id="ano" type="text" maxlength="4" placeholder="Selecione o ano" />
+				</div>
+			</div>
+			<div class="col-sm-3 d-flex">
+				<button type="button" class="btn btn-primary mt-3" id="btnBuscar">Buscar</button>
+			</div>
+		</div>
+
+		<br />
+
+		<div class="row">
+			<div class="col-sm-10 offset-sm-1">
+
+
+				<div class="accordion" id="accordionExample">
+					<div class="accordion-item atendimento">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingOne">
+							<button class="accordion-button-atendimento" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+									aria-controls="collapseOne">
+								EM ATENDIMENTO
+							</button>
+						</h2>
+						<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+							<div class="accordion-body">
+								<div class="graficos">
+									<div class="grafico-card">
+										<h3>ORIGEM</h3>
+										<canvas id="atendimentoOrigem"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CANAL</h3>
+										<canvas id="atendimentoCanal"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>VENDEDOR</h3>
+										<canvas id="atendimentoVendedor"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CIDADE</h3>
+										<canvas id="atendimentoCidade"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item orcamento">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingTwo">
+							<button class="accordion-button-orcamento" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								ORÇAMENTO
+							</button>
+						</h2>
+						<div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
+							<div class="accordion-body">
+								<div class="graficos">
+									<div class="grafico-card">
+										<h3>ORIGEM</h3>
+										<canvas id="orcamentoOrigem"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CANAL</h3>
+										<canvas id="orcamentoCanal"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>VENDEDOR</h3>
+										<canvas id="orcamentoVendedor"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CIDADE</h3>
+										<canvas id="orcamentoCidade"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="accordion-item vendido">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingThree">
+							<button class="accordion-button-vendido" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								VENDIDO
+							</button>
+						</h2>
+						<div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+							<div class="accordion-body">
+								<div class="graficos">
+									<div class="grafico-card">
+										<h3>ORIGEM</h3>
+										<canvas id="vendidoOrigem"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CANAL</h3>
+										<canvas id="vendidoCanal"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>VENDEDOR</h3>
+										<canvas id="vendidoVendedor"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CIDADE</h3>
+										<canvas id="vendidoCidade"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item negociado">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingFour">
+							<button class="accordion-button-negociado" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+								PERDIDO NEGOCIADO
+							</button>
+						</h2>
+						<div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour">
+							<div class="accordion-body">
+								<div class="graficos">
+									<div class="grafico-card">
+										<h3>ORIGEM</h3>
+										<canvas id="negociadoOrigem"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CANAL</h3>
+										<canvas id="negociadoCanal"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>VENDEDOR</h3>
+										<canvas id="negociadoVendedor"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CIDADE</h3>
+										<canvas id="negociadoCidade"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="accordion-item naoresponde">
+						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingFive">
+							<button class="accordion-button-naoresponde" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+								PERDIDO NÃO RESPONDE
+							</button>
+						</h2>
+						<div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
+							<div class="accordion-body">
+								<div class="graficos">
+									<div class="grafico-card">
+										<h3>ORIGEM</h3>
+										<canvas id="naorespondeOrigem"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CANAL</h3>
+										<canvas id="naorespondeCanal"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>VENDEDOR</h3>
+										<canvas id="naorespondeVendedor"></canvas>
+									</div>
+									<div class="grafico-card">
+										<h3>CIDADE</h3>
+										<canvas id="naorespondeCidade"></canvas>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+
+
+	</div>
+</div>
+
+@section Scripts {
+	<!-- Scripts para validação do lado do cliente -->
+	<partial name="_ValidationScriptsPartial" />
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="/js/dashboard/graficos.js"></script>
+
+
+}

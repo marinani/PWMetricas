@@ -16,15 +16,23 @@
 
 				<li class="nav-item">
 					<a href="/Home/Index" class="nav-link">
-						<i class="nav-icon bi bi-house"></i>
+						<img src="/icones/casa.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 						<p>Home</p>
 					</a>
 				</li>
 				@if (userPerfil == "Administrador" || userPerfil == "Gerente")
 				{
+
+					<li class="nav-item">
+						<a href="/Dashboard/Index" class="nav-link">
+							<img src="/icones/pizza.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
+							<p>Dashboard</p>
+						</a>
+					</li>
+
 					<li class="nav-item">
 						<a href="/Atendimento/Consulta" class="nav-link">
-							<i class="nav-icon bi bi-headset"></i>
+							<img src="/icones/atendimento.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 							<p>Atendimentos</p>
 						</a>
 					</li>
@@ -33,7 +41,7 @@
 				{
 					<li class="nav-item">
 						<a href="/Atendimento/Consulta" class="nav-link">
-							<i class="nav-icon bi bi-headset"></i>
+							<img src="/icones/atendimento.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 							<p>Meus Atendimentos</p>
 						</a>
 					</li>
@@ -43,7 +51,7 @@
 
 				<li class="nav-item">
 					<a href="#" class="nav-link">
-						<i class="nav-icon bi bi-person-fill"></i>
+						<img src="/icones/pessoa.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 						<p>
 							Clientes
 							<i class="nav-arrow bi bi-chevron-right"></i>
@@ -55,13 +63,13 @@
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
 							<a href="/Cliente/Cadastro" class="nav-link">
-								<i class="nav-icon bi bi-arrow-right"></i>
+								<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 								<p>Cadastro</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="/Cliente/Consulta" class="nav-link">
-								<i class="nav-icon bi bi-arrow-right"></i>
+								<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 								<p>Pesquisa</p>
 							</a>
 						</li>
@@ -72,7 +80,7 @@
 				{
 					<li class="nav-item">
 						<a href="#" class="nav-link">
-							<i class="nav-icon bi bi-list-check"></i>
+							<img src="/icones/to-do-list.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 							<p>
 								Cadastros
 								<i class="nav-arrow bi bi-chevron-right"></i>
@@ -81,31 +89,31 @@
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a href="/Vendedor/Consulta" class="nav-link">
-									<i class="nav-icon bi bi-arrow-right"></i>
+									<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 									<p>Vendedor</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a href="/Canal/Consulta" class="nav-link">
-									<i class="nav-icon bi bi-arrow-right"></i>
+									<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 									<p>Canal</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a href="/Origem/Consulta" class="nav-link">
-									<i class="nav-icon bi bi-arrow-right"></i>
+									<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 									<p>Origem</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a href="/Produto/Consulta" class="nav-link">
-									<i class="nav-icon bi bi-arrow-right"></i>
+									<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 									<p>Produto</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a href="/Tamanho/Consulta" class="nav-link">
-									<i class="nav-icon bi bi-arrow-right"></i>
+									<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 									<p>Tamanho</p>
 								</a>
 							</li>
@@ -116,7 +124,7 @@
 
 					<li class="nav-item">
 						<a href="#" class="nav-link">
-							<i class="nav-icon bi bi-shop"></i>
+							<img src="/icones/filial.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 							<p>
 								Filiais
 								<i class="nav-arrow bi bi-chevron-right"></i>
@@ -125,13 +133,13 @@
 						<ul class="nav nav-treeview">
 							<li class="nav-item">
 								<a href="/Loja/Consulta" class="nav-link">
-									<i class="nav-icon bi bi-arrow-right"></i>
+									<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 									<p>Pesquisa</p>
 								</a>
 							</li>
 							<li class="nav-item">
 								<a href="/Loja/Cadastro" class="nav-link">
-									<i class="nav-icon bi bi-arrow-right"></i>
+									<img src="/icones/flecha-direita.png" alt="Headset" style="width: 24px; height: 24px; margin-right: 8px;" />
 									<p>Nova Filial</p>
 								</a>
 							</li>

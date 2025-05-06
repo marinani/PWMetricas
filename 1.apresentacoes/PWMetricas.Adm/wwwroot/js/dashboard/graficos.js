@@ -144,32 +144,32 @@ $(document).ready(function () {
     // Chamadas para carregar os gráficos com parâmetros
     carregarGraficoPizza({
         id: 'atendimentoOrigem',
-        endpoint: '/Home/ListarOrigensPorStatus',
+        endpoint: '/Dashboard/ListarOrigensPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 1 }
     });
 
     carregarGraficoPizza({
         id: 'orcamentoOrigem',
-        endpoint: '/Home/ListarOrigensPorStatus',
+        endpoint: '/Dashboard/ListarOrigensPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 2 }
     });
 
 
     carregarGraficoPizza({
         id: 'vendidoOrigem',
-        endpoint: '/Home/ListarOrigensPorStatus',
+        endpoint: '/Dashboard/ListarOrigensPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 3 }
     });
 
     carregarGraficoPizza({
         id: 'negociadoOrigem',
-        endpoint: '/Home/ListarOrigensPorStatus',
+        endpoint: '/Dashboard/ListarOrigensPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 4 }
     });
 
     carregarGraficoPizza({
         id: 'naorespondeOrigem',
-        endpoint: '/Home/ListarOrigensPorStatus',
+        endpoint: '/Dashboard/ListarOrigensPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 5 }
     });
 
@@ -178,32 +178,32 @@ $(document).ready(function () {
 
     carregarGraficoPizza({
         id: 'atendimentoCanal',
-        endpoint: '/Home/ListarCanaisPorStatus',
+        endpoint: '/Dashboard/ListarCanaisPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 1 }
     });
 
 
     carregarGraficoPizza({
         id: 'orcamentoCanal',
-        endpoint: '/Home/ListarCanaisPorStatus',
+        endpoint: '/Dashboard/ListarCanaisPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 2 }
     });
 
     carregarGraficoPizza({
         id: 'vendidoCanal',
-        endpoint: '/Home/ListarCanaisPorStatus',
+        endpoint: '/Dashboard/ListarCanaisPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 3 }
     });
 
     carregarGraficoPizza({
         id: 'negociadoCanal',
-        endpoint: '/Home/ListarCanaisPorStatus',
+        endpoint: '/Dashboard/ListarCanaisPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 4 }
     });
 
     carregarGraficoPizza({
         id: 'naorespondeCanal',
-        endpoint: '/Home/ListarCanaisPorStatus',
+        endpoint: '/Dashboard/ListarCanaisPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 5 }
     });
 
@@ -212,31 +212,31 @@ $(document).ready(function () {
 
     carregarGraficoPizzaTradicional({
         id: 'atendimentoVendedor',
-        endpoint: '/Home/ListarVendedoresPorStatus',
+        endpoint: '/Dashboard/ListarVendedoresPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 1 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'orcamentoVendedor',
-        endpoint: '/Home/ListarVendedoresPorStatus',
+        endpoint: '/Dashboard/ListarVendedoresPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 2 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'vendidoVendedor',
-        endpoint: '/Home/ListarVendedoresPorStatus',
+        endpoint: '/Dashboard/ListarVendedoresPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 3 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'negociadoVendedor',
-        endpoint: '/Home/ListarVendedoresPorStatus',
+        endpoint: '/Dashboard/ListarVendedoresPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 4 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'naorespondeVendedor',
-        endpoint: '/Home/ListarVendedoresPorStatus',
+        endpoint: '/Dashboard/ListarVendedoresPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 5 }
     });
 
@@ -245,31 +245,31 @@ $(document).ready(function () {
 
     carregarGraficoPizzaTradicional({
         id: 'atendimentoCidade',
-        endpoint: '/Home/ListarCidadesPorStatus',
+        endpoint: '/Dashboard/ListarCidadesPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 1 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'orcamentoCidade',
-        endpoint: '/Home/ListarCidadesPorStatus',
+        endpoint: '/Dashboard/ListarCidadesPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 2 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'vendidoCidade',
-        endpoint: '/Home/ListarCidadesPorStatus',
+        endpoint: '/Dashboard/ListarCidadesPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 3 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'negociadoCidade',
-        endpoint: '/Home/ListarCidadesPorStatus',
+        endpoint: '/Dashboard/ListarCidadesPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 4 }
     });
 
     carregarGraficoPizzaTradicional({
         id: 'naorespondeCidade',
-        endpoint: '/Home/ListarCidadesPorStatus',
+        endpoint: '/Dashboard/ListarCidadesPorStatus',
         parametros: { mes: $("#mes").val(), ano: $("#ano").val(), loja: $("#LojaId").val(), status: 5 }
     });
 
@@ -283,32 +283,32 @@ $(document).ready(function () {
         const parametros = (status) => ({ mes: mesSelecionado, ano: anoSelecionado, loja: lojaSelecionada, status });
 
         // Origem
-        carregarGraficoPizza({ id: 'atendimentoOrigem', endpoint: '/Home/ListarOrigensPorStatus', parametros: parametros(1) });
-        carregarGraficoPizza({ id: 'orcamentoOrigem', endpoint: '/Home/ListarOrigensPorStatus', parametros: parametros(2) });
-        carregarGraficoPizza({ id: 'vendidoOrigem', endpoint: '/Home/ListarOrigensPorStatus', parametros: parametros(3) });
-        carregarGraficoPizza({ id: 'negociadoOrigem', endpoint: '/Home/ListarOrigensPorStatus', parametros: parametros(4) });
-        carregarGraficoPizza({ id: 'naorespondeOrigem', endpoint: '/Home/ListarOrigensPorStatus', parametros: parametros(5) });
+        carregarGraficoPizza({ id: 'atendimentoOrigem', endpoint: '/Dashboard/ListarOrigensPorStatus', parametros: parametros(1) });
+        carregarGraficoPizza({ id: 'orcamentoOrigem', endpoint: '/Dashboard/ListarOrigensPorStatus', parametros: parametros(2) });
+        carregarGraficoPizza({ id: 'vendidoOrigem', endpoint: '/Dashboard/ListarOrigensPorStatus', parametros: parametros(3) });
+        carregarGraficoPizza({ id: 'negociadoOrigem', endpoint: '/Dashboard/ListarOrigensPorStatus', parametros: parametros(4) });
+        carregarGraficoPizza({ id: 'naorespondeOrigem', endpoint: '/Dashboard/ListarOrigensPorStatus', parametros: parametros(5) });
 
         // Canal
-        carregarGraficoPizza({ id: 'atendimentoCanal', endpoint: '/Home/ListarCanaisPorStatus', parametros: parametros(1) });
-        carregarGraficoPizza({ id: 'orcamentoCanal', endpoint: '/Home/ListarCanaisPorStatus', parametros: parametros(2) });
-        carregarGraficoPizza({ id: 'vendidoCanal', endpoint: '/Home/ListarCanaisPorStatus', parametros: parametros(3) });
-        carregarGraficoPizza({ id: 'negociadoCanal', endpoint: '/Home/ListarCanaisPorStatus', parametros: parametros(4) });
-        carregarGraficoPizza({ id: 'naorespondeCanal', endpoint: '/Home/ListarCanaisPorStatus', parametros: parametros(5) });
+        carregarGraficoPizza({ id: 'atendimentoCanal', endpoint: '/Dashboard/ListarCanaisPorStatus', parametros: parametros(1) });
+        carregarGraficoPizza({ id: 'orcamentoCanal', endpoint: '/Dashboard/ListarCanaisPorStatus', parametros: parametros(2) });
+        carregarGraficoPizza({ id: 'vendidoCanal', endpoint: '/Dashboard/ListarCanaisPorStatus', parametros: parametros(3) });
+        carregarGraficoPizza({ id: 'negociadoCanal', endpoint: '/Dashboard/ListarCanaisPorStatus', parametros: parametros(4) });
+        carregarGraficoPizza({ id: 'naorespondeCanal', endpoint: '/Dashboard/ListarCanaisPorStatus', parametros: parametros(5) });
 
         // Vendedor
-        carregarGraficoPizzaTradicional({ id: 'atendimentoVendedor', endpoint: '/Home/ListarVendedoresPorStatus', parametros: parametros(1) });
-        carregarGraficoPizzaTradicional({ id: 'orcamentoVendedor', endpoint: '/Home/ListarVendedoresPorStatus', parametros: parametros(2) });
-        carregarGraficoPizzaTradicional({ id: 'vendidoVendedor', endpoint: '/Home/ListarVendedoresPorStatus', parametros: parametros(3) });
-        carregarGraficoPizzaTradicional({ id: 'negociadoVendedor', endpoint: '/Home/ListarVendedoresPorStatus', parametros: parametros(4) });
-        carregarGraficoPizzaTradicional({ id: 'naorespondeVendedor', endpoint: '/Home/ListarVendedoresPorStatus', parametros: parametros(5) });
+        carregarGraficoPizzaTradicional({ id: 'atendimentoVendedor', endpoint: '/Dashboard/ListarVendedoresPorStatus', parametros: parametros(1) });
+        carregarGraficoPizzaTradicional({ id: 'orcamentoVendedor', endpoint: '/Dashboard/ListarVendedoresPorStatus', parametros: parametros(2) });
+        carregarGraficoPizzaTradicional({ id: 'vendidoVendedor', endpoint: '/Dashboard/ListarVendedoresPorStatus', parametros: parametros(3) });
+        carregarGraficoPizzaTradicional({ id: 'negociadoVendedor', endpoint: '/Dashboard/ListarVendedoresPorStatus', parametros: parametros(4) });
+        carregarGraficoPizzaTradicional({ id: 'naorespondeVendedor', endpoint: '/Dashboard/ListarVendedoresPorStatus', parametros: parametros(5) });
 
         // Cidade
-        carregarGraficoPizzaTradicional({ id: 'atendimentoCidade', endpoint: '/Home/ListarCidadesPorStatus', parametros: parametros(1) });
-        carregarGraficoPizzaTradicional({ id: 'orcamentoCidade', endpoint: '/Home/ListarCidadesPorStatus', parametros: parametros(2) });
-        carregarGraficoPizzaTradicional({ id: 'vendidoCidade', endpoint: '/Home/ListarCidadesPorStatus', parametros: parametros(3) });
-        carregarGraficoPizzaTradicional({ id: 'negociadoCidade', endpoint: '/Home/ListarCidadesPorStatus', parametros: parametros(4) });
-        carregarGraficoPizzaTradicional({ id: 'naorespondeCidade', endpoint: '/Home/ListarCidadesPorStatus', parametros: parametros(5) });
+        carregarGraficoPizzaTradicional({ id: 'atendimentoCidade', endpoint: '/Dashboard/ListarCidadesPorStatus', parametros: parametros(1) });
+        carregarGraficoPizzaTradicional({ id: 'orcamentoCidade', endpoint: '/Dashboard/ListarCidadesPorStatus', parametros: parametros(2) });
+        carregarGraficoPizzaTradicional({ id: 'vendidoCidade', endpoint: '/Dashboard/ListarCidadesPorStatus', parametros: parametros(3) });
+        carregarGraficoPizzaTradicional({ id: 'negociadoCidade', endpoint: '/Dashboard/ListarCidadesPorStatus', parametros: parametros(4) });
+        carregarGraficoPizzaTradicional({ id: 'naorespondeCidade', endpoint: '/Dashboard/ListarCidadesPorStatus', parametros: parametros(5) });
     });
 
 
