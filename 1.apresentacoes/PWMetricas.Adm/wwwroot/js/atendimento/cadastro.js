@@ -6,16 +6,49 @@
     const origemDropdown = document.getElementById("OrigemId");
     const produtoDropdown = document.getElementById("ProdutoId");
     const tamanhoDropdown = document.getElementById("TamanhoId");
-    const statusDropdown = document.getElementById("StatusId");
+    const statusDropdown = document.getElementById("StatusAtendimentoId");
+    const dropdowns = ['#CanalId', '#OrigemId', '#ProdutoId', '#TamanhoId', '#StatusAtendimentoId'];
     debugger
     if ($("#IsVendedor").val() == "True") {
         $("#LojaId").prop("disabled", true);
         $("#UsuarioId").prop("disabled", true);
+        $("#StatusAtendimentoId").prop("disabled", true);
     }
     else {
         $("#LojaId").prop("disabled", false);
         $("#UsuarioId").prop("disabled", false);
+        $("#StatusAtendimentoId").prop("disabled", true);
     }
+
+
+    // Função para aplicar a cor de fundo ao carregar a página
+    function aplicarCorDeFundo(dropdownId) {
+        const dropdown = document.querySelector(dropdownId);
+        if (dropdown) {
+            const selectedOption = dropdown.options[dropdown.selectedIndex];
+            const color = selectedOption.getAttribute("data-color");
+            dropdown.style.backgroundColor = color || "transparent"; // Cor padrão caso não tenha
+        }
+    }
+
+    // Aplica a cor de fundo para cada dropdown
+    dropdowns.forEach(function (dropdownId) {
+        aplicarCorDeFundo(dropdownId);
+    });
+
+    // Adiciona evento para atualizar a cor ao alterar o valor
+    dropdowns.forEach(function (dropdownId) {
+        const dropdown = document.querySelector(dropdownId);
+        if (dropdown) {
+            dropdown.addEventListener("change", function () {
+                const selectedOption = dropdown.options[dropdown.selectedIndex];
+                const color = selectedOption.getAttribute("data-color");
+                dropdown.style.backgroundColor = color || "transparent"; // Cor padrão caso não tenha
+            });
+        }
+    });
+
+
 
     if (canalDropdown) { // Verifica se o elemento existe
         canalDropdown.addEventListener("change", function () {

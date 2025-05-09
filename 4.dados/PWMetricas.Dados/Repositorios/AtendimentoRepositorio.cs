@@ -34,10 +34,6 @@ namespace PWMetricas.Dados.Repositorios
                 .Include(x => x.Origem)
                 .AsQueryable();
 
-            if (filtro.StatusAtendimentoId.HasValue)
-            {
-                query = query.Where(x => x.StatusAtendimentoId == filtro.StatusAtendimentoId.Value);
-            }
 
             if (filtro.UsuarioId.HasValue)
             {
@@ -62,7 +58,8 @@ namespace PWMetricas.Dados.Repositorios
 
             if (filtro.DataAtual.HasValue)
             {
-                query = query.Where(x => x.DataRetorno.HasValue && x.DataRetorno.Value.Date == filtro.DataAtual.Value.Date);
+                query = query.Where(x => x.DataRetorno.HasValue && x.DataRetorno.Value.Date <= filtro.DataAtual.Value.Date && x.StatusAtendimentoId != 3);
+
             }
 
             return await query

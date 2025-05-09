@@ -1,6 +1,7 @@
 ﻿@using System.Security.Claims;
 @using PWMetricas.Aplicacao.Modelos
 @using PWMetricas.Aplicacao.Modelos.Dashboard
+@using PWMetricas.Dominio.Enumerators
 @model DashboardViewModel
 
 
@@ -38,14 +39,72 @@
 }
 
 
-@if (userPerfil == "Administrador" || userPerfil == "Gerente")
-{
-	<partial name="_Administrador" model="Model" />
-}
-@if (userPerfil == "Vendedor")
-{
-	<partial name="_Vendedor" model="Model" />
-}
+
+
+
+<div class="app-content-header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="mb-0 text-center text-sm-center">
+				</h3>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="app-content">
+	<div class="container-fluid">
+		<div class="row col-sm-10 offset-sm-1">
+			<div class="col-sm-3">
+				<div class="form-group">
+					<label asp-for="Mes">Mês</label>
+					<select asp-for="Mes" class="form-control" id="Mes">
+						@foreach (var item in Enumerador.BuscarTodos<Mes>())
+						{
+							<option value="@item.Valor">@item.Descricao</option>
+						}
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-3" style="z-index: 1050 !important; ">
+				<div class="form-group">
+					<label asp-for="Ano">Ano</label>
+					<input asp-for="Ano" class="form-control" id="Ano" type="text" maxlength="4" placeholder="Selecione o ano" />
+				</div>
+			</div>
+			<div class="col-sm-3 d-flex">
+				<button type="button" class="btn btn-primary mt-3" id="btnBuscar">Buscar</button>
+			</div>
+		</div>
+
+		<br />
+
+
+
+
+		@if (userPerfil == "Administrador" || userPerfil == "Gerente")
+		{
+			<partial name="_Administrador" model="Model" />
+		}
+		@if (userPerfil == "Vendedor")
+		{
+			<partial name="_Vendedor" model="Model" />
+		}
+
+
+
+
+
+	</div>
+</div>
+
+
+
+
+
+
 
 
 @section Scripts {

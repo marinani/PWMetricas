@@ -35,24 +35,31 @@ public class HomeController : Controller
                          .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.NomeFantasia + " - " + c.CNPJ }).ToList();
 
 
+        var usuario = await _usuarioServico.ObterPorId(int.Parse(usuarioLogadoId));
+
+        var modelo = new DashboardViewModel
+        {
+            LojaId = usuario.LojaId,
+            Resultado = await CarregarResultado(int.Parse(usuarioLogadoId)),
+            Tarefas = await CarregarTarefasDashboard(int.Parse(usuarioLogadoId))
+        };
+
+
         if (perfil != null && perfil.Equals("Vendedor"))
         {
-            var usuario = await _usuarioServico.ObterPorId(int.Parse(usuarioLogadoId));
+           
+            modelo.Vendedor = await CarregarDashboardVendedorInicial(int.Parse(usuarioLogadoId));
 
-            var modelo = new DashboardViewModel
-            {
-                LojaId = usuario.LojaId,
-                Vendedor = await CarregarDashboardVendedorInicial(usuario.Id)
-            };
-
-            return View(modelo);
+           
         }
         else
         {
             
 
-            return View();
+          
         }
+
+        return View(modelo);
     }
 
   
@@ -69,37 +76,79 @@ public class HomeController : Controller
 
     }
 
+    private async Task<ResultadoViewModel> CarregarResultado(int usuarioId)
+    {
+        var usuario = await _usuarioServico.ObterPorId(usuarioId);
+
+        if (usuario == null)
+        {
+            throw new Exception("Usuário não encontrado.");
+        }
+
+        if (usuario.PerfilId == 3)
+        {
+            var resultado = new ResultadoViewModel
+            {
+                SomaAtendimento = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 1, usuario.LojaId),
+                SomaOrcamento = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 2, usuario.LojaId),
+                SomaVendido = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 3, usuario.LojaId),
+                SomaNegociado = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 4, usuario.LojaId),
+                SomaNaoResponde = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 5, usuario.LojaId)
+            };
+
+            return resultado;
+        }
+        else
+        {
+            var resultado = new ResultadoViewModel
+            {
+                SomaAtendimento = await _atendimentoServico.SomaTotalAtendimento(null, 1, null),
+                SomaOrcamento = await _atendimentoServico.SomaTotalAtendimento(null, 2, null),
+                SomaVendido = await _atendimentoServico.SomaTotalAtendimento(null, 3, null),
+                SomaNegociado = await _atendimentoServico.SomaTotalAtendimento(null, 4, null),
+                SomaNaoResponde = await _atendimentoServico.SomaTotalAtendimento(null, 5, null)
+            };
+
+            return resultado;
+
+        }
+
+    }
+     
+    private async Task<List<TarefasViewModel>> CarregarTarefasDashboard(int usuarioId)
+    {
+        var usuario = await _usuarioServico.ObterPorId(usuarioId);
+
+        var IsVendedor = usuario.PerfilId == 3 ? true : false;
+
+        if (usuario == null)
+        {
+            throw new Exception("Usuário não encontrado.");
+        }
+
+
+        var filtro = new AtendimentoFiltro
+        {
+            LojaId = usuario.PerfilId == 3 ? usuario.LojaId : null,
+            UsuarioId = usuario.PerfilId == 3 ? usuario.Id : null,
+            DataAtual = DateTime.Now
+        };
+
+       return await _atendimentoServico.ObterTarefasPorFiltro(filtro);
+    }
+
     private async Task<DashboardVendedorInicial> CarregarDashboardVendedorInicial(int usuarioId)
     {
 
         var usuario = await _usuarioServico.ObterPorId(usuarioId);
 
-        if(usuario == null)
+        if (usuario == null)
         {
             throw new Exception("Usuário não encontrado.");
         }
 
         var vendedor = new DashboardVendedorInicial();
 
-        var filtro = new AtendimentoFiltro
-        {
-            LojaId = usuario.LojaId,
-            UsuarioId = usuarioId,
-            DataAtual = DateTime.Now
-        };
-
-        vendedor = await _atendimentoServico.ObterAtendimentosPorFiltro(filtro);
-
-        vendedor.NomeUsuario = usuario.Nome;
-        
-        vendedor.Resultado = new ResultadoViewModel()
-        {
-            SomaAtendimento = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 1, usuario.LojaId),
-            SomaOrcamento = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 2, usuario.LojaId),
-            SomaVendido = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 3, usuario.LojaId),
-            SomaNegociado = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 4, usuario.LojaId),
-            SomaNaoResponde = await _atendimentoServico.SomaTotalAtendimento(usuarioId, 5, usuario.LojaId)
-        };
 
         vendedor.MinhasMetas = new Metas()
         {
@@ -126,11 +175,6 @@ public class HomeController : Controller
         {
             vendedor.MinhasMetas.ValorMetaPorcentagemSuperMetaMensal = 0;
         }
-
-
-
-
-   
 
         return vendedor;
 

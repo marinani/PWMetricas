@@ -20,5 +20,6 @@ namespace PWMetricas.Aplicacao.Modelos.Atendimento
         public string ValorPedido { get; set; }
         public string Status { get; set; }
         public string Cliente { get; set; }
+        public string CorStatusAtendimento { get; set; }
     }
 }

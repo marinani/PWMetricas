@@ -70,11 +70,11 @@
 
 					<div class="accordion-item orcamento">
 						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingTwo">
-							<button class="accordion-button-orcamento collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							<button class="accordion-button-orcamento" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 								ORÇAMENTO
 							</button>
 						</h2>
-						<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+						<div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo">
 							<div class="accordion-body">
 								<div id="lista-orcamento">
 									@await Html.PartialAsync("_ListaOrcamento", Model)
@@ -87,11 +87,11 @@
 
 					<div class="accordion-item vendido">
 						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingThree">
-							<button class="accordion-button-vendido collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+							<button class="accordion-button-vendido" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 								VENDIDO
 							</button>
 						</h2>
-						<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+						<div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
 							<div class="accordion-body">
 								<div id="lista-vendido">
 									@await Html.PartialAsync("_ListaVendido", Model)
@@ -103,11 +103,11 @@
 
 					<div class="accordion-item negociado">
 						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingFour">
-							<button class="accordion-button-negociado collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+							<button class="accordion-button-negociado" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
 								PERDIDO NEGOCIADO
 							</button>
 						</h2>
-						<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+						<div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingFour">
 							<div class="accordion-body">
 								<div id="lista-negociado">
 									@await Html.PartialAsync("_ListaNegociado", Model)
@@ -120,11 +120,11 @@
 
 					<div class="accordion-item naoresponde">
 						<h2 class="accordion-header d-flex justify-content-between align-items-center" id="headingFive">
-							<button class="accordion-button-naoresponde collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+							<button class="accordion-button-naoresponde" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
 								PERDIDO NÃO RESPONDE
 							</button>
 						</h2>
-						<div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive">
+						<div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="headingFive">
 							<div class="accordion-body">
 								<div id="lista-naoresponde">
 									@await Html.PartialAsync("_ListaNaoResponde", Model)

@@ -253,21 +253,9 @@
 							{
 								@foreach (var status in ViewBag.Status)
 								{
-
-									@if (status.Equals("EM ATENDIMENTO"))
-									{
-										<option value="@status.Id" style="background-color: @status.CorHex;" data-color="@status.CorHex" selected="selected">
-											@status.Nome
-										</option>
-									}
-									else
-									{
-										<option value="@status.Id" style="background-color: @status.CorHex;" data-color="@status.CorHex">
-											@status.Nome
-										</option>
-									}
-
-
+									<option value="@status.Id" style="background-color: @status.CorHex;" data-color="@status.CorHex">
+										@status.Nome
+									</option>
 								}
 							}
 

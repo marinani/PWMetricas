@@ -186,27 +186,33 @@ namespace PWMetricas.Aplicacao.Servicos
         }
 
 
-        public async Task<DashboardVendedorInicial> ObterAtendimentosPorFiltro(AtendimentoFiltro filtro)
+        public async Task<List<TarefasViewModel>> ObterTarefasPorFiltro(AtendimentoFiltro filtro)
         {
             var atendimentos = await _atendimentoRepositorio.ObterAtendimentos(filtro);
-            var somaTotal = await _atendimentoRepositorio.SomaTotal(filtro);
 
-            return new DashboardVendedorInicial
+            var listaTarefas = new List<TarefasViewModel>();
+
+            foreach (var item in atendimentos)
             {
-                Tarefas = atendimentos.Select(a => new TarefasViewModel
-                {
-                    Guid = a.Guid,
-                    Cliente = a.Cliente.Nome,
-                    Status = a.StatusAtendimento.Nome,
-                    CorStatusAtendimento = a.StatusAtendimento.CorHex,
-                    Data = a.Data.ToShortDateString(),
-                    DataRetorno = a.DataRetorno.HasValue ? a.DataRetorno.Value.ToShortDateString() : "",
-                    ValorPedido = a.ValorPedido.ToString("C")
-                }).ToList(),
-                SomaAtendimento = somaTotal.HasValue ? somaTotal.Value : 0,
-            };
+                listaTarefas.Add(new TarefasViewModel {
+                    Guid = item.Guid,
+                    Cliente = item.Cliente.Nome,
+                    Status = item.StatusAtendimento.Nome,
+                    CorStatusAtendimento = item.StatusAtendimento.CorHex,
+                    Data = item.Data.ToShortDateString(),
+                    DataRetorno = item.DataRetorno.HasValue ? item.DataRetorno.Value.ToShortDateString() : "",
+                    ValorPedido = item.ValorPedido.ToString("C")
+                }
+                );
+            }
+
+            return listaTarefas;
         }
 
+        public async Task<decimal?> ObterSomaTotalAtendimentoPorFiltro(AtendimentoFiltro filtro)
+        {
+            return await _atendimentoRepositorio.SomaTotal(filtro);
+        }
 
 
 

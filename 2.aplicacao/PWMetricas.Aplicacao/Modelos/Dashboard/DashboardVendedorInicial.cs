@@ -8,9 +8,6 @@ namespace PWMetricas.Aplicacao.Modelos.Dashboard
 {
     public class DashboardVendedorInicial
     {
-        public string? NomeUsuario { get; set; }
-        public List<TarefasViewModel> Tarefas { get; set; } = new List<TarefasViewModel>();
-        public ResultadoViewModel Resultado { get; set; } = new ResultadoViewModel();
         public Metas MinhasMetas { get; set; } = new Metas();
 
         public decimal SomaAtendimento { get; set; } = 0;

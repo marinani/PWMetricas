@@ -178,30 +178,28 @@ namespace PWMetricas.Adm.Controllers
         [Route("Atendimento/NovoAtendimento")]
         public async Task<IActionResult> NovoAtendimento()
         {
-            await CarregarCombos();
+           
             //Obter o ID do usuário logado
             var perfil = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
             var usuarioLogadoId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+            var modelo = new AtendimentoViewModel
+            {
+                UsuarioId = usuarioLogadoId.Equals("0") ? 0 : int.Parse(usuarioLogadoId),
+                StatusAtendimentoId = 1,
+                IsVendedor = true
+            };
+
+           
             if (perfil != null && perfil.Equals("Vendedor"))
             {
                 var usuario = await _usuarioServico.ObterPorId(int.Parse(usuarioLogadoId));
-
-
-                var modelo = new AtendimentoViewModel
-                {
-                    UsuarioId = usuarioLogadoId.Equals("0") ? 0 : int.Parse(usuarioLogadoId),
-                    LojaId = usuario.LojaId,
-                    IsVendedor = true
-
-                };
-
-
-                return View(modelo);
+                modelo.LojaId = usuario.LojaId;
+               
             }
-            else
-            {
-                return View();
-            }
+
+            await CarregarCombos();
+            return View(modelo);
 
         }
 

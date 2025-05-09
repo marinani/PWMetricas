@@ -1,0 +1,80 @@
+﻿@using PWMetricas.Aplicacao.Modelos
+@using PWMetricas.Aplicacao.Modelos.Atendimento
+@model AtendimentoConsultaViewModel
+
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-bordered">
+		<thead>
+			<tr>
+				<th scope="col">Cliente</th>
+				<th scope="col">Status</th>
+				<th scope="col">Data</th>
+				<th scope="col">Retornar</th>
+				<th scope="col">R$ Pedido</th>
+				<th scope="col">Visualizar</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			@if (Model.Resultados.Any())
+			{
+				@foreach (var tarefa in Model.Resultados)
+				{
+					<tr>
+						<td>@tarefa.Cliente</td>
+						<td style="background-color:@tarefa.CorStatusAtendimento;">@tarefa.Status</td>
+						<td>@tarefa.Data</td>
+						<td>@tarefa.DataRetorno</td>
+						<td>@tarefa.ValorPedido</td>
+						<td>
+							<a asp-action="Editar" asp-controller="Atendimento" asp-route-guid="@tarefa.Guid" class="btn btn-primary btn-sm">
+								<i class="nav-icon bi bi-pencil"></i>
+							</a>
+							<a asp-action="Visualizar" asp-controller="Atendimento" asp-route-guid="@tarefa.Guid" class="btn btn-primary btn-sm">
+								<i class="nav-icon bi bi-eye"></i>
+							</a>
+						</td>
+					</tr>
+				}
+			}
+			else
+			{
+				<tr>
+					<td colspan="7" class="text-center">
+						<strong>Nenhuma tarefa encontrada.</strong>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3"></td>
+				<td colspan="1" class="text-center">
+					<strong>Soma Total:</strong>
+				</td>
+				<td colspan="1" class="text-center">
+					<strong>@Model.ValorPedido</strong>
+				</td>
+				<td colspan="1">
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
+@if (Model?.TotalPaginas > 1)
+{
+	<!-- Paginação -->
+	<nav>
+		<ul class="pagination">
+			@for (int i = 1; i <= Model.TotalPaginas; i++)
+			{
+				<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
+					<a class="page-link" asp-action="ListaAtendimento" asp-route-pagina="@i" asp-route-UsuarioId="@Model.Filtro.UsuarioId" asp-route-LojaId="@Model.Filtro.LojaId">
+						@i
+					</a>
+				</li>
+			}
+		</ul>
+	</nav>
+}
