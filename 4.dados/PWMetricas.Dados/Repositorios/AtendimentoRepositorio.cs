@@ -107,6 +107,12 @@ namespace PWMetricas.Dados.Repositorios
                 query = query.Where(x => x.Data <= filtro.DataFim.Value);
             }
 
+            if (filtro.DataAtual.HasValue)
+            {
+                query = query.Where(x => x.DataRetorno.HasValue && x.DataRetorno.Value.Date <= filtro.DataAtual.Value.Date && x.StatusAtendimentoId != 3);
+
+            }
+
             return await query
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
@@ -133,6 +139,12 @@ namespace PWMetricas.Dados.Repositorios
             if (filtro.DataFim.HasValue)
                 query = query.Where(x => x.Data <= filtro.DataFim.Value);
 
+            if (filtro.DataAtual.HasValue)
+            {
+                query = query.Where(x => x.DataRetorno.HasValue && x.DataRetorno.Value.Date <= filtro.DataAtual.Value.Date && x.StatusAtendimentoId != 3);
+
+            }
+
             return await query.CountAsync();
         }
 
@@ -155,6 +167,12 @@ namespace PWMetricas.Dados.Repositorios
 
             if (filtro.DataFim.HasValue)
                 query = query.Where(x => x.Data <= filtro.DataFim.Value);
+
+            if (filtro.DataAtual.HasValue)
+            {
+                query = query.Where(x => x.DataRetorno.HasValue && x.DataRetorno.Value.Date <= filtro.DataAtual.Value.Date && x.StatusAtendimentoId != 3);
+
+            }
 
             return await query.Select(x => x.ValorPedido).SumAsync();
         }

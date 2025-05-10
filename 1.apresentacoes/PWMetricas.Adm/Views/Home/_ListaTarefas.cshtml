@@ -1,6 +1,6 @@
 ﻿@using PWMetricas.Aplicacao.Modelos
-@using PWMetricas.Aplicacao.Modelos.Atendimento
-@model AtendimentoConsultaViewModel
+@using PWMetricas.Aplicacao.Modelos.Dashboard
+@model DashboardViewModel
 
 <div class="table-responsive">
 	<table class="table table-striped table-hover table-bordered">
@@ -70,7 +70,7 @@
 			@for (int i = 1; i <= Model.TotalPaginas; i++)
 			{
 				<li class="page-item @(i == Model.PaginaAtual ? "active" : "")">
-					<a class="page-link" asp-action="ListaAtendimento" asp-route-pagina="@i" asp-route-UsuarioId="@Model.Filtro.UsuarioId" asp-route-LojaId="@Model.Filtro.LojaId">
+					<a class="page-link" asp-action="ListaTarefas" asp-route-pagina="@i" asp-route-UsuarioId="@Model.Filtro.UsuarioId" asp-route-LojaId="@Model.Filtro.LojaId">
 						@i
 					</a>
 				</li>

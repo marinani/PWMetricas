@@ -175,6 +175,7 @@ namespace PWMetricas.Aplicacao.Servicos
                     Cliente = a.Cliente.Nome,
                     Status = a.StatusAtendimento.Nome,
                     Data = a.Data.ToShortDateString(),
+                    CorStatusAtendimento = a.StatusAtendimento.CorHex,
                     DataRetorno = a.DataRetorno.HasValue ? a.DataRetorno.Value.ToShortDateString() : "",
                     ValorPedido = a.ValorPedido.ToString("C")
                 }),

@@ -6,6 +6,7 @@ using PWMetricas.Aplicacao.Servicos.Interfaces;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PWMetricas.Aplicacao.Modelos.Dashboard;
 using PWMetricas.Dominio.Filtros;
+using PWMetricas.Aplicacao.Modelos.Atendimento;
 
 namespace PWMetricas.Adm.Controllers;
 
@@ -40,8 +41,7 @@ public class HomeController : Controller
         var modelo = new DashboardViewModel
         {
             LojaId = usuario.LojaId,
-            Resultado = await CarregarResultado(int.Parse(usuarioLogadoId)),
-            Tarefas = await CarregarTarefasDashboard(int.Parse(usuarioLogadoId))
+            Resultado = await CarregarResultado(int.Parse(usuarioLogadoId))
         };
 
 
@@ -62,9 +62,45 @@ public class HomeController : Controller
         return View(modelo);
     }
 
-  
+    [HttpGet]
+    [Route("Home/ListaTarefas")]
+    public async Task<IActionResult> ListaTarefas(AtendimentoFiltro filtro, int pagina = 1)
+    {
+        const int pageSize = 10; // Número de itens por página
+        filtro = await AtendimentoFiltro(filtro);
+        var resultadoPaginado = await _atendimentoServico.ObterAtendimentosPaginados(pagina, pageSize, filtro);
+
+        var viewModel = new DashboardViewModel
+        {
+            Filtro = filtro,
+            Resultados = resultadoPaginado?.Dados ?? new List<AtendimentoListaViewModel>(), // Evita null
+            PaginaAtual = resultadoPaginado?.PaginaAtual ?? 1,
+            TotalPaginas = resultadoPaginado?.TotalPaginas ?? 1,
+            TotalRegistros = resultadoPaginado?.TotalRegistros ?? 0,
+            ValorPedido = resultadoPaginado?.SomaTotal ?? "0,00"
+        };
+
+        return PartialView("_ListaTarefas", viewModel);
+    }
 
     #region Métodos Privados
+
+    private async Task<AtendimentoFiltro> AtendimentoFiltro(AtendimentoFiltro filtro)
+    {
+        var perfil = User.Claims.FirstOrDefault(c => c.Type == "Perfil")?.Value;
+        var usuarioLogadoId = User.Claims.FirstOrDefault(c => c.Type == "Id")?.Value;
+
+        filtro.DataAtual = DateTime.Now;
+        if (perfil != null && perfil.Equals("Vendedor"))
+        {
+            var usuario = await _usuarioServico.ObterPorId(int.Parse(usuarioLogadoId));
+            filtro.UsuarioId = usuario.Id;
+            filtro.LojaId = usuario.LojaId;
+            filtro.IsVendedor = true;
+
+        }
+        return filtro;
+    }
     private async Task CarregarCombosConsulta()
     {
         ViewBag.Lojas = (await _lojaServico.ObterTodos())

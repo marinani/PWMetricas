@@ -3,17 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PWMetricas.Aplicacao.Modelos.Atendimento;
+using PWMetricas.Dominio.Filtros;
 
 namespace PWMetricas.Aplicacao.Modelos.Dashboard
 {
     public class DashboardViewModel
     {
-        public int? LojaId { get; set; }
+        //public AtendimentoConsultaViewModel AtendimentoConsulta { get; set; } = new AtendimentoConsultaViewModel();
+        public AtendimentoFiltro Filtro { get; set; } = new AtendimentoFiltro();
+        public IEnumerable<AtendimentoListaViewModel> Resultados { get; set; } = new List<AtendimentoListaViewModel>();
 
+        public int PaginaAtual { get; set; }
+        public int TotalPaginas { get; set; }
+        public int TotalRegistros { get; set; }
+        public bool IsVendedor { get; set; } = false;
+        public int? LojaId { get; set; }
+        public string ValorPedido { get; set; } = "0,00";
         public int? Mes { get; set; } = DateTime.Now.Month;
         public int? Ano { get; set; } = DateTime.Now.Year;
         public string? NomeUsuario { get; set; }
-        public List<TarefasViewModel> Tarefas { get; set; } = new List<TarefasViewModel>();
         public ResultadoViewModel Resultado { get; set; } = new ResultadoViewModel();
         public DashboardVendedorInicial Vendedor { get; set; } = new DashboardVendedorInicial();
         public DashboardGerenteViewModel Gerente { get; set; } = new DashboardGerenteViewModel();
