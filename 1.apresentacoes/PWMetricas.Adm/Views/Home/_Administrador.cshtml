@@ -7,123 +7,7 @@
 
 
 
-@* 
-<div class="row">
-	<div class="col-sm-10 offset-sm-1">
-		<div class="card shadow p-4" id="resultados-container-metas">
-			<div id="resultados-metas">
-				<div class="progress-container">
-					<div class="header">
-						<img src="/icones/trofeu.png" style="width: 85px;height: auto;" alt="Troféu" class="icon-trophy">
-						<div>
-							<h4>Uhuuu, Parabéns @Model.Vendedor.NomeUsuario!</h4>
-							<h5>Você alcançou @(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal + "%") da meta mensal.</h5>
-							<p>Você está demais, vamos para Super-Meta?</p>
-						</div>
-					</div>
 
-
-					<!-- Barra de progresso da meta -->
-					<div class="progress mt-3">
-						<div class="progress-bar bg-success" role="progressbar"
-							 style="width: @(Convert.ToInt32(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal) + "%")"
-							 aria-valuenow="@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal"
-							 aria-valuemin="0" aria-valuemax="100">
-							@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemMetaMensal %
-						</div>
-					</div>
-
-					<!-- Barra de progresso da super-meta -->
-					<div class="progress mt-3">
-						<div class="progress-bar bg-meta" role="progressbar"
-							 style="width: @(Convert.ToInt32(Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal) + "%")"
-							 aria-valuenow="@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal"
-							 aria-valuemin="0" aria-valuemax="100">
-							@Model.Vendedor.MinhasMetas?.ValorMetaPorcentagemSuperMetaMensal %
-						</div>
-					</div>
-
-					<!-- Informações adicionais -->
-					<div class="meta-info mt-6 d-flex justify-content-between">
-						<div>
-							<p>Meta: <span class="text-success">@Model.Vendedor.MinhasMetas?.MetaMensalVendedor.ToString("C")</span></p>
-							<p>Super Meta: <span class="text-meta">@Model.Vendedor.MinhasMetas?.SuperMetaMensalVendedor.ToString("C")</span></p>
-						</div>
-						<div class="text-end">
-							<p>Meta Mensal: <b>@Model.Vendedor.MinhasMetas?.MetaMensal.ToString("C")</b></p>
-							<p>Super Meta Mensal: <b>@Model.Vendedor.MinhasMetas?.SuperMetaMensal.ToString("C")</b></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<br />
-<br /> *@
-
-
-<div class="row g-4">
-	<div class="col-sm-10 offset-sm-1">
-		<div class="card shadow p-4" id="resultados-container">
-			<div id="resultados">
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="container-principal">
-							<div style="display: flex; align-items: center; margin-bottom: 20px;">
-								<span style="font-size: 2em; margin-right: 10px;"> <img src="/icones/check-circle.png" style="width: 90px;height: auto;" alt="Ícone"></span>
-								<div>
-									<h4 style="color:#fff;">Veja como estão</h4>
-									<h2 style="color:#fff;">OS RESULTADOS (Todas as lojas) </h2>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<div class="quadro">
-								<div class="quadro-texto">EM ATENDIMENTO</div>
-								<div class="quadro-valor status-atendimento">@Model.Resultado?.SomaAtendimento.ToString("C")</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="quadro">
-								<div class="quadro-texto">ORÇAMENTO</div>
-								<div class="quadro-valor status-orcamento">@Model.Resultado?.SomaOrcamento.ToString("C")</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="quadro">
-								<div class="quadro-texto">VENDIDO</div>
-								<div class="quadro-valor status-vendido">@Model.Resultado?.SomaVendido.ToString("C")</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="quadro">
-								<div class="quadro-texto">PERDIDO NEGOCIADO</div>
-								<div class="quadro-valor status-negociado">@Model.Resultado?.SomaNegociado.ToString("C")</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="quadro">
-								<div class="quadro-texto">PERDIDO Ñ RESPONDE</div>
-								<div class="quadro-valor status-naoresponde">@Model.Resultado?.SomaNaoResponde.ToString("C")</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-<br />
-<br />
 
 <div class="row g-4">
 	<div class="col-sm-10 offset-sm-1">
@@ -159,13 +43,5 @@
 		</div>
 
 	</div>
-</div>
-
-<div class="container text-center mt-4">
-	<a href="/Atendimento/Consulta" class="custom-button-outline ms-auto">VERIFICAR ATENDIMENTOS </a>
-	<a href="/Atendimento/NovoAtendimento" class="custom-button ms-auto">
-		NOVO ATENDIMENTO
-		<img src="/icones/atendimento.png" alt="Ícone">
-	</a>
 </div>
 
